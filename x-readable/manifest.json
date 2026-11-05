@@ -1,5 +1,5 @@
 {
-  "count": 46,
+  "count": 47,
   "items": [
     {
       "id": "2103142706134294775",
@@ -368,6 +368,14 @@
       "public_path": "articles/2108876904002670873.html",
       "url": "https://x.com/i/article/2108874893500764160",
       "tweet_url": "https://x.com/Jaden_riku/status/2108876904002670873"
+    },
+    {
+      "id": "2117512471930167377",
+      "title_zh": "智能体代劳时，如何保持批判性思维",
+      "local_html": "/workspace/x-bookmarks/longform_batch7/01-critical-thinking-agents.html",
+      "public_path": "articles/2117512471930167377.html",
+      "url": "https://x.com/i/article/2116367635365695488",
+      "tweet_url": "https://x.com/addyosmani/status/2117512471930167377"
     }
   ]
 }
