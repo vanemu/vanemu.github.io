@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>上线前让 Opus 派 5 个子代理把应用「搞坏」</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>上线前让 Opus 派 5 个子代理把应用「搞坏」</h1>
+<div class="meta">作者：@RoundtableSpace（0xMarioNawfal）<br/>原文：<a href="https://x.com/RoundtableSpace/status/2113990140817527163">https://x.com/RoundtableSpace/status/2113990140817527163</a></div>
+<p>Before real users touch your app, have Opus 5.5 send in 5 subagents to break it.</p>
+<p>在真实用户碰你的应用前，让 Opus 5.5 派 5 个子代理去搞坏它。</p>
+<p>Run your app locally, open Claude Code in the project, and paste:</p>
+<p>本地跑应用，在项目里打开 Claude Code，粘贴：</p>
+<p>"Act as my break-it lead. Start the app, then spin up 5 subagents in parallel, each trying to break it a different way:</p>
+<p>「当我的破环队长。启动应用，再并行起 5 个子代理，各自用不同方式搞坏它：</p>
+<p>・ The chaos user: double clicks, the back button mid-checkout, refreshing during a save, 10 tabs open at once</p>
+<p>混乱用户：双击、结账中途按返回、保存时刷新、一次开 10 个标签</p>
+<p>・ The weird input user: emoji names, 5,000-character fields, pasted spreadsheets, wrong formats, empty submits</p>
+<p>奇葩输入用户：emoji 名字、5000 字符字段、粘贴表格、错误格式、空提交</p>
+<p>・ The slow user: a throttled network, timeouts, a flaky connection, a phone-size screen</p>
+<p>慢用户：限速网络、超时、不稳连接、手机尺寸屏</p>
+<p>・ The sneaky user: other people's IDs in the URL, edited requests, skipped steps, expired links</p>
+<p>狡猾用户：URL 里塞别人的 ID、改请求、跳步骤、过期链接</p>
+<p>・ The first-timer: no instructions, wrong turns, gives up the moment something is confusing</p>
+<p>新手：无说明、走错路、一困惑就放弃</p>
+<p>Each one logs every bug with exact steps to reproduce, what they expected, what happened, and a severity.</p>
+<p>每个都记录每个 bug：精确复现步骤、期望、实际、严重级别。</p>
+<p>Then merge everything into one list sorted by severity, fix the critical bugs, and re-run those tests to prove they're fixed."</p>
+<p>再合并成按严重度排序的清单，修关键 bug，重跑那些测试证明已修好。」</p>
+<p>Your users will find these bugs anyway. Find them first.</p>
+<p>用户反正会发现这些 bug。先你自己发现。</p>
+</div>
+</body>
+</html>

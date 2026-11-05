@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用 Opus 5.5 当周末产品经理：周一前大幅改进 App</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>用 Opus 5.5 当周末产品经理：周一前大幅改进 App</h1>
+<div class="meta">作者：@HHaandr（Hendrik Haandrikman 🐈）<br/>原文：<a href="https://x.com/HHaandr/status/2103852436041441310">https://x.com/HHaandr/status/2103852436041441310</a></div>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTJimKfXEAAJgxa?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Got Opus 5.5 tokens to burn this weekend?</p>
+<p>这个周末 Opus 5.5 token 用不完？</p>
+<p>Turn Claude into your app's product manager. It'll use your app like a new user, dig through your real revenue + App Store numbers, and show you exactly where you're losing people</p>
+<p>把 Claude 变成你应用的产品经理。它会像新用户一样用你的应用，翻真实收入和 App Store 数据，精确指出你在哪里流失用户。</p>
+<p>WILDLY better app by Monday. Here's how 👇</p>
+<p>周一前应用会好很多。做法如下 👇</p>
+<p>Step 0 (do this now, Apple takes 24–48h to generate your first analytics reports):</p>
+<p>第 0 步（现在就做，苹果生成首批分析报告要 24–48 小时）：</p>
+<p>・ brew install asc</p>
+<p>brew install asc</p>
+<p>・ Create an App Store Connect API key (Admin role), then asc auth login</p>
+<p>创建 App Store Connect API 密钥（Admin 角色），然后 asc auth login</p>
+<p>・ Ask Claude to request your App Store analytics reports</p>
+<p>让 Claude 申请你的 App Store 分析报告</p>
+<p>・ Open your app's folder in Claude Code (Code tab in the Claude desktop app)</p>
+<p>在 Claude Code 中打开应用文件夹（Claude 桌面端的 Code 标签）</p>
+<p>・ Connect the RevenueCat plugin</p>
+<p>连接 RevenueCat 插件</p>
+<p>・ Paste this:</p>
+<p>粘贴这段：</p>
+<p>"Act as a world-class mobile product manager reviewing {app name}, my app that helps {who} {do what}</p>
+<p>「扮演世界级移动产品经理，评审 {app name}——帮助 {who} {do what} 的应用</p>
+<p>Build and run it in the iOS Simulator. Go through it like a first-time user: onboarding, core feature, paywall. Screenshot every bit of friction</p>
+<p>在 iOS 模拟器里构建并运行。像首次用户一样走完：onboarding、核心功能、付费墙。每处摩擦都截图</p>
+<p>Pull the last 90 days from RevenueCat (trials, trial conversion, churn, revenue) and App Store Connect via asc (impressions, product page views, downloads), plus recent App Store reviews</p>
+<p>从 RevenueCat 拉近 90 天（试用、试用转化、流失、收入），经 asc 从 App Store Connect 拉展示、产品页浏览、下载，以及近期评论</p>
+<p>Find the biggest leak in the funnel: from store page to download to trial to paid to renewal</p>
+<p>找到漏斗最大漏洞：商店页→下载→试用→付费→续订</p>
+<p>Propose 3 iterations: one that makes it easier to use, one that brings people back, one that converts more to paid. For each: the evidence, the change, the metric it should move, the effort</p>
+<p>提出 3 个迭代：一个更易用、一个提升回访、一个提升付费转化。每个写清：证据、改动、应拉动的指标、工作量</p>
+<p>Put it all in one dashboard. Don't touch the code yet."</p>
+<p>全部放进一个仪表盘。先别改代码。」</p>
+<p>・ Pick your favorite and tell Claude to build it</p>
+<p>挑一个最喜欢的，让 Claude 去实现</p>
+<p>If you're in a rush and feeling adventurous, I can confirm this'll also work if you have the Claude Chrome plugin, log into App Store Connect, and tell it to look up the data there</p>
+<p>如果赶时间又想冒险：有 Claude Chrome 插件、登录 App Store Connect，让它直接在那里查数据，我也确认可行。</p>
+</div>
+</body>
+</html>

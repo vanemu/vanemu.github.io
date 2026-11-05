@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>猎奇 Qwen-Image-2.1 NSFW 详细测试</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>猎奇 Qwen-Image-2.1 NSFW 详细测试</h1>
+<p class="meta">作者：@MinLiBuilds (实践哥 Li)<br>原文：<a href="https://x.com/i/article/2104211268307460096">https://x.com/i/article/2104211268307460096</a><br>推文：<a href="https://x.com/MinLiBuilds/status/2104219761370665256">https://x.com/MinLiBuilds/status/2104219761370665256</a></p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOpFrQbIAAJyDC?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Qwen-Image-2.1 出来以后，大家最好奇的还有一个问题：NSFW 能力到底怎么样？</p>
+<p>如果上线这个模型，我们要做什么额外的工作才能交给用户？</p>
+<blockquote>NSFW 是 Not Safe For Work，通常指不适合在工作场合直接打开的敏感内容</blockquote>
+<p>评论区、私信里一直有人问，我自己也好奇。</p>
+<p>那就别猜了，我替大家跑一遍。</p>
+<p>最后一共跑了 375 张生成和编辑测试，0 拒绝。</p>
+<p>Qwen-Image-2.1 本身没有表现出稳定的 NSFW 拒绝机制，所以如果你真要拿它上线，外面基本还得再配一层内容检测。</p>
+<p>离谱的是，这次一路测下来，检测器经常比 Qwen-Image-2.1 本身先翻车。</p>
+<p>大家最关心的两个问题：</p>
+<ul><li>如果它真的出了图，内容到底能到什么程度；</li><li>出了图以后，外面的检测器又到底认不认得出来。</li></ul>
+<p>Qwen-Image-2.1 我是在一张 48GB RTX 4090 上跑起来的。视觉生成部分是 7B DiT，配一个 8.77B 的 Qwen3-VL 文本与参考图编码器，以及四通道 RGBA VAE。</p>
+<p>再介绍一下本文评估器： Huihui-Qwen3.8-27B-abliterated本地运行的 27B 多模态 VLM。 NSFW 分类器：Falconsai NSFW image detection基于 ViT 的图像分类器。</p>
+<blockquote>读前申明，本文主要做科学评测，露骨的图片都做了相应的脱敏治理。关键是评测能力范围以及局限性。</blockquote>
+<h2>先说结论</h2>
+<ol><li>Qwen-Image-2.1 什么都敢画。</li><li>细节部分画不好，而且容易出现肢体幻觉。</li><li>NSFW的检测器竟然容易翻车</li></ol>
+<p>下面也会按照这3个章节展开。</p>
+<h2>1. Qwen-Image-2.1 什么都敢画</h2>
+<p>我先做了一个固定模板的暴露梯度：同一个人物、同一个场景、同一个随机种子，只改变服装和覆盖程度。随后又加入不同随机种子、不同媒介、不同主体、不同姿势，以及文生图和图生图两条路径。</p>
+<p>它可以生成：</p>
+<ul><li>写实照片、古典油画、大理石雕塑、单线描、动漫和其他风格；</li><li>女性和男性、不同人种的主体；</li><li>站立、坐、躺、举臂、背面等姿势；</li><li>文生图和图生图两条路径。</li></ul>
+<p>不同画风的覆盖测试里，10 种风格全部出现最高档内容；主体替换 6/6；姿势测试 6/6；图生图姿态迁移 5/5。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOqDXObgAADQoc?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>公开版总不能塞一堆人体暴露图，所以我找了个更适合发文的类比对象。从正常穿衣，到泳装、内衣，再到“无衣”。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOqStgbYAA9U2X?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>然后我又反过来做了一次减衣梯度：</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOqYyea8AE95sZ?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>你换画风、换主体、换姿势，或者换到编辑路径，它仍然可能照着做。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOqdpoagAAv31b?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>结果非常直接：在这批样本里，我没有找到模型拒绝的边界，它什么都画。</p>
+<h2>2. 缺点：细节部分不好，容易出现肢体幻觉</h2>
+<p>“什么都画”很容易被误读成“能力很强”。</p>
+<p>但这次测试里，我反而看到了一个很明显的反差：</p>
+<p>平时正常跑图时，这类人体结构问题并不算特别突出；一进入 NSFW 场景，肢体和局部结构错误明显更容易出现。</p>
+<p>我看到的失败主要有三类。</p>
+<p>1. 多肢体</p>
+<p>画面里会凭空多出半透明的手臂，或者出现没有肩部连接的肢体。局部看起来像手臂，放回整个人体里却没有结构来源。</p>
+<p>2. 末端粘连</p>
+<p>手指、脚趾和其他多分节末端，容易粘成一团。它知道那里应该有“手”或“脚”，却不一定数得清每个分节。</p>
+<p>3. 关键区域糊掉</p>
+<p>有些图的脸、头发、腹部纹理都很清楚，某些需要更精细结构的区域却变成低频的平滑团块。周围越清楚，这种局部失焦越明显。粗结构能看，精细结构很容易出错。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOrPzhboAEha2j?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>为什么会这样，我无法做训练数据层面的验证。</p>
+<p>🤔 一个比较合理的猜测是：这类场景对应的训练数据可能更稀疏、分布也更窄，所以模型虽然愿意执行，但并没有学到同样扎实的细节结构。</p>
+<h2>3. NSFW的检测器竟然容易翻车</h2>
+<p>既然 Qwen-Image-2.1 本身没有明显的 NSFW 闸门，真要上线，外面基本就得再挂检测器。</p>
+<p>我原本还想用自动指标把这些问题量化出来。</p>
+<p>结果评估器自己先坏了。整批自动评测里，有的显示正常；但人眼能看到的缺陷并没有因此消失。</p>
+<p>🤔 未来如果上线，感觉评估器的选择会更麻烦一些，漏检率挺高的。</p>
+<p>最明显的是它挑画风。</p>
+<p>同样的内容，从照片换成油画、大理石、线描，分类器分数可以从接近 1 掉到接近 0。甚至到了高档位，古典油画和赛博朋克里仍然出现了 8/8 漏报。</p>
+<p>它也会挑主体。</p>
+<p>这里我用到了一部分 I2P 样本。I2P 是一套专门拿来“找模型安全边界”的敏感提示词测试集。</p>
+<p>另一边，视觉评判器也会误报，视觉评判器认为有 16 张男性图达到敏感档位，但这套分类器 0 张判为阳性。</p>
+<p>所以这里其实不用想得太复杂：</p>
+<p>模型没闸门，不代表外面挂一个 NSFW 分类器就安全了。</p>
+<p>真要做成线上服务服务，至少得有提示词检查、输出检测和人工兜底。</p>
+<p>检测器可以用，但只能当一道信号，不能当最后答案。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOsqjnaMAAOnAr?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>🚀 除了检测器。如果要把它做成对外服务，我想到四个要做的事情，想想就头大</p>
+<ol><li>拦截违规提示词。</li><li>生成结果先进入隔离区，用检测器粗筛。</li><li>高风险直接拒绝；低风险放行；中间区间进入人工复核或延迟交付。</li><li>持续用自己的样本做回归测试</li></ol>
+<h2>结论</h2>
+<p>这次测试表面上是在测 NSFW，实际上是测试拿着个模型上线，需要注意的事项：</p>
+<p>第一，模型有没有边界</p>
+<p>拒绝文本、空图和自动加衣服当然要记，但真正的输出仍然需要看。这个模型在本次样本里没有表现出稳定拒绝，却不代表每一次都能生成可用结果。</p>
+<p>第二，上线的话，选择一个合适的检测指标很重要</p>
+<p>分类器测的是“像不像它见过的敏感照片”；视觉评判测的是“它描述出了什么”；姿态指标测的是“关键点是否大致合理”。没有一个指标可以单独代表“模型是否被管住”。</p>
+<p>第三，安全部署是系统性问题</p>
+<p>模型本身、文生图路径、图生图路径、分类器、视觉评判、人工抽查和发布流程，都可能成为漏点。模型的一些安全护栏都得自己做。</p>
+<p>所以最后的结论是在这 375 张测试里，我没有找到可靠的拒绝边界；真正稳定暴露出来的限制，反而是检测器的盲区和输出质量的不确定性。</p>
+<p>NSFW 只是一个探针。换成暴力、版权角色、真人肖像或其他敏感类别，仍然应该可用同样的思路来测试：固定对照、检查真实像素、记录拒绝路径，再用人工复核去挑战自动指标。</p>
+<p>全部数字来自实测，失败样本已计入。逐张耗时、峰值显存、alpha 直方图和逐帧稳定性曲线都有原始记录。测试环境：单卡 RTX 4090 48GB，bf16 全量常驻，torch 2.14.0+cu130，diffusers 0.41.0.dev0。</p>
+</div>
+</body>
+</html>

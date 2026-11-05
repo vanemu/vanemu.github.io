@@ -1,0 +1,373 @@
+{
+  "count": 46,
+  "items": [
+    {
+      "id": "2103142706134294775",
+      "title_zh": "把下载付费率做到 12%+ 的 Onboarding 流程",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/01-onboarding-12pct.html",
+      "public_path": "articles/2103142706134294775.html",
+      "url": "https://x.com/LinoLeighton/status/2103142706134294775",
+      "tweet_url": "https://x.com/LinoLeighton/status/2103142706134294775"
+    },
+    {
+      "id": "2103402474677670352",
+      "title_zh": "14年老IT裸辞出海：产品冷启动全文拆解",
+      "local_html": "/workspace/x-bookmarks/longform_batch1/01-liangzhu-cold-start.html",
+      "public_path": "articles/2103402474677670352.html",
+      "url": "https://x.com/i/article/2103335232665432064",
+      "tweet_url": "https://x.com/liangzhu_AI/status/2103402474677670352"
+    },
+    {
+      "id": "2104147031996391428",
+      "title_zh": "24岁独立开发者年收 $4M：Connor 案例",
+      "local_html": "/workspace/x-bookmarks/longform_batch1/02-connor-4m-case.html",
+      "public_path": "articles/2104147031996391428.html",
+      "url": "https://umatan.m-newsletter.com/posts/connor-genius-24-year-old-arr6-billion-app-developer",
+      "tweet_url": "https://x.com/statistics1012/status/2104147031996391428"
+    },
+    {
+      "id": "2105262674330202485",
+      "title_zh": "App Store 上架字段怎么写才有 ASO 流量",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/02-aso-app-store-fields.html",
+      "public_path": "articles/2105262674330202485.html",
+      "url": "https://x.com/zekkontro33/status/2105262674330202485",
+      "tweet_url": "https://x.com/zekkontro33/status/2105262674330202485"
+    },
+    {
+      "id": "2110007318221885827",
+      "title_zh": "用 Apple Ads 约 30 天做到月入 $2.5k",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/03-apple-ads-2500.html",
+      "public_path": "articles/2110007318221885827.html",
+      "url": "https://x.com/frederickjames/status/2110007318221885827",
+      "tweet_url": "https://x.com/frederickjames/status/2110007318221885827"
+    },
+    {
+      "id": "2090071557590900974",
+      "title_zh": "SEO 必备：20 个顶级 Grok Bot 提示词",
+      "local_html": "/workspace/x-bookmarks/longform_batch1/04-grok-bot-seo-prompts.html",
+      "public_path": "articles/2090071557590900974.html",
+      "url": "https://x.com/i/article/2090065939446550528",
+      "tweet_url": "https://x.com/bloggersarvesh/status/2090071557590900974"
+    },
+    {
+      "id": "2103797248610238505",
+      "title_zh": "Fatbobman Swift 周报 #153：iPhone Duo 的机遇与挑战",
+      "local_html": "/workspace/x-bookmarks/longform_batch1/05-fatbobman-swift-weekly-153.html",
+      "public_path": "articles/2103797248610238505.html",
+      "url": "https://weekly.fatbobman.com/p/fatbobmans-swift-weekly-153",
+      "tweet_url": "https://x.com/icodesign_me/status/2103797248610238505"
+    },
+    {
+      "id": "2103852436041441310",
+      "title_zh": "用 Opus 5.5 当周末产品经理：周一前大幅改进 App",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/04-opus-product-manager.html",
+      "public_path": "articles/2103852436041441310.html",
+      "url": "https://x.com/HHaandr/status/2103852436041441310",
+      "tweet_url": "https://x.com/HHaandr/status/2103852436041441310"
+    },
+    {
+      "id": "2103977414711767244",
+      "title_zh": "上线前让 Opus 派出 5 个子代理检查这 20 项",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/05-opus-20-checks.html",
+      "public_path": "articles/2103977414711767244.html",
+      "url": "https://x.com/Voxyz_ai/status/2103977414711767244",
+      "tweet_url": "https://x.com/Voxyz_ai/status/2103977414711767244"
+    },
+    {
+      "id": "2104674464868762046",
+      "title_zh": "别再为动态设计软件买单：Opus 一键生成动效模板",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/06-stop-paying-motion.html",
+      "public_path": "articles/2104674464868762046.html",
+      "url": "https://x.com/twoclipping/status/2104674464868762046",
+      "tweet_url": "https://x.com/twoclipping/status/2104674464868762046"
+    },
+    {
+      "id": "2104676099083190435",
+      "title_zh": "用 Claude 自动化评估设计与 Hillclimbing",
+      "local_html": "/workspace/x-bookmarks/longform_batch2/01-automating-eval-hillclimbing.html",
+      "public_path": "articles/2104676099083190435.html",
+      "url": "https://claude.dev/blog/automating-eval-design-and-hillclimbing/",
+      "tweet_url": "https://x.com/ClaudeDevs/status/2104676099083190435"
+    },
+    {
+      "id": "2105613129602285716",
+      "title_zh": "SwiftUI Agent Skill：让 Claude / Codex 写出更好的代码",
+      "local_html": "/workspace/x-bookmarks/longform_batch2/02-swiftui-agent-skill.html",
+      "public_path": "articles/2105613129602285716.html",
+      "url": "https://www.hackingwithswift.com/articles/282/swiftui-agent-skill-claude-codex-ai",
+      "tweet_url": "https://x.com/twostraws/status/2105613129602285716"
+    },
+    {
+      "id": "2107465723513561197",
+      "title_zh": "跑十几个 Agent 后，我们如何把 Lint/CI 提速数十倍",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/07-ci-agent-speed.html",
+      "public_path": "articles/2107465723513561197.html",
+      "url": "https://x.com/PaulSangleF/status/2107465723513561197",
+      "tweet_url": "https://x.com/PaulSangleF/status/2107465723513561197"
+    },
+    {
+      "id": "2110161029103538282",
+      "title_zh": "Codex 占盘太大？3 招把会话从 60GB+ 降到 30GB",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/08-codex-disk-space.html",
+      "public_path": "articles/2110161029103538282.html",
+      "url": "https://x.com/miu21590/status/2110161029103538282",
+      "tweet_url": "https://x.com/miu21590/status/2110161029103538282"
+    },
+    {
+      "id": "2110777729658581409",
+      "title_zh": "TasteSkill v2：让 Opus 体检你 vibe-coded 的站点",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/09-taste-skill-v2.html",
+      "public_path": "articles/2110777729658581409.html",
+      "url": "https://x.com/Voxyz_ai/status/2110777729658581409",
+      "tweet_url": "https://x.com/Voxyz_ai/status/2110777729658581409"
+    },
+    {
+      "id": "2111442102756463077",
+      "title_zh": "收款前让 Opus 检查这 23 项支付与安全清单",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/10-opus-payment-checks.html",
+      "public_path": "articles/2111442102756463077.html",
+      "url": "https://x.com/Voxyz_ai/status/2111442102756463077",
+      "tweet_url": "https://x.com/Voxyz_ai/status/2111442102756463077"
+    },
+    {
+      "id": "2113602107412541650",
+      "title_zh": "大家用 Grok Bot 做什么：180 条回复里挑出的 8 个可直接试的玩法",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/11-grok-bot-180-replies.html",
+      "public_path": "articles/2113602107412541650.html",
+      "url": "https://x.com/shenpengwdh/status/2113602107412541650",
+      "tweet_url": "https://x.com/shenpengwdh/status/2113602107412541650"
+    },
+    {
+      "id": "2113650413170049529",
+      "title_zh": "huashu-design 3.0 发布！让你的设计审美再提升100%！",
+      "local_html": "/workspace/x-bookmarks/longform_batch2/03-huashu-design-3.html",
+      "public_path": "articles/2113650413170049529.html",
+      "url": "https://x.com/i/article/2113647892238049280",
+      "tweet_url": "https://x.com/AlchainHust/status/2113650413170049529"
+    },
+    {
+      "id": "2113990140817527163",
+      "title_zh": "上线前让 Opus 派 5 个子代理把应用「搞坏」",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/12-opus-5-subagents.html",
+      "public_path": "articles/2113990140817527163.html",
+      "url": "https://x.com/RoundtableSpace/status/2113990140817527163",
+      "tweet_url": "https://x.com/RoundtableSpace/status/2113990140817527163"
+    },
+    {
+      "id": "2114604912520921136",
+      "title_zh": "Claude Code 团队如何做 Code Review",
+      "local_html": "/workspace/x-bookmarks/longform_batch2/04-claude-code-review.html",
+      "public_path": "articles/2114604912520921136.html",
+      "url": "https://x.com/i/article/2114435487905808384",
+      "tweet_url": "https://x.com/addyosmani/status/2114604912520921136"
+    },
+    {
+      "id": "2115646544057634893",
+      "title_zh": "ChatGPT Pro API 额度怎么花：判定与语音向功能盘点",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/13-chatgpt-pro-api-credit.html",
+      "public_path": "articles/2115646544057634893.html",
+      "url": "https://x.com/usedhonda/status/2115646544057634893",
+      "tweet_url": "https://x.com/usedhonda/status/2115646544057634893"
+    },
+    {
+      "id": "2116576229319233596",
+      "title_zh": "短指南：我如何做出高质量 Grok Bot 并管理团队",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/14-grok-bot-guide.html",
+      "public_path": "articles/2116576229319233596.html",
+      "url": "https://x.com/poteto/status/2116576229319233596",
+      "tweet_url": "https://x.com/poteto/status/2116576229319233596"
+    },
+    {
+      "id": "2116615850606448978",
+      "title_zh": "SpaceXAI 工程师 Lauren Tan：用 Grok Bot Agent 自动化工程流",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/15-lauren-tan-grok-bot.html",
+      "public_path": "articles/2116615850606448978.html",
+      "url": "https://x.com/0xMorlex/status/2116615850606448978",
+      "tweet_url": "https://x.com/0xMorlex/status/2116615850606448978"
+    },
+    {
+      "id": "2116875018911010829",
+      "title_zh": "Grok Bot 30 刀额度不够用？5 个省额度方法",
+      "local_html": "/workspace/x-bookmarks/longform_batch6/16-grok-bot-save-quota.html",
+      "public_path": "articles/2116875018911010829.html",
+      "url": "https://x.com/xiaomovps/status/2116875018911010829",
+      "tweet_url": "https://x.com/xiaomovps/status/2116875018911010829"
+    },
+    {
+      "id": "2023779299367809063",
+      "title_zh": "Human 3.0：通往前 1% 的地图",
+      "local_html": "/workspace/x-bookmarks/longform_batch2/05-human-3-0.html",
+      "public_path": "articles/2023779299367809063.html",
+      "url": "https://x.com/i/article/2023439310499033089",
+      "tweet_url": "https://x.com/thedankoe/status/2023779299367809063"
+    },
+    {
+      "id": "2115006510979801566",
+      "title_zh": "FDE 实战案例｜数据清洗（海量多模态数据，怎么洗成一套可信数据）",
+      "local_html": "/workspace/x-bookmarks/longform_batch5/02-fde-data-cleaning.html",
+      "public_path": "articles/2115006510979801566.html",
+      "url": "https://x.com/i/article/2114998201186955265",
+      "tweet_url": "https://x.com/miles_mazy/status/2115006510979801566"
+    },
+    {
+      "id": "2042716870512353294",
+      "title_zh": "Codex 动手改你的 Xcode 项目之前，先装这些 Skills",
+      "local_html": "/workspace/x-bookmarks/longform_batch3/01-codex-xcode-skills.html",
+      "public_path": "articles/2042716870512353294.html",
+      "url": "https://x.com/i/article/2042696610484781056",
+      "tweet_url": "https://x.com/PaulSolt/status/2042716870512353294"
+    },
+    {
+      "id": "2094624092015992854",
+      "title_zh": "腾讯学堂：AI 原生思维——像训练大模型一样训练自己",
+      "local_html": "/workspace/x-bookmarks/longform_batch3/02-ai-native-thinking.html",
+      "public_path": "articles/2094624092015992854.html",
+      "url": "https://x.com/i/article/2094620108811390976",
+      "tweet_url": "https://x.com/dotey/status/2094624092015992854"
+    },
+    {
+      "id": "2101324415858511998",
+      "title_zh": "Bitrig 现已支持构建 iPhone Duo App",
+      "local_html": "/workspace/x-bookmarks/longform_batch5/03-bitrig-iphone-duo.html",
+      "public_path": "articles/2101324415858511998.html",
+      "url": "https://bitrig.com/blog/bitrig-builds-iphone-duo-apps",
+      "tweet_url": "https://x.com/bitrig/status/2101324415858511998"
+    },
+    {
+      "id": "2101760050108797268",
+      "title_zh": "AI 原生服务：一个千亿美元机会",
+      "local_html": "/workspace/x-bookmarks/longform_batch3/03-ai-native-services.html",
+      "public_path": "articles/2101760050108797268.html",
+      "url": "https://x.com/i/article/2101757072904007680",
+      "tweet_url": "https://x.com/gregisenberg/status/2101760050108797268"
+    },
+    {
+      "id": "2103529310208606701",
+      "title_zh": "让产品视频看起来很贵（Apple 框架）",
+      "local_html": "/workspace/x-bookmarks/longform_batch3/04-apple-product-videos.html",
+      "public_path": "articles/2103529310208606701.html",
+      "url": "https://x.com/i/article/2103118352554344448",
+      "tweet_url": "https://x.com/leomeethewoo/status/2103529310208606701"
+    },
+    {
+      "id": "2103705402793730449",
+      "title_zh": "小红书矩阵获客指南-全网独家，让你的活动 or 课程爆满！！！",
+      "local_html": "/workspace/x-bookmarks/longform_batch3/05-xiaohongshu-matrix.html",
+      "public_path": "articles/2103705402793730449.html",
+      "url": "https://x.com/i/article/2102982854732922880",
+      "tweet_url": "https://x.com/369Serena/status/2103705402793730449"
+    },
+    {
+      "id": "2103823484035956852",
+      "title_zh": "销售羞耻症克服指南",
+      "local_html": "/workspace/x-bookmarks/longform_batch4/01-sales-shame.html",
+      "public_path": "articles/2103823484035956852.html",
+      "url": "https://x.com/i/article/2103823030115864576",
+      "tweet_url": "https://x.com/wangzaimedia/status/2103823484035956852"
+    },
+    {
+      "id": "2104213533927895503",
+      "title_zh": "用 Opus 5.5 自动化 AI UGC",
+      "local_html": "/workspace/x-bookmarks/longform_batch4/02-automate-ai-ugc.html",
+      "public_path": "articles/2104213533927895503.html",
+      "url": "https://x.com/i/article/2104203982570663936",
+      "tweet_url": "https://x.com/danclipping/status/2104213533927895503"
+    },
+    {
+      "id": "2104216919033192746",
+      "title_zh": "用 Opus 5.5 搭建动态设计工作室（完整教程）",
+      "local_html": "/workspace/x-bookmarks/longform_batch4/03-motion-design-opus.html",
+      "public_path": "articles/2104216919033192746.html",
+      "url": "https://x.com/i/article/2104196832637210624",
+      "tweet_url": "https://x.com/0xMovez/status/2104216919033192746"
+    },
+    {
+      "id": "2104219761370665256",
+      "title_zh": "猎奇 Qwen-Image-2.1 NSFW 详细测试",
+      "local_html": "/workspace/x-bookmarks/longform_batch4/04-qwen-image-nsfw.html",
+      "public_path": "articles/2104219761370665256.html",
+      "url": "https://x.com/i/article/2104211268307460096",
+      "tweet_url": "https://x.com/MinLiBuilds/status/2104219761370665256"
+    },
+    {
+      "id": "2104488222575190439",
+      "title_zh": "我的 SEO 总监：Claude Code + Opus 5.5",
+      "local_html": "/workspace/x-bookmarks/longform_batch4/05-chief-of-seo.html",
+      "public_path": "articles/2104488222575190439.html",
+      "url": "https://x.com/i/article/2104479753377873920",
+      "tweet_url": "https://x.com/NicholasDulait/status/2104488222575190439"
+    },
+    {
+      "id": "2108611232609825021",
+      "title_zh": "用程序化 SEO 拿下百万级自然访问",
+      "local_html": "/workspace/x-bookmarks/longform_batch5/01-programmatic-seo.html",
+      "public_path": "articles/2108611232609825021.html",
+      "url": "https://x.com/i/article/2108605821391360000",
+      "tweet_url": "https://x.com/noimos_ai/status/2108611232609825021"
+    },
+    {
+      "id": "2113466943730823410",
+      "title_zh": "油管大神 Dan Koe 的「3-2-1」方法，让你成为任何领域的 1%",
+      "local_html": "/workspace/x-bookmarks/longform_batch5/04-dan-koe-321.html",
+      "public_path": "articles/2113466943730823410.html",
+      "url": "https://x.com/DtDt666/status/2113466943730823410",
+      "tweet_url": "https://x.com/DtDt666/status/2113466943730823410"
+    },
+    {
+      "id": "2115308205358325936",
+      "title_zh": "Left 评价流：更新后 What's New 再引导评分",
+      "local_html": "/workspace/x-bookmarks/longform_batch5/05-left-review-flow.html",
+      "public_path": "articles/2115308205358325936.html",
+      "url": "https://x.com/CristianRus4/status/2115308205358325936",
+      "tweet_url": "https://x.com/CristianRus4/status/2115308205358325936"
+    },
+    {
+      "id": "2113606558005547356",
+      "title_zh": "想在小红书推自己的 App？20 条爆款拆解",
+      "local_html": "/workspace/x-bookmarks/longform_batch1/03-xiaohongshu-20-notes.html",
+      "public_path": "articles/2113606558005547356.html",
+      "url": "https://newmax.cc/share/xiaohongshu-software-share-top20.html",
+      "tweet_url": "https://x.com/yangyi/status/2113606558005547356"
+    },
+    {
+      "id": "2110238620359778473",
+      "title_zh": "小红书主页怎么写，别人看了才想关注你",
+      "local_html": "/workspace/x-bookmarks/instapaper_email_v3/04-xiaohongshu-homepage-zh.html",
+      "public_path": "articles/2110238620359778473.html",
+      "url": "https://x.com/i/article/2110236552869888000",
+      "tweet_url": "https://x.com/JessiCao_JC/status/2110238620359778473"
+    },
+    {
+      "id": "2108171726412464173",
+      "title_zh": "Grok Bot + Opus 5.5：十步打造最强 Agent 套件",
+      "local_html": "/workspace/x-bookmarks/instapaper_email_v3/02-grok-bot-opus-55-agent-harness.html",
+      "public_path": "articles/2108171726412464173.html",
+      "url": "https://x.com/i/article/2108146154395303936",
+      "tweet_url": "https://x.com/0xMorlex/status/2108171726412464173"
+    },
+    {
+      "id": "2114386050638336082",
+      "title_zh": "How I work with Agents / 我如何与 Agents 共事",
+      "local_html": "/workspace/x-bookmarks/instapaper_email_v3/01-how-i-work-with-agents.html",
+      "public_path": "articles/2114386050638336082.html",
+      "url": "https://x.com/i/article/2114385531811319808",
+      "tweet_url": "https://x.com/thorstenball/status/2114386050638336082"
+    },
+    {
+      "id": "2108932338281247148",
+      "title_zh": "Claude Dashboard 拆解 26.8 万款月入过万 App",
+      "local_html": "/workspace/x-bookmarks/instapaper_email_v3/05-claude-dashboard-268117-apps.html",
+      "public_path": "articles/2108932338281247148.html",
+      "url": "https://x.com/i/article/2108930279347789824",
+      "tweet_url": "https://x.com/chhddavid/status/2108932338281247148"
+    },
+    {
+      "id": "2108876904002670873",
+      "title_zh": "Paul Graham：什么是好设计？",
+      "local_html": "/workspace/x-bookmarks/instapaper_email_v3/03-paul-graham-taste-for-makers-zh.html",
+      "public_path": "articles/2108876904002670873.html",
+      "url": "https://x.com/i/article/2108874893500764160",
+      "tweet_url": "https://x.com/Jaden_riku/status/2108876904002670873"
+    }
+  ]
+}

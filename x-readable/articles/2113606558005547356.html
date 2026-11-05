@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>想在小红书推自己的 App？20 条爆款拆解</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre,code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>想在小红书推自己的 App？20 条爆款拆解</h1>
+<p class="meta">作者：@yangyi (Yangyi)<br>
+原文：<a href="https://x.com/i/article/2113606112406913024">https://x.com/i/article/2113606112406913024</a><br>
+推文：<a href="https://x.com/yangyi/status/2113606558005547356">https://x.com/yangyi/status/2113606558005547356</a><br>原文标题：在小红书推自己的 App？这份报告教会你！</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVUJnr1a0AALkTW?format=jpg&amp;name=orig" alt="封面图" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<h2>想在小红书推自己的 App？我们用一段话扒完了 20 条爆款</h2>
+<p>做独立开发的朋友，产品上线以后多半会卡在同一个地方。东西做出来了，该去哪儿说，怎么说。小红书绕不开，可它的玩法和 V2EX、即刻、Product Hunt 都不一样，标题怎么起，首图放什么，正文写多长，没人给你一份说明书。</p>
+<p>这周我们在 NewMax 里做了个小实验。搜小红书「软件分享」这个关键词，把点赞最高的 20 条笔记全部拉下来，正文和原图逐条看完，最后做成一份拆解报告。整个过程我们只发了一段话。下面讲讲这些信息是怎么挖出来的，以及里面哪些东西独立开发者用得上。</p>
+<h2>起点是一段话</h2>
+<p>下面是我们发给 NewMax 的原始指令，和它干完活以后交回来的结果。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVUJnr5aUAAB-vF?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>指令写得很随意，「统一下载下来，观看分析一遍」这种口语它也照样执行。中间怎么拆步骤、先做什么后做什么，都是 AI 自己安排的。</p>
+<h2>中间具体做了什么</h2>
+<p>第一步是搜。NewMax 内置了小红书的数据连接器，AI 调搜索接口，关键词填「软件分享」，按点赞排序拉了两页，一共 40 条。翻一遍发现有两条跑题，一条是马来西亚的 iPad 配件，一条是驾照考试笔记，剔掉以后取前 20。</p>
+<p>第二步是补正文。搜索结果里每条正文只给前 60 个字，拿来拆结构远远不够。AI 逐条调了笔记详情接口，20 条分给两个子任务并行跑，拿回完整正文、话题标签和原图地址。</p>
+<p>第三步下载素材，这里卡了一下。图片第一次全部下载失败，报 SSL 错误。AI 先单独拿一张图测试，确认是本机代理拦住了小红书的一个图片域名，就换成另一个 CDN 域名重下，139 张图和 2 个视频都下来了。它还把这个办法记进了记忆，下次遇到直接绕过去。</p>
+<p>第四步是看图。AI 把每条笔记的几张图拼成一张总览图，一条一条看，记下首图长什么样，每一页讲了什么，批注怎么写。两条视频按固定间隔抽帧来看。本来还想跑一遍语音转写，本地 Whisper 卡住了，就停掉了。好在一条视频的口播字幕在画面里能直接读到，另一条只有背景音乐，结论没受影响。</p>
+<p>第五步算账。光看点赞容易被大号带偏，所以每条都多算了两个比值。收藏除以点赞，看内容有没有「先存着以后用」的价值。评论除以点赞，看它有没有把人聊起来。</p>
+<p>最后生成 HTML 报告。这一趟一共调了 22 次数据接口，搜索 2 次，详情 20 次，花了约 660 N币。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVUJsBSbgAEMxMi?format=png&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<h2>榜单长这样</h2>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVUJuArboAAOnKL?format=png&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>第一眼看过去，跟我们想象中的「软件分享」差得挺远。20 条里有 15 条讲的是记录、饮食、情绪、运动这类生活场景，纯效率工具只挤进来两条。用户点赞的是用了软件以后日子变好的样子。</p>
+<p>做工具的开发者可以先记住这一条。哪怕你的产品是给程序员用的，到了小红书上，也要先讲它把哪件具体的事变轻松了。</p>
+<h2>对独立开发者最有用的发现</h2>
+<p>20 条里有 6 条是开发者自己发的，标题都是「我做了一个 App」这一类。它们的点赞排不到最前面，评论却最多。这 6 条的评论/赞平均约 0.12，品牌官方号种草只有 0.02 左右，差了大约 6 倍。</p>
+<p>看两个例子。</p>
+<p>第 5 名叫 V Yoga，标题是「为了活得更久，我做了一个App」，2.2 万赞，1602 条评论。笔记带着上海交大的学校标签。正文先讲起因，大学生太累又怕死，再把三个功能编号列出来，最后坦白产品「还在原型阶段」，请大家等它长大。评论区于是变成了一片「求上线」。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVUJv2mbkAAqWTc?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>第 20 名 PlanBingo 是一个背单词 App，点赞只有 6670，评论却有 1605，评论/赞 0.241，是 20 条里最高的。它的图片统一用「01 到 06 编号大字加手机截图」，正文专门列了团队在哪些交互细节上花了功夫。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVUJx2eb0AALZf1?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>这几条怎么把评论带起来，报告里单独整理了一块。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVUJ0CYbAAAPHeh?format=png&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>坦白产品还没做完，结尾问一句大家想要什么，预告会持续更新开发日记。大公司的官方号很难这么写，独立开发者做起来毫不费力。你本来就是一个人在做，把这件事原原本本讲出来就够了。</p>
+<h2>标题和图片的结构可以直接借</h2>
+<p>标题方面，报告从 20 条里归纳出 7 个高频句式。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVUJ2FAagAAaRT4?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>20 个标题里，没有一个写「AI 驱动」「效率提升 X%」。它们的共同点是带身份词，带情绪标点。比如「所有研究生都去下啊啊啊啊啊啊！！！！」，这条是 Scholaread 的官方号发的，用的是学生安利的口吻，拿了 2.5 万赞。</p>
+<p>图片方面，一半以上的笔记用的是同一套做法。真实截图，每张只讲一个点，再叠一句手写批注，告诉人这一页能得到什么。</p>
+<p>报告最后还按这些规律写好了正文模板。开发者自述这一版，把方括号里的内容换成你自己的产品就能用。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVUJ4ImasAAM07f?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<h2>换成你自己的赛道</h2>
+<p>这套流程不挑关键词。把「软件分享」换成你的品类，把排序换成收藏或评论，就能得到另一份报告。指令可以这样写。</p>
+<blockquote><p>请你使用小红书连接器，检索「AI写作」，帮我找到收藏最多的前20条内容，下载下来逐张看图分析，生成一个HTML报告，拆解内容结构，并结合【你的产品】给出10个可执行选题。</p></blockquote>
+<p>三种排序看到的东西不一样。想拉下载看点赞，想做干货看收藏，想找话题看评论。另外两点也要心里有数。点赞数是抓取当天的快照，搜索排序也受平台算法影响，结论当参考用。「为什么爆」是根据数据和内容做的推断，平台不会告诉你真实原因。</p>
+<p>完整报告放在网上了，20 条案例的原图、拆解和模板都在里面，地址是 newmax.cc/share/xiaohongshu-software-share-top20.html 。</p>
+<p>想给自己的产品也跑一份，可以到 newmax.cc/download 下载 NewMax。</p>
+</div>
+</body>
+</html>

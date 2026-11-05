@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>收款前让 Opus 检查这 23 项支付与安全清单</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>收款前让 Opus 检查这 23 项支付与安全清单</h1>
+<div class="meta">作者：@Voxyz_ai（Vox）<br/>原文：<a href="https://x.com/Voxyz_ai/status/2111442102756463077">https://x.com/Voxyz_ai/status/2111442102756463077</a></div>
+<p>Claude Code tip: before your vibe-coded app takes its first payment, have Opus 5.5 check 𝘁𝗵𝗲𝘀𝗲 𝟮𝟯 𝘁𝗵𝗶𝗻𝗴𝘀:</p>
+<p>Claude Code 技巧：在 vibe-coded 应用收第一笔款前，让 Opus 5.5 检查这 23 项：</p>
+<p>&gt; One design doc that every color, font size and spacing follows</p>
+<p>&gt; 一份设计文档，约束所有颜色、字号、间距</p>
+<p>&gt; A real screen for every state: loading, empty, error</p>
+<p>&gt; 每种状态都有真实页面：加载、空态、错误</p>
+<p>&gt; Private keys only on the server, with your frontend files and git history searched, and anything that ever leaked replaced</p>
+<p>&gt; 私钥只在服务端；搜过前端文件和 git 历史，泄露过的一律轮换</p>
+<p>&gt; Every endpoint checks login and permissions on the server, and RLS is on in the database</p>
+<p>&gt; 每个接口在服务端校验登录与权限，数据库开了 RLS</p>
+<p>&gt; Spending caps or alerts on anything billed per use: AI, SMS, email</p>
+<p>&gt; 按量计费的东西设消费上限或告警：AI、短信、邮件</p>
+<p>&gt; Payment webhooks verify their signature, and the same payment sent twice only counts once</p>
+<p>&gt; 支付 webhook 验签；同一笔支付重放只计一次</p>
+<p>&gt; Refunds, cancellations and failed charges each run once in test mode, ending in the right status</p>
+<p>&gt; 退款、取消、扣款失败在测试模式各跑通一次，状态正确</p>
+<p>&gt; Access revoked on time when a trial or subscription ends</p>
+<p>&gt; 试用或订阅结束时及时收回访问</p>
+<p>&gt; When payments switch from test to live, the live keys and webhook signing secret are set up again</p>
+<p>&gt; 从测试切到线上时，重新配置线上密钥和 webhook 签名密钥</p>
+<p>&gt; Money stored as integers in the smallest currency unit, like Stripe does. No floats: in JS, 0.1 + 0.2 isn't 0.3</p>
+<p>&gt; 金额用最小货币单位整数存，像 Stripe。别用浮点：JS 里 0.1+0.2≠0.3</p>
+<p>&gt; A user double-clicking submit creates only one order</p>
+<p>&gt; 用户双击提交只创建一笔订单</p>
+<p>&gt; Sales tax or VAT set up for the countries you sell to</p>
+<p>&gt; 为销售国家配好销售税/增值税</p>
+<p>&gt; Your terms and privacy policy match what the code actually does</p>
+<p>&gt; 条款与隐私政策与代码实际行为一致</p>
+<p>&gt; Daily automatic backups (Supabase's free plan has none, so upgrade to Pro or schedule your own dump), plus one test restore into a new database</p>
+<p>&gt; 每日自动备份（Supabase 免费版没有，升 Pro 或自建 dump），并做过一次恢复到新库的演练</p>
+<p>&gt; Every schema migration has its reverse SQL written and has been run both ways on a copy of production data</p>
+<p>&gt; 每次 schema 迁移都有反向 SQL，并在生产数据副本上正反跑过</p>
+<p>&gt; Lists over 1,000 rows aren't silently cut off. Supabase's API returns at most 1,000 rows by default</p>
+<p>&gt; 超过 1000 行的列表不会被静默截断。Supabase API 默认最多返回 1000 行</p>
+<p>&gt; Times stored as timestamptz, with each user's timezone in its own column, so reminders go out in their local time</p>
+<p>&gt; 时间存 timestamptz，用户时区单独一列，提醒按本地时间发出</p>
+<p>&gt; Soft delete first, with RLS hiding deleted rows too. When a user deletes their account, wipe it for real</p>
+<p>&gt; 先软删，RLS 也隐藏已删行。用户删账号时再真正擦除</p>
+<p>&gt; Users can export their own data</p>
+<p>&gt; 用户可导出自己的数据</p>
+<p>&gt; Names with apostrophes, emoji or right-to-left text don't break any input</p>
+<p>&gt; 含撇号、emoji 或从右到左文字的名字不会弄坏输入</p>
+<p>&gt; Images in WebP or AVIF, with anything below the fold loading as you scroll</p>
+<p>&gt; 图片用 WebP 或 AVIF，折线以下滚动加载</p>
+<p>&gt; Indexes on the fields you filter by most. With a few dozen test rows everything is fast; real data is where it slows down</p>
+<p>&gt; 常过滤字段有索引。几十行测试数据都很快；真实数据才会慢</p>
+<p>&gt; Error monitoring hooked up, so you're the first to know when something breaks</p>
+<p>&gt; 接好错误监控，出问题你第一个知道</p>
+<p>Send this whole list to Claude Code and add this line at the end. It checks every item and gives you a table 👇</p>
+<p>把整份清单发给 Claude Code，末尾加这句。它会逐项检查并给你表格 👇</p>
+<p>"Split it across 5 subagents: design and speed, security, payments, data, and after launch. Check without editing anything, and for each item note pass or fail and which file the problem is in. For anything only visible in a dashboard, mark it 'needs my confirmation' and give me the steps to look. Only test backups and restores on a test database, only test payments in test mode, and don't touch production data. Show me the table first, and don't fix anything until I confirm."</p>
+<p>「拆成 5 个子代理：设计与速度、安全、支付、数据、上线后。只检查不改；每项标 pass/fail 以及问题所在文件。只能在仪表盘看到的标「需我确认」。」</p>
+</div>
+</body>
+</html>

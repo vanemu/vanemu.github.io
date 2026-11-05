@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChatGPT Pro API 额度怎么花：判定与语音向功能盘点</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>ChatGPT Pro API 额度怎么花：判定与语音向功能盘点</h1>
+<div class="meta">作者：@usedhonda（usedhonda）<br/>原文：<a href="https://x.com/usedhonda/status/2115646544057634893">https://x.com/usedhonda/status/2115646544057634893</a></div>
+<p>ChatGPT ProのAPIクレジットを連携、外部向けサービスの運営費に充てるほどでもないだろうから、すでにCodexをガンガン回している個人利用によさそうな機能を中心にピックアップ。</p>
+<p>已打通 ChatGPT Pro 的 API 额度。对外服务运营费用不了多少，所以按「已经在猛跑 Codex 的个人用途」挑了些好用功能。</p>
+<p>Codexユーザーなら、画像生成もImageGenでGPT Image呼び出しているだろうし、そういったものは除外して、サブスクCodexから直接使えない条件で探したが、結論としては、Jevみたいな判定処理と音声周りにつかうのが良さそうとのこと。</p>
+<p>Codex 用户大概已用 ImageGen 调 GPT Image，这类排除；在「订阅 Codex 直接用不了」的条件下找，结论是：像 Jev 那样的判定，以及语音相关最合适。</p>
+<p>・ Decisions API：Jevで回している判定処理の比較先</p>
+<p>Decisions API：给 Jev 判定流程做对照</p>
+<p>Jevをすでに使ってるなら、通知要否・分類・ルーティングなど、既存の判定を同じ入力で比較できる。置換するかは精度・レイテンシ・運用条件次第。</p>
+<p>若已在用 Jev，可用相同输入对照「是否通知 / 分类 / 路由」等现有判定。是否替换看精度、延迟与运维条件。</p>
+<p>gpt-6-lunaのDecisions料金は、未キャッシュ入力 $0.10／100万トークン、出力無料。指示文込み1件1,000トークンなら、1万件$1、100万件$100。キャッシュ書き込み等は別条件。</p>
+<p>gpt-6-luna 的 Decisions 价：未缓存输入 $0.10／百万 token，输出免费。含指令每条约 1000 token 时，1 万条 $1、100 万条 $100。缓存写入等另计。</p>
+<p>https://t.co/7PZedudcXu</p>
+<p>https://t.co/7PZedudcXu</p>
+<p>・ GPT-Live：既存エージェントの音声フロント</p>
+<p>GPT-Live：给现有 Agent 加语音前端</p>
+<p>自作AIエージェントにつなぎ、スマホや専用端末から話す。バックエンドのモデル・実行系を選べるので、既存の仕組みに音声を足す用途。</p>
+<p>接到自建 AI Agent，用手机或专用终端说话。可选后端模型与执行系，适合给现有系统加语音。</p>
+<p>音声セッションは$0.05／分＝$3／時間。毎日30分なら30日で$45＋バックエンドのモデル・ツール代。発話時間だけでなく、無音・待機を含む接続中の時間が課金対象。</p>
+<p>语音会话 $0.05／分＝$3／小时。每天 30 分则 30 天 $45 + 后端模型与工具费。计费含静音与等待，不只说话时长。</p>
+<p>仕様：</p>
+<p>规格：</p>
+<p>https://t.co/NO4i1qEtMm</p>
+<p>https://t.co/NO4i1qEtMm</p>
+<p>料金：</p>
+<p>价格：</p>
+<p>https://t.co/toAkxr0uE6</p>
+<p>https://t.co/toAkxr0uE6</p>
+<p>課金時間の定義：</p>
+<p>计费时长定义：</p>
+<p>https://t.co/qqKhgQQno5</p>
+<p>https://t.co/qqKhgQQno5</p>
+<p>・ Prompt-to-voice：エージェント用の声を設計</p>
+<p>Prompt-to-voice：设计 Agent 用的声音</p>
+<p>声質を文章で指定して生成・保存。同じvoice IDを再利用できる。</p>
+<p>用文字描述音色并生成、保存。同一 voice ID 可复用。</p>
+<p>声の作成は無料、利用はGPT-Liveの通常料金。文章から生成した声は現在GPT-Live専用で、通常のTTS／Realtimeには使えない。録音ベースのカスタム音声は承認顧客限定、同意録音が必要。</p>
+<p>造声免费，使用按 GPT-Live 常规价。文字生成的声目前仅 GPT-Live；普通 TTS／Realtime 不可用。录音定制声仅审批客户，需同意录音。</p>
+<p>https://t.co/K0Bcpb5wDn</p>
+<p>https://t.co/K0Bcpb5wDn</p>
+<p>・ 音声生成：セリフ・ナレーション・記事の音声化</p>
+<p>语音生成：台词、旁白、文章朗读</p>
+<p>原稿調整から生成・保存まではCodexに任せ、音声生成だけAPIを使う。創作素材や自分用の読み上げ音声に向いている。</p>
+<p>文稿调整到生成保存交给 Codex，只用 API 做语音生成。适合创作素材或自用朗读。</p>
+<p>gpt-realtime-2.1-miniの音声出力は$20／100万トークン。出力音声は約20トークン／秒なので、概算は以下。</p>
+<p>gpt-realtime-2.1-mini 语音输出 $20／百万 token。输出语音约 20 token／秒，粗算：</p>
+<p>・10分：$0.24</p>
+<p>・10 分钟：$0.24</p>
+<p>・1時間：$1.44</p>
+<p>・1 小时：$1.44</p>
+<p>・10時間：$14.40</p>
+<p>・10 小时：$14.40</p>
+<p>入力テキスト・出力テキスト等は別料金。長い履歴を引き継ぐ場合は、その入力費用も加わる。</p>
+<p>输入文本、输出文本等另计。接长历史时还要算那段输入费。</p>
+<p>音声生成：</p>
+<p>语音生成：</p>
+<p>https://t.co/GwAbXBvHFF</p>
+<p>https://t.co/GwAbXBvHFF</p>
+<p>モデル料金：</p>
+<p>模型价格：</p>
+<p>https://t.co/eQZVgnDNfb</p>
+<p>https://t.co/eQZVgnDNfb</p>
+<p>時間換算：</p>
+<p>时间换算：</p>
+<p>https://t.co/qqKhgQQno5</p>
+<p>https://t.co/qqKhgQQno5</p>
+<p>・ Realtime Translate：個人用の同時通訳</p>
+<p>Realtime Translate：个人同声传译</p>
+<p>配信・講演・通話の音声を流し込み、翻訳音声と字幕を受け取る。音声取得と再生・字幕表示を自作する前提。</p>
+<p>灌入直播/演讲/通话音频，拿翻译语音与字幕。前提是你自己做采集、播放与字幕显示。</p>
+<p>入力音声$0.034／分＝$2.04／時間。毎日1時間なら30日で$61.20。双方向通訳は方向ごとにセッションを作り、それぞれの処理時間を計上する。</p>
+<p>输入音频 $0.034／分＝$2.04／小时。每天 1 小时则 30 天 $61.20。双向传译要按方向各开会话，分别计处理时长。</p>
+<p>仕様：</p>
+<p>规格：</p>
+<p>https://t.co/HEhZV2PRq1</p>
+<p>https://t.co/HEhZV2PRq1</p>
+<p>料金：</p>
+<p>价格：</p>
+<p>https://t.co/Gky6ZsP4jr</p>
+<p>https://t.co/Gky6ZsP4jr</p>
+<p>※2026年10月28日時点、USD・概算。各用途は同じクレジット残高を消費する。Pro特典は対象条件を満たす間の付与で、未使用分は請求期間末に失効・繰越なし。</p>
+<p>※截至 2026-10-28，美元粗算。各用途吃同一额度余额。Pro 权益在满足条件期间发放，未用完账单期末作废、不结转。</p>
+<p>特典の条件：</p>
+<p>权益条件：</p>
+<p>https://t.co/TYHJytdSf0</p>
+<p>https://t.co/TYHJytdSf0</p>
+</div>
+</body>
+</html>

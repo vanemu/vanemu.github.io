@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fatbobman Swift 周报 #153：iPhone Duo 的机遇与挑战</title><style>body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+.note{color:#777;font-size:.9rem;padding:.8em;background:#f7f7f7;border-radius:6px;margin:0 0 1.2em;}
+</style></head>
+<body><div class="wrap">
+<h1>Fatbobman Swift 周报 #153：iPhone Duo 的机遇与挑战</h1>
+<p class="meta">作者：Fatbobman（东坡肘子）<br>原文：<a href="https://weekly.fatbobman.com/p/fatbobmans-swift-weekly-153">https://weekly.fatbobman.com/p/fatbobmans-swift-weekly-153</a><br>推文：<a href="https://x.com/icodesign_me/status/2103797248610238505">https://x.com/icodesign_me/status/2103797248610238505</a><br>说明：采用原文中文版。</p>
+<figure class="fig"><img src="https://substackcdn.com/image/fetch/$s_!UL9K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff8c12932-74e8-4278-a340-bd1b39d32476_2304x1348.webp" alt="封面图" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<h2>iPhone Duo 带来的机遇与挑战</h2>
+<p>尽管 iPhone Duo 的设计资料早在几个月前就已部分泄漏，而且苹果也是折叠机领域的后来者，但凭借软硬件整合能力，它所带来的交互变化还是给不少消费者带来了惊喜。</p>
+<p>不同机构对 iPhone Duo 的初期销量给出了不同口径的预测：Counterpoint 预计其 2026 年内出货量最高约 600 万部；IDC 则预计上市后前 12 个月可能达到约 1000 万部。在整个 iPhone 销量中，这仍然只占一小部分，但与 Vision Pro 上市两年半的几十万销量相比，这个数量已经足以支撑不少特别针对这款设备开发的应用了。这几天，我已经在社交媒体上看到不少针对 Duo 形态的创意，相信一旦其中出现几个爆款，也会进一步推动设备的销量。尤其是，Duo 相比 Vision Pro 具备更强的社交展示性，特别的硬件、特别的应用所带来的“特别感”，正是不少首批购买这类产品的用户所追求的。</p>
+<p>但对于更多开发者来说，iPhone Duo 独特形态带来的适配压力也是真实的。Duo 包括内外两块屏幕，内屏又可以以展开、半折叠等多种姿态存在，可以说是 iPhone 家族中适配难度最高的产品之一。苹果确实提供了不少有针对性的适配 API，标准容器在各种姿态下也已基本自适应，但这些只解决了 UI 层面的问题。真正难的是 UX：API 能告诉你可用空间有多大、铰链落在哪里，却无法告诉你半折叠时用户究竟想看到什么。多一种姿态，就多一次需要重新设计的体验。</p>
+<p>对于使用 Flutter、React Native 等第三方框架的团队，问题还要更靠前一步：不是适配得好不好，而是拿不拿得到信息。Flutter 的 MediaQuery.displayFeatures 在 Duo 上无论折叠到什么角度都返回空列表，React Native 则至今没有任何与折叠状态相关的官方 API。当硬件本身开始成为交互的一部分，跨平台框架就必须在屏蔽平台差异与暴露平台能力之间做出更多取舍，而这种取舍很难由框架单方面消化——它总是滞后于平台。</p>
+<p>事实上，在 Duo 发布之前，重新评估跨平台方案的趋势就已经出现，其背后是一组正在同时发生的变化：AI Coding Agent 大幅降低了原生开发与维护的成本，而 Liquid Glass、Duo 这样的变化又在不断抬高用足平台特性的价值。跨平台方案的性价比，正被这两头同时挤压。Notion 正在将基于 Web 技术栈的苹果端 UI 迁移到 SwiftUI；Shopify 则在几乎同一时间宣布将移动端从 React Native 迁回 Swift 与 Kotlin，理由之一是编码模型的进步正在削弱“避免把同一个功能造两遍”这一跨平台开发的重要成本优势。与之一并发生的，是它对旗下 React Native 开源库的交接。</p>
+<p>对于苹果生态来说，iPhone Duo 是一个真正带来变化的产品。过去几年，苹果平台的变化更多发生在软件和设计语言上，而 Duo 则重新改变了开发者面对的硬件形态。它的生态意义或许并不在于多卖出几百万台设备，而在于当设备本身再次成为应用设计的一部分时，“使用平台原生框架”这件事，正在从一道偏好题变成一道成本题。</p>
+<p>前一期内容 ｜ 全部周报列表</p>
+<p>如果您发现这份周报或我的博客对您有所帮助，可以考虑通过 Buy Me a Coffee 支持我的创作。</p>
+<h2>近期推荐</h2>
+<p>你是否碰到过这样的情况：一个看似简单的 LLDB 表达式，在断点调试时却迟迟没有反馈？为了计算属性、调用方法等操作，LLDB 有时需要启动 Swift 编译器，并寻找和加载相关 Module。过去这套过程并不总能准确找到构建时实际使用的 Module，甚至可能重新编译部分依赖，让一个原本简单的调试操作变成长时间等待。</p>
+<p>Adrian Prantl 介绍了一个从 Swift 6.3 开始引入、并在 6.4 中进一步完善的机制：Module Tracking。新的机制让调试信息能够更明确地告诉 LLDB：”构建时用的就是这些 Module，它们就在这里”，从而减少不必要的寻找和重新编译。Swift 6.4 还会改善 bridging header 的处理，并让调试产物明显瘦身——Darwin 上的 dSYM 不再打包二进制 Swift Module，Windows 与 Linux 上带调试信息的二进制同样受益。</p>
+<p>值得留意它的语义：两个 Dictionary.Keys 只要包含相同的键就视为相等，顺序不参与比较与哈希——这与字典本身的身份认定是一致的。 Dictionary.Values 没有一并获得该能力，因为值可以重复，需要的是 Swift 目前没有的多重集合语义。虽然只是一次小幅补全，但也让这些类型在泛型和集合场景中的使用更加自然。</p>
+<p>两周前我在 SwiftData：优化从建模开始 中讨论了“胖模型”给 SwiftData 列表带来的内存和性能压力，并尝试通过模型拆分减少一次查询真正加载的数据。 Mia Köring 使用了我文章中的测试代码，展示了她开发的 Vein 持久化框架在字段级惰性加载下的表现。</p>
+<p>Vein 采用了与 SwiftData Model 类似的声明方式，默认同样是属性预加载、关系惰性加载；不同之处在于，给某个属性标注 @LazyField 后，它会推迟到真正被访问时才去读取。因此在“只显示标题”的列表场景中，无需拆分模型也能取得不错的成绩。</p>
+<p>自动化被越来越多地应用到 App 开发的各个环节，但有时实践中的难点并非如何实现自动化，而是如何让它自己证明“我做对了”。</p>
+<p>Wesley Matlock 在通过自动化方式为 App Store 生成多语言截图时，发现西班牙语截图悄悄回退成了英文，而整个测试流程依然通过。检查后发现，原因来自 Xcode 27 下 -testLanguage 没有可靠地应用到 App。Wesley 随后改用 simctl 设置 Simulator 的语言，并通过比较截图的 SHA-256，自动检查不同语言或不同页面是否意外生成了完全相同的图片。</p>
+<blockquote><p>Wesley 基于截图哈希的比较思路可以迁移到任何“把请求交给黑盒、再把产出照单全收”的流程里。</p></blockquote>
+<p>Wesley 基于截图哈希的比较思路可以迁移到任何“把请求交给黑盒、再把产出照单全收”的流程里。</p>
+<p>transition 和 contentTransition 名字很像，但解决的是两类不同的问题：前者用于 View 被插入或移出视图层级时的动画，后者则用于 View 仍然存在、只是显示内容发生变化的情况。 Stewart Lynch 通过条件视图、数字变化和 SF Symbols 等例子对两者进行了直观比较，并介绍了 .numericText 、 .interpolate 、 .symbolEffect 等常用的内容过渡效果。</p>
+<blockquote><p>在 SwiftUI 中， transition 很早就支持自定义，但这种能力始终没有延伸到 Sheet、导航切换等更高层级的场景。这些场景与 contentTransition 类似，目前仍主要依赖系统提供的有限几种过渡方式。期待未来 SwiftUI 能进一步打通这些不同层级的 transition 概念，或者至少为开发者提供更多自定义空间。</p></blockquote>
+<p>在 SwiftUI 中， transition 很早就支持自定义，但这种能力始终没有延伸到 Sheet、导航切换等更高层级的场景。这些场景与 contentTransition 类似，目前仍主要依赖系统提供的有限几种过渡方式。期待未来 SwiftUI 能进一步打通这些不同层级的 transition 概念，或者至少为开发者提供更多自定义空间。</p>
+<p>在 SwiftUI 中，如果视图中有多个 @State ，我们可能会将它们抽象到一个 @Observable 中。但如果视图还依赖其他环境值或其他 Observable 实例呢？是否有一种方式，可以将来自不同数据源的状态组织到一起，同时减少视图对具体数据源的耦合？⁠ Mike Apurin 提出了 Scope 思路：通过他开发的 ⁠ ScopedState 将多个状态源组织到统一的访问边界中，只向 View 暴露当前界面真正需要的状态和操作。View 无需了解这些状态实际来自哪里，也更容易在 Preview 和测试中替换数据来源。需要注意的是，这并不是试图创建另一套类似 TCA 或 MVVM 的状态管理模型，而是一种作用于 View 层级、对现有状态源进行组织和抽象的方式。</p>
+<h2>折叠之前：iPhone Duo 适配</h2>
+<p>iPhone Duo 的推出让消费者在惊叹设备形态变化的同时，也给开发者带来了新的挑战：如何利用更大的显示空间，如何让现有布局适应不同的设备形态，以及如何利用折叠、多显示区域等新的交互能力。上周，不少内容创作者都从不同角度给出了自己的建议。</p>
+<p>・ ⁠ Florian Schweizer 强调“不要与框架对抗”：不要从判断“是不是 iPhone Duo”开始，而应该问“这个视图拿到了多少空”。他还将这些原则以及 Duo 的新 API、Apple 开发者资料整理成了一个 ⁠ SwiftUI iPhone Duo Skill ，供 Coding Agent 在适配现有 App 时使用。</p>
+<p>⁠ Florian Schweizer 强调“不要与框架对抗”：不要从判断“是不是 iPhone Duo”开始，而应该问“这个视图拿到了多少空”。他还将这些原则以及 Duo 的新 API、Apple 开发者资料整理成了一个 ⁠ SwiftUI iPhone Duo Skill ，供 Coding Agent 在适配现有 App 时使用。</p>
+<p>・ ⁠ Sagar Unagar 根据 ⁠Apple 最新的 HIG 和开发者资料，梳理了 iPhone Duo 在自适应布局、系统控件、折叠区域以及不同显示形态下的主要设计原则。</p>
+<p>⁠ Sagar Unagar 根据 ⁠Apple 最新的 HIG 和开发者资料，梳理了 iPhone Duo 在自适应布局、系统控件、折叠区域以及不同显示形态下的主要设计原则。</p>
+<p>・ ⁠ Jordan Morgan 总结了开发者首先需要关注的布局、系统栏、safe area、相机以及多显示区域等变化。</p>
+<p>⁠ Jordan Morgan 总结了开发者首先需要关注的布局、系统栏、safe area、相机以及多显示区域等变化。</p>
+<p>・ ⁠ Artem Mirzabekian 介绍了新的 ArrangementView ，开发者可以描述两组相关内容之间的关系，让 SwiftUI 根据可用空间和折叠区域自动选择合适的布局方式。</p>
+<p>⁠ Artem Mirzabekian 介绍了新的 ArrangementView ，开发者可以描述两组相关内容之间的关系，让 SwiftUI 根据可用空间和折叠区域自动选择合适的布局方式。</p>
+<blockquote><p>上面介绍的功能不少都只存在于 Xcode 27.1 中，想完整体验还需要一段时间。</p></blockquote>
+<p>上面介绍的功能不少都只存在于 Xcode 27.1 中，想完整体验还需要一段时间。</p>
+<h2>SwiftMusic：用 Swift 声明音乐</h2>
+<p>Norikazu Muramoto 开发的 SwiftMusic 是一套面向 Apple 平台开发者的声明式音乐创作框架。它借鉴了 SwiftUI 的设计理念，将 Music 、 Sound 、 body 、Result Builder 和 Modifier 等熟悉的 Swift 表达方式带入音乐创作，让节奏、旋律、和声、音色、效果器和混音关系都可以通过组合代码来描述。</p>
+<p>例如，鼓点、贝斯和合成器可以直接写成具有音乐含义的 Swift 代码：</p>
+<p>SwiftMusic 本身并不发声：它只把声明编译成节拍域事件与渲染计划，既不打开音频设备，也不绘制编辑器，实际的音频渲染由宿主负责——作者另外提供了 macOS 端的实时编辑器 MusicPlaygournd 来承担这部分工作。</p>
+<h2>Homebrew 7：一次告别 Intel 的大版本</h2>
+<p>Homebrew 7.0.0 正式发布，除了多项功能和内部实现调整，本次大版本也带来了值得关注的兼容性变化。目前 Apple Silicon Mac 上的 macOS 15–27 属于完整支持范围，而 Intel Mac 已全部降为 Tier 3，不再获得完整 CI 支持和新的 bottles，并计划在 2027 年 9 月或之后彻底停止支持。仍在 Intel Mac 或较旧 macOS 上使用 Homebrew 的开发者需要特别留意。</p>
+</div></body></html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用 Claude 自动化评估设计与 Hillclimbing</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>用 Claude 自动化评估设计与 Hillclimbing</h1>
+<p class="meta">作者：Lance Martin / @ClaudeDevs<br>原文：<a href="https://claude.dev/blog/automating-eval-design-and-hillclimbing/">https://claude.dev/blog/automating-eval-design-and-hillclimbing/</a><br>推文：<a href="https://x.com/ClaudeDevs/status/2104676099083190435">https://x.com/ClaudeDevs/status/2104676099083190435</a></p>
+<figure class="fig"><img src="https://claude.dev/blog/automating-eval-design-and-hillclimbing/og.png" alt="封面图" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Principles for designing evals and hillclimbing against them without fooling yourself, and how the claude-api skill's build-eval and hillclimb commands put them to work.</p>
+<p>如何设计评估、并在其上做 hillclimbing 而不自欺；以及 claude-api skill 里的 build-eval 与 hillclimb 命令如何把这些原则落到实处。</p>
+<p>Evaluations provide a signal on how your app or skill is performing on specific tasks. But designing evaluations, and improving performance on them without fooling yourself, is hard. We've added guidance for both to the claude-api skill .</p>
+<p>评估能告诉你，应用或 skill 在特定任务上表现如何。但设计评估，以及在不自欺的前提下把它跑高，都很难。我们已把这两方面的指引写进了 claude-api skill。</p>
+<p>With the skill, you can run /claude-api build-eval to build an evaluation inside your codebase, and run /claude-api hillclimb to improve your application against it, one change at a time, with a held-out set of examples to catch overfitting.</p>
+<p>有了这个 skill，你可以运行 /claude-api build-eval，在代码库里建评估；再运行 /claude-api hillclimb，一次改一处地对着评估改进应用，并用留出集抓住过拟合。</p>
+<p>In this article, we highlight the principles of good eval design and hillclimbing first, then show how Claude Code with the claude-api skill applies those principles. We’ll close by showing a few examples of these commands.</p>
+<p>本文先讲好评估设计与 hillclimbing 的原则，再展示 Claude Code 配合 claude-api skill 如何应用这些原则，最后给出几条命令的示例。</p>
+<h2>EVAL DESIGN</h2>
+<p>评估设计</p>
+<p>Well designed evaluations have a few common elements (Figure 1):</p>
+<p>设计良好的评估通常有几项共同要素（图 1）：</p>
+<p>・ Eval tasks mirror production. Sample tasks that you care about in “production,” or the setting in which the capability or application you are testing will be used. Sometimes tasks are picked because they are easy to generate or they are easy to grade. But it’s important to ensure that the task distribution represents what you actually care about.</p>
+<p>评估任务应镜像生产。抽取你在「生产环境」——也就是你要测的能力/应用实际会被使用的场景——里真正关心的任务。有时任务只因好生成或好打分才入选；但任务分布必须代表你真正在意的东西。</p>
+<p>・ Performance improves with stronger models and more thinking . More capable models and higher effort levels typically should perform better on an evaluation. If they don’t, ambiguous tasks or a miscalibrated grader often are hobbling performance.</p>
+<p>更强模型、更多思考应带来更好表现。更强模型与更高 effort 通常应在评估上更好。若不然，往往是任务含糊或打分器校准有问题在拖后腿。</p>
+<p>・ There is “passable” headroom at the frontier . The most capable model at the highest effort should be well below 100% on the evaluation, otherwise you can’t reliably judge how changes impact performance. Importantly, the gap should not be explained by impossible or ambiguous tasks: a common tell is that a task fails every evaluation run, regardless of the number of replicates. A good task is one where two domain experts would reach the same verdict and everything the grader checks is stated in the task.</p>
+<p>前沿应有「可接受的余量」。最强模型在最高 effort 下也不该接近满分，否则你很难判断改动是否真有用。且缺口不该来自不可能或含糊的任务：一个常见信号是无论重复多少次，该任务次次失败。好任务应是两位领域专家会给出同一结论，且打分器检查的每一项都在任务里写明。</p>
+<p>・ Low run-to-run variance . High variance is often due to poorly designed, ambiguous tasks or a grader that produces different verdicts on identical output. Variance can also hide in the configuration. For example, effort may not be applied consistently. Also, the environment can affect the results of the evaluation: leftover state from an earlier trial (a file, a git history) can hand the agent the answer.</p>
+<p>运行间方差要低。高方差常来自含糊任务，或同一输出打出不同结论的打分器。方差也会藏在配置里，例如 effort 没有一致应用。环境也会影响：上一次试验残留的状态（文件、git 历史）可能直接把答案递给 agent。</p>
+<h2>Adversarial sampling</h2>
+<p>对抗采样</p>
+<p>Model capability is jagged. If you pick cases because today's model fails them, you are sampling the valleys of one model's capability surface (Figure 2). The evaluation can end up measuring that model's failure fingerprint rather than what is intrinsically hard or valuable for your application to do.</p>
+<p>模型能力是「锯齿状」的。如果你因为「今天这款模型做砸了」才挑案例，你是在采样该模型能力曲面的低谷（图 2）。评估最后量到的，可能是这款模型的失败指纹，而不是对你应用真正难或真正有价值的东西。</p>
+<figure class="fig"><img src="https://claude.dev/media/6a014fa959cbc13b3026ca0f2ac1cb8754d541bd07da79bb4c61d81af428024a.png" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">FIG 2 Adversarial sampling</figcaption></figure>
+<p>Pick hard cases because a human judged them hard: a useful test is to be able to say why a task is hard before you include it. Include cases that are specific failures in your application derived from production traffic, bug reports, or tickets. However, don’t blindly trust user traffic: users sometimes try what they expect to work, so a task distribution drawn strictly from user traffic may skew easy.</p>
+<p>挑难题，是因为人判断它难：有用的检验是——在收录前你能说清它难在哪。要收录来自生产流量、bug 报告或工单的、对你应用特有的失败。但别盲目信任用户流量：用户常只试他们预期会成功的路径，纯用户流量分布可能偏「太容易」。</p>
+<h2>/CLAUDE-API BUILD-EVAL</h2>
+<p>/CLAUDE-API BUILD-EVAL</p>
+<p>The build-eval command in the claude-api skill turns these principles into a guided workflow. When you run /claude-api build-eval in Claude Code, Claude interviews you, builds the eval inside your codebase, and pauses for approval at specific points.</p>
+<p>claude-api skill 里的 build-eval 命令，把这些原则变成引导式工作流。在 Claude Code 里运行 /claude-api build-eval 时，Claude 会访谈你、在代码库里建评估，并在关键节点暂停等你批准。</p>
+<h2>Designing examples</h2>
+<p>设计样例</p>
+<p>Claude helps you sample inputs to build evaluations in this order:</p>
+<p>Claude 按以下顺序帮你采样输入来建评估：</p>
+<p>・ Production transcripts, after asking about retention and sensitive data.</p>
+<p>生产 transcript（会先问保留策略与敏感数据）。</p>
+<p>・ Bug reports and support tickets.</p>
+<p>Bug 报告与支持工单。</p>
+<p>・ Five to ten cases you write by hand.</p>
+<p>你手写的五到十个案例。</p>
+<p>・ Cases synthesized from your codebase.</p>
+<p>从代码库合成的案例。</p>
+<p>The skill prioritizes production traffic, but it can also generate synthetic data anchored in a few real examples that you provide. The skill instructs Claude to generate a simple page that shows you every input and waits until you confirm them. As an illustration, below we show an example set of inputs for an e-mail router application that the skill may ask the user to review (Figure 3).</p>
+<p>skill 优先用生产流量，也能基于你提供的少量真实样例生成合成数据。它会让 Claude 生成一个简单页面，展示每条输入并等你确认。下方示意一封「邮件路由」应用可能让你审阅的输入集（图 3）。</p>
+<figure class="fig"><img src="https://claude.dev/media/bccc92050c6361924330ef504796ca2c0ce9208d8837356472373f8957b9fdd5.png" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">FIG 3 Example inputs review generated by the skill</figcaption></figure>
+<h2>Validating the grader</h2>
+<p>校验打分器</p>
+<p>After the inputs, Claude proposes the cheapest grader that fits your application’s output:</p>
+<p>有了输入后，Claude 会提议最便宜、又适合你应用输出的打分方式：</p>
+<p>・ Programmatic verification : If the output possibilities are constrained, it uses a code based check (exact match, a label from a fixed set, JSON that matches a schema, tests that pass).</p>
+<p>程序化校验：若输出空间受限，就用代码检查（精确匹配、固定标签集、符合 schema 的 JSON、测试通过）。</p>
+<p>・ LLM-as-judge : It will default to this type of check if the output space is open-ended, with many valid answers but clear quality criteria. In this case, a second model reads the input, the output and a rubric written as checkable claims (not a 1-to-5 scale), and returns a score with its reasoning. If you have a baseline to compare against, the judge instead reads both inputs in random order, without being told which is the baseline, and picks the better one. You pick the judge model, and it should not be the model you are testing.</p>
+<p>LLM-as-judge：若输出开放、多种答案都可但质量标准清晰，则默认用它。第二个模型读输入、输出，以及写成「可核对主张」（不是 1–5 分量表）的评分标准，返回分数与理由。若有基线可比，评判模型会打乱顺序读两边输出、且不知道哪个是基线，再选出更好的。评判模型由你选，且不应是正在被测的模型。</p>
+<p>Claude grades a handful of cases and asks whether you would have scored any of them differently (Figure 4). In general, it is important to read a sample of scored transcripts before believing your evaluator; scoring failures are among the most common ways an evaluation is misconfigured.</p>
+<p>Claude 会先给一小撮案例打分，并问你是否会打出不同分（图 4）。总的来说，相信评估器之前，先读一批已打分 transcript；打分失败是评估配错最常见的方式之一。</p>
+<p>When you’ve validated the grader, the skill tells you the size of the evaluation set (cases × repeats × model, and roughly how long it will take), runs the baseline, and prints the score with a confidence interval. What you get back: the cases, the grader, the runner, one JSON line and one full transcript per case, and a plain page that lists each case's score with a link to its transcript. If you want more than that page shows (e.g., a chart), just ask and Claude will build it as an extra page next to it. By default, these extra pages are static files that open locally and load nothing from the network.</p>
+<p>打分器通过后，skill 会告诉你评估集规模（案例 × 重复 × 模型，以及大概耗时），跑基线，并打印带置信区间的分数。你会得到：案例、打分器、runner、每案一行 JSON 与完整 transcript，以及列出每案分数并链到 transcript 的简单页面。若还想要图表等，直接说，Claude 会在旁边再建一页。默认这些额外页是本地打开的静态文件，不联网加载。</p>
+<figure class="fig"><img src="https://claude.dev/media/9c7c2f00ebdd0f9e6b8ad0d3de8cdcc6ebb162c9d2fa5b4f4950ac36b736aef8.png" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">FIG 4 Schematic of the results page generated with suggested grades for each input.</figcaption></figure>
+<h2>Diagnostic checks</h2>
+<p>诊断检查</p>
+<p>During the baseline runs mentioned above, Claude checks a number of things:</p>
+<p>上述基线运行中，Claude 还会检查：</p>
+<p>・ Grader : Claude runs the grader twice on the same output, and reports whether the verdict changed.</p>
+<p>打分器：对同一输出跑两次，报告结论是否变化。</p>
+<p>・ Plumbing : Claude checks for timeouts, API errors, and cut-off answers to ensure infrastructure noise doesn't pass as model variance.</p>
+<p>管道：检查超时、API 错误、被截断的答案，避免把基础设施噪声当成模型方差。</p>
+<p>・ Headroom : if the baseline already scores about 95% or higher, the skill warns the user and alerts that the hillclimb should aim to explore cost or latency rather than quality.</p>
+<p>余量：若基线已约 95% 或更高，skill 会警告：hillclimb 更该探索成本或延迟，而不是质量。</p>
+<h2>HILLCLIMBING</h2>
+<p>Hillclimbing</p>
+<p>Now that you have a reliable means of grading your application’s performance on a task, you can try to improve it. Hillclimbing is an effective way to tune parameters like effort or prompts, which trade-off cost and performance. Some general tips for choosing where to apply it:</p>
+<p>有了可靠的任务打分手段后，就可以改进表现。Hillclimbing 很适合调 effort、提示词等在成本与性能之间权衡的参数。选择在哪里爬坡的一般建议：</p>
+<p>・ Cheap iteration - It should be inexpensive (in terms of time, cost, and effort) to modify whatever surface you are focused on for hillclimbing. Many internal efforts and customers have focused hillclimbing on text, such as prompts and skills. These are easy to change and revert. In contrast, open-ended modifications to an agent harness during hillclimbing may involve extensive code changes.</p>
+<p>便宜可迭代——你聚焦修改的那块表面，改动应在时间/金钱/精力上都不贵。很多内部项目与客户把 hillclimbing 放在提示词、skill 这类文本上：好改也好回滚。相对地，爬坡时对 agent harness 做开放式改代码，可能牵扯大量变更。</p>
+<p>・ Attributable - Changes in the score on your evaluation should be attributable to the surface you are modifying during hillclimbing. For example, several successful applications of hillclimbing have focused on skill triggering . The evaluation metric (the trigger rate for the skill) is directly coupled to the skill description that is being modified.</p>
+<p>可归因——评估分数变化应能归因到你正在改的那块表面。例如不少成功案例聚焦 skill 触发：指标（触发率）直接耦合正在改的 skill 描述。</p>
+<p>・ Well-scoped objective - One common failure mode is an open-ended request to improve performance without careful consideration of the headroom available in the evaluation; an evaluation that’s near saturation or a poorly scoped surface (e.g., an open-ended request to update the harness) is more likely to stall. One generally strong objective across various efforts is cost: even if an evaluation is saturated, you can ask Claude to find ways to reduce cost while keeping performance at parity.</p>
+<p>目标范围清楚——常见失败是「随便提一句把性能弄好」，却没想清评估还有多少余量；接近饱和的评估或范围很散的表面（比如「随便改 harness」）更容易卡住。一个跨项目都强的目标是成本：即便评估已饱和，仍可让 Claude 在保持性能持平的前提下降本。</p>
+<h2>Overfitting</h2>
+<p>过拟合</p>
+<p>Even a well-designed evaluation rarely matches the exact task distribution you care about in production. As a result, "overfitting" to an evaluation is a common problem and results in a system that performs better on an evaluation than on production traffic.</p>
+<p>即便设计良好的评估，也很少精确匹配你真正关心的生产任务分布。因此「对着评估过拟合」很常见：系统在评估上更好，在生产流量上未必。</p>
+<p>There are many ways an evaluation can "leak" into your harness (the code around the model, including prompts, tools, and loop that calls Claude). For example, consider an evaluation task that benefits from OCR, but OCR is rarely beneficial in your production tasks. The evaluation harness might add an OCR tool to your application, which improves on the benchmark without any impact on production. More broadly, hillclimbing may add features to that harness that address edge cases in the particular evaluation examples you’ve chosen. These harness additions improve your evaluation score, but don’t translate to improvements in production (Figure 5).</p>
+<p>评估有很多方式会「渗进」harness（模型周围的代码：提示词、工具、调用 Claude 的循环）。例如某评估任务吃 OCR 红利，但生产几乎用不上 OCR——评估 harness 可能给应用加上 OCR 工具，benchmark 涨了，生产无感。更广地说，hillclimbing 可能为特定评估样例的边角情况给 harness 加功能：评估分涨了，却换不成生产提升（图 5）。</p>
+<figure class="fig"><img src="https://claude.dev/media/a328a3f4d5bfd0967174ef2ca79bc8f094d8db3c12af71be3189891bf40d0e53.png" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">FIG 5 Common causes of harness overfitting.</figcaption></figure>
+<p>Three things can help address this:</p>
+<p>三件事有助于缓解：</p>
+<p>・ Split the cases . Use a train set that the hillclimber may read and a test set that is never seen. If the train set scores improve while the test set scores stay flat, then that is a common overfitting warning sign.</p>
+<p>拆分案例。用 hillclimber 可读的训练集，和永远不看的测试集。若训练集涨、测试集不动，就是常见的过拟合预警。</p>
+<p>・ Never paste failures into the prompt . If the hillclimber reads the failing transcripts, it should never paste the failure content into the prompt.</p>
+<p>永远不要把失败贴进提示词。即便 hillclimber 读了失败 transcript，也不该把失败内容粘进提示词。</p>
+<p>・ Keep the answers structurally out of the model's reach . Models can sometimes “reward hack” by directly finding answers to evaluations.</p>
+<p>从结构上让答案够不着模型。模型有时会「奖励黑客」，直接找到评估答案。</p>
+<p>As discussed below, the claude-api skill applies these principles for you.</p>
+<p>如下文所述，claude-api skill 会替你落实这些原则。</p>
+<h2>/CLAUDE-API HILLCLIMB</h2>
+<p>/CLAUDE-API HILLCLIMB</p>
+<p>The hillclimb command in the claude-api skill turns these principles into a guided workflow. When you run /claude-api hillclimb in Claude Code, Claude iterates to improve against a given evaluation. You choose what changes it can make including:</p>
+<p>claude-api skill 里的 hillclimb 命令，把这些原则变成引导式工作流。在 Claude Code 运行 /claude-api hillclimb 时，Claude 会迭代改进给定评估。你可以规定它能改什么，包括：</p>
+<p>・ Your system prompt</p>
+<p>系统提示词</p>
+<p>・ Skills or instruction files</p>
+<p>Skill 或说明文件</p>
+<p>・ Tool descriptions</p>
+<p>工具描述</p>
+<p>・ Model choice, effort level, and other API parameters</p>
+<p>模型选择、effort 与其他 API 参数</p>
+<p>・ Your harness code</p>
+<p>你的 harness 代码</p>
+<p>Before it starts, Claude asks what you want to optimize (e.g., performance, or cost while performance holds) and then splits the evaluation set at random into test and train. With a cost goal, it considers a few common cost drivers , including prompt caching, auditing the prompt for compatibility with the selected model, and picking the model and effort setting.</p>
+<p>开始前，Claude 会问你要优化什么（例如性能，或性能持平下降本），再把评估集随机拆成测试/训练。若目标是成本，它会考虑常见成本驱动因素：提示词缓存、检查提示词与所选模型是否兼容、以及选模型和 effort。</p>
+<p>Before the first round, Claude checks that the eval's noise (how far the score can move by chance alone) is smaller than the smallest improvement you'd act on; if it isn't, it says so and suggests more repetitions or cases.</p>
+<p>第一轮前，Claude 会检查评估噪声（分数仅凭偶然能晃动多远）是否小于你会采取行动的最小改进；若不是，它会明说，并建议增加重复次数或案例数。</p>
+<p>Each round, Claude reads the previous round’s train transcripts and proposes one change as a patch. It aims each round at a change whose effect can show above the eval's noise: it fixes the failing behavior at its root (e.g., rewrites the section that causes it or adds a missing rule) rather than rewording a line. It then runs evaluation with the patched change. At this point, Claude applies a check: if the train set improves but the test set is flat, Claude suspects overfitting and reverts the patch. If there is a regression, Claude reverts. If train and test sets improve, it keeps the patch (Figure 6).</p>
+<p>每一轮，Claude 读上一轮训练 transcript，提出一处补丁式改动。它瞄准效果能高出评估噪声的改动：从根上修失败行为（重写肇事段落或补缺失规则），而不是改几个措辞。然后带着补丁重跑评估。此时检查：若训练集涨、测试集不动，怀疑过拟合并回滚；若退步也回滚；若训练与测试都涨，则保留（图 6）。</p>
+<figure class="fig"><img src="https://claude.dev/media/dafbc5fb0edf5aeed96af8984ec09f6a0f8ebd753274c305ccf3043e1640d75a.png" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">FIG 6 The process used by the hillclimber.</figcaption></figure>
+<p>When the score stalls for two or three rounds, Claude reads each remaining train failure and sorts it by cause. It does the same early if no single fix could gain more than the eval's noise, and suggests more repetitions or cases, rather than spending rounds on changes too small to measure. This step can catch ambiguous evaluation cases, harness errors, or run-to-run variance.</p>
+<p>若分数卡住两三轮，Claude 会读剩余每条训练失败并按原因归类。若单次修复的增益已小于噪声，它也会尽早这样做，并建议加重复/加案例，而不是把轮次耗在测不出来的改动上。这一步能抓住含糊案例、harness 错误或运行间方差。</p>
+<p>Only legitimate failures are included in more hillclimbing rounds.</p>
+<p>只有「真正的失败」才会进入后续 hillclimbing 轮次。</p>
+<p>When hillclimbing completes, Claude leaves your code at the version that did best on the test set for your goal. It reports the test result against the baseline with confidence intervals (Figure 7). If the gain is within noise, it says so and recommends against merging.</p>
+<p>结束后，Claude 把代码留在测试集上按你目标表现最好的版本，并相对基线报告带置信区间的测试结果（图 7）。若增益落在噪声内，它会明说并建议不要合并。</p>
+<figure class="fig"><img src="https://claude.dev/media/8c9b0ffdf9d75df81ec451ccb55feb091693fb7eb88ad9c20f3911387e3ec4e1.png" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">FIG 7 Schematic of the report generated following hillclimbing.</figcaption></figure>
+<h2>EXAMPLES</h2>
+<p>示例</p>
+<h2>Hillclimbing for cost reduction</h2>
+<p>以降本为目标的 Hillclimbing</p>
+<p>We ran /claude-api hillclimb on an internal customer support benchmark with the goal of reducing cost and improving performance. The benchmark included 44 tickets, with 30 used for the search and 14 held out. It started on Opus 4.8 at default (high) effort settings with 74.4% decision accuracy on the search tickets and a token cost of 4.6 cents per ticket.</p>
+<p>我们在内部客服 benchmark 上跑了 /claude-api hillclimb，目标是降本并提升表现。共 44 张工单，30 张用于搜索、14 张留出。起点是 Opus 4.8、默认（高）effort：搜索集决策准确率 74.4%，每票 token 成本 4.6 美分。</p>
+<p>The hillclimb first audited the prompt, removing mandatory tool-call rituals, a scratchpad step, and contradictory rules. Then it tried Opus 5.5 on low effort. This cleared the baseline accuracy bar at 87.8% and cut cost to 1.9 cents per ticket, less than half the starting cost.</p>
+<p>hillclimb 先审计提示词，去掉强制工具调用仪式、草稿步骤与矛盾规则；再试 Opus 5.5 低 effort。准确率升到 87.8%，成本降到每票 1.9 美分，不到起点一半。</p>
+<p>Part of that saving comes from Opus 5.5's pricing : input and output tokens cost 20% less than on Opus 4.8, and cache reads cost 60% less. Because Opus 5.5 cleared the bar, the hillclimb then stepped down a tier to check whether a cheaper model could clear it too. Sonnet 5 on low effort scored about the same, 88.9%, at about half the cost, 1 cent per ticket (Figure 8).</p>
+<p>部分节省来自 Opus 5.5 定价：输入/输出比 Opus 4.8 便宜约 20%，缓存读取便宜约 60%。因 Opus 5.5 已过线，又下探一档看更便宜模型能否过线。Sonnet 5 低 effort 约 88.9%，成本约一半，每票 1 美分（图 8）。</p>
+<p>Finally, Claude improved the prompt with routing rules and a refund-cap cross-reference, bringing Sonnet 5 to 98.9% at about the same cost. On the 14 held-out tickets that the search never saw, the final configuration scored 90.5% against the original setup's 78.6%, at about one fifth of the cost.</p>
+<p>最后 Claude 用路由规则与退款上限交叉引用改进提示词，把 Sonnet 5 推到 98.9%，成本大致持平。在搜索从未见过的 14 张留出工单上，最终配置 90.5%，对比原设置 78.6%，成本约五分之一。</p>
+<h2>Hillclimbing for performance improvement</h2>
+<p>以提质为目标的 Hillclimbing</p>
+<p>Another example is our claude-api skill, which provides guidance on using our APIs and general tips for working with Claude (including the sub-commands discussed in this article). We want to ensure our skill can correctly implement code that uses our APIs, and we built an evaluation set derived from our documentation to test the skill.</p>
+<p>另一个例子是我们的 claude-api skill（含本文讨论的子命令），提供 API 用法与使用 Claude 的一般建议。我们希望它能正确写出调用我们 API 的代码，并基于文档建了一套评估来测它。</p>
+<p>On our evaluation, the skill started at 66%. We gave the hillclimber access to documentation and our SDKs, allowing Claude to identify errors and self-correct them (Figure 9). Claude found that the skill was missing coverage of eight features.</p>
+<p>评估上 skill 起点 66%。我们让 hillclimber 能读文档与 SDK，以便 Claude 发现错误并自纠（图 9）。Claude 发现 skill 缺了八项功能覆盖。</p>
+<p>Adding sections for them in the skill improved performance to 74%. It then found errors in C# and Java type tables, boosting performance to 77%.</p>
+<p>补上对应章节后升到 74%；又发现 C# 与 Java 类型表错误，升到 77%。</p>
+<p>After the score stalled for two rounds, Claude analyzed the remaining failures and bucketed them by root-cause. A normal round makes one edit for the most common failure. This step makes no edit; it only sorts every remaining failure by cause. This reflection step was useful in a few ways:</p>
+<p>分数卡住两轮后，Claude 分析剩余失败并按根因分桶。普通一轮只改最常见失败；这一步不做编辑，只把所有剩余失败按原因归类。这种反思有几方面用处：</p>
+<p>・ Reflecting across a collection of failures, the hillclimber found that the skill content was present but Claude was simply writing older API shapes (e.g., from its trained priors). To address, the hillclimber added a table near the top of the skill that guided Claude from the forms it remembered to the current ones: for example, from extended thinking with a fixed token budget, which the API now rejects on recent Opus models, to adaptive thinking, and from older versions of the web search and web fetch tools to the current ones. It also moved the C# and Java warnings against fixed-budget thinking above their adaptive-thinking examples. This improved performance to 80%.</p>
+<p>纵览一批失败后，hillclimber 发现 skill 内容其实在，但 Claude 仍写出更旧的 API 形态（来自训练先验）。于是在 skill 顶部加表，引导从「记得的旧写法」到「现行写法」：例如从已被新版 Opus 拒绝的固定 token 预算 extended thinking，转到 adaptive thinking；从旧版 web search/fetch 转到现行工具。并把 C#/Java 对固定预算 thinking 的警告挪到 adaptive 示例之前。表现升到 80%。</p>
+<p>・ Tasks that never improved in performance despite addressing obvious content gaps are tells that the example or grader is flawed. One task asked for code that catches one error type, while its grader wanted a chain of at least three. Claude reworded the task. Another grader's instructions contradicted our docs, and testing the real API showed the docs were right. Addressing these, along with more skill edits, brought performance to ~88%.</p>
+<p>内容缺口明显补过却始终不涨的任务，往往说明样例或打分器有问题。有个任务要求捕获一种错误类型，打分器却要至少三条链式捕获——Claude 改写了任务。另一份打分说明与文档矛盾，实测 API 证明文档正确。处理这些并继续改 skill 后，表现约到 88%。</p>
+<h2>GETTING STARTED</h2>
+<p>开始使用</p>
+<p>Note: Run claude update first. The claude-api skill ships inside Claude Code, so updating gets you the latest version of these commands.</p>
+<p>注意：先运行 claude update。claude-api skill 内置于 Claude Code，更新后才能拿到这些命令的最新版。</p>
+<pre>claude update</pre>
+<p>先更新 Claude Code。</p>
+<p>Then, in Claude Code:</p>
+<p>然后在 Claude Code 里：</p>
+<pre>/claude-api build-eval /claude-api hillclimb</pre>
+<p>运行 build-eval / hillclimb 子命令。</p>
+<p>These sub-commands can be used directly in Claude Code via the claude-api skill :</p>
+<p>这些子命令可通过 claude-api skill 直接在 Claude Code 中使用：</p>
+<p>Run /claude-api build-eval if you want to generate an evaluation set for a particular problem. You can steer it by providing access to examples (e.g., traces). Claude will employ the guidance shared in this article to design the examples and grader, and ensure you approve the examples and the grader.</p>
+<p>若要为特定问题生成评估集，运行 /claude-api build-eval。可提供样例（如 traces）来引导。Claude 会按本文原则设计样例与打分器，并确保你批准它们。</p>
+<p>Run /claude-api hillclimb if you have an evaluation and want Claude to improve on this, guided by your goal (e.g., better performance, or lower cost while performance holds). Claude will employ the guidance shared in this article to check for overfitting while climbing and check for bugs in the eval itself, such as a grader that marks a correct-looking answer wrong or a harness error, both before the first round and whenever the score stalls.</p>
+<p>若已有评估、希望 Claude 按你的目标（更好表现，或性能持平下降本）改进，运行 /claude-api hillclimb。Claude 会在爬坡时检查过拟合，并在首轮前以及分数卡住时检查评估自身的 bug（例如把正确答打成错、或 harness 错误）。</p>
+<p>With special thanks to Misha Khalman for skill development. With thanks to Misha Khalman, Michael Segner, Matt Bell, Matt Thanabalan, and Punit Shah for reviews, contributions, and product support.</p>
+<p>特别感谢 Misha Khalman 对 skill 开发的贡献；并感谢 Misha Khalman、Michael Segner、Matt Bell、Matt Thanabalan、Punit Shah 的审阅、贡献与产品支持。</p>
+</div>
+</body>
+</html>

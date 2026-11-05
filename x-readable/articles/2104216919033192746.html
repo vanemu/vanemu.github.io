@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用 Opus 5.5 搭建动态设计工作室（完整教程）</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>用 Opus 5.5 搭建动态设计工作室（完整教程）</h1>
+<p class="meta">作者：@0xMovez (Movez)<br>原文：<a href="https://x.com/i/article/2104196832637210624">https://x.com/i/article/2104196832637210624</a><br>推文：<a href="https://x.com/0xMovez/status/2104216919033192746">https://x.com/0xMovez/status/2104216919033192746</a></p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOuGahXEAEryHt?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Most people who try motion design with Opus 5.5 end up with the same video: centered text on a gradient, everything fading in, a logo at the end.</p>
+<p>多数人用 Opus 5.5 做动态设计，最后都做出同一条片子：渐变底上的居中文字、全部淡入、结尾一个 logo。</p>
+<p>They don't give it a reference, don't give it a render engine, don't ask it to look at its own frames.</p>
+<p>他们不给参考、不给渲染引擎、也不让它看自己的帧。</p>
+<p>This is the 12-step course that turns that mess into a repeatable studio pipeline. The prompt is 10% of the video. The other 90% is the harness.</p>
+<p>这是把那团乱变成可复用工作室流水线的 12 步课程。Prompt 只占视频的 10%，另外 90% 是 harness。</p>
+<blockquote>Follow my Substack to get fresh AI alpha: movez.substack.com</blockquote>
+<p>关注我的 Substack 拿最新 AI alpha：movez.substack.com</p>
+<p>On September 22, 2026 Anthropic shipped Claude Opus 5.5.</p>
+<p>2026 年 9 月 22 日，Anthropic 发布了 Claude Opus 5.5。</p>
+<p>Within hours the timeline filled with showreels, launch videos, music videos and five-minute history films, all of them rendered from code.</p>
+<p>几小时内时间线就被 showreel、发布视频、MV 和五分钟历史片刷满——全是用代码渲出来的。</p>
+<blockquote>Captions said "one prompt". Replies said "motion designers are cooked".</blockquote>
+<p>字幕写「一个 prompt」。回复写「动态设计师完蛋了」。</p>
+<p>Both are half true. Some clips really came from a 30-word prompt. 
+
+Others came from a 9,500-character director's brief, a folder of skills, two API keys and a 12-hour autonomous run.</p>
+<p>两边都只对一半。有些片子真的来自 30 词 prompt。
+
+另一些来自 9500 字符的导演 brief、一整夹 skills、两把 API key，外加 12 小时自主跑。</p>
+<p>Thariq from the Claude Code team summed up the gap in one line: the post says one-shot, the prompt is 10k characters with skills, examples, keys.</p>
+<p>Claude Code 团队的 Thariq 一句话点破差距：帖子写 one-shot，prompt 却是带 skills、示例、keys 的 1 万字符。</p>
+<p>This course shows you both ends and everything in between.</p>
+<p>本课程两端都会给你看，以及中间的所有档位。</p>
+<p>You'll read every one of the 9 posts that defined the trend, copy the prompt pattern each one used, and then build the engine yourself.</p>
+<p>你会读完定义这波趋势的 9 篇帖、抄下各自用的 prompt 模式，然后自己把引擎搭起来。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOdW0kW4AEzPtU?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>A seek(t) renderer, closed-form springs, a beat grid, synthesized sound, and a critique loop that makes Opus fix its own frames.</p>
+<p>一个 seek(t) 渲染器、闭式弹簧、节拍网格、合成音效，以及让 Opus 修自己帧的 critique 循环。</p>
+<p>・ Part 1 ·  What is actually happening</p>
+<p>第 1 部分 · 到底发生了什么</p>
+<h2>01. Pixels - model writes a program, not a video</h2>
+<p>01. 像素——模型写的是程序，不是视频</p>
+<p>Opus 5.5 takes text and images in and puts text out. It cannot emit an MP4. Every video in this trend is a program that Opus wrote, and something else turned that program into frames.</p>
+<p>Opus 5.5 吃文本和图片，吐文本。它发不出 MP4。这波趋势里每条视频都是 Opus 写的程序，再由别的东西把程序变成帧。</p>
+<p>The core trick is determinism. Opus writes a single function, draw(t) or seek(t), that paints the exact frame for any moment in time.</p>
+<p>核心技巧是确定性。Opus 写一个函数 draw(t) 或 seek(t)，任意时刻画出精确的那一帧。</p>
+<p>A headless browser calls it 900 times for 15 seconds at 60 fps, screenshots each frame, and ffmpeg stitches them.</p>
+<p>无头浏览器对 15 秒 60fps 调用 900 次、每帧截图，ffmpeg 再拼起来。</p>
+<p>Nothing depends on a timer, so the render is identical every run and a change is a one-line edit plus a re-render.</p>
+<p>不依赖计时器，所以每次渲染一模一样；改动就是改一行再重渲。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOeQEGXoAAi6MW?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Tommy Rossi dug into the one-shot output and found Opus prefers route A with zero dependencies: one index.html, a seek function called through eval, Playwright capturing frame by frame, ffmpeg encoding.</p>
+<p>Tommy Rossi 挖 one-shot 输出后发现：零依赖时 Opus 偏爱路线 A——一个 index.html、经 eval 调用的 seek、Playwright 逐帧捕获、ffmpeg 编码。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOeqeQWwAEjlq7?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>It skipped Remotion and HyperFrames even when available. If you want a framework, say so explicitly.</p>
+<p>即便 Remotion、HyperFrames 可用，它也跳过了。想要框架，得明确说。</p>
+<h2>02. Setup - install the studio in 10 minutes</h2>
+<p>02. 搭建——10 分钟装好工作室</p>
+<p>The chat app can write an animation, but only Claude Code (or any agent with a shell) can render it, listen to it and look at its own frames.</p>
+<p>聊天 App 能写出动画，但只有 Claude Code（或任何带 shell 的 Agent）能渲染、听声、看自己的帧。</p>
+<p>That feedback loop is the whole difference between the "mid" first try people complain about and the viral ones.</p>
+<p>这条反馈环，就是大家抱怨的「有点 mid」的初稿，和爆款之间的全部差别。</p>
+<p>Then drop a house-rules file in the project root. Claude Code reads CLAUDE.md on every run, so these rules apply to every video you make here without repeating them.</p>
+<p>然后在项目根丢一份房屋规则。Claude Code 每次跑都会读 CLAUDE.md，这些规则适用你在这里做的每条片子，不用反复说。</p>
+<p>Opus 5.5 defaults to medium effort and always thinks before answering. Every viral one-shot in the list ran on xhigh or max.</p>
+<p>Opus 5.5 默认 medium effort，且总会先想再答。列表里每个爆款 one-shot 都跑在 xhigh 或 max。</p>
+<p>Use medium for small fixes and re-renders, xhigh for new films, max when the first 3 seconds have to carry a launch.</p>
+<p>小修和小重渲用 medium；新片子用 xhigh；前 3 秒必须撑起发布时用 max。</p>
+<p>・ Part 2 · Prompting like a director</p>
+<p>第 2 部分 · 像导演一样写 prompt</p>
+<h2>03. One-liner - showreel prompt and why it works</h2>
+<p>03. 一行——showreel prompt 以及为什么管用</p>
+<p>Four of the nine posts used the same sentence. It's worth understanding why a single line produced 15 seconds of camera moves, kinetic type and audio.</p>
+<p>九篇里有四篇用了同一句。值得搞懂：为什么一行字能产出 15 秒镜头运动、动态字和音频。</p>
+<p>・ "showreel for a résumé" sets a genre with known rules: fast cuts, a new technique every shot, the best work first. Opus already knows what a reel looks like.</p>
+<p>「showreel for a résumé」定下有已知规则的类型：快切、每镜新技法、最好作品优先。Opus 本来就知道 reel 长什么样。</p>
+<p>・ "what an incredible motion designer you are" makes the model the subject, so it shows techniques instead of explaining a product. No content to get wrong.</p>
+<p>「what an incredible motion designer you are」让模型成为主体，于是它展示技法而不是解释产品——没有内容可搞错。</p>
+<p>・ "15-second" is short enough to finish in one pass and long enough for 6 to 8 shots.</p>
+<p>「15-second」短到一趟跑完，又长到够 6–8 个镜头。</p>
+<p>・ "go all out" works as an effort multiplier on top of xhigh or max.</p>
+<p>「go all out」在 xhigh/max 之上再当 effort 倍增器。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOfyu6WEAIvt7h?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>The original 15-second résumé reel on Max effort. The source of the prompt. Put it directly under the anatomy diagram.</p>
+<p>原版 15 秒简历 reel，Max effort。这句 prompt 的源头。直接放在结构图下面。</p>
+<p>Same prompt on xhigh, one-shot including audio. Shows xhigh is enough, and that the sound was not added in post.</p>
+<p>同一 prompt 在 xhigh、含音频的 one-shot。说明 xhigh 够用，声音也不是后期加的。</p>
+<p>The weakness: the athemeroy dataset calls it "brief contagion". Hundreds of identical prompts produced reels that rhyme with each other. Use it to test your setup, then move on. Variants that shipped and worked:</p>
+<p>弱点：athemeroy 数据集称之为「brief contagion」——几百个相同 prompt 产出彼此押韵的 reel。用它测搭建，然后换掉。奏效并上线的变体：</p>
+<p>A one-liner tests the engine. It never tests the idea, because it doesn't contain one.</p>
+<p>一行测的是引擎。它从不测创意——因为它根本不含创意。</p>
+<h2>04. Brand - point the reel at your product</h2>
+<p>04. 品牌——把 reel 对准你的产品</p>
+<p>Tony Dinh's post is the most useful for anyone selling something. He paid over $1,000 for a similar launch video a year ago; this took under 30 minutes.</p>
+<p>Tony Dinh 的帖对卖东西的人最有用。一年前类似发布视频他花了 1000+ 美元；这次不到 30 分钟。</p>
+<p>Three extra lines did it: the product URL, "use actual product screenshot, logo, assets", and "must have music". Opus went to the site and gathered the assets itself.</p>
+<p>多了三行就够：产品 URL、「用真实产品截图、logo、素材」、「必须有音乐」。Opus 自己上站搜集资产。</p>
+<p>Rob Hallam proved the second half: after his first reel, he asked for a product ad in the same chat, and it came out faster because the renderer, audio synth and export pipeline already existed.</p>
+<p>Rob Hallam 证明了后半段：第一条 reel 之后，同一聊天里再要产品广告，出来更快——因为渲染器、音频合成和导出管线已经在。</p>
+<p>Keep one session per brand.</p>
+<p>一个品牌保持一个会话。</p>
+<p>・ Shows: TypingMind reel in under 30 minutes, replacing a $1,000+ agency video. Full prompt is in the second reply.</p>
+<p>展示：不到 30 分钟的 TypingMind reel，替代 1000+ 美元机构片。完整 prompt 在第二条回复。</p>
+<p>・ Why here: Place under the brand prompt so readers can compare his 3 extra lines with the template.</p>
+<p>为何放这：放在品牌 prompt 下，方便读者对比他多写的 3 行与模板。</p>
+<p>・ Shows: Pocketsflow reel with a talking character voiced through ElevenLabs.</p>
+<p>展示：带说话角色、ElevenLabs 配音的 Pocketsflow reel。</p>
+<p>・ Why here: Illustrates the voice + mascot upgrade in the next paragraph.</p>
+<p>为何放这：说明下一段的语音 + 吉祥物升级。</p>
+<p>achxvi took the same idea further with a talking character: the Pocketsflow version passed an ElevenLabs key and asked for a character who explains the product. Voice plus mascot is what he now sells as a service.</p>
+<p>achxvi 把同一思路推得更远：Pocketsflow 版传入 ElevenLabs key，要一个讲解产品的角色。语音加吉祥物，就是他现在当服务卖的东西。</p>
+<p>Put API keys in .env and write "the ElevenLabs key is ELEVENLABS_API_KEY in .env". Never paste a real key into a prompt you'll screenshot. achxvi's public prompt used a joke placeholder for exactly this reason.</p>
+<p>API key 放 .env，写「ElevenLabs key 在 .env 的 ELEVENLABS_API_KEY」。永远别把真 key 贴进你要截图的 prompt。achxvi 的公开 prompt 用玩笑占位，正是这个原因。</p>
+<h2>05. Reference - name a look, feed a frame</h2>
+<p>05. 参考——点名一种 look，喂进一帧</p>
+<p>Without a reference, Opus falls back to its default: centered text, gradient background, everything fading in.</p>
+<p>没有参考，Opus 会退回默认：居中文字、渐变背景、全部淡入。</p>
+<p>Rexan Wong went through dozens of viral clips and found the same thing: naming a style beats describing one, and a reference video or frame gives the model pacing, type and transitions to copy.</p>
+<p>Rexan Wong 翻了几十条爆款，发现同一件事：点名风格胜过描述风格；参考视频或帧会给模型节奏、字体和转场去抄。</p>
+<p>Pleometric's two posts show the ladder. The pure-code TikTok piece started from a single frame of another viral animation.</p>
+<p>Pleometric 的两篇展示了阶梯。纯代码 TikTok 片从另一条爆款动画的单帧起步。</p>
+<p>The Donald-style piece pointed Opus at his own PC-98 image gallery. Your own library is a reference nobody else can copy.</p>
+<p>Donald 风格那条则把 Opus 指向他自己的 PC-98 图库。你自己的库是别人抄不走的参考。</p>
+<p>・ A frame: screenshot one frame of a video you love, attach it, say what to take (palette, type, grain) and what not to take (subject).</p>
+<p>一帧：截你喜欢的视频某一帧，附上，说清取什么（色板、字体、颗粒）、不取什么（主体）。</p>
+<p>・ A video: give Opus the file or link and ask it to extract frames with ffmpeg and describe pacing shot by shot before writing code.</p>
+<p>一段视频：给文件或链接，让 Opus 用 ffmpeg 抽帧，并在写代码前逐镜描述节奏。</p>
+<p>・ A library: a folder of your images or past work. Ask Opus to write a style_guide.md from it first.</p>
+<p>一座库：你的图片或旧作文件夹。先让 Opus 据此写 style_guide.md。</p>
+<p>・ Sources: whatships.com (launch videos), Dribbble motion, your competitors' launch films.</p>
+<p>来源：whatships.com（发布视频）、Dribbble motion、竞品发布片。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOh8wpXQAAR5wU?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Pleometric suggested p5.js and Opus chose to write its own paper renderer. When you give a reference, let the model pick the technique.</p>
+<p>Pleometric 提了 p5.js，Opus 却选择写自己的纸质渲染器。给参考时，让模型挑技法。</p>
+<p>Specify the look and the constraints, not the library, unless you need a specific framework for reuse.</p>
+<p>规定 look 和约束，不要规定库——除非你为了复用必须指定框架。</p>
+<p>Shows: Why most "one prompt" videos look the same, and the reference + framework + components fix.</p>
+<p>展示：为什么多数「一个 prompt」视频长得一样，以及参考 + 框架 + 组件怎么修。</p>
+<p>"Its TikTok feed" animation, pure code, started from one frame of another viral piece. The single-frame reference in action.</p>
+<p>「Its TikTok feed」动画，纯代码，从另一爆款的一帧起步。单帧参考正在起作用。</p>
+<h2>06. Spec  - write the state list, not the vibe</h2>
+<p>06. 规格——写状态列表，不写 vibe</p>
+<p>The most-bookmarked prompt of the week wasn't a one-liner.</p>
+<p>这周收藏最多的 prompt 不是一行。</p>
+<p>@twoclipping's UI morph (907K views, 19K bookmarks) and @verbove's MakerMap film both used an XML spec: inputs to ask for, direction, a beat-by-beat state list, build rules, and gotchas. NFT_Chen's editor film is the same idea as a story: a fake UI is a set where every element has a known state.</p>
+<p>@twoclipping 的 UI morph（90.7 万播放、1.9 万收藏）和 @verbove 的 MakerMap 片都用了 XML 规格：要问的输入、方向、逐拍状态表、构建规则和坑。NFT_Chen 的编辑器片是同一思路的故事版：假 UI 是布景，每个元素都有已知状态。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOi1VyWAAA5XaP?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>The concept behind them: one shape, never cut. A single element morphs size, radius and color from state to state (button, loader, player, slider, chart, command palette), a cursor drives each change with real clicks, and the last frame equals the first so it loops.</p>
+<p>背后概念：一个形状，永不硬切。单一元素在状态间变形尺寸、圆角、颜色（按钮、加载、播放器、滑块、图表、命令面板），光标用真实点击驱动每次变化，末帧等于首帧以便循环。</p>
+<p>Here is my own template built on that structure; the originals are linked in the resources.</p>
+<p>下面是我基于该结构写的模板；原帖链接在资源区。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOi9f0W0AEOxkr?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>The UI morph loop (907K views) with the open-sourced XML template in the thread. The original of the spec pattern. Put it right after Fig 2.</p>
+<p>UI morph 循环（90.7 万播放），帖里开源了 XML 模板。规格模式的原版。紧接 Fig 2 之后。</p>
+<p>MakerMap: one shape morphing through the whole product, real data, one HTML file. Shows the same spec applied to a real product.</p>
+<p>MakerMap：一个形状贯穿整个产品变形，真数据，一个 HTML 文件。同一规格落到真产品上。</p>
+<p>Opus codes a cartoon video editor and edits inside it: timeline, waveform, export button, all drawn.</p>
+<p>Opus 用代码画卡通视频编辑器，并在里面剪：时间线、波形、导出按钮，全画出来。</p>
+<p>UI as a film set, the story version of the spec approach.</p>
+<p>UI 当片场——规格思路的故事版。</p>
+<p>・ Part 3 · Build the engine</p>
+<p>第 3 部分 · 搭引擎</p>
+<h2>07. Engine - build the seek(t) renderer</h2>
+<p>07. 引擎——建 seek(t) 渲染器</p>
+<p>This is route A, the one Opus picks by default, written out cleanly. Two files. The page paints any moment on demand, the renderer walks time and pipes frames into ffmpeg.</p>
+<p>这是路线 A，Opus 默认会选的那条，写干净版。两个文件：页面按需画任意时刻，渲染器走时间并把帧送进 ffmpeg。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOkUz-W4AAaItz?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<h2>Prefer a framework? Same prompt, route B</h2>
+<p>更想用框架？同一 prompt，路线 B</p>
+<h2>08. Springs - make motion feel expensive</h2>
+<p>08. 弹簧——让运动感觉很贵</p>
+<p>Cheap motion eases from A to B on a fixed curve. Expensive motion has mass: it accelerates, overshoots a hair, settles.</p>
+<p>廉价运动用固定曲线从 A 缓到 B。昂贵运动有质量：加速、微微过冲、再落稳。</p>
+<p>The morph films all specify closed-form springs because they stay a pure function of time, which keeps seek(t) deterministic.</p>
+<p>那些 morph 片都指定闭式弹簧，因为它们仍是时间的纯函数，seek(t) 才能保持确定。</p>
+<p>The trick that most people miss: when a value changes target several times (a cursor, a container's width), you don't restart the spring.</p>
+<p>多数人漏掉的窍门：一个值多次改目标（光标、容器宽度）时，不要重启弹簧。</p>
+<p>You add one spring per change, each starting at its own time. The motion stays continuous, and you can still render frame 812 without simulating frames 0 to 811.</p>
+<p>每次变化加一根弹簧，各有自己的起始时间。运动保持连续，你仍可不模拟 0–811 就渲第 812 帧。</p>
+<p>・ Snappy UI: buttons, toggles, leading edges</p>
+<p>干脆 UI：按钮、开关、前沿</p>
+<p>・ Default: cards, containers, camera</p>
+<p>默认：卡片、容器、镜头</p>
+<p>・ Heavy: big type, 3D objects, logo lockups</p>
+<p>沉重：大字、3D 物体、logo 定版</p>
+<p>・ Playful: mascots, stickers (visible overshoot)"</p>
+<p>俏皮：吉祥物、贴纸（可见过冲）</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOljbuWQAAn_sR?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Replace every easing curve with closed-form springs from lib/motion.js. Tiny overshoot on UI, none on type. Any value with more than one target uses track()." Opus refactors the whole file in one pass.</p>
+<p>把每条缓动曲线换成 lib/motion.js 的闭式弹簧。UI 微过冲，文字不过冲。多于一个目标的值用 track()。」Opus 一轮就能重构整文件。</p>
+<h2>09. Sound - score it to the beat</h2>
+<p>09. 声音——对准节拍配乐</p>
+<p>Rob Hallam thought the audio was added in post. It wasn't.</p>
+<p>Rob Hallam 以为音频是后期加的。不是。</p>
+<p>@oozn's Steve Jobs film synthesized its soundtrack in Node with every cut locked to 120 BPM</p>
+<p>@oozn 的 Steve Jobs 片在 Node 里合成配乐，每个剪辑锁在 120 BPM</p>
+<p>Vox's "small print" piece synthesized music in Python and then polished the render second by second against it. Sound is where "AI video" starts feeling like a film.</p>
+<p>Vox 的「small print」用 Python 合成音乐，再对着它逐秒打磨画面。声音是「AI 视频」开始像电影的地方。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOmSUNWIAAuTXY?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Two paths. If you supply a track, measure it. If you don't, synthesize it on the same timeline as the picture.</p>
+<p>两条路。有现成曲就量它；没有，就在与画面同一时间线上合成。</p>
+<p>Steve Jobs biopic: Remotion + SVG, 23 transitions, soundtrack synthesized in Node, cuts on 120 BPM.</p>
+<p>Steve Jobs 传记片：Remotion + SVG，23 次转场，Node 合成配乐，剪在 120 BPM。</p>
+<p>Proof that code-synthesized music can carry a 2-minute film.</p>
+<p>证明：代码合成的音乐能撑起两分钟片子。</p>
+<p>"Small print": story, frames and music all by Opus, rendered with HyperFrames. Python-synthesized music, then a second-by-second polish pass.</p>
+<p>「Small print」：故事、帧和音乐全由 Opus，HyperFrames 渲染。Python 合成音乐，再逐秒打磨。</p>
+<p>・ Part 4 · From one clip to a studio</p>
+<p>第 4 部分 · 从一条片子到工作室</p>
+<h2>10. Overnight - write the director's brief</h2>
+<p>10. 过夜——写导演 brief</p>
+<p>Donald dictated for five minutes, went to sleep, and woke up to a 142-second music video with 2.1M views.</p>
+<p>Donald 口述五分钟就去睡，醒来看到 142 秒 MV，210 万播放。</p>
+<p>His public prompt runs about 9,500 characters. @pradeepXkapoor's "Pip" robot film used a 19,000-character brief. Read either and you see the same skeleton: they don't describe a video, they hire a crew.</p>
+<p>他的公开 prompt 约 9500 字符。@pradeepXkapoor 的「Pip」机器人片用了 19000 字符 brief。读任意一份都能看到同一骨架：他们不是在描述视频，是在雇剧组。</p>
+<p>・ Film in one line. The logline and the joke, so every decision can be checked against it.</p>
+<p>一句话电影。logline 和笑点，好让每个决定都能对照检查。</p>
+<p>・ References. Source video, song, image library, a GitHub repo of prior work. What to keep, what to push.</p>
+<p>参考。源视频、歌、图库、先前作品的 GitHub。保留什么、往哪推。</p>
+<p>・ Tools &amp; keys. Skills to load, APIs available (image, video, voice), budget, where docs live. "Spend it economically."</p>
+<p>工具与密钥。要加载的 skills、可用 API（图/视频/语音）、预算、文档位置。「花得经济。」</p>
+<p>・ Character bible. Proportions, palette sampled from a sheet, expressions, an identity lock that survives every style change.</p>
+<p>角色 bible。比例、从色卡采样的色板、表情、能扛住每种风格变化的身份锁。</p>
+<p>・ Beat sheet. Acts with timestamps, a visual payoff every 3 to 5 seconds, a hook in the first 2.</p>
+<p>节拍表。带时间戳的幕，每 3–5 秒一个视觉回报，前 2 秒有 hook。</p>
+<p>・ Text on screen. When lyrics or captions go huge, when they sit like subtitles. Composition leaves room for them.</p>
+<p>屏幕字。歌词/字幕何时巨大、何时像字幕条。构图给它们留空。</p>
+<p>・ Workflow gates. Plan → rig → stills → animatic → full pass → polish → audio → render. Don't skip gates.</p>
+<p>工作流闸门。计划→绑定→静帧→animatic→全遍→抛光→音频→渲染。别跳闸。</p>
+<p>・ Critique loop. Render stills, score them, write the 3 worst problems, fix, repeat until every score is 8+.</p>
+<p>Critique 循环。渲静帧、打分、写下最差 3 个问题、修、重复到每项 8+。</p>
+<p>・ Deliverables. Final MP4, loop check, poster frame, contact sheet, clean source with a README</p>
+<p>交付物。最终 MP4、循环检查、海报帧、contact sheet、带 README 的干净源码</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOoLAPW0AA_pFU?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>The key move in Donald's brief is generate-then-trace. Seedance 2.5 renders base shots with characters and physics, then Opus redraws the whole video in JavaScript on top, so the viewer only sees the code-drawn layer.</p>
+<p>Donald brief 的关键一手是 generate-then-trace：Seedance 2.5 渲出带角色和物理的底片，Opus 再用 JavaScript 整段重画，观众只看见代码画的层。</p>
+<p>Video models give motion that's hard to hand-code; the JS layer gives a consistent, ownable look. Pleometric re-ran the same brief with his own gallery and got a completely different film.</p>
+<p>视频模型给出难手写的运动；JS 层给出一致、可拥有的 look。Pleometric 用自己的图库重跑同一 brief，得到完全不同的片子。</p>
+<p>Spoke to my computer for 5 mins, Claude worked for 12 hours." The Claude Pop music video, 2.1M views. The headline example of L4.</p>
+<p>「对着电脑说了 5 分钟，Claude 干了 12 小时。」Claude Pop MV，210 万播放。L4 的标题级例子。</p>
+<p>The full ~9,500-character dictated brief. Readers compare it against the director-brief template below.</p>
+<p>完整约 9500 字符口述 brief。读者对照下面的导演 brief 模板。</p>
+<p>Donald's brief re-run with a PC-98 gallery; a mixed flow with bugs left in to keep it one-pass.</p>
+<p>Donald 的 brief 用 PC-98 图库重跑；混合流程，留了 bug 以保持一趟跑完。</p>
+<p>John Heibel's PDoom repo (1.1K stars) shows the subagent pattern for real: Opus wrote ANIMATION_GUIDE.md to brief the subagents it ran in parallel and STORYBOARD.md after the first generation, with nine chapters in src/ch/. Ask for both files by name.</p>
+<p>John Heibel 的 PDoom 仓库（1.1K stars）展示了真·子代理模式：Opus 写 ANIMATION_GUIDE.md 给并行子代理 brief，首代后再写 STORYBOARD.md，九章在 src/ch/。按名去要这两份文件。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOoxaBXQAAO7pu?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<h2>11. Critique - make Opus watch its own frames</h2>
+<p>11. Critique——让 Opus 看自己的帧</p>
+<p>Opus 5.5 reads images. That means it can look at what it rendered, and this single habit separates the clips that went viral from the ones posted with "it's a bit mid".
+
+ @mablesjoseph's watercolor short was upfront about it: 163 model calls and nearly seven hours, not one shot. Drew's launch-day piece had visible cleanup rounds too. Iteration is the method, not a failure.</p>
+<p>Opus 5.5 能读图。意味着它能看自己渲了什么——这一个习惯，把爆款和「有点 mid」的帖子分开了。
+
+@mablesjoseph 的水彩短片很坦白：163 次模型调用、将近七小时，不是 one-shot。Drew 发布日那条也有可见的清理轮次。迭代是方法，不是失败。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOpFvCXAAAxG2u?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Launch-day piece, 1.7M views, with visible cleanup rounds. Iteration is the method. Pair it with the next embed.</p>
+<p>发布日片子，170 万播放，带可见清理轮次。迭代就是方法。和下一个嵌入配对。</p>
+<p>Watercolor short, openly not one-shot: 163 model calls, about 6¾ hours. The honest counterweight to "one prompt" claims.</p>
+<p>水彩短片，公开承认不是 one-shot：163 次调用，约 6¾ 小时。对「一个 prompt」说法的诚实制衡。</p>
+<h2>12. Ship - formats, a skill, and a service</h2>
+<p>12. 交付——多格式、一个 skill、一门服务</p>
+<p>Three last moves turn a good clip into a repeatable business. Export every format from one timeline. Package your pipeline as a skill so the next video is a sentence. And, if you want, do what achxvi did the same week: sell it.</p>
+<p>最后三步把一条好片子变成可复用生意。一条时间线导出所有格式。把流水线打成 skill，下一条视频只需一句话。若愿意，像 achxvi 同一周做的那样：拿去卖。</p>
+<blockquote>Every format from one timeline</blockquote>
+<p>一条时间线，所有格式</p>
+<p>Write the scenes against a layout function, not fixed pixels, and ask Opus to render 9:16, 1:1 and 16:9 in parallel.</p>
+<p>场景对着布局函数写，不要死像素；让 Opus 并行渲 9:16、1:1、16:9。</p>
+<p>The MakerMap spec asked for exactly this. Reframe type and UI per format, don't crop a 16:9 render to vertical.</p>
+<p>MakerMap 规格就要求这个。按格式重排字体和 UI，别把 16:9 裁成竖版。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOp2EfXsAAkeF-?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<blockquote>Package it as a skill</blockquote>
+<p>打成 skill</p>
+<p>Now the whole course collapses into /motion-reel for [URL], 20s, vertical, reference ./refs/frame.png. Share the skill folder with your team or publish it as a plugin like buildwithhanif did.</p>
+<p>整门课于是收成 /motion-reel for [URL], 20s, vertical, reference ./refs/frame.png。把 skill 文件夹给团队，或像 buildwithhanif 那样发成插件。</p>
+<blockquote>Turn it into revenue</blockquote>
+<p>变成收入</p>
+<p>achxvi's offer is a good template: music, a mascot in any style, product features, an offer at the end, any language, up to 3 edits.</p>
+<p>achxvi 的报价是好模板：音乐、任意风格吉祥物、产品功能、结尾 offer、任意语言、最多 3 次修改。</p>
+<p>Tony Dinh's number anchors the price: people paid around $1,000 for this a year ago. A skill plus a critique loop lets you deliver in an afternoon.</p>
+<p>Tony Dinh 的数字锚定价格：一年前这大概收 1000 美元。一个 skill 加 critique 循环，你一下午就能交付。</p>
+<p>38-second vertical product film in 45 minutes, plus the reply offering it as a paid service. The "turn it into revenue" proof. Place directly under this paragraph.</p>
+<p>45 分钟做出 38 秒竖版产品片，回复里当付费服务卖。『变成收入』的证据。直接放本段下面。</p>
+<h2>Repos to clone</h2>
+<p>可克隆的仓库</p>
+<p>・ Music video: https://github.com/JohnHeibel/PDoomVideo</p>
+<p>MV：https://github.com/JohnHeibel/PDoomVideo</p>
+<p>・ Starter: https://github.com/JohnHeibel/ClaudeAnimationBase</p>
+<p>起步：https://github.com/JohnHeibel/ClaudeAnimationBase</p>
+<p>・ Node canvas: https://github.com/buildwithhanif/claude-animation-skill</p>
+<p>Node canvas：https://github.com/buildwithhanif/claude-animation-skill</p>
+<p>・ Framework (html): https://github.com/heygen-com/hyperframes</p>
+<p>框架（html）：https://github.com/heygen-com/hyperframes</p>
+<p>・ Framework (react): https://www.remotion.dev/docs/ai/skills</p>
+<p>框架（react）：https://www.remotion.dev/docs/ai/skills</p>
+<p>・ Long form: https://github.com/WinterArc21/Battle-of-Austerlitz-Film</p>
+<p>长片：https://github.com/WinterArc21/Battle-of-Austerlitz-Film</p>
+<p>・ Prompt library: https://github.com/guanmo-ai/awesome-ai-motion</p>
+<p>Prompt 库：https://github.com/guanmo-ai/awesome-ai-motion</p>
+<p>・ Dataset: https://github.com/athemeroy/awesome-opus-5-5-videos</p>
+<p>数据集：https://github.com/athemeroy/awesome-opus-5-5-videos</p>
+<h2>Conclusion:</h2>
+<p>结语</p>
+<p>The one-liner gets you a clip. The harness gets you a studio.</p>
+<p>一行给你一条片子。Harness 给你一座工作室。</p>
+<p>Install the stack, steal a reference, write the state list, own the seek(t) engine, and make Opus watch its own frames until every score is 8.</p>
+<p>装好栈，偷一个参考，写状态表，拥有 seek(t) 引擎，让 Opus 看自己的帧直到每项打到 8。</p>
+<p>Then package it as a skill and never write the long prompt again.</p>
+<p>然后打成 skill，再也不用写那份长 prompt。</p>
+<p>Follow my Substack to get the latest articles on AI, vibe-coding, and agentic systems.</p>
+<p>关注我的 Substack，拿最新 AI、vibe-coding 与 agentic 系统文章。</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 原生服务：一个千亿美元机会</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>AI 原生服务：一个千亿美元机会</h1>
+<p class="meta">作者：@gregisenberg (GREG ISENBERG)<br>原文：<a href="https://x.com/i/article/2101757072904007680">https://x.com/i/article/2101757072904007680</a><br>推文：<a href="https://x.com/gregisenberg/status/2101760050108797268">https://x.com/gregisenberg/status/2101760050108797268</a></p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HSrzGQJXgAA0WdI?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>AI-native services are here, and I think they're the best business you can start right now. There's probably $100 billion up for grabs. This is the full guide: what AI native services are, how to build one, and the opportunity map.</p>
+<p>AI 原生服务已经来了。我认为这是眼下最好开的一类生意，大概有 1000 亿美元的空间等着人拿。这篇是完整指南：什么是 AI 原生服务、怎么做一家，以及机会地图。</p>
+<p>This is pretty DENSE article so grab a coffee/tea, give it 15 minutes, and let's get into it.</p>
+<p>文章信息量很大，泡杯咖啡/茶，留 15 分钟，我们开始。</p>
+<h2>Background</h2>
+<p>背景</p>
+<p>For most of my career, running a service business meant pretty good living and a bad company (at least in the eyes of many VCs). You sold hours, the revenue stopped when you stopped, and the whole thing lived on a few people who could leave. That's changing, and the reason is simple enough to fit in one example.</p>
+<p>职业生涯大半时间里，做服务生意意味着日子过得不错、但公司本身不怎么样（至少在很多 VC 眼里如此）。你卖的是小时，你停下来收入就停，整个生意压在几个可能随时离开的人身上。这一点正在变，原因用一个例子就够说清。</p>
+<p>A business pays about $10,000 a year for QuickBooks. It pays about $120,000 a year for the accountant who uses QuickBooks. For twenty years, software companies fought over the $10,000, because that was the part you could sell at scale. The $120,000 was locked behind a human, and you couldn't scale a human without hiring another one. That's the money that just opened up. AI can now do most of what the accountant does, which means you can sell the finished work, the closed books, instead of the tool, and you can do it at software margins.</p>
+<p>一家公司每年大约付 1 万美元给 QuickBooks，却要付大约 12 万美元给用 QuickBooks 的会计。二十年来，软件公司抢的是那 1 万美元——因为那一块可以规模化卖。那 12 万美元锁在人的身后，不加人头就扩不出去。现在被打开的，正是这笔钱。AI 已经能做会计大部分工作，于是你可以卖成品——关好的账——而不是卖工具，并且用接近软件的毛利去做。</p>
+<p>That's what an AI-native service is. The work is done mostly by agents, and a small team handles the parts that still need a person. How you charge is up to you, a monthly retainer, a per-unit price, usage-based, whatever fits the customer. The thing that makes it AI-native is that the delivery runs on software instead of headcount.</p>
+<p>这就是 AI 原生服务：活主要由 Agent 干，小团队处理仍需人的部分。怎么收费随你——月费、按件、按用量，看客户适合什么。让它「AI 原生」的关键是：交付跑在软件上，而不是跑在人头上。</p>
+<p>This essay walks through every piece of it: what it's made of, how to build one, and the opportunity map.</p>
+<p>这篇会把每一块拆开讲：由什么构成、怎么搭起来、机会地图在哪。</p>
+<h2>What an AI-native service actually is</h2>
+<p>AI 原生服务到底是什么</p>
+<p>The simplest way to think about it: a normal service business sells a person's time. A SaaS business sells a tool and makes the customer do the work. An AI-native service does the work for the customer, and agents do most of it.</p>
+<p>最简单的对比：普通服务卖人的时间；SaaS 卖工具、让客户自己干活；AI 原生服务替客户把活干完，而且大部分由 Agent 完成。</p>
+<p>The customer doesn't want bookkeeping software. They want their books closed. They don't want a contract-review tool. They want to know if the contract is safe to sign. An AI-native service delivers that, and the customer experiences it exactly like hiring a firm, except it's faster, cheaper, and it doesn't get tired. Whether you bill them monthly, per job, or on usage is a separate decision.</p>
+<p>客户要的不是记账软件，是账关好；要的不是合同审查工具，是知道这份合同能不能签。AI 原生服务交付的就是这个结果，客户体验像请了一家事务所，只是更快、更便宜、还不累。按月、按单还是按用量收费，是另一件事。</p>
+<p>The trick is that under the hood it runs like software. The work is done by a system you built once, not by a headcount you grow forever. That's why it can be priced like a service and valued like software, which is the whole opportunity.</p>
+<p>诀窍在于：底层它像软件一样跑。活是由你建一次的系统完成的，不是靠永远加人。所以它可以按服务定价、却按软件估值——这就是整块机会。</p>
+<h2>Why now</h2>
+<p>为什么是现在</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HSryN-fXcAE7GnA?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>This wasn't possible 2 years ago, and the reason is a few things landing at the same time.</p>
+<p>两年前这还做不到。原因是几件事同时到位了。</p>
+<p>The models got good enough at the actual work. Reviewing a contract, coding a medical claim, drafting a demand letter, closing a month of books. Two years ago the output was a rough draft a person had to redo. Now it's a finished draft a person checks.</p>
+<p>模型已经够好，能干真活：审合同、编医疗理赔码、起草催告函、关一个月的账。两年前产出还是草稿、人得重做；现在是成品草稿，人只做检查。</p>
+<p>The cost of running them collapsed. A task that cost dollars in tokens now costs cents, which means your cost to deliver one more unit of work is close to zero. That's the number that turns a service into something with software margins.</p>
+<p>跑模型的成本崩了。以前几美元 Token 的任务，现在几美分，意味着多交付一单位的边际成本接近零。正是这个数字，把服务变成了有软件毛利的东西。</p>
+<p>And the money was always there. Businesses in the US spend about $4.6 trillion a year on services, roughly six times what they spend on software. That's the accountant, the broker, the paralegal, the bookkeeper, the compliance specialist. For two decades that pool was untouchable because every dollar of it was attached to a person. Now it's the biggest open market in the economy, and it's kinda crazy how open these markets truly are.</p>
+<p>钱其实一直在那儿。美国企业每年在服务上花大约 4.6 万亿美元，约等于软件支出的六倍——会计、经纪人、律师助理、簿记、合规专家。二十年里这池子碰不得，因为每一美元都绑着人。现在它成了经济里最大的开放市场，而且开放程度有点夸张。</p>
+<p>You can see it in the companies that moved first. Harvey, doing legal work, went from roughly $100 million to $190 million in annual revenue in about five months. EvenUp sells demand letters to injury firms at around $500 each, for work that used to eat eight to twelve hours of an associate's day, and crossed $50 million in revenue. Kick does small-business bookkeeping for $300 to $500 a month, undercuts a human bookkeeper by half, and still runs gross margins above 70 percent. These are service businesses. They just happen to have the economics of software.</p>
+<p>先动的公司已经证明了这点。做法律的 Harvey，大约五个月年经常收入从约 1 亿涨到 1.9 亿。EvenUp 向人身伤害律所卖催告函，每封约 500 美元，替代助理一天 8–12 小时的活，收入已过 5000 万。Kick 给小企业做簿记，月费 300–500 美元，比人工簿记便宜一半，毛利仍超 70%。这些都是服务生意，只不过碰巧有软件的经济结构。</p>
+<p>Why services, of all the things you could start</p>
+<p>为什么偏偏做服务，而不是别的</p>
+<p>Most people building right now are choosing between a SaaS product, an app, or an agency. I'll make the case why an AI-native service beats all three.</p>
+<p>现在大多数创业者在 SaaS、App、Agency 之间选。我会说明为什么 AI 原生服务能赢过这三者。</p>
+<p>SaaS is running up a down escalator. You sell a tool, and the tool competes with a foundation model that gets better and cheaper every quarter. Every time a lab ships, your product is worth a little less. An app is dependent on the App Store, so you're always playing a dance (and margins aren't as high as a result because you're giving Apple 30%). And a classic agency still sells hours, so its revenue is capped by its headcount and its margins are stuck at 20 to 30 percent forever.</p>
+<p>SaaS 像在下行电梯上往上跑：你卖工具，工具却在和每季度更强更便宜的基础模型竞争；实验室每发一次版，你的产品就贬一点。App 绑在 App Store 上，永远在跳舞（还要给 Apple 30%，毛利更薄）。传统 Agency 仍卖小时，收入被人头卡住，毛利永远停在 20–30%。</p>
+<p>An AI-native service flips all of that. You sell the finished work, so when the models get better, your business gets better. Model improvement works for you instead of against you.</p>
+<p>AI 原生服务把这一切翻过来。你卖的是成品，模型变强，你的生意也变强。模型进步站在你这边，而不是对着你。</p>
+<p>The budget already exists. You're replacing a line item the customer already pays, so you don't have to convince anyone they have a problem or invent a new category. Sales is "we do what your current firm does, faster and cheaper." That is the easiest pitch in business.</p>
+<p>预算本来就在。你替换的是客户已经在付的科目，不必说服他们「你有问题」、也不必发明新品类。销售话术就是：「我们干你们现在事务所干的事，更快更便宜。」这是生意里最好讲的 pitch。</p>
+<p>It cash-flows from day one. A SaaS founder guesses at product-market fit for a year before revenue. A service founder gets paid for the first job. You learn what to build by getting paid to do it. It also much more of a personal type business. Anecdotally, my friends who run high margin, smaller businesses powered by AI seem happier.</p>
+<p>第一天就有现金流。SaaS 创始人猜一年产品市场契合才见收入；服务创始人第一单就收钱。你靠被付钱干活来学会该建什么。这也更像「对人」的生意。就我观察，那些靠 AI 做高毛利、规模不大的朋友，似乎更开心。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HSrxkUbWQAAFu0A?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<h2>The wedge</h2>
+<p>楔子</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HSrxrnWWcAAw5_4?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>The coolest part is that a service is the best wedge there is.</p>
+<p>最酷的一点：服务是最好的楔子。</p>
+<p>You use it to get into a customer, a niche, an industry, before you know exactly what to build. You do the work, you get paid, and every job teaches you where the real pain is, what "correct" means, and which parts a machine can own. Then you productize what you learned. Then, if you want, you turn that into software. You climb from service to product with a business paying you at every rung, instead of raising money to guess.</p>
+<p>你用它在还没想清最终产品之前，就进入客户、细分行业。你干活、收钱，每单都教你真痛点在哪、「正确」意味着什么、哪些环节机器能接手。然后把学到的产品化；再往下，如果你愿意，做成软件。你是从服务爬到产品，每一阶都有生意付钱，而不是先融资再瞎猜。</p>
+<p>The biggest companies in AI figured this out already. The forward-deployed engineer model, an engineer embedded with the customer who builds instead of advises, is a service used as the wedge into an enterprise. It's how the winners get in the door. You can run the exact same play at a smaller scale in a niche you know.</p>
+<p>最大的 AI 公司早就想通了。Forward-deployed engineer——工程师嵌进客户现场、动手建而不是只给建议——本质上就是用服务当进企业的楔子。赢家靠这个进门。你完全可以在熟悉的细分里，用更小规模跑同一套打法。</p>
+<h2>The pieces</h2>
+<p>构成零件</p>
+<p>Every AI-native service has the same parts. If you understand these, you can design one for almost any niche.</p>
+<p>每家 AI 原生服务零件都一样。搞懂这些，几乎任何细分都能设计一套。</p>
+<p>・ The unit. This is the single most important decision. You sell one clearly defined thing: per claim, per filing, per contract, per month of books, per report. Never per hour. A retainer is fine, as long as it's for a clearly defined scope, because the unit is still what you deliver, you're just billing for it monthly instead of per job. The unit is what lets you price it, deliver it repeatedly, and eventually turn it into software. Pick something with a clear finish line, where the customer can look at it and say "done."</p>
+<p>计量单位（unit）。这是最重要的决策。你卖一件定义清楚的东西：按理赔、按申报、按合同、按一个月账、按报告。永远不要按小时。月费可以，但必须对应清晰范围——单位仍是你交付的东西，只是改成按月收。单位让你可以定价、可重复交付，最终还能软件化。选有明确终点的东西，客户看一眼就能说「完了」。</p>
+<p>・ The intake. This is how the work comes in, and it's where most service businesses bleed money without noticing. An agency takes three calls to scope one job. An AI-native service takes a form. The customer uploads the document, fills in five fields, and describes what they need. That's it. If you can't define intake as a form, your unit isn't clear enough yet.</p>
+<p>进件（intake）。活怎么进来。多数服务公司在这里默默失血：Agency 要打三通电话才定一单范围；AI 原生服务只要一张表。客户上传文件、填五个字段、描述需求，完事。如果你没法把进件定义成表单，说明单位还不够清晰。</p>
+<p>・ The engine. The AI that does the work. This is the model plus your instructions, your examples, your context about this specific industry. On day one it's mostly a good prompt and a few dozen examples. Over time it becomes something a competitor can't replicate, because it's shaped by every job you've run.</p>
+<p>引擎（engine）。干活的 AI：模型 + 你的指令 + 示例 + 这个行业的上下文。第一天多半是好 prompt 加几十个例子；时间久了会变成对手复制不了的东西，因为它被你跑过的每一单塑造过。</p>
+<p>・ The rulebook. This is the real product, and almost everyone underrates it. It's the written list of what "correct" means in your niche and every way the AI gets it wrong. "A home health note is incomplete without vitals." "A demand letter must cite the treatment dates." "This kind of claim gets denied when the code doesn't match the diagnosis." You build this list one mistake at a time, by reading outputs and writing down what you caught. After a few hundred jobs, this rulebook is the thing that makes your output trustworthy and your business defensible.</p>
+<p>规则书（rulebook）。这才是真正的产品，几乎所有人都低估它。它是一份写下来的清单：在你的细分里什么叫「正确」，以及 AI 所有会搞错的方式。「家庭护理笔记没有生命体征就不完整。」「催告函必须引用治疗日期。」「这类理赔在编码与诊断不符时会被拒。」你一错一记，靠读输出、写下抓到的问题来堆。跑过几百单后，规则书会让产出可信、生意可守。</p>
+<p>・ The review layer. Where a human still looks. You decide, per unit, what ships automatically and what a person checks first. Low-stakes, high-confidence work goes straight out. Anything with money, legal exposure, or a customer's reputation attached gets a human eye. The review layer is how you own the mistakes without drowning in them, and the rulebook shrinks it over time.</p>
+<p>复核层（review）。人还要看的地方。按单位决定：哪些自动出、哪些人先看。低风险、高置信直接放行；涉及钱、法律暴露或客户声誉的，必须人眼。复核层让你能「背锅」却不被淹死，而规则书会让它越来越薄。</p>
+<p>・ The delivery. How the finished work gets back to the customer. A dashboard they log into, an email with the file, a portal that shows status. This replaces the account manager. The customer should be able to see where their job is without asking anyone.</p>
+<p>交付（delivery）。成品怎么回到客户手里：可登录的仪表盘、带附件的邮件、显示进度的门户。这替代客户经理。客户不该再问人，自己就能看到单子到哪了。</p>
+<p>・ The pricing. You've got two good options and one bad one. Per unit, where you charge for each claim, filing, or letter, works when volume is predictable and the customer wants to pay for exactly what they use. A flat monthly retainer, where you charge a fixed fee for a defined scope, works when the customer wants budget certainty and you want revenue you can count on. Kick's $300 to $500 a month for bookkeeping is a retainer, and it's a great business. The only thing to avoid is pricing tied to hours, because that chains your revenue to your headcount, which is the exact trap that made agencies bad businesses. Whichever you pick, price against the human alternative, not your costs. If a firm charges $2,500 for the thing, you charge $800. It looks like a bargain to the customer and it's a fortune to you, because your cost to deliver one more unit is close to zero.</p>
+<p>定价（pricing）。两个好选项、一个坏选项。按件——每条理赔、申报、函件——适合量可预期、客户想按实际用量付的场景。固定月费——清晰范围内收死价——适合客户要预算确定、你要可预期收入的场景。Kick 簿记月费 300–500 美元就是月费模式，生意很好。唯一要避开的是绑小时的定价，那会把收入锁在人头上，正是 Agency 变差生意的陷阱。不管选哪个，对照人工替代品定价，而不是对照你的成本。事务所收 2500，你收 800。对客户是便宜，对你是暴利——因为多交付一单位的成本接近零。</p>
+<p>・ The distribution. How you get customers. For most of these niches the honest answer is cold outbound to a tight list of the exact person who writes the check, plus one lead magnet: do the first job free. A home health agency that gets ten notes reviewed for nothing, and sees three problems they missed, becomes a customer that afternoon. Content works too if you're already making it, and so do partnerships with the software these businesses already use and referrals in a niche where everyone knows everyone. You don't need an audience. You need a channel to the buyer, and a free first job is the fastest one there is.</p>
+<p>获客（distribution）。客户从哪来。对这些细分，诚实答案多半是：冷触达一份「真正签字付款的人」的短名单，再加一个获客钩子——第一单免费。一家家庭护理机构免费审了十份笔记、发现三个漏掉的问题，当天下午就能成交。你若本来就做内容，内容也行；和他们已在用的软件做合作、在人人都认识人人的圈子里拿转介也行。你不需要粉丝，需要通向买家的通道；免费第一单是最快的那条。</p>
+<h2>One built all the way through</h2>
+<p>从头到尾搭起来的例子</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HSrxxLBXsAA7rGw?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Here's what the pieces look like assembled, with real numbers.</p>
+<p>零件装在一起长这样，带真实数字。</p>
+<p>Take home health note review. A mid-size agency produces around 2,000 visit notes a month and pays a nurse reviewer roughly $70,000 a year to check them, because an incomplete note gets the claim denied or flagged in an audit.</p>
+<p>以家庭护理笔记审核为例。中型机构每月大约产出 2000 份上门笔记，请一名护士审核员年薪约 7 万美元来检查——因为笔记不全，理赔会被拒或在审计里被点名。</p>
+<p>The unit is one reviewed note. Intake is an upload, the agency drops in the day's notes. The engine runs each note against the rulebook you built, the twenty things that get a note denied: missing vitals, a vague medication change, care that doesn't support the billed level. The review layer sends clean notes straight back and flags the risky ones for a quick human look. Delivery is a dashboard showing every note, what passed, and what needs fixing, so the agency never has to ask.</p>
+<p>单位是「一份已审笔记」。进件是上传，机构扔进当天的笔记。引擎按你写的规则书跑每一份——二十条会让笔记被拒的点：缺生命体征、用药变更含糊、护理内容撑不起计费等级。复核层：干净的直接退回，有风险的标给人快速看一眼。交付是仪表盘：每份笔记、哪些过了、哪些要改，机构不用再问人。</p>
+<p>You charge $2 a note. That's $4,000 a month from one agency, and your cost to run a note through the model is a few cents. Ten agencies is $40,000 a month. Fifty is $2.4 million a year, and one person can run it, because the intake is an upload, the checking is a rulebook, and the delivery is a dashboard. You started by reviewing notes for five agencies by hand, and the rulebook you wrote doing that is now the whole product. That's the shape of it. A real business, in a niche nobody's fighting over, that you can start this month.</p>
+<p>你收每份 2 美元。一家机构就是月入 4000，模型跑一份只要几美分。十家是月入 4 万；五十家是年入 240 万，一个人就能跑——因为进件是上传、检查是规则书、交付是仪表盘。你从手审五家机构的笔记起步，当时写下的规则书，现在就是整个产品。形状就是这样：一个真实生意，细分里没人抢，这个月就能开干。</p>
+<h2>How to build one</h2>
+<p>怎么搭一家</p>
+<p>First, pick a box on the map (below). You want work that a company already pays an outside firm to do, and that has a checkable right answer. Both of those matter, and I'll explain why in a second.</p>
+<p>第一，在下面的地图上选一个格子。你要找的是：公司已经付钱给外部事务所做、并且有可核对正确答案的工作。这两点都重要，稍后再解释为什么。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HSrx1HdWsAAdkbW?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Second, find five customers and do the work for them, mostly by hand. Use AI as the engine, but read every single output yourself before it goes out. This is not the product yet. This is how you learn what correct looks like, where the AI breaks, and what the customer actually cares about. You'll get all of that in a few weeks by doing the work, which you'd never get by guessing in a pitch deck.</p>
+<p>第二，找五个客户，主要靠人亲手做。AI 当引擎，但发出去前你自己读每一份输出。这还不是产品，这是学：正确长什么样、AI 在哪翻车、客户真正在意什么。干几周就能全学到，这是猜 pitch deck 永远得不到的。</p>
+<p>Third, write down every mistake. Each time you catch something wrong, add it to the rulebook. After a few dozen jobs you'll have a list of the twenty things that keep going wrong in this niche. That list is your product. Nobody else has it.</p>
+<p>第三，记下每一个错。每抓到一次，就写进规则书。几十单之后你会有一份「这个细分里总翻车的二十件事」清单。那份清单就是产品，别人没有。</p>
+<p>Fourth, productize. Fix the scope, fix the price, turn intake into a form, turn delivery into a dashboard, and run the rulebook automatically. Now one person can handle fifty customers, and the business has the margins of software with the sales cycle of a service. This is where most of these businesses should live, and it's a great place to stay.</p>
+<p>第四，产品化。钉死范围与价格，进件变表单，交付变仪表盘，规则书自动跑。这时一个人能扛五十个客户，生意有软件毛利、服务销售周期。多数这类生意就该停在这里，而且很值得停在这里。</p>
+<p>Fifth, and only if you want to, turn it into software. Once the rulebook and the workflow are solid, you can let customers run it themselves. That's the jump from a productized service to a product, and it's where the highest valuations are. But you'll have earned it, because you built the software by doing the work first instead of guessing what to build. You can always optionally raise VC once you get to this point if you want.</p>
+<p>第五，只有你想的时候，再做成软件。规则书和工作流稳了，可以让客户自己跑。那是从产品化服务跳到产品，估值最高的一跳——但你是靠先干活挣来的，不是靠猜该建什么。到这一步如果你想，也可以再考虑融 VC。</p>
+<p>I plan on doing an episode this week of the pod going deeper into this @startupideaspod on YouTube/Spotify/Apple.</p>
+<p>这周播客我会更深聊这个，@startupideaspod，YouTube / Spotify / Apple 都有。</p>
+<h2>The map</h2>
+<p>地图</p>
+<p>Two questions decide almost everything about whether an idea works.</p>
+<p>两个问题几乎决定一个想法能不能成。</p>
+<p>One: does the customer already pay an outside firm to do this? If yes, the budget exists, the scope is already defined, and switching to you costs them nothing. If they do it in-house, you're trying to replace someone's employee, which is a much harder conversation.</p>
+<p>一：客户是不是已经付钱给外部事务所做这件事？是，则预算在、范围清、换你几乎零成本。若是内部做，你等于要替掉某人的员工，对话难得多。</p>
+<p>Two: is there a checkable right answer? If the output can be verified against a rule, AI plus your rulebook can own it. If it needs a real judgment call, a human has to stay in the loop.</p>
+<p>二：有没有可核对的正确答案？若产出能按规则验证，AI + 你的规则书就能接管；若需要真正判断，人必须留在环里。</p>
+<p>Put those two on a grid and you get four boxes.</p>
+<p>把这两个轴画成格子，得到四个盒子。</p>
+<p>Already outsourced and checkable: build here. This is the sweet spot. You're a cheaper, faster version of a firm they already write checks to, and you can prove the work is right.</p>
+<p>已外包且可核对：在这里建。甜区。你是他们已在付钱的事务所的更便宜、更快版本，还能证明活做对了。</p>
+<p>Checkable but done in-house: a real opportunity, harder sell. Position it as a tool the team keeps, not a replacement for a person.</p>
+<p>可核对但内部做：真机会，但更难卖。定位成团队留下的工具，而不是替掉某个人。</p>
+<p>Already outsourced but judgment-heavy: keep a human in the loop and charge a premium. AI does the prep, a person makes the call, and you can price close to what the old firm charged.</p>
+<p>已外包但偏判断：人留在环里，收溢价。AI 做准备，人做决定，定价可以贴近老事务所。</p>
+<p>In-house and judgment-heavy: skip it. Because that's a job, not a business.</p>
+<p>内部做且偏判断：跳过。那是一份工作，不是一门生意。</p>
+<h2>The opportunities</h2>
+<p>机会清单</p>
+<p>Here are real top-right boxes, each with the unit you'd sell. None are glamorous. That's on purpose.</p>
+<p>下面是真实的右上角格子，每个都写了你该卖的单位。都不光鲜，这是故意的。</p>
+<p>・ Medical billing and coding, per claim. Clinics already outsource it. A wrong code means a denied claim, so correct is checkable and expensive to miss.</p>
+<p>医疗账单与编码，按理赔。诊所已经在外包。编码错了就会被拒赔，所以「正确」可核对，漏了很贵。</p>
+<p>・ Commercial insurance quoting, per policy. The broker's core job is shopping carriers and filling forms. It's mostly a task with a checkable output.</p>
+<p>商业保险报价，按保单。经纪人核心活就是比价、填表，大体是可核对产出的任务。</p>
+<p>・ Customs and freight classification, per shipment. Every import needs the right code and paperwork. Rule-bound, document-heavy, costly when wrong.</p>
+<p>海关与货运归类，按票货。每票进口都要正确编码和单据。规则死、文件多，错了代价高。</p>
+<p>・ Regulatory filings for licensed businesses, per filing. Finance, food, healthcare, all pay specialists to follow strict rules, and the rules are the spec sheet.</p>
+<p>持牌业务的监管申报，按次申报。金融、食品、医疗都请专家跟死规则，规则本身就是规格书。</p>
+<p>・ Lease abstraction and title work, per document. Commercial real estate is buried in this and already farms it out.</p>
+<p>租约摘要与产权工作，按文档。商业地产被这事埋着，而且已经外包出去。</p>
+<p>・ RFP and grant writing, per submission. Mostly structure and precedent, and the budget already exists as a line item.</p>
+<p>RFP 与基金申请撰写，按份提交。大多是结构与先例，预算本来就是科目。</p>
+<p>・ Property tax appeals, per appeal, with a share of the savings. Already outsourced, checkable, and the customer only pays when you win. (I did this recently and paid a firm 50% of savings, you can do the same service for 10% of savings!)</p>
+<p>房产税复议，按件，抽节省额分成。已外包、可核对，而且赢了客户才付钱。（我最近付过一家公司节省额的 50%；你完全可以按 10% 做同样服务！）</p>
+<p>・ Home health visit note review, per note. Notes have to be complete or billing gets denied, and agencies review them by hand today.</p>
+<p>家庭护理上门笔记审核，按份。笔记不全账单会被拒，机构今天还在手审。</p>
+<p>・ Demand letters for injury firms, per letter. A junior associate spends hours on each. The structure is repeatable and the output is checkable.</p>
+<p>人身伤害律所的催告函，按封。初级助理每封要花好几小时。结构可复用，产出可核对。</p>
+<p>・ Accounts payable exception handling, per exception. Companies pay people to chase the invoices that don't match, and the matching is a rule.</p>
+<p>应付账款异常处理，按异常。公司雇人追对不上的发票，而对账本身就是规则。</p>
+<p>Look at the pattern. Each one is work a business already pays someone to do, has a right answer you can check, and lives in an industry running on old software that hates the process. That combination is the tell. When you find it, you've found a business.</p>
+<p>看规律：每一项都是企业已付钱让人做的活，有可核对的正确答案，且处在靠老旧软件硬撑、人人讨厌流程的行业。这个组合就是信号。找到它，你就找到了一门生意。</p>
+<p>I'll keep adding these types of opportunities on Ideabrowser.com (literally free to sign up for validated ideas)</p>
+<p>我会持续在 Ideabrowser.com 加这类机会（注册验证想法本身免费）。</p>
+<h2>What makes it defensible</h2>
+<p>护城河是什么</p>
+<p>The first question every founder and every investor asks is: why won't the customer just do this themselves with ChatGPT? The answer is that they don't want a tool, they want it done, and they want someone on the hook when it's wrong. A clinic isn't going to have its office manager paste claims into a chatbot and hope. They want a firm that knows what a denied claim looks like, has caught that mistake three hundred times, and will fix it if it slips through. Your rulebook and your accountability are the product. The model is just the engine, and everyone has the same engine.</p>
+<p>每个创始人和投资人第一个问题都是：客户为什么不自己用 ChatGPT 干？答案是：他们不要工具，他们要「干完」，而且出错时要有人扛。诊所不会让办公室经理把理赔粘进聊天机器人然后祈祷。他们要一家知道拒赔长什么样、同一个错抓过三百次、漏了也能修的事务所。你的规则书和问责，才是产品。模型只是引擎，人人都有同一台引擎。</p>
+<p>That's the real moat. When you sell the finished work, you own the mistakes. A software company ships a bug and patches it. A firm that files a wrong claim has a real problem, and the customer is right to be upset. So the moat is not the model. It's the rulebook, the hundreds of edge cases you caught and wrote down in one narrow niche. A competitor can download the model in an afternoon. They can't download three hundred jobs' worth of your mistakes.</p>
+<p>这才是真护城河。你卖成品，就得背锅。软件公司出 bug 打补丁就行；事务所递错理赔是真出事，客户生气也合理。所以护城河不是模型，是规则书——你在一个窄细分里抓住并写下的几百个边角。对手一个下午就能下载模型，下载不了你三百单踩过的坑。</p>
+<p>That's also why the review layer matters. It's what lets you own the mistakes without them owning you, and it's the thing that shrinks as the rulebook grows.</p>
+<p>这也是为什么复核层重要：它让你能背锅却不被锅压死，而且会随规则书变厚而变薄。</p>
+<h2>The one thing to get right</h2>
+<p>唯一必须做对的事</p>
+<p>Most people building "AI agencies" point the AI at production and leave everything else the way it was. That gives you a slightly cheaper agency. The reason agencies were never great businesses was the overhead around the work, scoping, checking, managing, selling, all of which grew with every client.</p>
+<p>很多人做「AI Agency」只是把 AI 对准生产，其余一切照旧。那只会得到稍便宜一点的 Agency。Agency 从来不是好生意，原因是活周围的开销——定范围、检查、管理、销售——随客户数一起涨。</p>
+<p>An AI-native service collapses that overhead on purpose. Intake is a form. Scope is a menu. Quality is a rulebook. Account management is a dashboard. Do that and the business behaves like software. Skip it and you've just built a faster version of the thing that never worked. And the coolest part is if you ever want to sell that business, your margins might be 60-80%. So you can command a life changing exit on something like a 6-12X EBITDA exit.</p>
+<p>AI 原生服务故意把这些开销压扁。进件是表单，范围是菜单，质量是规则书，客户管理是仪表盘。做到这些，生意行为像软件；跳过它们，你只是把那个从来不行的东西做得更快一点。最酷的是：哪天要卖公司，毛利可能在 60–80%，按 6–12 倍 EBITDA 退出，可以改变人生。</p>
+<p>So, that's basically the whole thing. Pick a unit. Build the intake, the engine, the rulebook, the review layer, and the delivery. Price against the human, per unit or on a retainer. Start by doing the work by hand for five customers, write down every mistake, then productize. The $120,000 that was locked behind a person is open now! Go find yours.</p>
+<p>所以整件事大致就是这样。选一个单位。建好进件、引擎、规则书、复核层和交付。对照人工定价，按件或月费。先亲手给五个客户干活，记下每个错，再产品化。锁在人背后的那 12 万美元现在打开了！去找属于你的那一份。</p>
+<p>Point of this article was just to get your creative juices flowing.</p>
+<p>写这篇文章，只是为了把你的脑洞打开。</p>
+<p>AI-native services are here, and now's the time.</p>
+<p>AI 原生服务已经到了，现在就是时机。</p>
+</div>
+</body>
+</html>

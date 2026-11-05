@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codex 动手改你的 Xcode 项目之前，先装这些 Skills</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Codex 动手改你的 Xcode 项目之前，先装这些 Skills</h1>
+<p class="meta">作者：@PaulSolt (Paul Solt)<br>原文：<a href="https://x.com/i/article/2042696610484781056">https://x.com/i/article/2042696610484781056</a><br>推文：<a href="https://x.com/PaulSolt/status/2042716870512353294">https://x.com/PaulSolt/status/2042716870512353294</a></p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HFks6mbXwAEs05g?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>I've been building iOS and macOS apps with Codex and Claude Code since last year. One thing I've learned: agents need simple systems that produce reliable results.</p>
+<p>从去年起我就在用 Codex 和 Claude Code 做 iOS / macOS App。有一条经验很清楚：Agent 需要简单、能稳定产出结果的系统。</p>
+<p>Without the right skills, agents write deprecated code, create compiler errors, and waste your time debugging their mistakes. These 5 skill packs fix that. Each one comes from a developer who's been shipping real apps with agents.</p>
+<p>Skills 不对的话，Agent 会写废弃 API、制造编译错误，然后把你的时间浪费在帮它擦屁股上。下面这 5 套 skill pack 就是来修这个问题的。每一套都来自真正在用 Agent 出货的开发者。</p>
+<h2>1. Paul Hudson: The Swift Foundation</h2>
+<p>1. Paul Hudson：Swift 基础盘</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HFkuU2SXQAMVwmC?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>If you've learned Swift online, you've probably read Paul Hudson's work (@twostraws). His agent skills come from a decade of teaching Swift through Hacking with Swift — and his SwiftUI rules help correct common mistakes with agents.</p>
+<p>如果你是在网上学的 Swift，多半读过 Paul Hudson（@twostraws）的东西。他的 agent skills 来自十多年用 Hacking with Swift 教 Swift 的经验——其中的 SwiftUI 规则，专门纠正 Agent 常犯的错。</p>
+<p>I met Paul at try! Swift in NYC and we spent some time together in the SwiftUI labs at WWDC 2019. He's a prolific writer and digs in deep so you can understand what works.
+
+These skills will jumpstart your agents:</p>
+<p>我在纽约 try! Swift 见过 Paul，WWDC 2019 的 SwiftUI lab 里也一起待过。他写得又多又深，能帮你搞清楚什么真正管用。
+
+这些 skills 能立刻拉高你的 Agent：</p>
+<p>・ SwiftUI Pro: modern SwiftUI APIs, view composition, state management</p>
+<p>SwiftUI Pro：现代 SwiftUI API、视图组合、状态管理</p>
+<p>・ Swift Concurrency Pro: async/await, actors, Sendable, Swift 6 migration</p>
+<p>Swift Concurrency Pro：async/await、actors、Sendable、Swift 6 迁移</p>
+<p>・ Swift Testing Pro: Test macros, parameterized tests, XCTest migration</p>
+<p>Swift Testing Pro：Test macros、参数化测试、XCTest 迁移</p>
+<p>・ SwiftData Pro: models, queries, migrations, CloudKit sync</p>
+<p>SwiftData Pro：模型、查询、迁移、CloudKit 同步</p>
+<p>He also maintains the canonical directory of every community Swift skill.</p>
+<p>他还维护着社区所有 Swift skill 的权威目录。</p>
+<h2>2. Antoine van der Lee: SwiftLee</h2>
+<p>2. Antoine van der Lee：SwiftLee</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HFkufz9W8AA4KHk?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Antoine van der Lee (@twannl) runs SwiftLee — one of the most widely read Swift blogs. He has 5 skill repos, each with detailed reference docs. His Xcode Build Optimization skill stands out — 6 sub-skills for build settings and compilation times to make your code build faster.</p>
+<p>Antoine van der Lee（@twannl）运营着 SwiftLee——阅读量最大的 Swift 博客之一。他有 5 个 skill 仓库，每个都有详细参考文档。其中最亮眼的是 Xcode Build Optimization——6 个子 skill，专门优化构建设置和编译时间，让代码编得更快。</p>
+<p>・ SwiftUI Expert: state management, view composition, performance, Liquid Glass</p>
+<p>SwiftUI Expert：状态管理、视图组合、性能、Liquid Glass</p>
+<p>・ Swift Concurrency: actors, Sendable, data race safety, Swift 6 migration</p>
+<p>Swift Concurrency：actors、Sendable、数据竞争安全、Swift 6 迁移</p>
+<p>・ Swift Testing Expert: modern testing patterns, XCTest migration, parameterized tests</p>
+<p>Swift Testing Expert：现代测试模式、XCTest 迁移、参数化测试</p>
+<p>・ Core Data Expert: stack setup, fetch requests, background contexts, migrations</p>
+<p>Core Data Expert：栈搭建、fetch、后台 context、迁移</p>
+<p>・ Xcode Build Optimization: 6 sub-skills for build settings, compilation times, project config</p>
+<p>Xcode Build Optimization：6 个子 skill，覆盖构建设置、编译时间、工程配置</p>
+<p>The Xcode Build Optimization skill is a powerful tool that can make both you and your agents more productive. And if you want a better workflow with the iOS Simulator, check out his developer app: @rocketsim_app</p>
+<p>Xcode Build Optimization 这套 skill 能同时提升你和 Agent 的效率。如果你想把 iOS Simulator 工作流做得更好，也可以看看他的开发者 App：@rocketsim_app</p>
+<h2>3. Thomas Ricouard: Codex Expert</h2>
+<p>3. Thomas Ricouard：Codex 专家</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HFkuymjXIAAm2wi?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Thomas Ricouard (@Dimillian) built Codex Monitor — the open source macOS app for managing multiple Codex agents — and then joined OpenAI's Developer Experience team.</p>
+<p>Thomas Ricouard（@Dimillian）做了开源 macOS 应用 Codex Monitor——用来管理多个 Codex Agent——随后加入了 OpenAI 的 Developer Experience 团队。</p>
+<p>His skills now ship as the official Codex Build iOS App and Build Mac App plugins. These automatically update with each new release of the Codex app or Codex CLI.</p>
+<p>他的 skills 现在以官方 Codex「Build iOS App」和「Build Mac App」插件的形式发布，会随 Codex App / CLI 的新版本自动更新。</p>
+<p>Build iOS Apps plugin</p>
+<p>Build iOS Apps 插件</p>
+<p>・ SwiftUI Liquid Glass:  iOS 26+ Liquid Glass APIs, modifier ordering, fallbacks</p>
+<p>SwiftUI Liquid Glass：iOS 26+ Liquid Glass API、modifier 顺序、降级方案</p>
+<p>・ SwiftUI UI Patterns: navigation, sheets, app wiring, reusable components</p>
+<p>SwiftUI UI Patterns：导航、sheets、App 接线、可复用组件</p>
+<p>・ SwiftUI Performance Audit:  invalidation storms, identity churn, layout thrash</p>
+<p>SwiftUI Performance Audit：无效化风暴、identity churn、layout thrash</p>
+<p>・ SwiftUI View Refactor: smaller subviews, MV-style data flow, Observation</p>
+<p>SwiftUI View Refactor：更小的子视图、MV 风格数据流、Observation</p>
+<p>・ iOS Debugger Agent: simulator build/run/debug with XcodeBuildMCP</p>
+<p>iOS Debugger Agent：用 XcodeBuildMCP 做模拟器构建/运行/调试</p>
+<p>・ iOS App Intents: Siri, Shortcuts, widget integration</p>
+<p>iOS App Intents：Siri、Shortcuts、小组件集成</p>
+<p>Build macOS Apps plugin adds AppKit interop, packaging/notarization, signing/entitlements, window management, and SwiftPM workflows.</p>
+<p>Build macOS Apps 插件额外覆盖 AppKit 互操作、打包/公证、签名/entitlements、窗口管理，以及 SwiftPM 工作流。</p>
+<p>You can dig into the source for both of these plugins at the Official OpenAI Plugins repo,</p>
+<p>这两套插件的源码都可以在官方 OpenAI Plugins 仓库里翻到。</p>
+<h2>4. Krzysztof Zabłocki: Advanced Swift + Tooling</h2>
+<p>4. Krzysztof Zabłocki：进阶 Swift + 工具链</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HFkvDcGW4AA7fTR?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Krzysztof Zabłocki (@merowing_) created Sourcery — the Swift metaprogramming tool used by 40,000+ apps including Airbnb and The New York Times. His open source tools power over 80,000 apps total.</p>
+<p>Krzysztof Zabłocki（@merowing_）创造了 Sourcery——被 4 万+ App 使用的 Swift 元编程工具，包括 Airbnb 和《纽约时报》。他的开源工具合计驱动超过 8 万个 App。</p>
+<p>His approach to agent skills is completely different. Instead of individual skill files, he built a rules-based system over 3 years of daily LLM use — 12 domain-specific rule files with a smart loader that uses LLM self-reflection to decide which rules to apply based on context. The system is tool-agnostic: same rules work in Cursor, Claude Code, and Codex.</p>
+<p>他对 agent skills 的思路完全不同。不是一个个 skill 文件，而是他三年每天用 LLM 打磨出的规则系统——12 个领域规则文件，外加一个智能加载器，用 LLM 自我反思按上下文决定启用哪些规则。系统与工具无关：同一套规则在 Cursor、Claude Code、Codex 里都能用。</p>
+<p>What I like about his approach: he has a progressive documentation reading CLI tool to offload search and make it agent-friendly. He also created Inject for hot Swift reloading — useful for fast prototyping when you want to see UI changes without rebuilding.</p>
+<p>我喜欢的一点：他有一个渐进式文档阅读 CLI，把搜索卸给工具、对 Agent 更友好。他还做了 Inject，支持 Swift 热重载——快速原型时不用整包重编就能看 UI 变化。</p>
+<p>Read his guide: Stop Getting Average Code from Your LLM</p>
+<p>读他的指南：Stop Getting Average Code from Your LLM</p>
+<p>You can grab two agent friendly files that follow his coding philosophy:</p>
+<p>你可以先拿两份符合他编码哲学、对 Agent 友好的文件：</p>
+<p>・ general.md: primary directive and coding standards</p>
+<p>general.md：主指令与编码标准</p>
+<p>・ rule-loading.md: smart loader that selects rules by context</p>
+<p>rule-loading.md：按上下文选择规则的智能加载器</p>
+<p>The full 12-file set covering dependency injection, SwiftUI architecture, ViewModel coordination, and Swift Testing is part of his Swifty Stack course.</p>
+<p>覆盖依赖注入、SwiftUI 架构、ViewModel 协作、Swift Testing 的完整 12 文件套件，在他的 Swifty Stack 课程里。</p>
+<h2>5. AppCreator: Agent-Friendly Build Tools</h2>
+<p>5. AppCreator：对 Agent 友好的构建工具</p>
+<p>None of the skills above matter if your agent can't build and test your code.</p>
+<p>上面这些 skills 再好，如果你的 Agent 没法构建和测试你的代码，也就没意义。</p>
+<p>Xcode build output is verbose. Test output is worse. We're juggling XCTest and Swift Testing with two different build systems. Agents choke on this.</p>
+<p>Xcode 的构建输出又臭又长，测试输出更糟。我们还在 XCTest 和 Swift Testing、两套构建系统之间来回倒腾。Agent 很容易被噎住。</p>
+<p>I built AppCreator to solve that problem. It scaffolds Xcode projects with agent-friendly defaults. I created it to quickly prototype new app ideas that used the same workflow as my existing projects.</p>
+<p>我做了 AppCreator 来解决这个问题。它会用对 Agent 友好的默认项脚手架出 Xcode 工程。初衷是快速原型新点子，同时沿用我现有项目同一套工作流。</p>
+<p>Adopt the skill for your existing apps and it will help your agent make a build script using Make that is agent friendly.</p>
+<p>把这个 skill 接到已有 App 上，它会帮 Agent 用 Make 写出对 Agent 友好的构建脚本。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HFknU1hXkAAnhz-?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>・ Buildable folders: agents add files without regenerating project files</p>
+<p>Buildable folders：Agent 加文件不用重新生成工程文件</p>
+<p>・ Prefers warnings as errors: agents don't write deprecated code</p>
+<p>默认警告当错误：避免 Agent 写出废弃代码</p>
+<p>・ Makefiles: every command (build, run, test) in one place</p>
+<p>Makefiles：build / run / test 等命令集中在一处</p>
+<p>・ xcbeautify: clean, parseable output instead of Xcode's wall of text</p>
+<p>xcbeautify：干净、可解析的输出，而不是 Xcode 那堵文字墙</p>
+<p>・ Version tracking: know exactly what changed between updates</p>
+<p>版本追踪：清楚每次更新改了什么</p>
+<p>Download and install AppCreator. It's totally free, just in early-access and not available on GitHub (yet).</p>
+<p>下载安装 AppCreator。完全免费，目前 early-access，还没上 GitHub。</p>
+<p>Learn something? Follow these great Swift and iOS Developers:</p>
+<p>有收获？关注这些优秀的 Swift / iOS 开发者：</p>
+<p>・ Paul Hudson: (@twostraws) for SwiftUI, Concurrency, Testing, and SwiftData</p>
+<p>Paul Hudson（@twostraws）：SwiftUI、Concurrency、Testing、SwiftData</p>
+<p>・ Antoine van der Lee: (@twannl) for SwiftUI, Build Optimization, Concurrency, Testing, and Core Data</p>
+<p>Antoine van der Lee（@twannl）：SwiftUI、Build Optimization、Concurrency、Testing、Core Data</p>
+<p>・ Thomas Ricouard: (@Dimillian) for the official iOS/macOS Codex plugins</p>
+<p>Thomas Ricouard（@Dimillian）：官方 iOS/macOS Codex 插件</p>
+<p>・ Krzysztof Zabłocki: (@merowing_) for a rules-based architecture and advanced iOS development topics</p>
+<p>Krzysztof Zabłocki（@merowing_）：基于规则的架构与进阶 iOS 话题</p>
+<p>Install one of these skill packs or plugins today. See how your agent's code changes. Then stack more.</p>
+<p>今天就装上一套 skill pack 或插件，看看 Agent 写出的代码有什么变化，然后再叠更多。</p>
+<p>What skills are you using with your iOS projects? Reply below — I want to see what's working for you.</p>
+<p>你在 iOS 项目里用哪些 skills？回复告诉我——我想看看大家真正管用的组合。</p>
+<p>Follow @PaulSolt for the workflows I'm actually using to build and ship iOS apps with AI. You can watch my Codex Workflow video on YouTube.</p>
+<p>关注 @PaulSolt，看我实际用来做和上架 AI iOS App 的工作流。也可以在 YouTube 上看我的 Codex Workflow 视频。</p>
+<p>P.S. If your agent still can't build your Xcode project reliably, start with AppCreator. It's free — grab it here.</p>
+<p>P.S. 如果你的 Agent 还是没法稳定构建 Xcode 项目，从 AppCreator 开始。免费——这里领取。</p>
+</div>
+</body>
+</html>

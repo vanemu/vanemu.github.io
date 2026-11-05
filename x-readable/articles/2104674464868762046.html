@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>别再为动态设计软件买单：Opus 一键生成动效模板</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>别再为动态设计软件买单：Opus 一键生成动效模板</h1>
+<div class="meta">作者：@twoclipping（zero）<br/>原文：<a href="https://x.com/twoclipping/status/2104674464868762046">https://x.com/twoclipping/status/2104674464868762046</a></div>
+<figure class="fig"><img src="https://pbs.twimg.com/amplify_video_thumb/2104672991703433216/img/bH3z6pQ-9dOuDQ-E.jpg" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">（视频封面）</figcaption></figure>
+<p>STOP PAYING FOR MOTION DESIGN SOFTWARE</p>
+<p>别再为动态设计软件买单</p>
+<p>opus 5.5 one shot every frame of this in code, no after effects</p>
+<p>Opus 5.5 用代码一镜到底生成每一帧，不用 After Effects</p>
+<p>im open sourcing the whole template for free</p>
+<p>我把整套模板免费开源</p>
+<p>plug in your product and it recreates this</p>
+<p>填入你的产品，就能复刻这段效果</p>
+<p>steal the prompt ↓</p>
+<p>直接偷提示词 ↓</p>
+<p>&lt;inputs&gt;</p>
+<p>&lt;inputs&gt;</p>
+<p>Ask me for: the one question a user asks my product and its one-line answer, two album covers, a royalty-free song around 110 BPM with a quiet intro and a hard drop (Mixkit, free for commercial use), and my logo for the ending. If I skip any, use the defaults: "is this all code?" / "yes. every frame.", two atmospheric photos, Mixkit "Head Bang".</p>
+<p>向我索取：用户会问产品的一个问题及其一句话答案、两张专辑封面、一首约 110 BPM、有安静前奏和重 drop 的免版税歌曲（Mixkit，可商用），以及结尾用的 logo。若跳过，用默认：「这全是代码吗？」/「是的。每一帧。」、两张氛围图、Mixkit「Head Bang」。</p>
+<p>&lt;/inputs&gt;</p>
+<p>&lt;/inputs&gt;</p>
+<p>&lt;direction&gt;</p>
+<p>&lt;direction&gt;</p>
+<p>A 22 second square loop, 1440x1440 at 60fps, 2D only, one continuous take. Nothing ever cuts: every scene grows out of the last, and every gesture physically carries the camera into the next world. Every morph glides for 0.8s on cubic-bezier(.45,0,.15,1) and the camera zoom rides the same curve, so shapes change so smoothly you barely notice. Content dissolves in the back half of each glide. One gesture per scene.</p>
+<p>22 秒方形循环，1440×1440、60fps，纯 2D，一镜到底。从不硬切：每场从上一场生长出来，每个手势物理地带着镜头进入下一世界。每个 morph 用 cubic-bezier(.45,0,.15,1) 滑 0.8 秒，镜头缩放同曲线，形变几乎无感。内容在滑移后半段溶解。每场一个手势。</p>
+<p>Look: a warm light stage (#f3f3f0 to #e3e3de), black UI, the app world dark (#121212) tinted from the current album cover, one green accent (#1ed760). Geist for UI, the real macOS pointer, soft layered shadows that grow with the shape's height.</p>
+<p>观感：暖色光台（#f3f3f0 到 #e3e3de）、黑色 UI、应用世界深色（#121212）并按当前封面染色、一个绿色强调色（#1ed760）。UI 用 Geist、真实 macOS 指针、随形状高度增长的柔和分层阴影。</p>
+<p>Banned: hard cuts, bouncy springs, particles, glows, zooming in and straight back out, holds longer than 1s, anything that looks like a template.</p>
+<p>禁用：硬切、弹跳弹簧、粒子、光晕、推近再推回、超过 1 秒的停顿、任何像模板的东西。</p>
+<p>&lt;/direction&gt;</p>
+<p>&lt;/direction&gt;</p>
+<p>&lt;structure&gt;</p>
+<p>&lt;structure&gt;</p>
+<p>Beats are the song's, and the press lands on its drop.</p>
+<p>节拍跟歌曲走，按下落在 drop 上。</p>
+<p>Generate: the cursor clicks, the pill glides into a spinner, then a check.</p>
+<p>Generate：光标点击，胶囊滑成 spinner，再变成勾选。</p>
+<p>Chat: the check splits into three typing dots (goo). The left dot flies up into the question bubble and types it, the right one flies down into the reply. Both contract back into dots while gliding in and pour into the middle one.</p>
+<p>Chat：勾选分裂成三个打字点（goo）。左点飞上问题气泡打字，右点飞下回复。滑入时缩回点并汇入中间点。</p>
+<p>Play: the middle dot bends into a play triangle, point by point. The cursor presses it on the drop: a white button pops in under the click and the dark app floods out around it, so the leftover white becomes the play button. The camera pulls back to reveal the full now-playing screen: big cover, title, heart (liked, fills green), progress, controls, volume.</p>
+<p>Play：中间点逐点弯成播放三角。光标在 drop 时按下：点击下方弹出白按钮，深色应用向外淹没，留下的白成为播放键。镜头拉远露出完整正在播放页：大封面、标题、心形（已赞变绿）、进度、控件、音量。</p>
+<p>Swipe: the cursor drags the cover sideways, the next track slides in, and the whole app retints from the new cover.</p>
+<p>Swipe：光标横拖封面，下一曲滑入，整个应用按新封面重新染色。</p>
+<p>Drag: the camera glides to the volume. The cursor drags it to max and keeps pulling: the bar rubber-bands and drags the camera sideways out of the app, tracking the knob across a dark dotted canvas.</p>
+<p>Drag：镜头滑向音量。光标拖到最大并继续拉：条像橡皮筋，把镜头侧向拖出应用，跟随旋钮穿过深色点阵画布。</p>
+<p>Chart: the line lands and bends up into a green chart while the number counts up. The volume knob becomes its last point.</p>
+<p>Chart：线条落下并弯成绿色图表，数字上数。音量旋钮成为最后一个点。</p>
+<p>Dive: the cursor clicks that point and the camera dives into it until the light stage fills the frame.</p>
+<p>Dive：光标点该点，镜头扎进去直到光台充满画面。</p>
+<p>Ending: an "Ask [my product]" button grows out of the light, thins into a line, and the line fans out into my logo (default: the Claude spark, six copies rotating into twelve rays in Claude orange). It folds back into the line, which thickens into Generate. Last frame = first frame.</p>
+<p>Ending：「Ask [我的产品]」按钮从光中长出，收成线，线扇成 logo（默认：Claude 火花，六份旋成十二道橙色射线）。再折回线，加粗成 Generate。末帧=首帧。</p>
+<p>&lt;/structure&gt;</p>
+<p>&lt;/structure&gt;</p>
+<p>&lt;build&gt;</p>
+<p>&lt;build&gt;</p>
+<p>・ One HTML canvas. Everything is a pure function of time inside seek(t): no timers, no state between frames.</p>
+<p>一个 HTML canvas。一切都是 seek(t) 内时间的纯函数：无定时器、帧间无状态。</p>
+<p>・ A camera with position and log-space zoom. Scenes live side by side in one world, so a pan really travels.</p>
+<p>带位置与对数空间缩放的相机。场景并排活在同一世界，平移是真旅行。</p>
+<p>・ Goo: blur + alpha threshold on an offscreen layer for the split and the merges.</p>
+<p>Goo：离屏层上 blur + alpha 阈值，用于分裂与合并。</p>
+<p>・ Floods are circles that grow from whatever caused them to the farthest corner in about 0.4s, and the colour switch happens underneath them.</p>
+<p>淹没是从触发点长到最远角约 0.4 秒的圆，颜色切换在其下方完成。</p>
+<p>・ Sound: before the press the song plays through a low-pass filter, like it's in the next room, and opens up to full on the drop. A downloaded Mixkit SFX for every event, each placed by its measured peak. Loudnorm to -14 LUFS.</p>
+<p>声音：按下前歌曲经低通，像在隔壁；drop 时打开到全频。每个事件用已下载的 Mixkit 音效，按测得峰值对齐。loudnorm 到 -14 LUFS。</p>
+<p>・ Render with Playwright at 60fps with 4 motion-blur subframes, 12 on the fast pan. Then scan every frame for single-frame jumps and fix each one.</p>
+<p>用 Playwright 以 60fps 渲染，4 个运动模糊子帧，快速平移用 12。再扫描每帧修单帧跳变。</p>
+<p>&lt;/build&gt;</p>
+<p>&lt;/build&gt;</p>
+<p>&lt;gotchas&gt;</p>
+<p>&lt;gotchas&gt;</p>
+<p>A handoff between two drawings only works once the first one has fully landed, or it pops. The cursor must stay on whatever it drags, even while it stretches. A counter or tooltip that changes every frame smears under motion blur, so swap whole values.</p>
+<p>两个绘制的交接必须等第一个完全落地，否则会跳。光标必须粘在拖动的东西上，即使拉伸。逐帧变的计数器/提示在运动模糊下会糊，要整值替换。</p>
+<p>&lt;/gotchas&gt;</p>
+<p>&lt;/gotchas&gt;</p>
+<p>&lt;start&gt;</p>
+<p>&lt;start&gt;</p>
+<p>Ask me for the inputs, then show me the beat map and 6 stills (chat, play, app, drag, chart, logo) before you render.</p>
+<p>先向我要 inputs，再给我节拍图和 6 张静帧（chat、play、app、drag、chart、logo），然后再渲染。</p>
+<p>&lt;/start&gt;</p>
+<p>&lt;/start&gt;</p>
+</div>
+</body>
+</html>

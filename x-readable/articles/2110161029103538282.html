@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codex 占盘太大？3 招把会话从 60GB+ 降到 30GB</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Codex 占盘太大？3 招把会话从 60GB+ 降到 30GB</h1>
+<div class="meta">作者：@miu21590（vechen）<br/>原文：<a href="https://x.com/miu21590/status/2110161029103538282">https://x.com/miu21590/status/2110161029103538282</a></div>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HUjMCe6XgAEjZrn?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Tibo finally acknowledged that Codex eats way too much disk space.</p>
+<p>Tibo 终于承认 Codex 太吃磁盘了。</p>
+<p>My Codex sessions went from 60+ GB to 30 GB using just 3 tricks. Guess it's time to share them.</p>
+<p>我的 Codex 会话从 60+ GB 降到 30 GB，只用了 3 招。该分享了。</p>
+<p>・ Delete subagent sessions</p>
+<p>删除子代理会话</p>
+<p>Codex stores subagent sessions that don't even appear in your sidebar. Some of mine were over 2 GB EACH.</p>
+<p>Codex 会存侧边栏都看不到的子代理会话。我有些单个就超过 2 GB。</p>
+<p>Ask Codex to delete inactive subagent sessions or those unused for 48+ hours.</p>
+<p>让 Codex 删除不活跃或超过 48 小时未用的子代理会话。</p>
+<p>・ Remove embedded images from sessions</p>
+<p>去掉会话里的嵌入图片</p>
+<p>Some images take 1–2 MB each and get duplicated hundreds of times inside session files.</p>
+<p>有些图每张 1–2 MB，在会话文件里被复制成百上千次。</p>
+<p>Ask Codex to replace embedded images with tiny 1×1 pixel placeholders while preserving the session structure.</p>
+<p>让 Codex 把嵌入图换成 1×1 像素占位，同时保留会话结构。</p>
+<p>・ Reclaim unused SQLite space</p>
+<p>回收未用的 SQLite 空间</p>
+<p>Codex's SQLite database can accumulate gigabytes of unused pages (freelist). In my case, sometimes 1–3 GB.</p>
+<p>Codex 的 SQLite 会堆积数 GB 未用页（freelist）。我这边有时 1–3 GB。</p>
+<p>Ask Codex to check the freelist and prepare VACUUM commands to reclaim that space after Codex is completely closed.</p>
+<p>让 Codex 检查 freelist，并在完全退出 Codex 后准备 VACUUM 命令回收空间。</p>
+<h2>Exact prompts (from reply)</h2>
+<p>精确提示词（来自回复）</p>
+<p>・ Delete hidden subagent sessions</p>
+<p>删除隐藏的子代理会话</p>
+<p>Find my local Codex session storage and identify all subagent sessions inactive for 48+ hours. Safely delete them without breaking parent sessions.</p>
+<p>找到本地 Codex 会话存储，识别所有超过 48 小时不活跃的子代理会话。安全删除，不破坏父会话。</p>
+<p>・ Replace embedded images</p>
+<p>替换嵌入图片</p>
+<p>Scan all my Codex sessions and calculate what percentage of them is occupied by embedded images. Replace images from before each session's most recent context compaction with valid 1×1 pixel placeholders.</p>
+<p>扫描所有 Codex 会话，计算嵌入图占比。把每次上下文压缩之前的图片换成合法的 1×1 像素占位。</p>
+<p>・ Reclaim SQLite space</p>
+<p>回收 SQLite 空间</p>
+<p>Find my local Codex SQLite database and check how much space is wasted on unused pages (freelist). Calculate the reclaimable size and prepare safe VACUUM commands to run after Codex is completely closed. Don't modify anything yet.</p>
+<p>找到本地 Codex SQLite 数据库，检查 freelist 浪费了多少空间。计算可回收大小，准备在完全关闭 Codex 后安全执行的 VACUUM 命令。先别改任何东西。</p>
+</div>
+</body>
+</html>
