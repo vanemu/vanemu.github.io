@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>腾讯学堂：AI 原生思维——像训练大模型一样训练自己</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>腾讯学堂：AI 原生思维——像训练大模型一样训练自己</h1>
+<p class="meta">作者：@dotey (宝玉)<br>原文：<a href="https://x.com/i/article/2094620108811390976">https://x.com/i/article/2094620108811390976</a><br>推文：<a href="https://x.com/dotey/status/2094624092015992854">https://x.com/dotey/status/2094624092015992854</a></p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGV_3IXkAAVHRr?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<h2>引言</h2>
+<p>腾讯学堂出品，本文整理自 AI 博主、《软件工程之美》专栏作者宝玉在腾讯内部的分享。他以自己做了三年的字幕翻译 App 为主线，讲了 AI 产品从找需求、判边界、最小验证、重设计到落地交付的完整过程；问答环节回应了另一个问题：每个个体如何与 AI 共同进化。做产品的、写代码的、带团队的，都能从这份一线实操记录里拿到能用的东西。</p>
+<blockquote>📎 PPT 下载： 《AI 原生思维》演示文稿（PDF）</blockquote>
+<h2>嘉宾介绍</h2>
+<p>宝玉，AI 自媒体博主、资深技术人，《软件工程之美》专栏作者。2000 年起自学编程，历任工程师、开发经理、开发总监，后出国留学，毕业后重新从工程师做到工程经理，技术栈从 ASP、.NET、iOS 前端一路切换到 AI 开发。近年以 AI 主题写作和分享为主，他写的 Nano Banana 城市天气画图提示词曾火到海外，Google CEO 在推特上公开致谢。</p>
+<h2>前言</h2>
+<p>今天讲 AI 原生思维，分两个部分：一是 AI 产品怎么做，怎么找需求、判边界、落地交付；二是个体怎么跟 AI 共同进化。选这两个题目，是因为我做 AI 博主这些年，被问得最多的就是两类问题：一类是 AI 焦虑，AI 会不会替代我们，该学什么；另一类来自做 AI 产品的人，AI 产品跟传统产品到底有什么不一样。</p>
+<p>先简单介绍自己。我大学学的力学，因为喜欢做软件转到软件工程；2000 年左右自学编程，从 ASP、PHP 做到 .NET、iOS 前端，再到 AI 开发；职位从工程师做到开发总监，出国留学后又从工程师做到工程经理。写自媒体也一样，最早写《软件工程之美》专栏，这几年主要写 AI。我一直在转型，所以 AI 来的时候没那么恐惧，以前的经验告诉我，无非就是要去学、去转。</p>
+<p>这些年的经历用一个比喻说，就是像训练大模型一样训练自己。我做自媒体本质是费曼学习法：要学 AI，就把学到的东西分享出来；为了分享，得去学更多理论；写出来收到反馈，反馈又帮我建立新的循环。模型也一样，预训练之后靠微调、对齐不断进化。而且模型一直在变：GPT-3 是自动补全，ChatGPT 会聊天，现在 Agent 能自主完成任务。模型在进化，知识也得跟着进化，很多时候要敢于推翻自己的旧权重。这是贯穿全场的暗线。</p>
+<h2>一、找需求：盯着模型能力的边界线</h2>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGWebLXIAA9Prc?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ 贯穿全场的暗线：建立反馈循环→跟着模型一起进化→敢于推翻旧权重</p>
+<p>上半场我用一个自己做的 AI 产品贯穿始终：一个转录翻译 App，给它英文视频，输出中文字幕。选它不是因为它多好，而是我自己做的、踩过很多坑，每个判断和每个坑都能讲出当时的真实想法。别人的案例只能讲结果，自己的案例才能讲决策。</p>
+<p>想法的起点很早。年轻时《反恐 24 小时》正火，人人字幕组第一时间把美剧翻译出来，我觉得这件事很了不起。后来有了 AI，我自己要看吴恩达的教学视频，就想：能不能像字幕组一样，也做出双语字幕？</p>
+<p>但需求不是拍脑袋就值得做。你觉得大家都需要的东西，做出来可能没人用；没人用就没反馈，慢慢就做不下去了。做之前我先把自己当用户：我做自媒体要翻大量教学视频，自己天天用。其次这是真痛点，很多人想看英文内容但听力跟不上。第三，以前字幕组靠人力，听译、对轴、翻译、校对，一个小组才能干完；现在 Whisper 能听写、大模型能翻译、连时间轴对齐 Agent 也能做。AI 让以前不可能的事变得可能了。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGWnJ5XEAAce9f?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ 判断一个 AI 需求的三问：痛点够不够硬、我是不是用户、AI 是不是刚好够到</p>
+<h2>1.1 一个提示词的三级命运</h2>
+<p>关于第三问“AI 是不是刚好够到”，插一个例子。我有个做得很成功的画图提示词，就是后来很火的 Nano Banana 城市天气图，Google CEO 在推特上公开致谢过它。</p>
+<p>这个提示词迭代了很多版本。GPT 刚出画图模型时我就在用，但那时要手动输入城市、天气一大堆信息，才能画出一张很酷的图，有人围观，不火。到了 Nano Banana 这代，Gemini 内置搜索能自己查天气，我把提示词简化到只输一个城市名：输入上海，就生成一张带当天天气效果的上海地标图。这一下有了传播性，每个人都想试自己的城市，生成后贴回来分享，从中文圈火到英文圈，最后 Google 官方都注意到了。</p>
+<p>同一个需求，模型没有检索能力时，它只是个普通提示词；能力到了，就能让所有人参与。需求一直都在，是能力边界刚好扫过了它。另一点是品味：人人都能用 AI 生成东西，想流行还是得有自己的品味，品味就是门槛。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGWzM8XIAAdFiI?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ 同一个提示词的三级命运——体验差一步，命运差十倍</p>
+<h2>1.2 跟着模型进化的方向走</h2>
+<p>回头看模型的几次跃迁：GPT-3 时代是自动补全，能做的事有限，比如写营销文案；ChatGPT 有了对话能力，聊天机器人这类需求一下迸发出来；这一两年有了 Agent 能力，能按目标调工具自动完成任务，Claude Code、Manus 就是基于新能力长出来的。</p>
+<p>所以找需求要盯着模型能力进化的方向。每次升级，边界线外扩一圈，扫过的地方全是新需求。不是想到一个需求做出来就有人用，在边界线上找，才最容易发现新机会。</p>
+<h2>二、判边界：能力、成本、价值，一个需求要连闯三关</h2>
+<p>找到需求，接下来评估值不值得做。我看三个角度：AI 的能力现在做不做得到？成本成不成立？交付的价值是不是用户真要的？多数人只盯着第一关。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGW9f9W4AA3d2x?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ AI 产品的三条边界：能力线会动、成本线会动，价值线锚在人性上不动</p>
+<h2>2.1 能力边界：同一个想法，两种命运</h2>
+<p>2023 年 GPT-4 刚出时，有个叫 AutoGPT 的项目：通用 Agent 雏形，你输入任务，它就不停调 GPT-4、调 Google 搜索，汇总成报告。GitHub 上 Star 涨得飞快，但火了一阵就凉了。原因很简单：那时 Agent 能力没到，任务经常打转；调 Google API 要付费，GPT-4 又非常贵，烧大把 Token 交付不了结果。</p>
+<p>Manus 是同一个“通用 Agent”的想法，但它出现在能力刚好够到的时刻：模型已经能自己列 to-do list、逐条执行、交付结果，于是一夜刷屏。想法不是关键，能力边界才是。想法太早，烧的只是 Token。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGW_ngWgAAuRmU?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ AutoGPT 与 Manus：同一个想法，边界两侧，两种命运</p>
+<p>边界线没有停。Claude Code 用最简单的命令行循环调工具写代码，至今是最火的 Coding Agent，形态服务于能力，不服务于潮流。“小龙虾”（OpenClaw）又进一步：通过电报、微信、QQ 就能指挥它干活，还把 Skill 用到极致。模型只训练过公共知识，我用 Markdown 文件就能教它给文章配图、发布，把私有知识装进去。再往后 Codex 的创新是 GUI 和 Computer Use：能操作浏览器和 App，写完网页自己点鼠标、敲键盘完整测一遍，以前要人全程参与的中间过程，现在最后验收就行。到现在各家都在推“Work”类产品，Agent 从写代码泛化到办公。边界每次外扩后还有小的溢出点，盯住就能发现新需求。</p>
+<p>我的产品也是一层层解锁的：Whisper 解锁听写，大模型解锁翻译和拆字幕，Agent 解锁自主执行和验收。最早翻半小时字幕，我要校对一两个小时；现在 Codex 翻完，我花五分钟看一遍就行，时间轴对得非常准。每解锁一层能力，产品就能重设计一次。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGXB37WAAApO7-?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ BaoCut 的三层能力解锁：Whisper→大模型→Agent，每解锁一层产品就能重设计一次</p>
+<p>落成操作规则就是“产品三问”：现在能做的马上做；半年后能做的搭架子等模型，模型进化是你的顺风；很久做不了的用工程补，或者别做。GPT-4 时代我就做过 UI 工具辅助校对：点文本框跳到视频对应位置、按回车自动拆字幕。这是在补 Agent 能力和现实的差距，能力到了再把这些步骤剃掉。</p>
+<h2>2.2 成本边界：账单会直接杀死产品</h2>
+<p>第二个因素是成本。GPT-4 时代翻半小时视频要几美元，我自己勉强接受，普通人太贵，那个版本我一直自己用。现在 DeepSeek 这类模型出来，一小时视频几毛钱就能翻完。但成本要动态看：Token 单价在降，Agent 模式下消耗量上去了，不能只看单价。公式很简单：调用次数×每次 Token 量×单价，降成本就从这三个因子下手。</p>
+<p>我有过一次真实优化。最早让模型直接输出结构化 JSON，十句字幕加标记就有几十 K Token，结构越复杂单次处理量越小，半小时视频要几十上百次请求，用户抱怨一个视频用掉 20% 周额度。后来改成纯文本和 HTML 输出，HTML 对模型友好，就像网页翻译，单次量大了，次数降了。代价是解析变复杂：润色后要用 diff 算法找改动、对回时间轴。但这就是取舍：模型输出简单格式，复杂解析交给程序。翻译用便宜模型，只有对齐才用贵一点的。一轮下来，调用从 33 次降到 12 次，单集处理从 31 分钟降到 18 分钟。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGXEGpXQAAG9w0?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ 一次真实的成本优化：调用 33→12 次，单集处理 31→18 分钟</p>
+<h2>2.3 价值边界：用户买的是结果，还是结果背后的人</h2>
+<p>第三关是价值。字幕翻译用户要的是确定性结果，英文进去、准确中文出来，不在乎谁翻的。但不是所有东西都这样：AI 自动写小说、做视频，很多人天然抵触，叫“AI 垃圾”；哪怕我只让 AI 润色文章，都有读者评论“AI 味很重”。如果产品只是在生产更多 AI 垃圾，就要想想值不值得做。用户买的是结果还是结果背后的人，这条线锚在人性上，不随模型升级移动。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGXHu5WYAAwJJD?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ 两条会动的线上找机会，在那条不动的线内侧建护城河</p>
+<h2>三、最小验证：让坏想法死得早</h2>
+<p>决定做了，下一步是怎么快速做出来。这个项目我两三年前就开了，一直没发布：视频编辑器工作量大，Whisper 早期时间戳对不准，业余时间老被打断，眼看要进“半成品坟场”。破局靠两个选择。</p>
+<p>第一个是 Claude Design：用指令直接生成高保真交互原型，不用写代码，配模拟数据，几分钟就能上手测试。从头做没人做过的东西，靠写代码反馈周期太长；用原型，周期压到几小时，马上知道哪里不对。MVP 决策也在这步做：只做 Mac、只做最简单的播放和字幕。</p>
+<p>第二个有点阴差阳错：我用了完全不熟的 Swift 加 AppKit。这些年我主要做前端，Electron、TypeScript 特别熟，用熟的语言有个坏处，你老想自己控制代码，一控制你就成了瓶颈，不放心让 AI 写。Swift 不熟，只能交给 AI，我只管验收，代码都不怎么看。正因为不熟才能放手，几天就做出能跑的 MVP。在不熟悉的领域开始，反而更接近 AI 原生思维。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGXJ3PXEAEbJ1a?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ BaoCut 差点死掉：高保真原型与一门不熟悉的语言救了它</p>
+<p>最小验证的另一面是让坏想法死得早。反例：我嫌刷推特微博太花时间，用 AI 一小时做了个客户端原型，挺漂亮，但做出来发现还不如网页方便，没有每天想用的冲动，砍掉。字幕 App 相反，比脚本好用太多，我每天都在用，就一直迭代到现在。</p>
+<h2>四、重设计：不要让 AI 模仿人</h2>
+<h2>4.1 V1：模拟人类字幕组</h2>
+<p>GPT-4 时代的第一版，直觉做法是模拟字幕组：Whisper 听写、转 SRT、大模型翻译、人工校对、算法处理时间轴。能做，但问题多：模型翻译时自作主张把两条字幕合并，时间戳对不上；校对要完整看一遍视频，翻一集要一两个小时；长句还要靠大模型拆。V1.5 用工作流编排和算法打补丁，有效，但旧框架里打补丁，收益递减。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGXMBdWoAA69yp?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ V1 模拟人类字幕组：工具替代了大量人工，但校对依然繁重</p>
+<h2>4.2 V2：以终为始，三连追问</h2>
+<p>到了 Agent 时代，我重新思考这个产品，思路一句话：以终为始。终点很简单，把英文视频翻译成中文字幕。不问“原流程哪步还能优化”，从终点倒推，连追三个问题。</p>
+<p>第一问：为什么对不齐？中英文语序不同，英文倒装、中文正序，SRT 条目级对不上，模型为了对上就把两段合并。但句子级一定能一一对应，为什么非要先拆 SRT？因为在模仿字幕组。Whisper 有个选项叫 word timestamp，每个词都有时间戳。我转录时保留词级时间戳，翻译按句子对齐，再回头按词级时间戳重拆，时间轴不用人工对。</p>
+<p>第二问：为什么翻译质量差？一小时字幕太长，必须分页翻，分页后术语不一致。改进：先做整体分析提取术语表，每页翻译时注入本页术语，保证风格一致。</p>
+<p>第三问：为什么这么多人工？因为在模仿字幕组每步人工校验。V2 里每步都给 Agent 验证工具，比如用脚本校验每条英文是不是正好对应一条中文，Agent 自己验收，人只兜底。配套地，界面从 GUI 变成命令行工具加 Skill 文件，数据从数据库改成静态文件，模型对文件操作天然友好。整个流程 Agent 自主完成，人只在两头：输入视频，最后验收。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGXOK2XkAAoeBQ?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ V2 推倒重来：不问原流程哪步能优化，以终为始三连追问</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGXSEYWIAM-yQg?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ 一页看懂：从“模仿人”到“围绕 Agent 重设”4.3 三条设计准则</p>
+<p>经验总结成三条准则。准则一：让 Agent 操作它最擅长的格式。HTML、Markdown、纯文本训练数据里管够，选型先问：这个格式模型见得多吗？</p>
+<p>准则二：给设计规范，不给模板。我做 PPT Skill 时放了一堆模板，水墨风、科技风各一套。后来从 Claude Design 学到：不给模板，给一套颜色、样式的规范，模型自己决定做成什么样。今天这个 PPT 就不是模板套的，而是基于 Adobe 的 Design System 生成的。模板是专家捷径，规范加模型能力是笨办法，但“苦涩的教训”说通用方法终将战胜专家捷径。模型每升级一次，产品不改代码自动变强，这就是“搭架子等模型”。</p>
+<p>准则三：把 App 做成 Agent 的插件。用户现在不是先打开你的 App，而是先打开 Agent。我买吸树叶的机器，没逛电商，直接问 ChatGPT，它帮我对比选型；我把看中的一款发给它，它告诉我为什么它选的更好，吹叶吸叶参数两回事、裸机不含电池、电池生态锁定，比我刷商品页深得多，我被说服了。购买决策发生在 Agent 对话里，你的详情页就变成了 Agent 的数据源。</p>
+<p>最诚实的信号是我自己：BaoCut 是我写的 App，但现在连我都不打开它的界面了。Codex 里丢个视频链接，说一句“帮我翻译这个字幕”，它调 BaoCut 命令行翻完，我只确认。作者本人都绕过了自己的图形界面，这就是入口迁移最诚实的证据。设计要照顾两头：Agent 操作方便，人确认方便，确认不了的东西人不会放心用。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGXUY4W8AIaofP?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ 作者本人都绕过了自己的图形界面——入口迁移最诚实的证据</p>
+<h2>五、落地验证：流程没变，人的角色变了</h2>
+<p>新功能怎么上线？上周的真实案例：用户有两台电脑，一台性能好不常用，一台常用性能弱，希望“远程转录”，用常用的机器指挥另一台的显卡跑字幕。好需求，我按固定流程推进，但没打开编辑器。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGXWfdWAAAs-qc?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ 落地五关：流程没变，执行主体变了，人的位置在关键节点上</p>
+<p>第一关可行性：我把需求发给 Claude Code，它给四个方案，比较靠谱的是 App 开启转录服务、两台机器配对调用。这技术我没做过，让它给出细节，确认可行才决定做。Agent 分析罗列，人判断拍板。也有看走眼的时候，“本地模型辅助拆字幕”做出来体验很糟砍掉了。可行性分析是期望值的赌注，但没有它坑更多。</p>
+<p>第二关设计文档：让 Agent 先写文档，确认两点，理解对了、方案可行。传统开发文档是负担，AI 原生开发文档是一等公民：对人是确认修改的载体，改文档比改代码便宜；对 Agent 是 Session 间传上下文的接力棒。</p>
+<p>第三关高保真原型：数据全模拟，看见实物才知道跟想要的差距。我把需求、原型、UI 合成一次确认，以前产品经理、UI、架构师三个角色的事，现在一个 Agent 加设计规范一次做完。原型阶段改布局一句话的事，开发完再改成本指数级上升，这一步能磨就磨。</p>
+<p>第四关实现：功能大就拆里程碑，一次一个小版本，避免一步错步步错。代码我没怎么管，也没 Review。第五关测试：把自己当普通用户，凭直觉乱用，问题扔回给 Agent 改。</p>
+<p>整个功能时间跨度一两天，实际投入几小时，以前至少要几周。流程还是传统那套，一个没少；变的是我的角色：不再是程序员，而是产品经理加测试，更像管理者。确认可以合并，不能省略。验证题给 Agent，判断题留给人，人只留“方向对不对、体验好不好、值不值得做”。瓶颈转移到代码两侧：Agent 几小时写完码，左边设计确认、右边测试部署还是人类速度，精力花在流程设计上比优化 Prompt 值得。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGXYclWwAAmw-i?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ 复盘四句话：角色变了、确认合并不省略、验证题给 Agent、瓶颈在两侧</p>
+<h2>六、结语</h2>
+<p>总结一下。做 AI 产品，先找符合 AI 特点的需求：痛点够不够硬、自己是不是用户、AI 是不是刚好够到；再看三条边界：能力、成本、价值。做的时候先做高保真原型快速验证，让坏想法死得早。设计时站在 AI 的角度：给它工具自己验证，用它熟悉的格式，给规范不给模板。开发时人的精力放在定义和验收两头，确认可以合并，不能省略。</p>
+<p>模型一直在进化。今天 Agent 能力强，明天可能是一群 Agent 协作。每次边界线外扩，都值得重新想一遍：这个能力边界下，对 AI 最好的设计是什么，有什么新需求冒出来了。就像训练大模型要推翻旧权重，做产品的人也要敢于推翻自己的旧答案。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGXagcXQAAFE1y?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>▲ 一页落地地图：找需求→判边界→最小验证→重设计→落地五关→持续进化</p>
+<h2>互动问答</h2>
+<p>Q1：在和 AI 协作的过程中，有没有一个具体的习惯或方法，对个人成长帮助最大？</p>
+<p>我的经验就一条：先用起来。只有实践才有真实感悟，我今天讲的开发过程，你不自己做一遍，能带走的东西很有限。AI 把反馈周期缩到很短：照着这个流程，哪怕不写代码，做一个小工具或 Skill，几小时就有反馈。</p>
+<p>最根本的是建立反馈循环：定义想做的事，AI 帮你做成，你验收；分享出去收反馈；把经验写出来，AI 帮你整素材，输出又倒逼你系统思考。小循环做项目，大循环做分享。循环建起来、越转越快，成长就越来越快。可以理解为把人的成长做成一套 Loop Engineering。</p>
+<p>Q2：哪些事情该交给 AI 做，哪些事情要留给人这个 Human in the Loop？是让 AI 补短板，还是留给人提升自己？</p>
+<p>执行层交给 AI，不用有心理负担。写代码、生成 PPT 样式让 AI 做就很好。程序员担心技术不进步了？换个角度：别把自己当写代码的，当 Tech Lead 或 Engineering Manager，AI 是你的员工。</p>
+<p>你的价值在两头：定义问题和验收结果。定义问题，是怎么定义产品、怎么拆成 Agent 刚好能做好的任务、怎么让它自己拿反馈，靠反复练习。验收靠品味：我看过很好的 AI 视频，想法我也有，但两个视频摆面前我分不出好坏，对视频不专业，给不出有效反馈，所以至今做不好 AI 视频。做 Coding 也一样，不看代码也要能判断性能和安全。执行越来越少，定义和验收要刻意练习。</p>
+<p>Q3：品味感觉有点虚无缥缈——编程有规范、有硬指标，但很多场景没有硬标准，怎么界定和提升品味？</p>
+<p>没有标准答案，有点像模型的监督微调。编程、数学有客观标准，跑测试就知道；写作没有。Claude 早期版本写作很强，新版本被吐槽变差，就是对齐偏了 Agent、没对齐写作，好坏标准全在人的判断。</p>
+<p>我的办法是大量输入加自己上手：读很多文章，自己也写，不用当专业作家，写过就知道什么是好；好的差的一对比，品味就出来了。画图、视频也一样。这件事 AI 短期替代不了，只能靠大量阅读、写作、看片内化。就像大模型靠数据训练涌现能力，人也一样。</p>
+<p>Q4：作为非工程师，怎么判断 Vibe Coding 出来的代码是否靠谱？比如 GPT 写的代码常有大量不必要的安全验证、过度防御。</p>
+<p>我的观点可能有争议，越是有编程经验的人可能越不认同，一年前的我也不会认同：不用太在意代码细节。整不整洁、有没有冗余、是否过度防御，都不是关键。你把自己当 QA，看三件事：功能完不完整；性能好不好，跑一下看 CPU 内存占用，我的 App 有段时间内存很高，就让 AI 去优化；安全是最高优先级，SQL 注入、弱密码这类常识测试要做，拿不准找专业的人。其他实现细节没那么重要，就像高级语言编译成汇编你本来也看不懂，当黑盒就好。</p>
+<p>真正的重点在两头：一是拆分，拆成 Agent 刚好能处理的小模块，一次一个小模块，AI 的产出比绝大多数程序员的平均水平高；二是验收，功能、性能、安全把住，细节不用管。</p>
+<p>Q5：有些同学的工作还没被 AI 席卷——做硬件的、做创意的、依赖人际亲和力的销售岗位，不知道怎么用 AI 提效，有什么上手建议？</p>
+<p>先把 Agent 用起来，别停在 Chatbot。只要日常用电脑，重复的、知识类的工作都可以让它试。我买东西让 Agent 比价选型；处理保险、法律的事让它搜资料、填表单。最近的例子：Mac 发布 App 要申请苹果开发者证书，我没做过，这种事没资料，以前得花几周；这次让 Codex 开内置浏览器，全程帮我登录开发者账号、生成下载证书，几小时搞定，我只做登录和确认。</p>
+<p>跟工种关系不大。多试探它的边界，就知道它能做什么，像打游戏开地图，地图越开越大。</p>
+<p>Q6：长生命周期的老项目，文档少、测试不足，AI 上下文不够、一改就出问题，怎么解决？</p>
+<p>这种项目“按下葫芦起了瓢”，两点最关键。第一上下文：维护一个 AGENTS.md 或 CLAUDE.md，像一张地图，项目结构、高层设计、测试脚本、兼容性注意事项都在里面，让 Agent 按任务快速定位。还要有硬性规则：每次变更同步更新文档，过时的文档比没有更有害。</p>
+<p>第二让 Agent 能自己验证。改出问题多半是没验证。单元测试之外补跨模块集成测试，用模拟数据或真实环境同步的数据跑。测试不用一步到位，做需求改 Bug 时同步补；定期人工抽查，AI 有时会为了过测试而写测试。这两点做好，再尽量用好模型，老项目也能改得动。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HRGZdfgXoAAf_RI?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+</div>
+</body>
+</html>

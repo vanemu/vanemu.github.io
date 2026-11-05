@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>跑十几个 Agent 后，我们如何把 Lint/CI 提速数十倍</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>跑十几个 Agent 后，我们如何把 Lint/CI 提速数十倍</h1>
+<div class="meta">作者：@PaulSangleF（Paul）<br/>原文：<a href="https://x.com/PaulSangleF/status/2107465723513561197">https://x.com/PaulSangleF/status/2107465723513561197</a></div>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HT843ZPWwAAK9XR?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>we merged 4x more commits last week than we did a month ago (thanks opus 5.5). our dev setup and CI couldn't keep up, so we reworked both:</p>
+<p>上周合并的 commit 是一个月前的 4 倍（多亏 Opus 5.5）。本地开发和 CI 跟不上，于是两边都重做了：</p>
+<p>・ lint: 4x faster</p>
+<p>lint：快 4 倍</p>
+<p>・ memory per agent session: half</p>
+<p>每个 agent 会话内存：减半</p>
+<p>・ CI setup step: 50x faster</p>
+<p>CI setup 步骤：快 50 倍</p>
+<p>・ CI type check: 10x faster</p>
+<p>CI 类型检查：快 10 倍</p>
+<p>we often run 10+ agents at once locally, and each one runs its own lint, type checks and tests.</p>
+<p>我们经常本地同时跑 10+ 个 agent，每个各自跑 lint、类型检查和测试。</p>
+<p>from time to time, several agents would run these at the same time and block each other.</p>
+<p>偶尔几个 agent 会同时跑这些检查，互相卡住。</p>
+<p>a 64 GB MBP would run out of memory and crash. so most of the work was making things faster and lighter, or getting rid of them</p>
+<p>64 GB 的 MBP 会内存耗尽崩溃。所以大部分工作是让检查更快更轻，或干脆去掉。</p>
+<p>we revamped our local setup to make checks faster and use less memory:</p>
+<p>我们重做了本地环境，让检查更快、更省内存：</p>
+<p>・ oxlint and oxfmt instead of eslint and prettier, and type-aware lint only runs in CI. linting a changed file went from over 10s to a few seconds</p>
+<p>用 oxlint 和 oxfmt 替代 eslint 和 prettier，感知类型的 lint 只在 CI 跑。改动文件的 lint 从超过 10 秒降到几秒</p>
+<p>・ a hook formats every file an agent edits, so agents don't have to take a turn to format it</p>
+<p>用 hook 格式化 agent 编辑的每个文件，agent 不必再花一轮去格式化</p>
+<p>・ typescript 7's native LSP instead of tsserver. each agent session uses about half the memory</p>
+<p>用 TypeScript 7 原生 LSP 替代 tsserver。每个 agent 会话大约只用一半内存</p>
+<p>・ agents run one check script after each change. it installs missing packages and env files first, then lints, type-checks and runs the tests for what changed</p>
+<p>每次改动后 agent 跑一个检查脚本：先装缺的包和环境文件，再 lint、类型检查、跑相关测试</p>
+<p>・ only 3 type checks or big test runs can run at once across all worktrees, so they don't slow each other down</p>
+<p>所有 worktree 同时最多 3 个类型检查或大测试，避免互相拖慢</p>
+<p>we revamped our CI to make it faster:</p>
+<p>我们重做了 CI 让它更快：</p>
+<p>・ every CI job installs pnpm before it can install our packages. the standard github action for this (pnpm/action-setup) installs pnpm through npm, and that hung for 3-7 min on most of our test jobs. we now download the pnpm binary from github releases, which takes about 4s</p>
+<p>每个 CI job 装包前要先装 pnpm。官方 action（pnpm/action-setup）经 npm 装 pnpm，多数测试 job 会卡 3–7 分钟。我们改为从 GitHub releases 下 pnpm 二进制，大约 4 秒</p>
+<p>・ our type check needs about 9.5 GB of memory. github's standard runners have 8 GB, so it ran out of memory and took 206s. on a 16 GB machine it takes 20s</p>
+<p>类型检查大约要 9.5 GB 内存。GitHub 标准 runner 只有 8 GB，会 OOM，花 206 秒；16 GB 机器只要 20 秒</p>
+<p>・ vercel builds type-check with typescript 7 (85s to 45s), and previews only build for PRs that change the database</p>
+<p>Vercel 构建用 TypeScript 7 做类型检查（85s→45s），且只有改数据库的 PR 才构建预览</p>
+<p>if you're running lots of agents, look at what they're waiting on. for us it was mostly lint, type checks and CI setup</p>
+<p>如果你跑很多 agent，看看它们在等什么。对我们来说主要是 lint、类型检查和 CI setup</p>
+</div>
+</body>
+</html>

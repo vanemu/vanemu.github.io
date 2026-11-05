@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code 团队如何做 Code Review</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Claude Code 团队如何做 Code Review</h1>
+<p class="meta">作者：@addyosmani (Addy Osmani)<br>原文：<a href="https://x.com/i/article/2114435487905808384">https://x.com/i/article/2114435487905808384</a><br>推文：<a href="https://x.com/addyosmani/status/2114604912520921136">https://x.com/addyosmani/status/2114604912520921136</a><br>原文标题：How the Claude Code team does code review </p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVgF5M4bIAAvLxh?format=jpg&amp;name=orig" alt="封面图" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>We previously mentioned that Claude writes about 90 percent of the code for Claude Code. So how do we do code review at this scale? Who reads code anyway? What happens if code goes wrong?</p>
+<p>我们以前提过：Claude Code 大约 90% 的代码是 Claude 写的。那这种规模下怎么做 code review？谁还在读代码？代码出问题了怎么办？</p>
+<p>This post describes our team's code review process at Claude Code and how we have improved it. Between June and September, we saw more than double the number of pull requests that were merged to the codebase for Claude Code, while the share of pull requests that had to be reverted fell by more than 40 percent.</p>
+<p>本文介绍 Claude Code 团队的 code review 流程以及我们如何改进它。6 月到 9 月间，Claude Code 代码库合并的 PR 数量翻了一倍多，而需要回滚的 PR 占比下降了超过 40%。</p>
+<p>We didn't stop doing code review. Instead, we've automated the majority of reading and tuned it to optimize for human time and effort. We've also made significant investments into improving the speed and ease of reverting mistakes.</p>
+<p>我们并没有停止 code review。相反，我们把大部分「阅读」自动化了，并调优以节省人的时间与精力；同时也大力投入，让回滚错误更快、更容易。</p>
+<h2>Rethinking the goal of code review</h2>
+<p>重新思考 code review 的目标</p>
+<p>With agents writing code, the volume of changes increases rapidly. In our monorepo, we went from approximately 2,500 changes merging each day in May to over 30,000 in September of this year.</p>
+<p>有了 agent 写代码，变更量迅速膨胀。我们的 monorepo 从今年 5 月每天约 2,500 次合并，涨到 9 月每天超过 30,000 次。</p>
+<p>While Claude Code is not in our monorepo, it has a lot of pressure on it as well. When you're moving fast like that, it becomes increasingly hard, if not impossible, to do code review manually, line by line.</p>
+<p>Claude Code 虽不在该 monorepo 里，压力同样很大。以这种速度推进时，逐行人工 review 越来越难，甚至不可能。</p>
+<p>Code review serves two purposes:</p>
+<p>Code review 有两个目的：</p>
+<p>・ Detect and correct bugs before they ship</p>
+<p>在上线前发现并修正 bug</p>
+<p>・ Develop a shared understanding of the codebase</p>
+<p>形成对代码库的共同理解</p>
+<p>While this article focuses primarily on the first goal, we'll discuss the second goal toward the end of the post.</p>
+<p>本文主要聚焦第一个目标，第二个会在文末讨论。</p>
+<p>We view "did someone read the code?" as an imprecise measure of "what could go wrong with this change, and what check - automated or human - is the right one to catch it?"</p>
+<p>我们把「有没有人读过代码？」看作一个不精确的代理指标，真正要问的是：「这个改动可能出什么问题，哪一类检查——自动的或人的——最适合抓住它？」</p>
+<p>This question also changed the timing of code review. Traditionally, code review was a check performed after the fact, when the code was written, the PR was filed, and someone waited for someone else to take a look. Instead, we've integrated code review into the workflow. It's more like a spellcheck that you continuously do while writing.</p>
+<p>这个问题也改变了 review 的时机。传统上，review 是事后检查：代码写完、PR 开了，等人来看。我们把 review 嵌进工作流，更像写作时持续开启的拼写检查。</p>
+<p>The majority of changes have already been reviewed and corrected by Claude, at least once, before a human is asked to take a look. In this way, we catch most of the routine bugs and reserve human attention for more high-level considerations.</p>
+<p>在请人看之前，多数改动至少已经被 Claude review 并修正过一次。这样我们先抓住常规 bug，把人的注意力留给更高层的考量。</p>
+<h2>Human time and attention</h2>
+<p>人的时间与注意力</p>
+<p>We want to reserve human time and attention for things only humans can handle, while making sure we have enough automation to cover the rest. Even at our current pace, there is still an incredible amount of work for humans to do, and our team is encountering new and novel challenges almost every day.</p>
+<p>我们希望把人的时间留给只有人能处理的事，同时用足够自动化覆盖其余部分。即便以现在的节奏，仍有大量工作需要人来做，团队几乎每天都会遇到新挑战。</p>
+<p>For this reason, human time is a dual-sided cost. Not only do we count the time people spend doing code review, but also the time that they spend fixing bugs that are introduced by bad code. If we reduce the first without reducing the second, we're not really saving human time.</p>
+<p>因此人的时间是双边成本：不仅要算花在 review 上的时间，也要算修「坏代码引入的 bug」的时间。若只减前者、不减后者，其实并没有节省人时。</p>
+<p>So, our goal is that the majority of pull requests in our Claude Code repos (the CLI, the desktop and web apps, and the mobile apps) should merge with a maximum of one person in the loop (who could be the author) without an increase in reverts or incidents.</p>
+<p>所以我们的目标是：Claude Code 相关仓库（CLI、桌面与网页、移动端）里，多数 PR 最多只需一个人介入（可以是作者本人）就能合并，同时回滚与事故不上升。</p>
+<p>We track our human time in terms of median human approvals per PR (along with the 95th percentile), the number of human comments, and how long a PR waits on a person. We use the revert and incident rates as a guardrail: if these metrics increase, we haven't reduced human time, just relocated it.</p>
+<p>我们用人侧指标追踪：每 PR 中位人工批准数（及 95 分位）、人工评论数、PR 等人的等待时长。回滚率与事故率是护栏：若这些上升，说明人时只是被挪地方了，并未真正减少。</p>
+<h2>What's the journey of a change?</h2>
+<p>一次改动要走怎样的旅程？</p>
+<p>A typical change, whether it's from an engineer's laptop or a Claude session in Slack, goes through multiple layers of review.</p>
+<p>无论改动来自工程师笔记本，还是 Slack 里的 Claude 会话，典型路径都会经过多层 review。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVf9yKZbwAAQXG9?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">FIG A: The life of a change</figcaption></figure>
+<p>Above is the typical Claude Code change, from the author's environment to production. Most of this process is automated, with human attention focused on the risky part.</p>
+<p>上图是典型 Claude Code 改动：从作者环境到生产。大部分流程自动化，人的注意力集中在风险更高的部分。</p>
+<p>We have six layers of checks with a rollback mechanism to handle any issues that get through.</p>
+<p>我们有六层检查，外加回滚机制，处理漏网问题。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVf-M9yawAAIxYF?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">FIG B: Layers, not one gate</figcaption></figure>
+<p>Each layer catches some bugs while missing others. Few bugs get through all of the layers, and if some do, we have a rollback mechanism in place.</p>
+<p>每层都会抓住一些 bug、漏掉另一些。很少有 bug 能穿过全部层；若真穿过，还有回滚兜底。</p>
+<p>1.Pre-PR verification:</p>
+<p>1. PR 前验证：</p>
+<p>Most of our review is done before we create a PR. We ask Claude to do something runnable, such as running tests, the build, or comparing a screenshot to the design. Instead of saying the task is done, we ask it to show us the result. Then, a subagent reviews the diff with fresh context. Both these strategies are part of our guide to best practices.</p>
+<p>多数 review 发生在开 PR 之前。我们让 Claude 做可运行的事：跑测试、构建，或把截图与设计对比。不只说「做完了」，还要展示结果。然后用新上下文的子 agent 再审 diff。这两招都写在我们的最佳实践指南里。</p>
+<p>Before opening a PR, many of us also run a handful of internal skills -- bug hunting, diff reduction, end-to-end validation, and checking our UI changes against our design guidelines.</p>
+<p>开 PR 前，很多人还会跑一批内部 skill——找 bug、缩小 diff、端到端验证，以及对照设计规范检查 UI。</p>
+<p>According to Boris Cherny, who created Claude Code, equipping Claude with a verification process is probably the biggest key to higher quality outcomes.</p>
+<p>Claude Code 创建者 Boris Cherny 认为：给 Claude 配上验证流程，很可能是提升质量的最大关键。</p>
+<p>He estimates that a verification process improves the quality of Claude's output by a factor of two to three.</p>
+<p>他估计验证流程能把 Claude 产出质量提升约两到三倍。</p>
+<p>The verification process for any given domain can be very different:</p>
+<p>不同领域的验证流程可以很不一样：</p>
+<p>Sometimes it's as simple as running a bash command. Sometimes it's running a test suite. Sometimes it's testing the app in a browser or phone simulator.</p>
+<p>有时只是跑一条 bash；有时是整套测试；有时是在浏览器或手机模拟器里测 App。</p>
+<p>If the automated reviewer is consistently flagging the same issue, we fix it at the source -- via the skill itself, a lint rule, or updating documentation files like:</p>
+<p>若自动 reviewer 总在挑同一类问题，我们就从源头修——改 skill、加 lint 规则，或更新这类文档：</p>
+<p>CLAUDE.md -- The project description file that you can use to give Claude context about the project (technology stack, conventions, goals, non-goals). Claude Code pulls this file in for every single review, so we keep it brief for large codebases and reference the rest of the documentation here. When code breaks a convention in this file, or an update makes something in it out of date, the reviewer flags it.</p>
+<p>CLAUDE.md——给 Claude 项目上下文（技术栈、约定、目标与非目标）。每次 review 都会拉这份文件，所以大仓库我们写得很短，其余文档在此引用。若代码破坏其中约定，或更新导致它过时，reviewer 会标出。</p>
+<p>REVIEW.md -- The file where code owners tell the reviewer what matters in their part of the code. We separately verify whether the reviewer is actually following these guidelines. Good ones are brief and focus on:</p>
+<p>REVIEW.md——代码所有者告诉 reviewer：自己这块代码里什么重要。我们会单独验证 reviewer 是否真按这些指引做。好的 REVIEW.md 简短，聚焦于：</p>
+<p>Defining project failure (the docs should not lie; the config should not misroute) Limiting nitpicking Defining ignored paths Requiring file + line reference, not guessing filenames Requiring top-level summary including count and clear statement of "no issues"</p>
+<p>定义项目级失败（文档不该说谎；配置不该误路由）；限制吹毛求疵；定义忽略路径；要求文件+行号引用，禁止猜文件名；要求含数量与「无问题」明确声明的顶层摘要。</p>
+<p>2. AI review on every pull request</p>
+<p>2. 每个 PR 的 AI review</p>
+<p>Every PR receives a Claude review before a human review.</p>
+<p>每个人工 review 之前，每个 PR 都会先过一轮 Claude review。</p>
+<p>The diff is analyzed against the entire codebase and the intent of the PR as stated by the PR author. It checks that: the change actually addresses the issue the change fits into the larger system the change does not break other parts of the codebase</p>
+<p>diff 会对照整个代码库与作者陈述的 PR 意图分析，检查：改动是否真解决了问题；是否契合更大系统；是否破坏代码库其他部分。</p>
+<p>When reviewing a bug fix, the bot tries to find the root cause.</p>
+<p>审 bug 修复时，bot 会尝试找根因。</p>
+<p>Our public product, Code Review for Claude Code, is now available to all Team and Enterprise customers. There is a lighter version for local use as well -- /code-review.</p>
+<p>我们的公开产品 Code Review for Claude Code 已向所有 Team 与 Enterprise 客户开放；本地也有更轻的版本——/code-review。</p>
+<p>Since we released the research preview, the share of our internal PRs getting substantive review comments has gone from 16% to 54%. Code Review detects issues on the majority of PRs with more than 1,000 lines and returns clean results on most smaller PRs. Repos can be configured by admins to use Quick, Standard, or Deep modes. Deep is useful in cases where the cost of missing a single bug is higher than the time spent reviewing code.</p>
+<p>研究预览发布以来，内部 PR 收到实质性 review 评论的比例从 16% 升到 54%。超过 1,000 行的 PR 多数会被检出问题；较小 PR 多数返回干净结果。管理员可为仓库配置 Quick / Standard / Deep。Deep 适合「漏一个 bug 的代价高于多花审阅时间」的场景。</p>
+<p>Findings are vetted by multiple other agents before human review:</p>
+<p>发现在给人看之前，还会经多个其他 agent 核验：</p>
+<p>Multiple agents run in parallel to hunt for bugs</p>
+<p>多个 agent 并行找 bug</p>
+<p>A separate vote decides if a finding is valid or a false positive, only confirming the findings that have enough votes</p>
+<p>单独投票判断发现是有效还是误报，票数够才确认</p>
+<p>Findings that are only style/diagnostics/cleanup related are filtered out (we A/B tested these filters on our own PRs before rolling them out)</p>
+<p>过滤掉仅风格/诊断/清理类发现（上线前我们在自己的 PR 上做过 A/B）</p>
+<p>The remaining findings are presented as inline comments, ordered by severity level and marked as:</p>
+<p>剩余发现以行内评论呈现，按严重度排序，并标记为：</p>
+<p>Important Nit Pre-existing (so we don't unfairly penalize the author for bugs that were not introduced by the PR)</p>
+<p>Important；Nit；Pre-existing（不把 PR 未引入的旧 bug 不公平地算在作者头上）</p>
+<p>All findings must be addressed -- fixed or the thread is resolved with a reason. In many cases, an agent will fix the problem overnight so the author returns to a PR that's already been through another review pass.</p>
+<p>所有发现都必须处理——修好，或说明理由关闭线程。很多时候 agent 会连夜修好，作者回来时 PR 已又过一轮。</p>
+<p>3. Security review that can block</p>
+<p>3. 可阻断合并的安全审查</p>
+<p>We also run an automated security review. No PR can be merged while there is still an open finding (either from the code review or the security review). The author can either fix the issue or close the thread with a short reason (how we deal with a false positive).</p>
+<p>我们还跑自动安全审查。只要还有未关闭发现（来自 code review 或安全审查），PR 就不能合。作者可修复，或用简短理由关闭线程（处理误报的方式）。</p>
+<p>A finding will be auto-closed if a subsequent commit addresses the problem. You can set up the same thing with the open-source security review GitHub Action, or the /security-review command. See automated security reviews in Claude Code for a guide on how to set this up.</p>
+<p>后续 commit 若解决了问题，发现会自动关闭。你可用开源安全审查 GitHub Action 或 /security-review 命令做同样的事；指南见 Claude Code 的 automated security reviews。</p>
+<p>4. Automated checks that block</p>
+<p>4. 可阻断合并的自动检查</p>
+<p>Standard checks: lint, type checks, tests on all platforms, build. (We wrote about how we scaled CI here.) A typical CLI PR can have dozens of checks run before anyone looks at it. The PR template has questions about how the change was tested and how to revert it. Claude can answer those for you, but the author is responsible for reviewing them.</p>
+<p>标准检查：lint、类型检查、全平台测试、构建。（我们写过如何扩展 CI。）典型 CLI PR 在任何人看之前可能跑几十项检查。PR 模板会问如何测试、如何回滚——Claude 可代填，但作者要负责审阅。</p>
+<p>5. Human approval, scaled by risk</p>
+<p>5. 按风险缩放的人工批准</p>
+<p>Some changes are more risky than others (e.g. a docs fix vs. an auto-updater change), so they require different levels of review.</p>
+<p>有些改动风险更高（例如文档修正 vs 自动更新器），需要不同级别的审查。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVf_D--bcAAPXY-?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">FIG C</figcaption></figure>
+<p>The tier is determined by the change, not the author. A classifier determines the risk level based on the change. Another classifier determines if a particular change actually requires another approval, even if the tier does not say it does. Some paths always require another approval -- anything marked as sensitive by owners, and any CI workflow file.</p>
+<p>层级由改动决定，不由作者决定。分类器根据改动定风险；另一分类器判断即便层级未要求，某改动是否仍需额外批准。有些路径永远需要另一人批准——所有者标为敏感的路径，以及任何 CI workflow 文件。</p>
+<p>Only authors on the repo's trusted list receive relaxed review requirements, and that's generally the team that owns the repo. All others require a second person to approve. Agent approvals don't count as human approvals. Automated review can clear a low-risk change, but it can't stand in for a human when one is required.</p>
+<p>只有仓库受信名单上的作者享受放宽要求，通常是拥有该仓库的团队。其他人需要第二人批准。Agent 批准不算人工批准。自动审查可放行低风险改动，但在需要人时不能替代人。</p>
+<p>The author of the change is responsible for it, so if an agent authors a PR the operator of the agent is always counted as one of the required reviewers. A PR approval is only good for one commit. If a new commit lands that can't be trusted (e.g. an agent pushed something, or someone resolved a merge by hand), the PR must be reapproved.</p>
+<p>改动作者对其负责：若 agent 开 PR，操作该 agent 的人始终计为所需审查者之一。一次批准只对一个 commit 有效。若出现不可信的新 commit（例如 agent 推了东西，或有人手动解决合并冲突），PR 必须重新批准。</p>
+<p>6. Merge queue, feature flags and staged rollouts</p>
+<p>6. 合并队列、特性开关与分阶段放量</p>
+<p>The merge queue ensures that all the checks run on main with the change applied. This prevents merging two successful PRs into a broken main. Typically, new features are rolled out behind a feature flag, with Anthropic employees getting access first. Because we use the product extensively, we often notice regressions before our users do.</p>
+<p>合并队列确保检查在应用该改动后的 main 上跑，避免两个各自成功的 PR 合出坏掉的 main。新功能通常先藏在特性开关后，Anthropic 员工先用。因为我们重度自用产品，常比用户更早发现回归。</p>
+<p>When we roll out publicly, changes go to the latest channel first, and the stable channel trails behind.</p>
+<p>公开放量时先到 latest 通道，stable 滞后跟上。</p>
+<p>7. Fast feedback and rollback</p>
+<p>7. 快速反馈与回滚</p>
+<p>Some bad merges will inevitably make it through. This is our last line of defense, focused on identifying these as quickly as possible. Changes behind feature flags can be disabled without deploying.</p>
+<p>总会有坏合并漏网。这是最后一道防线，重点是尽快发现。藏在特性开关后的改动可不部署就关掉。</p>
+<p>Claude Code runs a weekly on-call rotation and any incident reviews involve looking back to see what layer should have caught the problem. It's still up to the author and on-call to notice bad merges, in addition to monitoring the revert and incident dashboards. We don't yet have circuit breaker mechanisms that adjust approval requirements based on these, but it's something we're looking into as we're making progress toward less human intervention in merging.</p>
+<p>Claude Code 有每周 on-call；事故复盘会回看哪一层本该抓住问题。发现坏合并仍靠作者与 on-call，外加回滚与事故仪表盘。我们还没有按这些指标自动调整批准要求的断路器，但在减少人工介入合并的路上正在考虑。</p>
+<p>One team member noted that slowing down and reducing output can actually improve accuracy, but that's mostly because the amount of work being done decreases overall. Our priority is really on improving our ability to identify and correct issues quickly.</p>
+<p>有位队友指出：放慢并减少产出其实能提高准确率，但多半是因为总工作量下降了。我们真正优先的是更快识别并纠正问题的能力。</p>
+<h2>How we make the reviewer better</h2>
+<p>我们如何让 reviewer 更好</p>
+<p>Our code review process is an ongoing cycle of improvement:</p>
+<p>我们的 code review 是持续改进循环：</p>
+<p>We use incidents as an evaluation metric. The team collected incident-causing PRs, their fix-forwards and reverts, and had the engineers who understand the codebase verify the location and correctness of each bug. The review system is evaluated daily against this collection.</p>
+<p>用事故当评估指标。团队收集导致事故的 PR、其 fix-forward 与回滚，并由懂代码库的工程师核实每个 bug 的位置与正确性。审查系统每天对着这批集合评估。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVf_nM4aIAAKyCq?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">FIG D: Our incidents are the eval</figcaption></figure>
+<p>Every incident adds to the collection and every change to the review system is evaluated against the entire collection.</p>
+<p>每起事故加入集合；对审查系统的每次改动都对着整批集合评估。</p>
+<p>To measure noise, we observe how humans react to the review comments. It's easy to improve our bug-finding rate if we're okay with reporting lots of non-bugs, so this needs to be regulated. We categorize each review comment into how the person on the PR handled it: fixed the issue, rejected it, clarified it as intentional, or decided it didn't matter. Additionally, we run the review system on PRs we know to be clean and observe how often the system reports something that would have resulted in a harmful change.</p>
+<p>为量噪声，我们观察人对 review 评论的反应。若愿意报大量非 bug，很容易抬高「找 bug 率」，所以必须约束。我们把每条评论按处理方式分类：修好、拒绝、澄清为有意为之、或认为无所谓。另外，我们在已知干净的 PR 上跑审查系统，观察它「报出会导致有害改动」的频率。</p>
+<p>Our stated priorities are first, detecting real bugs, and second, reducing the number of review cycles.</p>
+<p>我们公开的优先级：第一，检出真 bug；第二，减少审查轮次。</p>
+<p>It's more costly for an author to have to deal with a review comment when they're an agent. It only takes a second for a human to dismiss a nit, but when an agent has to address it, this results in another commit, and another cycle of review.</p>
+<p>作者是 agent 时，处理一条 review 评论成本更高。人关掉一条 nit 只要一秒；agent 处理则意味着又一次 commit、又一轮审查。</p>
+<p>The review process must converge. It's possible for an agent author and an agent reviewer to cycle forever. We observed one PR in our CLI project cycle more than fifty times overnight, due to the back-and-forth between the agent author and the agent reviewer. This cycle was stopped manually, but it could have gone on indefinitely.</p>
+<p>审查过程必须收敛。agent 作者与 agent reviewer 可能永远循环。我们见过 CLI 项目里一个 PR 一夜间循环五十多次，因双方来回扯皮。后来手动停掉，否则可能无限继续。</p>
+<p>When we ran git blame on what the review system kept flagging, ~59% of it was code that had been there since its first pass. Essentially, the review system was rarely finding new bugs, but finding a few more old ones on each cycle.</p>
+<p>对审查系统反复标记的内容做 git blame，约 59% 从第一次提交就存在——它很少找到新 bug，每轮只是多挖出一点旧的。</p>
+<p>We made this worse because we had gotten into the habit of running several review cycles by default, because each cycle can find a different bug. While it can be useful to iterate through several review cycles for a high-risk change, it's not needed for every PR. Our team started tracking the number of cycles-to-pass in addition to recall, and updated re-review to:</p>
+<p>我们还曾默认跑多轮审查（每轮可能找到不同 bug），把问题弄得更糟。对高风险改动多轮有用，但不是每个 PR 都需要。团队开始在 recall 之外追踪「通过所需轮次」，并更新复审策略：</p>
+<p>Limit the number of cycles. The review system asks the author to re-evaluate the approach after three cycles. Limit re-review to just diff after the initial cycles. Specify the class of bugs, so the author can correct all of them, not just one line. Avoid re-reporting issues already observed. The review agents are also run on the current codebase overnight, helping us identify historical bugs before they propagate.</p>
+<p>限制轮次：三轮后要求作者重新评估方案。初始轮次之后复审只看新 diff。指明 bug 类别，让作者一次改全类，而不是只改一行。避免重复报告已见问题。审查 agent 还会夜间在当前代码库上跑，帮我们在历史 bug 扩散前发现它们。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVgAB3aaYAApPEZ?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">FIG E: Review that converges</figcaption></figure>
+<p>Reduction in the average number of review rounds per internal pull request after Convergence.</p>
+<p>Convergence 之后，内部 PR 平均审查轮次下降。</p>
+<h2>Humans in the loop</h2>
+<p>人在回路中</p>
+<p>Having a senior engineer stop working to review a common error is an expensive process compared to automating that process. Human reviewers are still essential for some tasks:</p>
+<p>让资深工程师停下手头工作去审常见错误，比自动化昂贵得多。但人工审查对有些事仍必不可少：</p>
+<p>・ Should we even build this? Deciding whether or not to build something, setting the vision, taste, and goals for the product.</p>
+<p>该不该做这个？决定是否构建、设定产品愿景、品味与目标。</p>
+<p>One team that claims they have solved the bottleneck of code review still performs human review for changes from outside the team to ensure that it is the right thing to build.</p>
+<p>有个自称已解决 code review 瓶颈的团队，对外来改动仍做人审，以确保「这是该做的事」。</p>
+<p>・ Auditing dangerous code (billing, auto-updater, CI workflows).</p>
+<p>审计危险代码（计费、自动更新器、CI workflow）。</p>
+<p>・ Architecture review, because those choices set the conventions others follow.</p>
+<p>架构审查，因为这些选择会定下他人遵循的约定。</p>
+<p>・ Verifying proofs (test output, commands run, screenshots, reviewer comments). If you can't describe what the checks would miss, don't ask for a 👍, you need a real review!</p>
+<p>核验证据（测试输出、跑过的命令、截图、reviewer 评论）。若说不清检查会漏什么，就别只要一个 👍——你需要真正的审查！</p>
+<p>・ Taking responsibility. A person answers for every change that ships, whoever typed it.</p>
+<p>承担责任。每个上线改动都有人对它负责，不论是谁敲的字。</p>
+<h2>Team context</h2>
+<p>团队上下文</p>
+<p>Code review has always served the dual purpose of communicating codebase changes. Reading the diff of a colleague's change is how people usually understand what has changed, and how the codebase works. If the bulk of the reading is done by machines, what becomes the way to learn the codebase?</p>
+<p>Code review 一直也承担沟通代码库变化的功能。读同事 diff，是理解「改了什么、代码库如何工作」的常见方式。若大部分阅读交给机器，学习代码库的方式变成什么？</p>
+<p>We don't have any formal mechanism for this. No member of the team has a full mental model of Claude Code in their head, nor do we think anyone needs to. Rather, when anyone wants to learn about a piece of the codebase, they ask Claude to generate an explainer about that exact slice. It only takes a few minutes and the explainer is always up to date.</p>
+<p>我们没有正式机制。团队里没人脑子里有完整 Claude Code 心智模型，我们也不认为需要。想了解某块时，就让 Claude 就那一小片生成讲解——几分钟，而且永远跟现状同步。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HVgAZymawAAx2IG?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">FIG F: If machines do most of the reading, how does anyone learn the code?</figcaption></figure>
+<p>For some of us, we go the extra step and have Claude generate a mini artifact that visualizes this area and teaches it in our preferred style.</p>
+<p>有些人还会多走一步：让 Claude 生成可视化该区域、并以自己偏好风格讲解的小工件。</p>
+<p>This is a better way to focus our human attention than reading trivial diffs line by line, which teaches you very little (e.g. a one-line copy change). Creating an explainer about the module you're going to change teaches you a lot.</p>
+<p>这比逐行读琐碎 diff（例如改一行文案）更能聚焦人的注意力——那种读法几乎学不到东西。为你即将改的模块生成讲解，学到的更多。</p>
+<p>Plus, we're generally open by default, working in open Slack channels, and seeing what others are building as they build it.</p>
+<p>此外我们默认开放：在开放 Slack 频道工作，边做边看见别人在构建什么。</p>
+<h2>"You land it, you own it"</h2>
+<p>「你落地，你拥有」</p>
+<p>If you merge a small or medium change, and something still goes wrong, the general expectation is that you usually fix it yourself. There are a few reasons why this doesn't spiral out of control:</p>
+<p>若你合并了小到中等改动，出了问题，一般期望你自己修。这没有失控，原因包括：</p>
+<p>・ Small changes that are easy to review, debug, and revert.</p>
+<p>改动小，易审、易调、易回滚。</p>
+<p>・ Everything can be reverted. Feature flags, reverts, and staged rollouts can reverse most mistakes in minutes.</p>
+<p>一切可回滚。特性开关、revert、分阶段放量能在几分钟内逆转多数错误。</p>
+<p>・ Blast radius sets the bar. More expensive code gets more eyes and validation.</p>
+<p>爆炸半径定门槛。更贵的代码获得更多眼睛与验证。</p>
+<p>・ Regressions are surfaced quickly by telemetry and internal usage.</p>
+<p>遥测与内部使用能快速暴露回归。</p>
+<p>・ It's not a blame game. The person who fixes the issue owns it because they have the most context. Incident reviews consider the system.</p>
+<p>不是甩锅游戏。修问题的人拥有它，因为上下文最多。事故复盘看的是系统。</p>
+<p>・ Plus, much of the team shares responsibilities by working in open channels. Anyone can see what others are building, join in on the conversation, or have Claude look for gaps. Feedback also comes from non-code owners. That openness is a big part of why quality stays high without a gate on every line.</p>
+<p>此外，很多责任通过开放频道共享。任何人都能看见别人在做啥、加入讨论，或让 Claude 找缺口。反馈也来自非代码所有者。这种开放，是质量能高、却不必每行都设关卡的重要原因。</p>
+<h2>Changing course</h2>
+<p>改弦更张</p>
+<p>With agents, it is cheap to start new work, but sometimes you shouldn't. This typically arises when someone in the channel calls out the proposed change as an invalid path (citing previous decisions or suggesting a better path), and the author either closes the PR or changes the implementation.</p>
+<p>有了 agent，开新活很便宜，但有时不该开。典型场景是频道里有人指出拟议改动是无效路径（引用既往决策或提出更好路径），作者于是关掉 PR 或改实现。</p>
+<p>Because it was easy to write the code in the first place, it doesn't feel like a loss to close the PR. The key is to pivot early in the thread, instead of waiting until the end to make a blocking comment on a finalized PR.</p>
+<p>因为起初写代码很容易，关 PR 也不觉得亏。关键是在线程早期转向，而不是等定稿 PR 上再放阻断评论。</p>
+<h2>How to implement</h2>
+<p>如何落地</p>
+<p>Most of the components of this approach are already available to your team.</p>
+<p>这套方法的多数组件你们团队已经能用。</p>
+<p>Before the pull request</p>
+<p>开 PR 之前</p>
+<p>・ Give the agent a checklist of checks it can run. List these checks in a short CLAUDE.md file</p>
+<p>给 agent 一份可跑检查清单，写在简短 CLAUDE.md 里</p>
+<p>・ Set up the agent to call formatters and linters via hooks</p>
+<p>用 hooks 让 agent 调用格式化与 lint</p>
+<p>・ Run /code-review and /security-review locally or have a new-context subagent review the changes</p>
+<p>本地跑 /code-review 与 /security-review，或用新上下文的子 agent 审改动</p>
+<p>・ Create a REVIEW.md, and use it to track recurring review issues</p>
+<p>创建 REVIEW.md，用来追踪反复出现的审查问题</p>
+<p>On every pull request</p>
+<p>每个 PR 上</p>
+<p>・ Enforce CI</p>
+<p>强制 CI</p>
+<p>・ Update your PR template with "Testing", "Risk" and "How to revert"</p>
+<p>更新 PR 模板，加入 Testing、Risk、How to revert</p>
+<p>・ On one repo, add an AI reviewer (Code Review for Claude Code, or the Claude Code GitHub Action), and iterate on your REVIEW.md for a few weeks before rolling it out to more repos.</p>
+<p>先在一个仓库加 AI reviewer（Code Review for Claude Code 或 Claude Code GitHub Action），迭代几周 REVIEW.md，再推广到更多仓库</p>
+<p>・ Add an automated security review</p>
+<p>加入自动安全审查</p>
+<p>・ Require that all review threads be resolved before merging</p>
+<p>要求合并前解决所有 review 线程</p>
+<p>・ Apply review rigor according to risk: a quick pass for routine changes, and a thorough review for high-risk areas (where bugs are expensive). Code Review has Quick, Standard and Deep levels.</p>
+<p>按风险决定严格度：常规改动快速过；高风险区域（bug 昂贵）彻底审。Code Review 有 Quick / Standard / Deep</p>
+<p>・ Limit the number of review rounds, and after a few rounds, just review the new diff.</p>
+<p>限制审查轮次；几轮之后只审新 diff</p>
+<p>Approval</p>
+<p>批准</p>
+<p>・ Define risk levels, which are set based on the change, not the author. Start strict, and progressively relax as you see evidence.</p>
+<p>定义风险层级，按改动而非作者设定。先严，有证据后再逐步放宽</p>
+<p>・ Reserve lenient approval paths for trusted authors.</p>
+<p>宽松批准路径只留给受信作者</p>
+<p>・ Bot approvals cannot be used to satisfy a required approval. Dismiss any approvals when new commits are pushed.</p>
+<p>Bot 批准不能充当必需批准；有新 commit 推入时撤销既有批准</p>
+<p>・ Designate humans as the approvers for code and policies controlling auth, billing, CI, and release workflows, as well as installers. Use CODEOWNERS and branch protection for this.</p>
+<p>指定人作为认证、计费、CI、发布流程与安装器相关代码与策略的批准者；用 CODEOWNERS 与分支保护落实</p>
+<p>Merging and post-merge</p>
+<p>合并与合并后</p>
+<p>・ Set up a merge queue</p>
+<p>建立合并队列</p>
+<p>・ Experiment with feature flags</p>
+<p>尝试特性开关</p>
+<p>・ Launch to internal users first</p>
+<p>先对内部用户发布</p>
+<p>・ Roll out in stages</p>
+<p>分阶段放量</p>
+<p>・ Create a one-step revert mechanism</p>
+<p>做一键回滚机制</p>
+<p>・ Build a set of evals by logging incidents and reverts</p>
+<p>用事故与回滚日志建评估集</p>
+<p>・ Rescore the reviewer any time you change its prompts, tools or model</p>
+<p>改 reviewer 的提示词、工具或模型时重新打分</p>
+<p>・ Track human effort, using reverts and incident rates as guardrails</p>
+<p>追踪人的投入，用回滚与事故率作护栏</p>
+<h2>Where this is headed</h2>
+<p>走向何方</p>
+<p>Code Review was announced with the intention that the final approval decision would still be made by a human. All the product does is post its findings. But in our own repos, we are going further: Owners are deciding which low-risk changes can be merged automatically when the automated checks pass. And this boundary will continue to evolve.</p>
+<p>发布 Code Review 时的设想是：最终批准仍由人做，产品只是贴出发现。但在我们自己的仓库里走得更远：所有者决定哪些低风险改动在自动检查通过后可自动合并。这条边界还会继续演进。</p>
+<p>So whenever our reviewers miss something, we ask ourselves what wasn't in the model's context, and turn that into a CLAUDE.md file, a skill or a new check. And we haven't changed our goal: To reduce the amount of human effort per change while keeping our revert rate no higher than it is now.</p>
+<p>所以每当 reviewer 漏了东西，我们就问模型上下文里缺了什么，并把它变成 CLAUDE.md、skill 或新检查。目标没变：降低每次改动的人工投入，同时让回滚率不高于现在。</p>
+<p>So if you also allow agents to create pull requests, please let us know what checks you've automated, what requires a human, and what we're getting wrong.</p>
+<p>若你们也允许 agent 开 PR，请告诉我们：自动化了哪些检查、哪些必须人做、以及我们哪里做得不对。</p>
+<p>A rewrite of our original article and checked with Pangram.</p>
+<p>原文改写版，并用 Pangram 核对。</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TasteSkill v2：让 Opus 体检你 vibe-coded 的站点</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>TasteSkill v2：让 Opus 体检你 vibe-coded 的站点</h1>
+<div class="meta">作者：@Voxyz_ai（Vox）<br/>原文：<a href="https://x.com/Voxyz_ai/status/2110777729658581409">https://x.com/Voxyz_ai/status/2110777729658581409</a></div>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HUqlXtGWcAAzmuG?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Highly recommend installing the new TasteSkill v2 in Claude Code or Codex, then having Opus 5.5 use it to 𝗴𝗶𝘃𝗲 𝘁𝗵𝗲 𝘀𝗶𝘁𝗲 𝘆𝗼𝘂 𝘃𝗶𝗯𝗲-𝗰𝗼𝗱𝗲𝗱 𝗮 𝗰𝗵𝗲𝗰𝗸𝘂𝗽. It came out two days ago. It opens your pages at desktop, tablet and phone widths and lists every AI-website tell they hit.</p>
+<p>强烈建议在 Claude Code 或 Codex 安装新的 TasteSkill v2，再让 Opus 5.5 用它给你 vibe-coded 的站点做体检。两天前刚出。它会按桌面/平板/手机宽度打开页面，列出所有「一眼 AI 站」特征。</p>
+<p>A few on the list you can check right away:</p>
+<p>清单上几条可以马上自查：</p>
+<p>・ A small all-caps line above the headline, like FEATURES</p>
+<p>标题上方一行小全大写，比如 FEATURES</p>
+<p>・ Sections numbered 01 / 02 / 03</p>
+<p>分区编号 01 / 02 / 03</p>
+<p>・ Monospace body text and buttons, anywhere outside code</p>
+<p>代码以外任何地方的等宽正文字和按钮</p>
+<p>・ Gradients, hairline borders, and shadows that sit there even without hover</p>
+<p>即使无悬停也一直在的渐变、发丝边、阴影</p>
+<p>・ Cream backgrounds with terracotta, or any violet or indigo</p>
+<p>奶油底配赤陶，或任何紫/靛蓝</p>
+<p>・ Fewer than 4 real pictures (SVG drawings don't count), or fewer than 8 things that move</p>
+<p>真图少于 4 张（SVG 不算），或会动的东西少于 8 个</p>
+<p>New tests: blind judges gave pages built with it 7.7 and pages without it 7.8, 𝗻𝗲𝗮𝗿𝗹𝘆 𝗮 𝘁𝗶𝗲. It still came first on 2 of the 3 briefs.</p>
+<p>新测试：盲评给用它做的页面 7.7、不用的 7.8，几乎打平。3 个 brief 里它仍赢了 2 个。</p>
+<p>Send this to Opus 5.5 and it'll list every issue with the page and element it's on 👇</p>
+<p>发给 Opus 5.5，它会按页面和元素列出每个问题 👇</p>
+<p>"Install taste-skill by following the README at  (the install name is design-taste-frontend), then read its skill file and scripts.</p>
+<p>「按 README 安装 taste-skill（安装名 design-taste-frontend），读 skill 文件和脚本。</p>
+<p>Then run this project locally and run inspect.mjs once each on the homepage and the main landing pages: inspect.mjs &lt;local URL&gt; --out .taste-skill/inspect/&lt;page name&gt;. Look at the screenshots it saves. Only check public-facing pages; skip dashboards and table pages. If Node 22 or Chrome is missing, tell me first.</p>
+<p>本地跑项目，对首页和主要落地页各跑一次 inspect.mjs：inspect.mjs &lt;本地 URL&gt; --out .taste-skill/inspect/&lt;页名&gt;。看它存的截图。只查对外页面；跳过仪表盘和表格页。若缺 Node 22 或 Chrome，先告诉我。</p>
+<p>For each issue, say which page, which width and which element (quote the report), and give the smallest fix. List FAIL items before WARN items.</p>
+<p>每个问题写明页面、宽度、元素（引用报告），并给最小修复。先列 FAIL 再列 WARN。</p>
+<p>Show me the list first. Don't change any code."</p>
+<p>先给我列表。别改任何代码。」</p>
+</div>
+</body>
+</html>

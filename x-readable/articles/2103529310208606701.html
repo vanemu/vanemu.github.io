@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>让产品视频看起来很贵（Apple 框架）</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>让产品视频看起来很贵（Apple 框架）</h1>
+<p class="meta">作者：@leomeethewoo (leo)<br>原文：<a href="https://x.com/i/article/2103118352554344448">https://x.com/i/article/2103118352554344448</a><br>推文：<a href="https://x.com/leomeethewoo/status/2103529310208606701">https://x.com/leomeethewoo/status/2103529310208606701</a></p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTE5qj0aQAAlIAJ?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>You've probably seen those videos from Apple. They look f*cking sick</p>
+<p>你大概见过 Apple 那些视频。看起来真他妈好看。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/amplify_video_thumb/2103527016452833281/img/hKXDwjZ1cV63DGCy.jpg" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">（视频封面）</figcaption></figure>
+<p>Hi, I'm leo. My team produced over 50 product videos this summer for companies like @TrustWallet @fomo @PrizePicks</p>
+<p>嗨，我是 leo。这个夏天我们团队给 @TrustWallet、@fomo、@PrizePicks 这类公司做了 50 多条产品视频。</p>
+<p>Here's some of our recent work:</p>
+<p>下面是我们最近的一些作品：</p>
+<figure class="fig"><img src="https://pbs.twimg.com/amplify_video_thumb/2103527016419192832/img/JlqokUv8FmX5sjMA.jpg" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">（视频封面）</figcaption></figure>
+<p>I've already wrote an article before about Apple videos, it was a bit surface level tbh and it absolutely boomed</p>
+<p>我之前写过一篇关于 Apple 视频的文章，说实话比较浅，但意外爆了。</p>
+<p>https://x.com/leomeethewoo/status/2098032450731720823?s=20</p>
+<p>https://x.com/leomeethewoo/status/2098032450731720823?s=20</p>
+<p>So In this article we'll go more deep and I'll share some of the frameworks my team uses to produce this kind of videos. I've written everything manually without use of AI, I hope you'll like it</p>
+<p>这篇会挖得更深，分享我们团队用来做出这类视频的框架。全文我手写、没用 AI，希望你会喜欢。</p>
+<h2>1. Branding (Premium storytelling)</h2>
+<p>1. 品牌（Premium 叙事）</p>
+<p>The strongest brands aren't selling products, they are giving people a way to identify through their choices</p>
+<p>最强的品牌不是在卖产品，而是给人一种通过选择来自我认同的方式。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTE6rS5aUAABOLE?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>The whole world knows apple. Their goal in their videos isn't to make more people know them, it's to make people that are already familiar with brand feel like they are special by using their product aka "premium" feeling</p>
+<p>全世界都认识 Apple。它们视频的目标不是让更多人知道自己，而是让已经熟悉品牌的人，因为用了产品而觉得自己特别——也就是「premium」的感觉。</p>
+<p>From it comes the whole brand ideology that they use in their videos:</p>
+<p>由此衍生出它们视频里整套品牌意识形态：</p>
+<h2>Intention is everything</h2>
+<p>意图决定一切</p>
+<p>Nothing is done on accident</p>
+<p>没有什么是偶然做的。</p>
+<p>Every choice needs a purpose:</p>
+<p>每个选择都要有目的：</p>
+<p>-The font</p>
+<p>-字体</p>
+<p>-Background</p>
+<p>-背景</p>
+<p>-Music</p>
+<p>-音乐</p>
+<p>-Color theme</p>
+<p>-配色</p>
+<p>A simple but huge part of having a premium - feeling brand is not doing things that make the brand  feel less premium</p>
+<p>想做出 premium 感，有一件简单但极重要的事：别去做那些让品牌显得「不贵」的事。</p>
+<p>And this is where many people fuck up: experiment with too much effects, add unnecessary sound effects and rap music.</p>
+<p>很多人就栽在这里：特效堆太多、加一堆没必要的音效和说唱。</p>
+<p>Give yourself real rules and guidelines (give yourself 3 colors that you will use for the same type of videos, same backgrounds, similar music choice for certain type of projects)</p>
+<p>给自己定真实的规则和指南（同一类视频只用 3 种颜色、同一类背景、某类项目用相似音乐）。</p>
+<p>To the audience it feels like you decided that it should be that way</p>
+<p>对观众来说，会感觉这一切都是你「决定就该这样」。</p>
+<p>This is the most important part to understand and the following points will all be based on that</p>
+<p>这是最重要、也必须先理解的一点；后面所有内容都建立在这之上。</p>
+<h2>2. Design</h2>
+<p>2. 设计</p>
+<p>Like it or not, every great video starts with a great design.</p>
+<p>不管你喜不喜欢，好视频都从好设计开始。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/amplify_video_thumb/2103527016440139776/img/vITttnjyK_DseMZC.jpg" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">（视频封面）</figcaption></figure>
+<p>Many people think that to make a great product video they need to hire a skilled motion designer and he will do all the work</p>
+<p>很多人以为要做出厉害的产品视频，就得雇一个牛的动效设计师，然后全部交给他。</p>
+<p>Big companies like Apple take this approach completely different. They focus on design first and then anything else.</p>
+<p>Apple 这类大公司完全反过来：先抓设计，其他再说。</p>
+<p>Their approach is simple - Apple developed a brand design guideline over the years: guidelines for typography, backgrounds and many more</p>
+<p>做法很简单——Apple 多年来沉淀了品牌设计规范：字体、背景等等。</p>
+<p>They stick to it from video to video.</p>
+<p>视频与视频之间，它们严格遵守。</p>
+<p>Besides that, 10's of the most talented product designers on their team have a great understanding of the apple's style</p>
+<p>此外，团队里几十位顶尖产品设计师对 Apple 风格理解极深。</p>
+<p>They follow those key principles:</p>
+<p>他们遵循这些关键原则：</p>
+<p>・ One shot = one idea.</p>
+<p>一个镜头 = 一个想法。</p>
+<p>・ Every scene has space to "Breathe"</p>
+<p>每个场景都要有「呼吸」的空间</p>
+<p>・ Key objects are in the center of the frame</p>
+<p>关键物体放在画面中心</p>
+<p>・ The background fits the brand guidelines and never interrupts the key objects</p>
+<p>背景符合品牌规范，绝不抢关键物体的戏</p>
+<p>Our approach is same - we have 5 full-time product designers on the team that first storyboard each animation frame by frame in figma to make sure that the final result looks good.</p>
+<p>我们做法一样——团队有 5 名全职产品设计师，先在 Figma 里逐帧故事板，确认最终效果再开做。</p>
+<p>Here's for example how our recent storyboard looked like:</p>
+<p>比如下面是我们最近一份故事板：</p>
+<figure class="fig"><img src="https://pbs.twimg.com/amplify_video_thumb/2103527016561848320/img/7i0bDkU2YYUGCwGe.jpg" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">（视频封面）</figcaption></figure>
+<p>The point here is simple - your video won't look good without a good design. Focus on it first and the rest will follow.</p>
+<p>道理很简单——没有好设计，视频就不会好看。先盯设计，其余自然跟上。</p>
+<h2>3. Animation</h2>
+<p>3. 动画</p>
+<p>When it comes to animating, there are couple of great techniques to make it feel more expensive</p>
+<p>说到动画，有几招能让成片更「贵」：</p>
+<p>1)Smoothness</p>
+<p>1）顺滑度</p>
+<p>Smooth out any motion by easing your keyframe graphs and overlapping them</p>
+<p>用缓动（easing）曲线重叠关键帧，把动作抹顺。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/amplify_video_thumb/2103527016649867264/img/Z6aW2Pm1A3_PzRbL.jpg" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">（视频封面）</figcaption></figure>
+<p>In most cases, linear motion looks more out of place and cheap comparing to the eased motion</p>
+<p>多数情况下，线性运动比缓动看起来更突兀、更廉价。</p>
+<p>2)Dynamic transitions</p>
+<p>2）动态转场</p>
+<p>When one scene smoothly transitions to another, we just think that it belongs there</p>
+<p>当一个场景平滑过渡到下一个，我们会觉得它「就该在那儿」。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/amplify_video_thumb/2103527016599597056/img/5W5f6EFlBiwNI8tC.jpg" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">（视频封面）</figcaption></figure>
+<p>Avoid direct cuts between scenes unless they are neccesary for the message</p>
+<p>除非信息需要，否则避免场景之间硬切。</p>
+<p>3)Adaptive rhytm</p>
+<p>3）自适应节奏</p>
+<p>The rhytm of a video shouldn't always be linear.</p>
+<p>视频节奏不该永远线性。</p>
+<p>Depending on the part of video, it should speed up, slow down or stay same</p>
+<p>按段落需要加速、减速，或保持不变。</p>
+<h2>4. Music choice</h2>
+<p>4. 选曲</p>
+<p>You can control the video energy by a sound track</p>
+<p>用配乐就能控制视频的能量。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/amplify_video_thumb/2103527016821833728/img/5z1eq61IBk9iPI14.jpg" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /><figcaption class="caption">（视频封面）</figcaption></figure>
+<p>Including the "expensive" "premium" feelings</p>
+<p>也包括「昂贵」「premium」的感觉。</p>
+<p>Start with a BPM choice:</p>
+<p>先从 BPM 入手：</p>
+<p>60 – 80 BPM associates with Regal, Cinematic, Heritage vibe</p>
+<p>60–80 BPM：庄重、电影感、Heritage 气质</p>
+<p>90 – 110 BPM is more Smooth, Cool, Effortless</p>
+<p>90–110 BPM：更 Smooth、Cool、不费力</p>
+<p>115-123 BPM feels Elite, Kinetic, Sophisticated</p>
+<p>115–123 BPM：Elite、动能、精致</p>
+<p>Everything more than that is more drive and hype and can fit well certain projects or destroy others</p>
+<p>再高就更偏 drive / hype，某些项目很合，也很容易毁另一些。</p>
+<p>Then you can experiment with genre, certain types of music will target different audiences and fit different projects.</p>
+<p>然后再试风格：不同类型音乐会打不同受众、适配不同项目。</p>
+<h2>5. Sound design</h2>
+<p>5. 音效设计</p>
+<p>The cherry on top of every video is great sound design.</p>
+<p>好视频的点睛之笔是出色的音效设计。</p>
+<p>Here goes the same psychology  as in the first point</p>
+<p>心理逻辑和第一点一样。</p>
+<p>Try to avoid sound effects that do feel important</p>
+<p>尽量避开那些「听起来很重要、其实没用」的音效。</p>
+<p>And after you're done with sound effects listen to everything and ask yourself what feels off</p>
+<p>音效做完后，整段听一遍，问自己哪里别扭。</p>
+<p>If there's a sound effect that feels too loud, out of place or doesn't help people to stay engaged or understand your product better - remove it</p>
+<p>如果某个音效太吵、不合位，或帮不上忙让人更投入、更好懂产品——删掉。</p>
+<p>---------------------------------------------------------------------------------</p>
+<p>---------------------------------------------------------------------------------</p>
+<p>Thanks for reading, follow me for more cool stuff :)</p>
+<p>感谢阅读，想看更多就关注我 :)</p>
+</div>
+</body>
+</html>

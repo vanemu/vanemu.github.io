@@ -214,6 +214,11 @@ defaults:
       show_edit_on_github: true
       show_subscribe: true
       pageview: true
+  # Static Instapaper archive: copy HTML unchanged (no layouts / Liquid).
+  - scope:
+      path: "x-readable"
+    values:
+      layout: null
 
 
 ## => Plugins

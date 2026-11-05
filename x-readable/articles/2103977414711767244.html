@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>上线前让 Opus 派出 5 个子代理检查这 20 项</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>上线前让 Opus 派出 5 个子代理检查这 20 项</h1>
+<div class="meta">作者：@Voxyz_ai（Vox）<br/>原文：<a href="https://x.com/Voxyz_ai/status/2103977414711767244">https://x.com/Voxyz_ai/status/2103977414711767244</a></div>
+<p>Claude Code tip: before you ship a vibe-coded site, have Opus 5.5 send out 𝟱 𝘀𝘂𝗯𝗮𝗴𝗲𝗻𝘁𝘀 to check 𝘁𝗵𝗲𝘀𝗲 𝟮𝟬 𝘁𝗵𝗶𝗻𝗴𝘀, then fix them all in one pass:</p>
+<p>Claude Code 技巧：上线 vibe-coded 站点前，让 Opus 5.5 派出 5 个子代理检查这 20 项，然后一次修完：</p>
+<p>Consistent design</p>
+<p>设计一致性</p>
+<p>・ Write a DESIGN.md first, and make every color, font size, spacing and corner radius follow it</p>
+<p>先写 DESIGN.md，让每种颜色、字号、间距、圆角都遵循它</p>
+<p>・ Keep the palette restrained and the type hierarchy clear</p>
+<p>配色克制，字号层级清晰</p>
+<p>・ Make every button, card and input of the same kind look alike</p>
+<p>同类按钮、卡片、输入框外观一致</p>
+<p>・ Too flat? Add emphasis. Too crowded? Cut</p>
+<p>太扁平？加强调。太挤？删减</p>
+<p>・ Keep text readable on both dark and light backgrounds</p>
+<p>深色/浅色背景下文字都可读</p>
+<p>On mobile</p>
+<p>移动端</p>
+<p>・ No sideways scrolling, and nothing spilling off the screen</p>
+<p>不要横向滚动，不要内容溢出屏幕</p>
+<p>・ Add a mobile menu</p>
+<p>加移动端菜单</p>
+<p>・ Make buttons big enough to tap</p>
+<p>按钮要够大，方便点按</p>
+<p>・ Keep the layout intact when the text is enlarged</p>
+<p>放大文字时布局不崩</p>
+<p>Every state</p>
+<p>各种状态</p>
+<p>・ Give loading, empty and error states a proper screen</p>
+<p>加载、空态、错误态都要有像样的页面</p>
+<p>・ Give every button feedback, with its own hover, pressed and disabled look</p>
+<p>每个按钮有反馈：悬停、按下、禁用各自样式</p>
+<p>・ Show form errors right where they happen, plus submitting, success and failure messages</p>
+<p>表单错误就地显示，还有提交中、成功、失败提示</p>
+<p>・ Add transitions to modals, dropdowns and tab switches</p>
+<p>模态框、下拉、标签切换加过渡</p>
+<p>Use it like a real user</p>
+<p>像真实用户一样用</p>
+<p>・ Click through the core flows, like sign-up and checkout, from start to finish</p>
+<p>把注册、结账等核心流程从头点到尾</p>
+<p>・ Find buttons that do nothing and links that are broken</p>
+<p>找出没反应的按钮和坏链</p>
+<p>・ Make sure the whole thing works with just a keyboard</p>
+<p>确保纯键盘也能完整操作</p>
+<p>Before launch</p>
+<p>上线前</p>
+<p>・ Say what you do in one line on the home page</p>
+<p>首页一句话说清你做什么</p>
+<p>・ Give each page one main button you want people to click</p>
+<p>每页只有一个你最想让人点的主按钮</p>
+<p>・ Give every page a title, a description and a favicon</p>
+<p>每页有标题、描述和 favicon</p>
+<p>・ Delete all placeholder text</p>
+<p>删掉所有占位文案</p>
+<p>For effort, follow Anthropic's cost guide from yesterday: medium is for well-scoped daily work. The default medium is enough for these 20 fixes; raise it for the harder ones. Thariq tested it: turning effort up mostly buys more verification and edge-case testing.</p>
+<p>关于 effort：按 Anthropic 昨天的成本指南——medium 适合范围清晰的日常活。这 20 项默认 medium 就够；更难的再提高。Thariq 测过：提高 effort 主要买到更多验证和边界测试。</p>
+<p>Send this whole post to Claude Code. If you need to, add this line at the end 👇</p>
+<p>把整篇发给 Claude Code。需要的话在末尾加这句 👇</p>
+<p>"Send one subagent per group to check it without editing anything. Then fix everything yourself from their lists, so no two agents edit the same file. If a group is more complex, raise that subagent's effort. Show me the list of issues first, don't change anything until I confirm, and when you're done, give me before-and-after screenshots."</p>
+<p>「每组派一个子代理只检查不改动。然后你根据他们的清单自己修，避免两个代理改同一文件。某组更复杂就提高该子代理的 effort。先给我问题列表，确认前别改；做完给我前后对比截图。」</p>
+</div>
+</body>
+</html>

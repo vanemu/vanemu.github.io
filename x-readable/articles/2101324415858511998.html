@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bitrig 现已支持构建 iPhone Duo App</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Bitrig 现已支持构建 iPhone Duo App</h1>
+<p class="meta">作者：@bitrig (Bitrig)<br>原文：<a href="https://bitrig.com/blog/bitrig-builds-iphone-duo-apps">https://bitrig.com/blog/bitrig-builds-iphone-duo-apps</a></p>
+<p>Last week, Apple announced the iPhone Duo, its first foldable phone.</p>
+<p>上周，Apple 发布了 iPhone Duo——它的第一款折叠屏手机。</p>
+<p>Moments like this are one of the best parts of building for Apple platforms. A new device is a blank canvas, and everything feels wide open. Everyone is still figuring out what it's for, Apple included.</p>
+<p>为 Apple 平台开发时，这样的时刻最让人兴奋。新设备像一张白纸，一切都敞开。大家（包括 Apple）都还在摸索它到底能做什么。</p>
+<p>It was developers who invented pull to refresh, swipe actions, and pressing the volume button to take a picture. And Apple ultimately built all three into the system as first-class interactions.</p>
+<p>下拉刷新、滑动操作、按音量键拍照——这些都是开发者先发明的，Apple 最终把它们做成了系统级交互。</p>
+<p>Today, we're excited to share:</p>
+<p>今天我们很高兴宣布：</p>
+<h2>Bitrig can now build iPhone Duo apps and test them in its 3D folding simulator.</h2>
+<p>Bitrig 现已能构建 iPhone Duo App，并在 3D 折叠模拟器里测试。</p>
+<p>That means:</p>
+<p>这意味着：</p>
+<p>・ Try every pose. iPhone Duo can sit on a table like a laptop or stand by your bedside like a tent. Open, closed, or partially folded, in portrait or landscape, your app needs to adapt. Bitrig’s 3D simulator lets you grab it, fold it, turn it, and watch your app respond.</p>
+<p>尝试每一种姿态。iPhone Duo 可以像笔记本一样搁在桌上，或像帐篷一样立在床头。打开、合上、半折，竖持或横持，App 都需要适配。Bitrig 的 3D 模拟器让你抓住、折叠、旋转，看着 App 实时响应。</p>
+<p>・ Respond to the hinge. Drive interactions and effects as the phone folds using onHingeChange, like Apple’s unfold effect that makes the outer display feel like a window into the inner one. Read the hinge data live as you open and close it in the built-in simulator.</p>
+<p>响应铰链。用 onHingeChange 在折叠过程中驱动交互与效果，就像 Apple 的展开效果让外屏像一扇看向内屏的窗户。在内置模拟器里开合时，实时读取铰链数据。</p>
+<p>・ Build hands-free experiences. Use ArrangementView to lay out media on the upper half and controls on the lower half when iPhone Duo is sitting on table. Support landscape orientation so people can use your app on the outer display when it's standing on its edges.</p>
+<p>打造免持体验。平放桌上时用 ArrangementView 把媒体放上半、控件放下半。支持横屏，让它立在边缘时也能在外屏使用你的 App。</p>
+<p>・ Use both displays at once. Add a CameraCaptureAccessory to the outer display and give the person facing the camera something useful to see.</p>
+<p>同时使用两块屏幕。给外屏加 CameraCaptureAccessory，让面对镜头的人也能看到有用信息。</p>
+<figure class="fig"><img src="https://framerusercontent.com/images/4DByqbxGN3QcLBX6VWdtfp3T44.jpg" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Bitrig builds native SwiftUI apps, so standard navigation, toolbars, and controls already do much of the work of adapting to iPhone Duo. And with support for Apple’s App Resizability skill, Bitrig can help you update an existing app to make better use of the space.</p>
+<p>Bitrig 构建原生 SwiftUI App，标准导航、工具栏和控件已经承担了大部分适配工作。配合 Apple 的 App Resizability skill，Bitrig 还能帮你更新现有 App，更好利用空间。</p>
+<figure class="fig"><img src="https://framerusercontent.com/images/5JnilyTF2roDBn0vzK0Oe8yc8ag.jpg" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>To get started, install Xcode 27.1 beta and the iOS 27.1 simulator. Bitrig helps you manage multiple versions of Xcode, so you can start preparing your app for iPhone Duo with the beta and switch back to Xcode 27 to build and release updates.</p>
+<p>开始前请安装 Xcode 27.1 beta 和 iOS 27.1 模拟器。Bitrig 帮你管理多版本 Xcode，可用 beta 为 iPhone Duo 做准备，再切回 Xcode 27 构建并发布更新。</p>
+<p>With two displays, a hinge, and all the ways you can hold it or set it down, iPhone Duo opens up many new possibilities. So open Bitrig, unfold the simulator, and see what you can invent.</p>
+<p>两块屏幕、一个铰链，以及所有拿法与摆放方式——iPhone Duo 打开了许多新可能。打开 Bitrig，展开模拟器，看看你能发明什么。</p>
+<p>P.S. On September 26 we're hosting Bitrig Hacks: iPhone Duo Edition in San Francisco. The goal is to get together and explore what's newly possible with iPhone Duo. We'll have lunch, a great panel of judges, giveaways, and prizes. We'd love for you to join us.</p>
+<p>附：9 月 26 日我们将在旧金山举办 Bitrig Hacks: iPhone Duo Edition。目标是一起探索 iPhone Duo 的新可能。有午餐、评委阵容、赠品和奖品。欢迎加入。</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用 Opus 5.5 自动化 AI UGC</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>用 Opus 5.5 自动化 AI UGC</h1>
+<p class="meta">作者：@danclipping (Daniel)<br>原文：<a href="https://x.com/i/article/2104203982570663936">https://x.com/i/article/2104203982570663936</a><br>推文：<a href="https://x.com/danclipping/status/2104213533927895503">https://x.com/danclipping/status/2104213533927895503</a></p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOq9LBWQAAX4ZL?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>I’m going to walk you through the AI UGC machine i'd run with Opus 5.5, from the lazy version where someone else handles the hard part to the full build in Claude Code, step by step...</p>
+<p>我会带你走一遍我会用 Opus 5.5 跑的 AI UGC 机器：从「难活让别人干」的懒人版，到 Claude Code 里的完整搭建，一步一步来……</p>
+<p>because content changed shape a while ago, and now one good video isn't enough, you need hundreds of them, on brand, with the same creator, posted across TikTok, Reels and Shorts every single day</p>
+<p>因为内容形态早就变了：一条好视频不够，你需要成百上千条、同一创作者、同一品牌感，每天铺到 TikTok、Reels 和 Shorts。</p>
+<p>and before we touch a single tool, you need to hear the one rule that decides whether any of this is worth your time</p>
+<p>在碰任何工具之前，你得先听清一条规则——它决定后面这一切值不值得花时间。</p>
+<p>a lot of people chase the fun part, prettier generations, a smoother face, a new model every week... and none of it counts if nobody sees the videos</p>
+<p>很多人追好玩的那部分：更漂亮的生成、更顺的脸、每周换新模型……可如果没人看到视频，这些都不算数。</p>
+<p>a folder with 300 perfect clips and zero views is a hobby, not a growth system</p>
+<p>一个文件夹里塞了 300 条完美素材、却零播放，那是爱好，不是增长系统。</p>
+<p>so if you have no plan for where your videos go and who posts them, keep that in mind the whole way, because we're coming back to it</p>
+<p>所以如果你还没想好视频发去哪、谁来发，整条路上都要记着——我们后面会回来讲。</p>
+<p>here's what we'll cover, in the order you'd actually build it:</p>
+<p>下面按你真正会搭建的顺序讲：</p>
+<p>• the easy route where the distribution side is handled for you</p>
+<p>• 分发侧帮你搞定的轻松路线</p>
+<p>• what Opus 5.5 actually does in this setup</p>
+<p>• Opus 5.5 在这套里到底干什么</p>
+<p>• the folder that runs the whole machine</p>
+<p>• 驱动整台机器的那个文件夹</p>
+<p>• the five stations from angle to finished clip</p>
+<p>• 从角度到成片的五个工位</p>
+<p>• the quality check that keeps your accounts clean</p>
+<p>• 保住账号干净的质检</p>
+<p>• the weekly loop that keeps it all moving</p>
+<p>• 让一切持续转的周循环</p>
+<p>• a four week plan so you're not staring at a blank folder</p>
+<p>• 四周计划，免得盯着空文件夹发呆</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOivfSXAAAcYRG?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>start with the easy route</p>
+<p>先走轻松路线</p>
+<p>i'll be straight with you, the Claude Code build later in this article is fun, but plenty of you don't want to build a distribution system, you want your videos posted and seen while you run the business</p>
+<p>直说吧：后面 Claude Code 那套很有趣，但很多人并不想自建分发系统——你只想视频发出去、被人看到，自己去跑生意。</p>
+<p>that's where [Affiliate Network] fits, because it handles the part that breaks everyone once the videos start stacking up</p>
+<p>这就是 [Affiliate Network] 的位置：视频一堆起来，最容易把人拖垮的那一块，它来扛。</p>
+<p>you open a campaign, set your CPM, which is what you pay per 1,000 views, and write your rules in normal words, like you'd brief a new hire</p>
+<p>你开一个 campaign，设好 CPM（每千次播放付多少），用正常人话写规则，就像给新员工写 brief。</p>
+<p>creators apply, post your content, and every view runs through bot checks and your rule checks before you pay a cent, then payouts go out automatically</p>
+<p>创作者申请、发你的内容；每一份播放都先过机器人检测和你的规则检测，你才付钱；结算自动打出。</p>
+<p>you can bring creators you already work with, or tap into a marketplace of around 200k to 250k creators ready to post</p>
+<p>可以带上你已有的创作者，也可以进大约 20–25 万创作者的市场。</p>
+<p>that last part is why this setup works, because once your Opus 5.5 machine fills a folder with finished clips, there's somewhere for them to go that isn't you logging into 40 accounts</p>
+<p>最后这一点才是关键：Opus 5.5 机器把成片堆满文件夹后，得有地方去——而不是你自己登 40 个号。</p>
+<p>what Opus 5.5 actually does here</p>
+<p>Opus 5.5 在这里实际干什么</p>
+<p>Opus 5.5 came out on September 22, and the first thing to get right is that it doesn't make videos, it takes text and images in and gives text back</p>
+<p>Opus 5.5 在 9 月 22 日发布。先搞清一件事：它不直接做视频，它吃文本和图片，吐文本。</p>
+<p>that sounds like a limitation, it's actually the point</p>
+<p>听起来像限制，其实正是重点。</p>
+<p>video models are good at turning a prompt into a clip, they're bad at deciding what clip to make, keeping one creator consistent across 200 videos, and telling you which output is garbage</p>
+<p>视频模型擅长把 prompt 变成片段，却不擅长决定该拍什么、在 200 条里保持同一创作者一致、以及告诉你哪条是垃圾。</p>
+<p>that's the part that eats your day, and that's where Opus 5.5 earns its spot</p>
+<p>那才是吃掉你白天的部分，也正是 Opus 5.5 的价值。</p>
+<p>so think of it like this, Opus 5.5 is the director, your video tool is the camera, and distribution is the screen</p>
+<p>可以这么想：Opus 5.5 是导演，视频工具是摄像机，分发是屏幕。</p>
+<p>a few things make this model a real fit for the job:</p>
+<p>几件事让它很适合这份工：</p>
+<p>• input is $4 and output is $20 per million tokens, 20% below Opus 5, and Anthropic says typical jobs cost around 40% less because it uses fewer tokens per task</p>
+<p>• 输入 $4 / 输出 $20 每百万 token，比 Opus 5 低约 20%；Anthropic 说典型任务大约再省 40%，因为每任务用更少 token</p>
+<p>• cache reads cost $0.20 per million tokens, so the stuff you reuse in every run costs almost nothing</p>
+<p>• 缓存读取 $0.20 / 百万 token，每次跑都复用的内容几乎不花钱</p>
+<p>• it has a 1M token context window, so every winning script and every comment thread fits in one go</p>
+<p>• 100 万 token 上下文，所有打赢的脚本和评论串一次塞得下</p>
+<p>• through the Batch API it can return up to 300K tokens in one job, which is hundreds of scripts at once</p>
+<p>• 通过 Batch API 单次最多可回 30 万 token，等于一次几百条脚本</p>
+<p>• it reads images, so it can judge frames from your clips</p>
+<p>• 能读图，所以能评判你片段里的帧</p>
+<p>• the effort setting goes from low to max, so you pay for deep thinking only where it matters</p>
+<p>• effort 从 low 到 max，只在关键处为深思付钱</p>
+<p>you can check all of that on [Anthropic's Opus 5.5 page]</p>
+<p>细节可看 [Anthropic 的 Opus 5.5 页面]</p>
+<p>The folder that runs the machine</p>
+<p>驱动机器的文件夹</p>
+<p>the setup is one folder on your computer, and that folder is the whole brain of your UGC agent, so it's worth getting it right</p>
+<p>整套就是你电脑上的一个文件夹——它是 UGC Agent 的大脑，值得认真搭。</p>
+<p>inside it, i keep four files the agent reads every single run:</p>
+<p>里面我每次跑都会让 Agent 读四份文件：</p>
+<p>• a brief that explains the product, who buys, what they're scared of, and what the video should make them do</p>
+<p>• brief：产品是什么、谁买、怕什么、视频要促什么行动</p>
+<p>• a creator bible with the name, look, room, lighting, the way they talk, and three reference images of the same face</p>
+<p>• creator bible：名字、长相、房间、灯光、说话方式，外加同一张脸的三张参考图</p>
+<p>• a hook library with every hook that already worked, plus the numbers behind it</p>
+<p>• hook library：已经打赢的 hook，以及背后的数据</p>
+<p>• a running log where every run adds a new entry and never deletes an old one</p>
+<p>• running log：每次跑追加一条，从不删旧的</p>
+<p>the creator bible is the file that saves your accounts, because the moment the face changes or the room changes, viewers feel it and scroll</p>
+<p>creator bible 是保账号的那份：脸一变、房间一变，观众立刻感觉到然后划走。</p>
+<p>the log is the one that saves you later, because three weeks from now you won't remember why a batch flopped, and the agent won't either unless it wrote it down</p>
+<p>log 是以后救你的那份：三周后你不会记得某批为什么扑街，Agent 也不会——除非当时写下来了。</p>
+<p>and here's the Opus 5.5 trick, you put the brief and the creator bible at the top of every request and cache them, so they ride along with every script for cents</p>
+<p>Opus 5.5 的窍门：每次请求把 brief 和 creator bible 放最上面并缓存，它们跟着每条脚本跑，只要几美分。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOj3G8WcAA_OnI?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>The five stations</p>
+<p>五个工位</p>
+<p>station one is angle mining, and every batch starts here, not with scripts</p>
+<p>工位一是挖角度。每批从这里开始，不是从写脚本开始。</p>
+<p>you give Opus 5.5 the raw material, top comments from competitor videos, product reviews, Reddit threads and your own best performers, and ask it to pull out the pains, the objections and the exact words people use</p>
+<p>把原材料丢给 Opus 5.5：竞品视频高赞评论、产品评价、Reddit 帖、自己最好的表现——让它抽出痛点、异议，以及人们原话。</p>
+<p>then you ask for 20 angles, each with one line on who it's for and why they'd stop scrolling</p>
+<p>然后要 20 个角度，每个用一句话写清：给谁看、为什么会停下来。</p>
+<p>run this one at high effort, because one strong angle can carry fifty videos and this is where thinking harder pays for itself</p>
+<p>这一步用 high effort：一个强角度能撑五十条视频，这里多想一点划算。</p>
+<p>station two is locking the creator, which you already did in the folder, so every request from here on reads the bible first</p>
+<p>工位二是锁定创作者——文件夹里已经做完；之后每次请求都先读 bible。</p>
+<p>station three is scripts and prompts in bulk</p>
+<p>工位三：批量脚本与提示词</p>
+<p>for each angle, Opus 5.5 writes 10 scripts with different hooks, then turns each script into shot by shot prompts in the exact format your video tool wants</p>
+<p>每个角度，Opus 5.5 写 10 条不同 hook 的脚本，再把每条拆成视频工具要的逐镜头 prompt。</p>
+<p>the structure i give it is simple, a hook in the first two seconds, the problem, the moment they found the product, the proof shown not told, and a soft close</p>
+<p>我给它的结构很简单：前两秒 hook → 问题 → 发现产品的瞬间 → 展示而非口述的证据 → 软收尾。</p>
+<p>run this through the Batch API at low effort, because you don't need deep thinking to write variation 37 of a hook you already approved</p>
+<p>这一步用 Batch API + low effort：你已批准的 hook 写第 37 个变体，不需要深思。</p>
+<p>station four is generation, where the prompts go to your video tool's API</p>
+<p>工位四是生成：prompt 打进视频工具的 API。</p>
+<p>if your tool has no API, Opus 5.5 can drive it through computer use and click through the screens the way you would</p>
+<p>如果工具没 API，Opus 5.5 可以用 computer use 像你一样点界面。</p>
+<p>the easiest way to wire all this is to let Opus 5.5 build the pipeline for you in Claude Code, you describe the loop in plain words and it writes the script that reads the angles, writes the prompts, calls the video tool and saves every clip with its script ID</p>
+<p>最省事的接线方式：让 Opus 5.5 在 Claude Code 里帮你搭管线——用人话描述循环，它写出读角度、写 prompt、调视频工具、按 script ID 存片的脚本。</p>
+<p>it sounds scary, but it takes one sitting and you only do it once</p>
+<p>听起来吓人，其实坐一下午就够，而且只做一次。</p>
+<p>station five is the quality check, and it gets its own section because it's the one everyone skips</p>
+<p>工位五是质检——单独一节，因为人人都跳过它。</p>
+<p>The quality check</p>
+<p>质检</p>
+<p>this is why so many AI UGC accounts fill up with weird hands and melting faces, nobody checked before posting</p>
+<p>很多 AI UGC 号堆满怪手和融化的脸，就是因为没人发前检查。</p>
+<p>the agent pulls three frames from every clip and sends them to Opus 5.5 with the creator bible</p>
+<p>Agent 从每条片子抽三帧，连同 creator bible 送给 Opus 5.5。</p>
+<p>then it scores each clip on four things:</p>
+<p>然后按四项打分：</p>
+<p>• does the face match the reference</p>
+<p>• 脸是否匹配参考</p>
+<p>• does the room and lighting match</p>
+<p>• 房间和灯光是否匹配</p>
+<p>• are there broken hands, text or objects</p>
+<p>• 有没有坏掉的手、文字或物体</p>
+<p>• does the first frame actually work as a hook</p>
+<p>• 第一帧是否真能当 hook</p>
+<p>anything under your bar gets regenerated, anything above it goes into the ready folder with a caption Opus 5.5 already wrote</p>
+<p>不达标的重生成；达标的进 ready 文件夹，并带上 Opus 5.5 已写好的文案。</p>
+<p>the rule i give the agent is that every fail comes with the frame and the reason, and if it can't tell, it says so instead of guessing</p>
+<p>我给 Agent 的规则：每次失败都要附帧和原因；说不清就直说，不要猜。</p>
+<p>a few warnings before you trust the scores:</p>
+<p>信任分数前先听几条警告：</p>
+<p>• the model is judging stills, so it can miss a glitch that happens between frames</p>
+<p>• 模型看的是静帧，可能漏掉帧间闪现的 glitch</p>
+<p>• lip sync and voice still need a human ear on a sample of every batch</p>
+<p>• 口型与声音仍需人耳抽检每批样本</p>
+<p>• a clip that passes QC can still be boring, and only real views tell you that</p>
+<p>• 过 QC 的片子仍可能无聊——只有真实播放能告诉你</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOkVfPXgAAeGjE?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Run the loop every week</p>
+<p>每周跑循环</p>
+<p>this is the part that turns a one off batch into a system</p>
+<p>这一步把一次性批次变成系统。</p>
+<p>the loop i run is short, and the agent repeats it every week:</p>
+<p>我跑的循环很短，Agent 每周重复：</p>
+<p>• pull last week's views and results per video from your campaign dashboard</p>
+<p>• 从 campaign 仪表盘拉上周每条视频的播放与结果</p>
+<p>• tag which angles and hooks won and which ones died</p>
+<p>• 标记哪些角度/hook 赢了、哪些死了</p>
+<p>• add the winners to the hook library and retire the losers</p>
+<p>• 赢家进 hook library，输家退役</p>
+<p>• mine five new angles from fresh comments</p>
+<p>• 从新评论再挖五个角度</p>
+<p>• batch the next round of scripts and prompts</p>
+<p>• 批量下一批脚本与 prompt</p>
+<p>• generate, QC and drop the clips in the ready folder</p>
+<p>• 生成、质检、丢进 ready 文件夹</p>
+<p>• wait for your yes before anything goes live</p>
+<p>• 等你点头再上线</p>
+<p>• write what happened into the log</p>
+<p>• 把发生的事写入 log</p>
+<p>one change at a time sounds slow, it is, on purpose, because if you change the creator, the hooks and the length in the same week, you'll never know which one did the work</p>
+<p>一次只改一件事听起来慢——就是故意慢：同一周改创作者、hook 又改时长，你永远不知道是谁起作用。</p>
+<p>and this is where the rule from the start comes back</p>
+<p>开头那条规则在这里回来了。</p>
+<p>a batch that looked amazing and got no views goes in the log as a miss, and a rough looking batch that pulled views and sales goes in as a win, no debate</p>
+<p>看起来很美却零播放的批次，log 记 miss；看起来糙却有播放和成交的，记 win——没有商量。</p>
+<p>that's also why distribution matters so much here, because one account posting 200 videos doesn't get 200 times the views, it gets flagged</p>
+<p>这也是分发如此重要的原因：一个号发 200 条，不会有 200 倍播放，只会触发风控。</p>
+<p>with a campaign on [Affiliate Network], the same ready folder goes out through real creators, and you only pay for views that passed the checks</p>
+<p>用 [Affiliate Network] 的 campaign，同一 ready 文件夹经真实创作者发出去，你只为通过检测的播放付钱。</p>
+<p>here's what that looks like at scale on one dashboard, $65,603 spent, 48.8M views, at a $2.50 effective CPM</p>
+<p>规模化后仪表盘大概长这样：花 $65,603，拿到 4880 万播放，有效 CPM $2.50。</p>
+<figure class="fig"><img src="https://pbs.twimg.com/media/HTOk2Y1WAAAKYSp?format=jpg&amp;name=orig" alt="" style="display:block;width:100%;max-width:680px;height:auto;border:0;" /></figure>
+<p>Your first four weeks</p>
+<p>你的前四周</p>
+<p>here's how i'd lay out the first month if you were starting from zero today, and i'd follow it in order instead of skipping to the fun part</p>
+<p>如果今天从零开始，我会这样排第一个月——按顺序，别跳到好玩的那步。</p>
+<p>in week one, you write the brief and the creator bible, pick your video tool, and set spend limits on the API before i is the first real run</p>
+<p>第一周：写 brief 和 creator bible，选视频工具，给 API 设好花费上限，然后再做第一次真跑。</p>
+<p>in week two, Opus 5.5 mines your angles and Claude Code wires the five stations, then you run one small batch and read every QC report yourself</p>
+<p>第二周：Opus 5.5 挖角度，Claude Code 接好五个工位；跑一小批，自己读每一份 QC 报告。</p>
+<p>week three is launch week, you open your campaign, set the CPM and the rules, and send the first ready folder to creators</p>
+<p>第三周是上线周：开 campaign，设 CPM 和规则，把第一批 ready 文件夹交给创作者。</p>
+<p>in week four, you turn on the weekly loop and start measuring, and you give each batch a couple of weeks before calling it a win or a miss</p>
+<p>第四周：打开周循环开始度量；每批给几周时间再判 win/miss。</p>
+<p>after that, the machine keeps going with you making one decision a week instead of writing scripts all day</p>
+<p>之后机器继续转，你每周只做一次决策，而不是整天写脚本。</p>
+<p>this is the whole setup, and none of it needs you to be a video editor, it needs you to admit which videos get seen and which ones just look good</p>
+<p>整套就是这样。你不需要会剪视频——你需要承认：哪些视频被看见了，哪些只是好看。</p>
+<p>if you want to build it yourself, open Claude Code, make the folder, and write the creator bible tonight</p>
+<p>想自己搭：今晚打开 Claude Code，建文件夹，写 creator bible。</p>
+<p>and whatever you pick, make sure the videos have somewhere to go before you make a single extra clip</p>
+<p>不管选哪条路，先确保视频有地方去，再多做一条。</p>
+<p>if you want the distribution side handled from day one, you can [launch your UGC campaign on Affiliate Network here]</p>
+<p>如果想从第一天就有人管分发，可以在这里 [启动你的 UGC campaign（Affiliate Network）]</p>
+</div>
+</body>
+</html>
