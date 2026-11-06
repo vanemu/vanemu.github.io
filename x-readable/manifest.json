@@ -1,5 +1,5 @@
 {
-  "count": 47,
+  "count": 49,
   "items": [
     {
       "id": "2103142706134294775",
@@ -376,6 +376,22 @@
       "public_path": "articles/2117512471930167377.html",
       "url": "https://x.com/i/article/2116367635365695488",
       "tweet_url": "https://x.com/addyosmani/status/2117512471930167377"
+    },
+    {
+      "id": "2118355780474937831",
+      "title_zh": "跑完520万字和50万次判断：最硬核的「去AI味」Skill",
+      "local_html": "/workspace/x-bookmarks/longform_batch8/01-lieflat-less-ai-tone.html",
+      "public_path": "articles/2118355780474937831.html",
+      "url": "https://x.com/i/article/2118340378260910080",
+      "tweet_url": "https://x.com/lieflat_3/status/2118355780474937831"
+    },
+    {
+      "id": "2117694233301725635",
+      "title_zh": "ASO 终极指南：App Store 优化实操",
+      "local_html": "/workspace/x-bookmarks/longform_batch8/02-ultimate-aso-guide.html",
+      "public_path": "articles/2117694233301725635.html",
+      "url": "https://x.com/i/article/2117675610319249408",
+      "tweet_url": "https://x.com/tyd3n_/status/2117694233301725635"
     }
   ]
 }
