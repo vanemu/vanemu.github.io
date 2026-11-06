@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASO 终极指南：App Store 优化实操</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .35em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>ASO 终极指南：App Store 优化实操</h1>
+<p class="meta">作者：@tyd3n_ (Darius Pop)<br>
+原文：<a href="https://x.com/i/article/2117675610319249408">https://x.com/i/article/2117675610319249408</a><br>
+推文：<a href="https://x.com/tyd3n_/status/2117694233301725635">https://x.com/tyd3n_/status/2117694233301725635</a></p>
+<p>I know, you built your app, you're excited about it, and you're probably thinking:</p>
+<p>我知道，你已经把 App 做出来了，很兴奋，心里大概在想：</p>
+<p>"Yo, this app is going to make me a millionaire."</p>
+<p>「哟，这 App 要让我成为百万富翁了。」</p>
+<p>I know because I've been there too.</p>
+<p>我懂，因为我也经历过。</p>
+<p>And I still am, don't get me wrong ahaha. I'm not a millionaire yet.</p>
+<p>而且现在还在经历，别误会哈哈。我还没成百万富翁。</p>
+<p>But I've learned A LOT during this journey, and there are a few things I wish someone had told me before publishing my first app.</p>
+<p>但这段旅程里我学到了很多，有几件事真希望有人在我发第一款 App 之前就告诉我。</p>
+<p>If you ever thought that just by publishing your app people would magically find it and start downloading it, well... you were completely wrong.</p>
+<p>如果你曾以为只要上架，用户就会神奇地发现并开始下载——那你就大错特错了。</p>
+<p>Nowadays everyone can build apps.</p>
+<p>如今谁都能做 App。</p>
+<p>I don't know if your idea is actually a good fit for the market or not, but that's a story for another day.</p>
+<p>你的点子适不适合市场，我不知道，那是另一篇文章的事。</p>
+<p>What I can tell you is that, besides all the chaotic distribution strategies you're probably trying right now, there's a good chance you've completely skipped ASO (App Store Optimization).</p>
+<p>我能告诉你的是：除了你正在试的各种杂乱分发策略之外，你很有可能完全跳过了 ASO（App Store Optimization，应用商店优化）。</p>
+<p>Or maybe you're doing it, but you're doing it wrong.</p>
+<p>或者你在做，但方式不对。</p>
+<p>Don't worry, because I'm going to share pretty much everything I've learned about ASO so far, including the mistakes I've made with my own apps.</p>
+<p>别担心，我会把目前学到的 ASO 几乎都分享出来，包括我在自己 App 上踩过的坑。</p>
+<p>Hopefully, by the end of this article, you'll have a much clearer idea of what you should be doing to get more organic downloads.</p>
+<p>希望读完这篇，你会更清楚该怎么做，才能拿到更多自然下载。</p>
+<p>Enough talking, let's jump in.</p>
+<p>话不多说，开始。</p>
+<h2>1. Understanding the App Store Hierarchy</h2>
+<p>1. 理解 App Store 的层级</p>
+<p>First of all, you need to understand how the App Store works.</p>
+<p>首先，你得搞懂 App Store 怎么运作。</p>
+<p>Not every field on your App Store listing has the same importance when it comes to keywords.</p>
+<p>上架页里，不是每个字段对关键词的重要性都一样。</p>
+<p>Some fields are generally considered more influential than others.</p>
+<p>有些字段通常被认为影响力更大。</p>
+<p>And no, putting your keywords everywhere isn't going to magically make you rank #1.</p>
+<p>而且，把关键词塞得到处都是，并不会魔法般让你排到第一。</p>
+<p>Here's how I think about it:</p>
+<p>我大致是这么看的：</p>
+<h2>The App Title</h2>
+<p>App 标题</p>
+<p>This is one of the most important places to put your main keyword. Apple gives you 30 characters, so don't waste them.</p>
+<p>这是放主关键词最重要的位置之一。Apple 只给 30 个字符，别浪费。</p>
+<p>If your app is a habit tracker, you probably want people searching for "habit tracker" to understand what your app does immediately.</p>
+<p>如果你做的是习惯打卡类 App，大概希望搜「habit tracker」的人一眼就明白你的 App 干什么。</p>
+<h2>The Subtitle</h2>
+<p>副标题</p>
+<p>The subtitle also plays an important role.</p>
+<p>副标题也很重要。</p>
+<p>You get another 30 characters to explain what your app does and target relevant keywords.</p>
+<p>你还有 30 个字符，用来说明 App 做什么，并覆盖相关关键词。</p>
+<p>It's generally considered less influential than the title, but still very important.</p>
+<p>一般认为它不如标题权重高，但依然非常关键。</p>
+<h2>The Keywords Field</h2>
+<p>关键词字段</p>
+<p>Here you get 100 characters.</p>
+<p>这里有 100 个字符。</p>
+<p>And trust me, those 100 characters are worth using properly.</p>
+<p>相信我，这 100 个字符值得好好用。</p>
+<p>You want to include relevant keywords that people are actually searching for.</p>
+<p>你要放进用户真正会搜的相关词。</p>
+<p>Apple can also combine words from your metadata to match different searches, so you don't necessarily need to write every possible keyword combination.</p>
+<p>Apple 也会把元数据里的词组合起来匹配不同搜索，所以不必写出每一种可能的词组。</p>
+<p>I'll explain this better in a second.</p>
+<p>稍后我会讲得更清楚。</p>
+<h2>Promotional Text &amp; Description</h2>
+<p>宣传文本与描述</p>
+<p>Here's something that might save you some time.</p>
+<p>有一点可能帮你省时间。</p>
+<p>On Apple's App Store, the description and promotional text aren't direct keyword-ranking fields.</p>
+<p>在 Apple 的 App Store 上，描述和宣传文本并不是直接的关键词排名字段。</p>
+<p>So stop stuffing them with keywords, lol.</p>
+<p>所以别再往里面堆关键词了，哈哈。</p>
+<p>That doesn't mean they're useless.</p>
+<p>这不代表它们没用。</p>
+<p>Your description should explain why someone should download your app, while promotional text can highlight updates or important features.</p>
+<p>描述应该说清「为什么该下载」；宣传文本可以强调更新或重要功能。</p>
+<p>Just remember: we're trying to convince real people to download our apps, not only algorithms.</p>
+<p>记住：我们是在说服真人下载，而不只是算法。</p>
+<p>And one more thing: this is about Apple's App Store. Google Play works differently, especially when it comes to descriptions.</p>
+<p>还有：这说的是 Apple App Store。Google Play 不一样，尤其是描述字段。</p>
+<h2>2. How to Optimize Your App Title for Search</h2>
+<p>2. 如何为搜索优化 App 标题</p>
+<p>One mistake I've seen people make is putting their beautiful app name first without explaining what the app actually does.</p>
+<p>我见过的一个常见错误：漂亮品牌名放最前面，却不说明 App 到底做什么。</p>
+<p>Yeah, I know.</p>
+<p>是的，我懂。</p>
+<p>You spent three days choosing that name, found the perfect domain, and now you want everyone to see it.</p>
+<p>你花了三天起名、找到完美域名，当然想让所有人看见它。</p>
+<p>I get it ahaha.</p>
+<p>我理解哈哈。</p>
+<p>But here's the problem.</p>
+<p>但问题在这。</p>
+<p>Nobody knows your app exists yet.</p>
+<p>还没人知道你的 App 存在。</p>
+<p>Think about Duolingo.</p>
+<p>想想 Duolingo。</p>
+<p>Duolingo has the luxury of putting its brand first because millions of people already know what Duolingo is.</p>
+<p>Duolingo 有本钱把品牌放前面，因为几百万人已经知道它是什么。</p>
+<p>People literally search for "Duolingo."</p>
+<p>人们会直接搜「Duolingo」。</p>
+<p>We're not there yet.</p>
+<p>我们还没到那一步。</p>
+<p>At least I'm not lol.</p>
+<p>至少我还没哈哈。</p>
+<p>So instead of relying only on your brand name, try making your main keyword more visible.</p>
+<p>所以别只靠品牌名，试着让主关键词更显眼。</p>
+<p>For example:</p>
+<p>比如：</p>
+<p>Habit Tracker: MyApp</p>
+<p>Habit Tracker: MyApp</p>
+<p>Instead of:</p>
+<p>而不是：</p>
+<p>MyApp: Habit Tracker</p>
+<p>MyApp: Habit Tracker</p>
+<p>This isn't some magical trick that guarantees better rankings just because the keyword comes first.</p>
+<p>这不是什么关键词靠前就保证排名更好的魔法。</p>
+<p>But it immediately tells people what your app does, and that's important when someone is scrolling through search results.</p>
+<p>但它能立刻告诉用户 App 做什么——在搜索结果里滑动时，这很重要。</p>
+<p>Keep the title natural, relevant, and within Apple's 30-character limit.</p>
+<p>标题要自然、相关，并控制在 Apple 的 30 字符限制内。</p>
+<p>Hopefully, one day we'll have the luxury of people searching directly for our beautiful app names.</p>
+<p>希望有一天，我们也有本钱让人直接搜我们漂亮的 App 名。</p>
+<h2>3. Stop Wasting Your 100 Keyword Characters</h2>
+<p>3. 别再浪费那 100 个关键词字符</p>
+<p>Now let's talk about the keywords field.</p>
+<p>接下来谈关键词字段。</p>
+<p>For each localization, Apple gives you 100 characters, and you should try to make good use of them.</p>
+<p>每个本地化语言，Apple 给你 100 个字符，应该好好用。</p>
+<p>But here's something interesting, you don't always have to enter complete search phrases.</p>
+<p>有趣的是：你不一定总要填完整搜索短语。</p>
+<p>For example, let's say you have a habit tracker.</p>
+<p>比如你做习惯打卡。</p>
+<p>Instead of writing:</p>
+<p>与其写成：</p>
+<p>"habit tracker, habit goals, habit routine"</p>
+<p>「habit tracker, habit goals, habit routine」</p>
+<p>You could use individual relevant words separated by commas, avoiding words you've already included in your title or subtitle.</p>
+<p>不如用逗号分隔的单个相关词，并避开标题、副标题里已经用过的词。</p>
+<p>Something like:</p>
+<p>类似：</p>
+<p>"routine,goals,daily,streaks,planner"</p>
+<p>「routine,goals,daily,streaks,planner」</p>
+<p>Why?</p>
+<p>为什么？</p>
+<p>Because Apple can combine keywords from different fields and match multiple search queries.</p>
+<p>因为 Apple 会组合不同字段里的关键词，匹配多种搜索。</p>
+<p>So you're potentially targeting more searches without wasting characters repeating the same words.</p>
+<p>这样你能覆盖更多搜索，又不用浪费字符重复同样的词。</p>
+<p>Of course, that doesn't mean every possible combination will rank.</p>
+<p>当然，这不代表每种组合都会有排名。</p>
+<p>You still need to choose relevant keywords, and some exact phrases may be worth keeping together.</p>
+<p>你仍要选相关词；有些精确短语也值得整段保留。</p>
+<p>But in general:</p>
+<p>但总体原则是：</p>
+<p>Don't waste characters repeating words you've already used.</p>
+<p>别浪费字符去重复已经用过的词。</p>
+<p>Oh, and one more thing.</p>
+<p>对了，还有一点。</p>
+<p>Don't just target the keywords with the highest search volume.</p>
+<p>别只盯搜索量最高的词。</p>
+<p>If you're competing against apps with millions of downloads, good luck ranking above them from day one.</p>
+<p>如果你要跟下载量上百万的 App 硬刚，想从第一天就排在它们上面？祝你好运。</p>
+<p>Sometimes a smaller keyword with less competition is a much better opportunity.</p>
+<p>有时搜索量更小、竞争更弱的词，才是更好的机会。</p>
+<p>More about that later.</p>
+<p>这点后面再说。</p>
+<h2>4. Your Screenshots Matter More Than You Think</h2>
+<p>4. 截图比你想的更重要</p>
+<p>Okay, now imagine this.</p>
+<p>好，想象一下。</p>
+<p>Someone searches for a keyword.</p>
+<p>有人搜了一个关键词。</p>
+<p>Your app appears in the results.</p>
+<p>你的 App 出现在结果里。</p>
+<p>They see your icon, title, and screenshots.</p>
+<p>他们看到图标、标题和截图。</p>
+<p>And then... they keep scrolling.</p>
+<p>然后……继续往下划。</p>
+<p>Why?</p>
+<p>为什么？</p>
+<p>Maybe because your screenshots look terrible.</p>
+<p>也许是因为截图看起来很糟。</p>
+<p>I'm not saying yours do, but you get the point lol.</p>
+<p>我不是说你的一定糟，但你懂我意思哈哈。</p>
+<p>Your screenshots are one of the first things potential users see, and they can make a huge difference in whether someone downloads your app.</p>
+<p>截图是潜在用户最先看到的东西之一，能极大影响是否下载。</p>
+<p>Here's what I suggest:</p>
+<p>我的建议是：</p>
+<p>Focus on the first 3 screenshots. Depending on the App Store layout, users may see up to three screenshots directly in search results.</p>
+<p>抓住前 3 张截图。按 App Store 布局，搜索结果里用户往往能直接看到最多三张。</p>
+<p>Make the message clear. People should understand your app's value without having to read five paragraphs.</p>
+<p>信息要清晰。不必读五大段，就该看懂价值。</p>
+<p>Avoid tiny text. Remember that people are looking at these screenshots on their phones.</p>
+<p>别用过小的字。记住大家是在手机上看这些截图。</p>
+<p>Use good contrast. Don't put light gray text on a white background and expect people to read it.</p>
+<p>对比度要够。别指望浅灰字配白底还能被读到。</p>
+<p>Show benefits, not just features. Explain what the user gets from using your app.</p>
+<p>展示收益，而不只是功能。说清用户用了能得到什么。</p>
+<p>Here's how the first three screenshots appear in the App Store.</p>
+<p>下面是前三张截图在 App Store 里的呈现方式。</p>
+<p>For example, instead of writing:</p>
+<p>比如，与其写：</p>
+<p>"Advanced Analytics Dashboard"</p>
+<p>「Advanced Analytics Dashboard」</p>
+<p>You could write:</p>
+<p>你可以写：</p>
+<p>"See How Much Money You've Saved"</p>
+<p>「See How Much Money You've Saved」</p>
+<p>The second one gives people an actual reason to care.</p>
+<p>第二种才真正给出在乎的理由。</p>
+<p>Another mistake is trying to explain EVERYTHING in the first screenshot.</p>
+<p>另一个错误是试图在第一张截图里解释所有事。</p>
+<p>You don't need to.</p>
+<p>没必要。</p>
+<p>You just need to make someone interested enough to keep looking.</p>
+<p>你只要让人有兴趣继续看下去。</p>
+<p>If you're unsure whether your screenshots are actually good, I built a free tool that analyzes your App Store listing and shows you what you could improve.</p>
+<p>如果不确定截图够不够好，我做了一个免费工具，会分析你的上架页并告诉你能改进什么。</p>
+<p>You can try it here:</p>
+<p>可以在这里试试：</p>
+<p>https://www.minimalistscreens.com/tools/app-store-grader</p>
+<p>https://www.minimalistscreens.com/tools/app-store-grader</p>
+<p>And remember, getting people to find your app is only half the job.</p>
+<p>记住：让人找到你的 App 只是一半工作。</p>
+<p>You still need to convince them to download it.</p>
+<p>你还要说服他们下载。</p>
+<h2>5. Reviews Are Important Too</h2>
+<p>5. 评论也很重要</p>
+<p>Every app has its own visibility in the App Store, and ratings and reviews are among the signals Apple considers.</p>
+<p>每个 App 在商店里都有自己的可见度，评分和评论是 Apple 会参考的信号之一。</p>
+<p>But they're also important for something else.</p>
+<p>但它们对另一件事同样重要。</p>
+<p>--- Trust. ---</p>
+<p>——信任。——</p>
+<p>Imagine finding two similar apps.</p>
+<p>想象你找到两款类似的 App。</p>
+<p>One has 4.8 stars and hundreds of reviews.</p>
+<p>一款 4.8 分、几百条评论。</p>
+<p>The other has 3.2 stars and almost no reviews.</p>
+<p>另一款 3.2 分、几乎没评论。</p>
+<p>Which one would you download?</p>
+<p>你会下哪一款？</p>
+<p>Exactly.</p>
+<p>没错。</p>
+<p>I'm personally working on this with my own app too.</p>
+<p>我自己的 App 也在这方面努力。</p>
+<p>One thing you can do is ask your users for a review directly inside your app.</p>
+<p>你可以做的一件事：在 App 内直接请用户评价。</p>
+<p>But please, don't ask them immediately after opening it for the first time.</p>
+<p>但请别在第一次打开后立刻问。</p>
+<p>That's annoying.</p>
+<p>那很烦人。</p>
+<p>Wait until they've actually experienced something useful.</p>
+<p>等到他们真正体验到有用的东西再说。</p>
+<p>Maybe they've completed a task, reached a milestone, or achieved something with your app.</p>
+<p>比如完成了任务、达成里程碑，或用你的 App 做成了什么。</p>
+<p>That's a much better moment to ask.</p>
+<p>那才是更好的时机。</p>
+<p>You can use Apple's native review prompt to make the process easier.</p>
+<p>可以用 Apple 原生的评价弹窗，流程更顺。</p>
+<p>And obviously, the goal is to get as many genuine positive reviews as possible.</p>
+<p>显然，目标是尽量多拿到真实的好评。</p>
+<p>Hopefully five stars ahaha.</p>
+<p>最好是五星哈哈。</p>
+<p>Just don't try to manipulate reviews or reward users for positive ratings.</p>
+<p>只是别操纵评论，也别用奖励换好评。</p>
+<p>Build something people enjoy using, and make it easy for them to share their experience.</p>
+<p>做出大家愿意用的东西，并让他们容易分享体验。</p>
+<h2>6. Localization Doesn't Mean Translating Word by Word</h2>
+<p>6. 本地化 ≠ 逐词翻译</p>
+<p>This is probably one of the most interesting things I've learned recently.</p>
+<p>这大概是我最近学到最有意思的一点。</p>
+<p>I've asked quite a few developers how they localize their apps.</p>
+<p>我问过不少开发者怎么做本地化。</p>
+<p>And most of them were like:</p>
+<p>大多数人差不多会说：</p>
+<p>"Well, I just translate everything from English."</p>
+<p>「嗯，我就把英文全翻过去。」</p>
+<p>That's it.</p>
+<p>就这样。</p>
+<p>But here's the problem.</p>
+<p>但问题在这。</p>
+<p>People in different countries don't necessarily search for the same things.</p>
+<p>不同国家的人，搜的东西未必一样。</p>
+<p>Even when they're looking for exactly the same type of app.</p>
+<p>即便他们要找的是同一类 App。</p>
+<p>Let's say your English keyword is:</p>
+<p>假设你的英文关键词是：</p>
+<p>"Budget Tracker"</p>
+<p>「Budget Tracker」</p>
+<p>You can't automatically assume that its literal translation is the most searched term in Germany, Italy, or France.</p>
+<p>你不能自动假设它的字面翻译就是德国、意大利或法国搜索量最高的词。</p>
+<p>Maybe people use another expression.</p>
+<p>也许当地人用另一个说法。</p>
+<p>Maybe they search for something more specific.</p>
+<p>也许他们搜得更具体。</p>
+<p>Or maybe they use an English keyword even though their native language is different.</p>
+<p>或者母语不同，却仍在用英文关键词。</p>
+<p>I've personally noticed this while researching keywords for my app, Smoke Off.</p>
+<p>我给自己的 App Smoke Off 做关键词研究时就亲身遇到过。</p>
+<p>Some English keywords were getting searched in Italy, and that opened up opportunities I hadn't considered before.</p>
+<p>有些英文词在意大利也有搜索量，打开了我之前没想过的机会。</p>
+<p>So here's what I'd suggest.</p>
+<p>所以我的建议是。</p>
+<p>Before localizing:</p>
+<p>本地化之前：</p>
+<p>Research the keywords people actually use in that market.</p>
+<p>研究那个市场里人们实际在用的关键词。</p>
+<p>Compare their popularity and difficulty.</p>
+<p>比较热度与难度。</p>
+<p>Choose the ones that make sense for your app.</p>
+<p>选对你 App 有意义的词。</p>
+<p>Adapt your title, subtitle, and keywords accordingly.</p>
+<p>相应调整标题、副标题和关键词字段。</p>
+<p>Don't forget to localize your screenshots too.</p>
+<p>别忘了截图也要本地化。</p>
+<p>You can use ASO tools like Minimalist Screens to research keywords across different markets.</p>
+<p>可以用 Minimalist Screens 这类 ASO 工具，跨市场做关键词研究。</p>
+<p>Or, if you don't have access to a tool yet, ask an AI to help you brainstorm relevant keywords in a particular language.</p>
+<p>或者如果还没有工具，可以让 AI 帮你用某种语言头脑风暴相关词。</p>
+<p>Just don't blindly trust the suggestions.</p>
+<p>只是别盲目相信建议。</p>
+<p>AI can give you ideas, but it doesn't automatically know which keywords have the best search volume or competition.</p>
+<p>AI 能给点子，但不会自动知道哪些词搜索量最好、竞争如何。</p>
+<p>You'll still need to validate them.</p>
+<p>你仍需要验证。</p>
+<p>Also, keep in mind that App Store localizations depend on supported languages and storefronts, not simply one independent keyword field for every country.</p>
+<p>另外记住：App Store 本地化取决于支持的语言与店面，不是每个国家都有独立关键词字段。</p>
+<p>So check which languages Apple supports in your target markets.</p>
+<p>所以先查清目标市场 Apple 支持哪些语言。</p>
+<p>The main point is simple:</p>
+<p>核心很简单：</p>
+<p>Translate for how people search, not just how words are written.</p>
+<p>按人们怎么搜来翻译，而不只是按字面怎么写。</p>
+<h2>7. Localize Your Pricing Too</h2>
+<p>7. 定价也要本地化</p>
+<p>Now here's something that some developers might disagree with me on.</p>
+<p>接下来这一点，有些开发者可能不同意我。</p>
+<p>I think you should seriously consider localizing your pricing.</p>
+<p>我认为你应该认真考虑本地化定价。</p>
+<p>Unless you have significant AI costs, infrastructure costs, or other expenses that make it difficult.</p>
+<p>除非你有很高的 AI 成本、基础设施成本或其他开支，让这变得很难。</p>
+<p>Think about it.</p>
+<p>想想看。</p>
+<p>Someone living in a country with lower purchasing power might love your app but find your subscription too expensive.</p>
+<p>住在购买力较低国家的人可能很喜欢你的 App，但觉得订阅太贵。</p>
+<p>And you might be thinking:</p>
+<p>你或许会想：</p>
+<p>"But I want to make exactly €10 from every subscription."</p>
+<p>「但我希望每笔订阅都刚好赚到 €10。」</p>
+<p>Yeah, I get it.</p>
+<p>嗯，我懂。</p>
+<p>But would you rather get €5 from someone who otherwise wouldn't subscribe, or €0?</p>
+<p>但你更想从本来不会订阅的人那里拿到 €5，还是 €0？</p>
+<p>I know what I'd choose.</p>
+<p>我知道我会选哪个。</p>
+<p>Less money is better than no money.</p>
+<p>少赚总比不赚好。</p>
+<p>Of course, you still need to make sure you're profitable.</p>
+<p>当然，你仍要确保自己是赚钱的。</p>
+<p>Here's a simple framework I'd start testing with:</p>
+<p>这是我会先拿来测试的一个简单框架：</p>
+<table>
+<tr><th>Market</th><th>Starting Price</th></tr>
+<tr><td>Tier 1</td><td>100% of your base price</td></tr>
+<tr><td>Tier 2</td><td>55–70% of your base price</td></tr>
+<tr><td>Tier 3</td><td>30–40% of your base price</td></tr>
+</table>
+<p>These are just starting points, not universal rules.</p>
+<p>这些只是起点，不是放之四海的规则。</p>
+<p>You shouldn't randomly throw countries into tiers either.</p>
+<p>也不该随便把国家丢进某个档位。</p>
+<p>Research purchasing power, local competitors, subscription behavior, and your actual costs.</p>
+<p>要研究购买力、本地竞品、订阅习惯，以及你的真实成本。</p>
+<p>For example, if your base subscription is €10/month, you might test a lower price in a market where €10 is relatively expensive.</p>
+<p>例如基础订阅是 €10/月，你可以在 €10 相对偏贵的市场测试更低价。</p>
+<p>Apple already handles currency conversions and certain tax adjustments, but that's not the same as optimizing your prices for purchasing power.</p>
+<p>Apple 已经处理货币换算和部分税费调整，但那不等于按购买力优化价格。</p>
+<p>With Minimalist Screens, you can explore localized pricing and adjust your pricing strategy for different markets.</p>
+<p>用 Minimalist Screens，你可以探索本地化定价，并为不同市场调整策略。</p>
+<p>I think it's worth experimenting with, especially when you're trying to reach users outside your main market.</p>
+<p>我觉得值得试，尤其当你想触达主市场之外的用户时。</p>
+<h2>8. How I Actually Do Keyword Research</h2>
+<p>8. 我实际怎么做关键词研究</p>
+<p>Okay, we talked about keywords a lot.</p>
+<p>好了，关键词谈了很多。</p>
+<p>But how do you actually find the right ones?</p>
+<p>但怎么真正找到对的词？</p>
+<p>There are plenty of ASO tools out there, and you can use whichever works best for you.</p>
+<p>ASO 工具很多，选你最顺手的就行。</p>
+<p>Personally, I built Minimalist Screens with my brother because I wanted to have everything in one place, without paying crazy prices for multiple tools.</p>
+<p>就我个人而言，我和哥哥一起做了 Minimalist Screens，因为我想把一切放在一个地方，而不必为多个工具付天价。</p>
+<p>We wanted to make ASO more accessible and affordable for indie developers like us.</p>
+<p>我们想让 ASO 对像我们这样的独立开发者更易得、更便宜。</p>
+<p>Here's how I approach keyword research.</p>
+<p>我做关键词研究的大致方式是这样。</p>
+<p>First, I look for relevant keywords.</p>
+<p>首先，找相关关键词。</p>
+<p>I start with what my app actually does.</p>
+<p>从我的 App 实际做什么出发。</p>
+<p>For Smoke Off, for example, I'd research terms related to quitting smoking, tracking cigarettes, cravings, and similar topics.</p>
+<p>以 Smoke Off 为例，我会研究戒烟、记录抽烟、烟瘾等相关词。</p>
+<p>The idea is to find keywords with real search intent.</p>
+<p>目标是找到有真实搜索意图的词。</p>
+<p>Then I look at popularity.</p>
+<p>然后看热度。</p>
+<p>Obviously, we want keywords that people are searching for.</p>
+<p>显然我们要人们正在搜的词。</p>
+<p>There's no point ranking #1 for a keyword nobody searches.</p>
+<p>排第一但没人搜，毫无意义。</p>
+<p>After that, I check difficulty.</p>
+<p>接着看难度。</p>
+<p>This is where it gets interesting.</p>
+<p>这里开始有意思了。</p>
+<p>A keyword might have amazing popularity, but if the competition is too strong, it might be almost impossible for a new app to rank well.</p>
+<p>某个词可能热度很高，但竞争太强时，新 App 几乎不可能排得好。</p>
+<p>That's why I prefer finding a balance between demand and competition.</p>
+<p>所以我更偏好在需求与竞争之间找平衡。</p>
+<p>Finally, I look at opportunity.</p>
+<p>最后看机会。</p>
+<p>Minimalist Screens has an opportunity metric that helps me compare keywords based on their potential.</p>
+<p>Minimalist Screens 有一个 opportunity 指标，帮我按潜力比较关键词。</p>
+<p>It makes it easier to decide which keywords are worth targeting and which ones I should probably leave alone for now.</p>
+<p>更容易决定哪些值得做、哪些暂时该放过。</p>
+<p>My general strategy is pretty simple:</p>
+<p>我的总体策略很简单：</p>
+<p>Find relevant keywords with decent demand and competition that my app has a realistic chance of handling.</p>
+<p>找相关、有一定需求、且竞争程度是我的 App 现实上能对付的词。</p>
+<p>I don't always go for the biggest ones.</p>
+<p>我不总是冲最大的那些。</p>
+<p>Especially when the app is still small.</p>
+<p>尤其 App 还小时。</p>
+<p>You can always target more competitive keywords as your app grows.</p>
+<p>App 长大后，再去碰更卷的词也不迟。</p>
+<h2>9. Be Patient, Track Your Keywords, and Keep Improving</h2>
+<p>9. 要有耐心，追踪关键词，持续改进</p>
+<p>One last thing.</p>
+<p>最后再说一件事。</p>
+<p>ASO takes time.</p>
+<p>ASO 需要时间。</p>
+<p>Please don't change your title today and expect to wake up tomorrow with a million downloads.</p>
+<p>请别今天改标题，就指望明天醒来多出一百万下载。</p>
+<p>You need to test things, understand what's working, and keep improving.</p>
+<p>你需要测试、理解什么有效，并持续改进。</p>
+<p>That's why tracking your keywords is important.</p>
+<p>所以追踪关键词很重要。</p>
+<p>For example, let's say your app is ranking #47 for a keyword.</p>
+<p>比如你的 App 某词排第 47。</p>
+<p>After making some changes, you move to #28.</p>
+<p>改了之后到第 28。</p>
+<p>Then #16.</p>
+<p>再到第 16。</p>
+<p>That's useful information.</p>
+<p>这是有用的信息。</p>
+<p>It doesn't necessarily mean every improvement came from your metadata changes, but at least you can start understanding how your visibility is changing.</p>
+<p>不一定每次提升都来自元数据改动，但至少能开始理解可见度怎么在变。</p>
+<p>And if your rankings aren't improving?</p>
+<p>如果排名没改善呢？</p>
+<p>Maybe your keywords are too competitive.</p>
+<p>也许关键词太卷。</p>
+<p>Maybe you're targeting the wrong search intent.</p>
+<p>也许瞄准的搜索意图不对。</p>
+<p>Or maybe there are better opportunities you haven't found yet.</p>
+<p>或者还有更好的机会你还没找到。</p>
+<p>That's why I added keyword tracking to Minimalist Screens.</p>
+<p>所以我在 Minimalist Screens 里加了关键词追踪。</p>
+<p>You can monitor your rankings over time instead of manually searching for your app every single day.</p>
+<p>你可以随时间监控排名，而不必每天手动搜自己的 App。</p>
+<p>But don't forget to measure actual results too.</p>
+<p>但别忘了也要衡量实际结果。</p>
+<p>Better rankings are nice.</p>
+<p>排名变好很不错。</p>
+<p>More downloads are even nicer.</p>
+<p>下载变多更棒。</p>
+<p>And more paying users?</p>
+<p>付费用户更多？</p>
+<p>Well, that's the goal lol.</p>
+<p>嗯，那才是目标哈哈。</p>
+<h2>10. Don't Forget About the Actual App</h2>
+<p>10. 别忘了 App 本身</p>
+<p>Before wrapping this up, there's one more thing I want to say.</p>
+<p>收尾前还有一件事想说。</p>
+<p>You can have amazing screenshots.</p>
+<p>你可以有超棒的截图。</p>
+<p>Perfectly optimized keywords.</p>
+<p>完美优化的关键词。</p>
+<p>Great localization.</p>
+<p>出色的本地化。</p>
+<p>And even a really good pricing strategy.</p>
+<p>甚至很好的定价策略。</p>
+<p>But if your app is terrible and nobody actually wants it, ASO isn't going to save you.</p>
+<p>但如果 App 很糟、没人真正想要，ASO 救不了你。</p>
+<p>I know that's not what everyone wants to hear.</p>
+<p>我知道这话不是人人爱听。</p>
+<p>But it's true.</p>
+<p>但它是真的。</p>
+<p>ASO helps people discover your app and can improve your chances of converting them into users.</p>
+<p>ASO 帮人发现你的 App，也能提高转化成用户的概率。</p>
+<p>It doesn't replace having a product that solves a real problem.</p>
+<p>它替代不了「解决真实问题」的产品。</p>
+<p>So keep improving your app while working on your distribution.</p>
+<p>所以一边做分发，一边继续打磨产品。</p>
+<p>You need both.</p>
+<p>两者都要。</p>
+<h2>One Last Thing Before You Go</h2>
+<p>走之前再说一句</p>
+<p>That's pretty much everything I wanted to share about ASO.</p>
+<p>关于 ASO，我想分享的大致就是这些。</p>
+<p>Or at least the most important things I've learned so far.</p>
+<p>至少是我目前学到最重要的部分。</p>
+<p>I'm still learning too, and I'm constantly experimenting with my own apps.</p>
+<p>我也还在学习，并不断在自己的 App 上实验。</p>
+<p>Some things work.</p>
+<p>有些有效。</p>
+<p>Some don't.</p>
+<p>有些不行。</p>
+<p>If there's one thing I want you to remember from this article, it's this:</p>
+<p>如果这篇只让你记住一件事，就是：</p>
+<p>Building your app is only the beginning. Getting people to discover it is a completely different challenge.</p>
+<p>把 App 做出来只是开始。让人发现它，完全是另一场挑战。</p>
+<p>And that's exactly why I'm building Minimalist Screens.</p>
+<p>而这正是我做 Minimalist Screens 的原因。</p>
+<p>I wanted one place where indie developers like me could research keywords, track rankings, improve screenshots, and work on localization without having to jump between a bunch of different tools.</p>
+<p>我想给像我这样的独立开发者一个地方：研究关键词、追踪排名、改进截图、做本地化，而不必在一堆工具之间跳来跳去。</p>
+<p>If you found this guide useful, I'd really appreciate a like and a repost!</p>
+<p>如果这篇指南对你有用，真心希望你能点个赞、转发一下！</p>
+<p>I spent quite some time putting everything together, so it would mean a lot if you could help me reach more indie developers.</p>
+<p>整理这些花了不少时间，若能帮我触达更多独立开发者，我会非常感激。</p>
+<p>Hope it helps you get some more downloads ahaha.</p>
+<p>希望它能帮你多拿一些下载哈哈。</p>
+</div>
+</body>
+</html>
