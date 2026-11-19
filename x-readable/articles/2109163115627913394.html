@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anatomy：把概念画成会动的机器</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+h3{font-size:1.05rem;margin:1.15em 0 .45em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+a{color:#0b57d0;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.fig img,.fig video{display:block;width:100%;max-width:680px;height:auto;border:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+.pair{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 1.1em;}
+.pair .fig{flex:1 1 220px;margin:0;}
+.gallery{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 1.2em;}
+.gallery figure{flex:1 1 140px;margin:0;max-width:220px;}
+.gallery img{display:block;width:100%;height:auto;border:0;border-radius:4px;}
+.gallery .caption{font-size:.8rem;margin:.3em 0 0;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .45em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+.note{color:#555;font-size:.92rem;margin:0 0 1em;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Anatomy：把概念画成会动的机器</h1>
+<p class="meta">作者：Ryan（@wheresryan22）<br>原文：<a href="https://skills.wheresryan.sh/anatomy">https://skills.wheresryan.sh/anatomy</a><br>书签帖：<a href="https://x.com/dingyi/status/2109163115627913394">https://x.com/dingyi/status/2109163115627913394</a><br>2026-10-09</p>
+<figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/og.png" alt="Anatomy 封面：一只伸出的手" /></figure>
+<p>Name an idea in one line, and Claude draws the machine that does it.</p>
+<p>用一句话点出一个概念，Claude 就会画出一台做这件事的机器。</p>
+<p>Anatomy is a skill for Claude Code. The collection has 33 figures, all live. By Ryan, 9 October 2026.</p>
+<p>Anatomy 是一个给 Claude Code 用的 Skill。目前有 33 幅图，全都是可交互的。作者 Ryan，2026 年 10 月 9 日。</p>
+<p>Most explanations of how something works are drawn as boxes and arrows. They tell you the parts exist, but not what the parts do, and the reader has to imagine the motion the arrows stand for. I wanted Claude to draw the thing itself: a real object whose moving parts behave the way the idea does.</p>
+<p>大多数「某件事物如何运作」的解释，画的都是方框和箭头。它们告诉你有这些部分，却不说各部分做什么，读者还得自己去想象箭头所代表的运动。我想让 Claude 直接把那个东西画出来：一件真实的物件，其活动部件的行为，就是这个概念本身。</p>
+<p>Anatomy is a skill for Claude Code that does this. You name an idea in one line, Claude invents a machine that does it, and draws it as a live isometric figure you can turn, press and read. Every figure is made of dozens to hundreds of small solid parts, and every number it shows comes from the same model that moves them.</p>
+<p>Anatomy 就是做这件事的 Claude Code Skill。你用一句话点出一个概念，Claude 发明一台做这件事的机器，并画成可旋转、可按、可读数的等轴测活动图。每幅图由几十到几百个小实体零件组成，它显示的每一个数字，都来自驱动这些零件运动的同一个模型。</p>
+<p>The original page has live interactive figures. This readable version uses still images from the site; please open the original for the machines you can turn, press and read.</p>
+<p>原页上的图是可交互的。这个可读版使用网站上的静态图；若要旋转、按压并读取数值，请打开原文。</p>
+<figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/thumbs/watch.webp" alt="机械表机芯" /><figcaption class="caption">This is a mechanical watch movement. It came from one line, `/anatomy explain how a mechanical watch keeps time, interactive`, and just under two hours of Claude working on its own. (One hour and fifty-four minutes of active time, built in one pass and checked by the same agent.)<br>这是一台机械表机芯。它来自一句话：`/anatomy explain how a mechanical watch keeps time, interactive`，以及 Claude 独自工作了将近两小时（实际有效时间 1 小时 54 分钟，一遍做成，并由同一个 agent 检查）。</figcaption></figure>
+<p>Drag the crown upward to wind it: the ratchet turns, the click ticks and the power reserve climbs. Press S to slow time to a twentieth, and again to a hundredth, and you can watch the pallet fork let the fifteen-tooth escape wheel through half a tooth at a time. Press E to lift the bridges apart and see the train underneath, its wheels cut to true ratios: the fourth wheel turns once a minute and the centre wheel once an hour.</p>
+<p>向上拖动表冠上条：棘轮转动，卡销作响，动力储存上升。按 S 把时间降到二十分之一，再按一次降到百分之一，就能看见擒纵叉一次放行十五齿擒纵轮的半个齿。按 E 把夹板抬开，看到下面的轮系，齿比是真实的：秒轮每分钟转一圈，中心轮每小时转一圈。</p>
+<h2>要物件，不要示意图</h2>
+<p>The skill rests on one rule, written at the top of its instructions, above everything else:</p>
+<p>这个 Skill 建立在一条规则上，它写在说明的最上方，压过其他一切：</p>
+<blockquote>The object is the explanation.
+物件本身就是解释。
+— SKILL.md, “The one idea that matters”</blockquote>
+<p>No boxes, no arrows, no labels floating in space. Claude has to invent a real, well-made thing whose working is the concept, and say in one sentence what moves and what that motion means.</p>
+<p>不要方框，不要箭头，不要悬浮在空中的标签。Claude 必须发明一件真实、做工良好的东西，其运作方式就是这个概念，并用一句话说清什么在动、这运动意味着什么。</p>
+<p>A figure fails in two ways, and I watched it fail both ways many times before the rule existed. Too abstract: stacked plates, floating slabs and labelled boxes that don’t read as anything. Too flat: one big slab with a few lines on it, with no volume, no parts and nothing to discover. The cure for both is the same, a recognisable machine built from many small parts that each do something. The machine is never copied from a reference picture. A reference can give the finish, the materials and the mood; the object is invented.</p>
+<p>一幅图会以两种方式失败，在这条规则出现之前，我两种都看过很多次。太抽象：叠在一起的板、悬浮的块和贴着标签的方框，什么也认不出来。太扁平：一大块板上面几根线，没有体积，没有零件，也没有可发现的东西。两种毛病的治法相同：做成一台能认出来的机器，由许多各司其职的小零件组成。这台机器绝不从参考图临摹。参考图可以提供表面处理、材料和气氛；物件本身是发明出来的。</p>
+<p>Some ideas map almost by themselves. A queue is a marble run: two hoppers feed one sloping lane, and the marbles wait in order behind an escapement until a timer drum takes them. A cache that forgets its oldest entry is a bookcase with four places on top, most recently used at the left. Others take more invention. A bloom filter is a fruit machine whose three reels are the three hash functions, and it only pays out when all three of a word’s flags are already up.</p>
+<p>有些概念几乎会自己对上。队列是一座弹珠跑道：两个料斗喂入一条斜槽，弹珠在擒纵机构后按顺序等候，直到计时鼓把它们放行。会忘掉最旧条目的缓存，是一座顶层只有四个位置的书架，最近使用的在左边。另一些则更需要发明。布隆过滤器是一台水果机，三个转轮就是三个哈希函数，只有当一个词的三面旗帜都已经竖起时，它才赔付。</p>
+<div class="gallery"><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/hash-map.webp" alt="哈希碰撞：分拣台" /><figcaption class="caption">Hash map collisions<br>哈希碰撞：分拣台</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/binary-search.webp" alt="二分查找：实验室天平" /><figcaption class="caption">Binary search<br>二分查找：实验室天平</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/dns.webp" alt="DNS 解析：气动传管" /><figcaption class="caption">DNS resolution<br>DNS 解析：气动传管</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/message-queue.webp" alt="消息队列：弹珠跑道" /><figcaption class="caption">Message queue<br>消息队列：弹珠跑道</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/lru-cache.webp" alt="LRU 缓存：书架" /><figcaption class="caption">LRU cache<br>LRU 缓存：书架</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/tcp-handshake.webp" alt="TCP 握手：邮政索道" /><figcaption class="caption">TCP handshake<br>TCP 握手：邮政索道</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/gradient-descent.webp" alt="梯度下降：等高模型" /><figcaption class="caption">Gradient descent<br>梯度下降：等高模型</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/bloom-filter.webp" alt="布隆过滤器：水果机" /><figcaption class="caption">Bloom filter<br>布隆过滤器：水果机</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/flex-grow.webp" alt="flex-grow：台钳" /><figcaption class="caption">flex-grow<br>flex-grow：台钳</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/mark-sweep.webp" alt="标记清除：模块合成器" /><figcaption class="caption">Mark and sweep<br>标记清除：模块合成器</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/b-tree.webp" alt="B 树索引：旋转卡片柜" /><figcaption class="caption">B-tree index<br>B 树索引：旋转卡片柜</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/debounce.webp" alt="防抖与节流：八音盒记录器" /><figcaption class="caption">Debounce, throttle<br>防抖与节流：八音盒记录器</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/mutex.webp" alt="互斥锁：水箱和钥匙" /><figcaption class="caption">Mutex<br>互斥锁：水箱和钥匙</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/merge-sort.webp" alt="归并排序：编钟架" /><figcaption class="caption">Merge sort<br>归并排序：编钟架</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/sampling.webp" alt="温度：轮盘" /><figcaption class="caption">Temperature<br>温度：轮盘</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/watch.webp" alt="机械表机芯" /><figcaption class="caption">Watch movement<br>机械表机芯</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/computer.webp" alt="台式计算机" /><figcaption class="caption">Desk computer<br>台式计算机</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/turbofan.webp" alt="涡扇地面试车" /><figcaption class="caption">Turbofan ground run<br>涡扇地面试车</figcaption></figure><figure><img src="https://skills.wheresryan.sh/anatomy/thumbs/seasons.webp" alt="四季" /><figcaption class="caption">Seasons<br>四季</figcaption></figure></div>
+<p>None of these were drawn by hand. Each one started from a single line naming the idea. There are 33 so far, all live in the collection.</p>
+<p>这些都不是手绘的。每一幅都始于点出概念的那一句话。目前已有 33 幅，全部可在合集里交互。</p>
+<h2>怎么写提示词</h2>
+<p>The prompt is the idea, not the drawing. I almost never say what to draw. “Explain how an LRU cache evicts entries” is enough, and deciding that it should be a bookcase is the part Claude is asked to do.</p>
+<p>提示词写的是概念，不是图画。我几乎从不说该画什么。「解释 LRU 缓存如何淘汰条目」就够了；决定把它画成书架，是要交给 Claude 去做的事。</p>
+<p>Three words change what you get, and Claude only reaches for them when you write them in the line:</p>
+<p>有三个词会改变你得到的结果，而且只有当你把它们写进那一行时，Claude 才会去用：</p>
+<table>
+<tr><th>词</th><th>作用</th></tr>
+<tr><td><code>interactive</code></td><td>The figure answers the pointer and the keyboard: drag, press, hold a key. Leave it out and you get a still drawing.<br>图会对指针和键盘作出反应：拖、按、按住键。不写这个词，得到的就是静图。</td></tr>
+<tr><td><code>WebGL</code></td><td>Shaders for fire, water, plasma, moving air and light, drawn inside the same isometric camera as the parts.<br>用着色器表现火、水、等离子体、流动的空气和光，和零件画在同一台等轴测相机里。</td></tr>
+<tr><td><code>3D</code></td><td>Parts that really turn in depth, re-projected and re-sorted every frame, instead of only looking isometric. Slow: hours to build, not minutes.<br>零件在深度上真正旋转，每一帧重新投影和排序，而不只是看起来像等轴测。会很慢：要数小时，不是几分钟。</td></tr>
+</table>
+<p>If you already know the object, name it, with whatever true numbers matter. And if the figure is going somewhere in particular, say where. The skill writes framework-free TypeScript that outputs SVG and HTML, or React components for a Next.js site, in a dark or a light theme.</p>
+<p>如果你已经知道要那件物件，就直接点名，并带上真正要紧的数字。如果这幅图有明确的去处，也说清楚。这个 Skill 会写出不依赖框架的 TypeScript，输出 SVG 和 HTML，或给 Next.js 站点用的 React 组件，并支持深色或浅色主题。</p>
+<ul>
+<li>Name the idea: <code>/anatomy explain how an LRU cache evicts entries, interactive</code><br>只点概念：<code>/anatomy explain how an LRU cache evicts entries, interactive</code></li>
+<li>Add shaders: <code>/anatomy explain how a jet engine afterburner works, interactive, WebGL</code><br>加上着色器：<code>/anatomy explain how a jet engine afterburner works, interactive, WebGL</code></li>
+<li>Make it turn: <code>/anatomy explain why the Earth has seasons, interactive, 3D</code><br>让它在三维里转：<code>/anatomy explain why the Earth has seasons, interactive, 3D</code></li>
+<li>Or name the object: <code>/anatomy a mechanical metronome on a small wooden plinth, swinging at 120 bpm, with a sliding weight you can drag, interactive</code><br>或者直接点名物件：<code>/anatomy a mechanical metronome on a small wooden plinth, swinging at 120 bpm, with a sliding weight you can drag, interactive</code></li>
+<li>Say where it goes: <code>/anatomy explain how a CDN edge cache serves a request, interactive, as React components for our Next.js docs, dark theme</code><br>说明它要去哪里：<code>/anatomy explain how a CDN edge cache serves a request, interactive, as React components for our Next.js docs, dark theme</code></li>
+</ul>
+<p>You don’t always need the command. The skill’s description covers any request for an explanatory diagram, a technical illustration or an interactive explainer, even one that never says “isometric”, so Claude reaches for it on its own. Until a request matches, Claude sees only the skill’s name and its description. It reads the rest only when it needs it.</p>
+<p>你并不总是需要这条命令。Skill 的描述覆盖了任何「解释性图示、技术插图或交互说明」的请求，即使完全没提「等轴测」，Claude 也会自己去用它。在请求匹配之前，Claude 只看得到 Skill 的名称和描述，其余部分只在需要时才读取。</p>
+<h2>Claude 会做什么</h2>
+<p>Between your line and the finished figure, Claude works through a fixed order. Most of the quality is decided in the first four steps, before any geometry exists.</p>
+<p>从你的那一行到完成的图，Claude 按固定顺序推进。大部分品质在前四步就决定了，那时几何还不存在。</p>
+<ol>
+<li>Size it. Say up front whether this is a Figure, a Hero or an Epic, and roughly how long it will take.<br>先定体量。一开始就说明这是 Figure、Hero 还是 Epic，以及大概要花多久。</li>
+<li>Truth first. Collect the real numbers and behaviour, and write them as a small model that the motion and the readout both read.<br>先求真。收集真实数字和行为，写成一个小模型，运动和读数都从它读取。</li>
+<li>Invent the object. A machine whose mechanism maps one to one onto the idea.<br>发明物件。机制与概念一一对应的一台机器。</li>
+<li>List the parts. At least forty, grouped into base, structure, mechanism, controls and the one lit subject. Each sits on another.<br>列出零件。至少四十个，分成底座、结构、机构、控制和那一个被点亮的主体。每个都落在另一个之上。</li>
+<li>Plan the world. World units, plans as rounded rectangles and circles, a camera, then a fit to the card.<br>规划世界。世界单位、圆角矩形和圆形的平面图、相机，再适配到卡片里。</li>
+<li>Build the geometry once. Every static path computed ahead of time. Moving parts are built at rest and moved.<br>几何只建一次。所有静态路径预先算好。活动零件在静止状态建好，然后再移动。</li>
+<li>Paint back to front. Sorted by depth, wrapping parts split in two, and the order proved by an audit once it gets dense.<br>从后往前画。按深度排序，包裹住的零件拆成两半；一旦变密，就用审计证明顺序正确。</li>
+<li>Frame it. A card with a title, the interaction hint and a live readout. Words stay out of the drawing.<br>加上边框。一张有标题、交互提示和实时读数的卡片。文字留在图外。</li>
+<li>Make it live. Calm, time-based motion, an idle tour, pointer and keyboard, and stillness under reduced motion.<br>让它活起来。平稳的、基于时间的运动，空闲时的巡游，指针和键盘响应，并在减少动态效果时静止。</li>
+<li>Verify like a critic. Screenshots, contact sheets, crops at four times and two automatic checks, until nothing is left to fix.<br>像评论者一样验收。截图、样张、四倍裁切，再加上两项自动检查，直到没有要改的地方。</li>
+</ol>
+<p>Step two looks like this in practice. The test rig, one of the skill’s examples, explains how a glass button swells and leans under a finger, and its whole behaviour lives in a small spring model. The parts, the readout, the screen-reader text and the caption all read from it, so none of them can disagree.</p>
+<p>第二步在实践中是这样的。测试台是 Skill 的示例之一，用来解释玻璃按钮在手指下如何鼓起和倾斜，它的全部行为都活在一个小弹簧模型里。零件、读数、屏幕阅读器文本和说明都从中读取，因此彼此不会打架。</p>
+<pre><code>function spring(held: Spring, want: number, dt: number, [stiff, drag]: Tuning, calm: boolean) {
+  const damping = calm ? 2 * Math.sqrt(stiff) : drag;
+  const steps = Math.max(Math.ceil(dt * SUB_RATE), 1);
+  const slice = dt / steps;
+  for (let step = 0; step &lt; steps; step++) {
+    held.rate += (want - held.at) * stiff * slice - held.rate * damping * slice;
+    held.at += held.rate * slice;
+  }
+  if (Math.abs(want - held.at) &lt; QUIET &amp;&amp; Math.abs(held.rate) &lt; QUIET) {
+    held.at = want;
+    held.rate = 0;
+  }
+}</code></pre>
+<p>And step six. The dial gauge, the smallest example, starts with its base: four turned feet in depth order, a plate with a bevel, a groove inset five units from the edge, and a screw with a ring at each corner. Every one of those is a solid from the kit, not a line drawn by hand.</p>
+<p>再看第六步。刻度表是最小的示例，从底座开始：按深度顺序排列的四个车制底脚、一块带倒角的底板、距边缘五单位的凹槽，以及每个角上一颗带环的螺丝。每一件都是工具包里的实体，不是手画的线。</p>
+<pre><code>function plate() {
+  const out = [`&lt;path class="iso-halo" d="${k.haloOf(PLATE, -PLATE_H - FOOT_H, PLATE_H, P)}"/&gt;`];
+  for (const [x, y] of byDepth(k.corners(PLATE, 22))) {
+    out.push(S(k.cylinder(x, y, 7, -PLATE_H - FOOT_H, 1.6, P, 28), { tone: "lo" }));
+    out.push(S(k.cylinder(x, y, 5.4, -PLATE_H - FOOT_H + 1.6, FOOT_H - 1.6, P, 28), { tone: "mid" }));
+  }
+  out.push(S(k.slabOf(PLATE, -PLATE_H, PLATE_H, P, 8, 1.6), { tone: "mid" }));
+  out.push(L(k.planOutline(k.insetPlan(PLATE, 5), 0, P), { tone: "lo" }));
+  const screws = k.corners(PLATE, 10);
+  out.push(L(screws.map(([x, y]) =&gt; k.ring(x, y, 2.2, 0, P, 16)).join(""), { tone: "lo" }));
+  out.push(D(screws.map(([x, y]) =&gt; at([x, y, 0])), { size: 0.5 }));
+  return out.join("");
+}</code></pre>
+<p>The first step sets the budget. Every request lands in one of three sizes:</p>
+<p>第一步先定预算。每个请求都会落入三种体量之一：</p>
+<table>
+<tr><th>体量</th><th>容纳什么</th><th>时间</th></tr>
+<tr><td>Figure</td><td>40–80 parts, SVG with at most one shader<br>40–80 个零件，SVG，最多一个着色器</td><td>30–90 min</td></tr>
+<tr><td>Hero</td><td>80–150 parts, several shaders or one turning part<br>80–150 个零件，多个着色器或一个会转的零件</td><td>2–4 h</td></tr>
+<tr><td>Epic</td><td>A whole vehicle, building or plant<br>一整辆车、一座建筑或一座工厂</td><td>6 h or more<br>6 小时以上</td></tr>
+</table>
+<p>A Figure is built without asking. A Hero is announced first, then built. An Epic is never started without you: Claude gives the estimate, proposes a Hero that keeps the core of the idea, and lists what the full version would add. Whatever the size, there is a working page in the browser within the first hour. The rest of the time goes into deepening it.</p>
+<p>Figure 不用请示就会开做。Hero 会先告知再动手。Epic 没有你点头绝不会开始：Claude 会给出预估，提议一个保住概念核心的 Hero，并列出会做完整版时再加什么。无论体量多大，第一个小时内浏览器里都会有一个能用的页面。其余时间用来加深它。</p>
+<h2>一幅图的构造</h2>
+<p>Every figure follows the same drawing rules. They are what make it read as a solid, made thing rather than a sketch.</p>
+<p>每幅图都遵循同一套绘制规则。正是这些规则让它读起来像一件结实、被做出来的东西，而不是一张草图。</p>
+<ul>
+<li>One camera: Isometric, looking down at 30° from a corner. Nothing in perspective, so parallel edges stay parallel.<br>一台相机：等轴测，从角落向下看 30°。没有透视，因此平行边保持平行。</li>
+<li>Solids: Every part is filled and painted in order, so what is in front hides what is behind. No see-through edges.<br>实体：每个零件都被填充并按顺序上色，前面的挡住后面的。没有透视过去的边。</li>
+<li>Four tones: Each side is shaded by the way it faces the light, with a lighter top.<br>四种色调：每个面按朝向光线的方式分色，顶面更亮。</li>
+<li>One accent: Exactly one part is lit: the one the reader should watch.<br>一个强调色：恰好点亮一个零件，也就是读者该看的那个。</li>
+<li>Lines resolve: Every line ends on a face, another line or a dot. No leader lines, balloons or arrows.<br>线条要收住：每条线都落在一个面、另一条线或一个点上。不要引出线、标注泡或箭头。</li>
+<li>Detail at 4×: At normal size it reads as one machine. Zoomed in, every region still has something true to find.<br>放大四倍仍有细节：正常尺寸时读作一台机器。放大后，每个区域仍有真实可寻的东西。</li>
+<li>No words inside: Text lives around the drawing, never on it, apart from one tiny engraved label at most.<br>图内无字：文字在图周围，不在图上，最多允许一个极小的铭刻标签。</li>
+<li>True numbers: Every readout comes from the model that moves the parts.<br>真实数字：所有读数都来自驱动零件运动的那个模型。</li>
+</ul>
+<p>A figure is also a small program. It plays an idle tour when nobody touches it, pauses when you hover or focus it, answers the pointer and the keyboard, stops when it scrolls off screen and goes still under reduced motion. Its readout is announced to screen readers as it changes.</p>
+<p>一幅图也是一个小程序。没人碰时它会做空闲巡游；悬停或聚焦时暂停；响应指针和键盘；滚出屏幕就停止；在减少动态效果时静止。读数变化时会向屏幕阅读器播报。</p>
+<p>On a page of its own, a figure sits in a card with its number, title, hint and live readout in the four corners. On this site I moved the hint and the readout into the margin beside each figure, so the drawing stands on the page by itself.</p>
+<p>独自成页时，图放在一张卡片里，四个角分别是编号、标题、提示和实时读数。在这个站点上，我把提示和读数移到了每幅图旁边的页边，好让图画自己立在页面上。</p>
+<h2>六台机器，近看</h2>
+<p>The collection reads best one machine at a time. Each of these names the idea, then the object Claude chose for it; open one on the original page to play with it.</p>
+<p>这个合集最好一次看一台机器。下面每一项先点出概念，再说 Claude 为它选的物件；要动手玩，请到原页打开。</p>
+<h3>哈希碰撞：分拣台</h3>
+<figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/thumbs/hash-map.webp" alt="哈希碰撞 / 分拣台" /><figcaption class="caption">Hash map collisions — Sorting desk<br>哈希碰撞——分拣台</figcaption></figure>
+<p>A hash map files each key in a bucket, and keys that land in the same bucket pile up. A post-office sorting desk. A coding machine prints each letter's bucket, the hash of its name mod 8, and files it in that pigeonhole, on top of any letters already there.</p>
+<p>哈希表把每个键放进一个桶里，落到同一桶的键会堆在一起。这是一张邮局分拣台。一台编码机印出每封信的桶号，也就是其名称哈希对 8 取模，再放进那个格里，叠在已有信件之上。</p>
+<h3>布隆过滤器：水果机</h3>
+<figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/thumbs/bloom-filter.webp" alt="布隆过滤器 / 水果机" /><figcaption class="caption">Bloom filter — Fruit machine<br>布隆过滤器——水果机</figcaption></figure>
+<p>A bloom filter can say “definitely not” for certain, but only “maybe” for yes. A fruit machine. Three reels are the three hash functions and a row of sixteen flags is the bit array; it pays out only when all three of a word's flags are already up.</p>
+<p>布隆过滤器可以肯定地说「一定不在」，对「在」却只能说「也许」。一台水果机。三个转轮是三个哈希函数，一排十六面旗是位数组；只有当一个词的三面旗都已经竖起时，它才赔付。</p>
+<h3>互斥锁：水箱和钥匙</h3>
+<figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/thumbs/mutex.webp" alt="互斥锁 / 水箱和钥匙" /><figcaption class="caption">Mutex — Tank and key<br>互斥锁——水箱和钥匙</figcaption></figure>
+<p>Two writers reading the same value at once will both act on a stale number. A water tank filled by two pumps. Without the interlock key both controllers read the same level and overfill it; with it, only the one holding the key may read and run.</p>
+<p>两个写入者同时读到同一个值，就会都按一个过期数字行动。一只由两台泵注水的水箱。没有联锁钥匙时，两个控制器读到同一水位，就会把它注满溢出；有了钥匙，只有握着钥匙的那一方可以读取并运行。</p>
+<h3>TCP 握手：邮政索道</h3>
+<figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/thumbs/tcp-handshake.webp" alt="TCP 握手 / 邮政索道" /><figcaption class="caption">TCP handshake — Mail ropeway<br>TCP 握手——邮政索道</figcaption></figure>
+<p>Before any data moves, both ends have to agree that the other one is listening. A mail ropeway between two stations. Canisters flying SYN, SYN with an ACK pennant, then ACK ride the rope across, and each station's semaphore shows its connection state.</p>
+<p>在任何数据移动之前，两端必须先确认对方在听。两站之间的邮政索道。飞过去的罐依次是 SYN、带 ACK 旗的 SYN，然后是 ACK，每站的信号机显示连接状态。</p>
+<h3>温度：轮盘</h3>
+<figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/thumbs/sampling.webp" alt="温度 / 轮盘" /><figcaption class="caption">Temperature — Roulette wheel<br>温度——轮盘</figcaption></figure>
+<p>Temperature reshapes the odds of the next token without changing which tokens are possible. A roulette wheel whose sixteen pockets are the likeliest next tokens, each as wide as its probability. A thermostat knob sets the temperature and moves the frets.</p>
+<p>温度会改变下一个 token 的几率，但不改变哪些 token 是可能的。一只轮盘，十六个袋是最可能的下一个 token，宽度等于各自的概率。恒温旋钮设定温度，并移动档位。</p>
+<h3>防抖与节流：八音盒记录器</h3>
+<figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/thumbs/debounce.webp" alt="防抖与节流 / 八音盒记录器" /><figcaption class="caption">Debounce, throttle — Music-box recorder<br>防抖与节流——八音盒记录器</figcaption></figure>
+<p>Debounce waits for quiet; throttle lets one call through per window, however many arrive. A music-box recorder with a turning pin disc. Every click of the knob is a call; the throttle and debounce dashpots each set their own pins, so you can read when each function actually ran.</p>
+<p>防抖要等安静下来；节流则在每个时间窗口只放行一次调用，无论来了多少。一台带旋转针盘的八音盒记录器。旋钮每响一次就是一次调用；节流和防抖的阻尼器各自插针，因此你能读出每个函数实际何时运行。</p>
+<p>The pattern is the same every time. The object has to do the idea, not stand for it, so the thing you watch move is the thing being explained.</p>
+<p>每一次的模式都相同。物件必须去做这个概念，而不是代表它，因此你看见在动的那件东西，就是正在被解释的东西。</p>
+<h2>两台大机器</h2>
+<p>Small ideas make small machines. The big ones are where the skill earns its keep: hundreds of parts, real engineering numbers, and shaders that live inside the drawing rather than on top of it.</p>
+<p>小概念做成小机器。大的那些，才是这个 Skill 真正值回票价的地方：上百个零件、真实的工程数字，以及住在图画里面而不是浮在上面的着色器。</p>
+<figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/thumbs/turbofan.webp" alt="涡扇地面试车" /><figcaption class="caption">A Rolls-Royce Trent 970, the engine of the A380, hung from a ground-run thrust frame with its near upper quarter cut away. Drag the lever and the fan, intermediate and high-pressure spools wind up at their own speeds. The fan swallows 1.2 tonnes of air a second, most of it leaves as a cold bypass jet while the rest burns in the combustor, and the load cell reads the thrust climbing from 14 to 334 kN. Press Space for a take-off run. The audit measured 6,320 overlapping pairs across 541 solids and found every one drawn in the right order.<br>一台劳斯莱斯 Trent 970，A380 的发动机，挂在地面试车推力架上，近侧上四分之一被剖开。拖动操纵杆，风扇、中压和高压转子会按各自的转速加速。风扇每秒吞下 1.2 吨空气，大部分作为冷涵道喷流离开，其余在燃烧室燃烧，测力计读数从 14 千牛升到 334 千牛。按空格键可看一次起飞运转。审计测过 541 个实体上的 6320 对重叠，发现每一对都按正确顺序绘制。</figcaption></figure>
+<figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/print/raptor-poster.webp" alt="Raptor 2 海报" /><figcaption class="caption">Raptor 2, SpaceX’s full-flow staged-combustion engine, hanging in a test stand. It is one of the skill’s own examples and its reference for dense pipework. Hover it and it comes apart into eleven assemblies, from the gimbal to the nozzle; press I to fire it. Every drop of oxygen passes through an oxygen-rich preburner that spins the oxygen pump, every drop of methane through a fuel-rich one that spins the methane pump, and the two hot gases meet in a main chamber at 300 bar. The plume, shock, splash and steam are WebGL, drawn between a back and a front SVG, so the stand passes in front of the flame.<br>Raptor 2，SpaceX 的全流量分级燃烧发动机，挂在试验台上。它是这个 Skill 自带的示例之一，也是密集管线的参考。悬停时它会拆成十一个组件，从万向架到喷管；按 I 点火。每一滴氧气都经过富氧预燃室带动氧泵，每一滴甲烷都经过富燃预燃室带动甲烷泵，两股热气在 300 bar 的主燃烧室相遇。羽流、激波、飞溅和蒸汽是 WebGL，画在前后两层 SVG 之间，因此试验台会从火焰前面穿过。</figcaption></figure>
+<p>The first working version took 38 minutes. Making it right took ten more hours, and an audit now proves that no pipe passes through anything, at rest, apart and in every frame between.</p>
+<p>第一个能跑的版本用了 38 分钟。把它做对又花了十个小时。现在有一次审计证明：无论静止、拆开，还是中间的每一帧，都没有管子穿过任何东西。</p>
+<h2>印在纸上</h2>
+<p>Every figure can also leave the screen. Ask for a printable version and Claude prints it from the same page and the same model: real still frames of the machine, the parts it is built from, and the numbers it computes, laid out on an ordinary A4 sheet.</p>
+<p>每幅图也可以离开屏幕。只要提出要可打印版本，Claude 就会从同一页面、同一个模型打印出来：机器的真实静帧、组成它的零件，以及它算出的数字，排在一张普通的 A4 纸上。</p>
+<p>Just say so in the prompt, while the figure is made or afterwards:</p>
+<p>在做图时或做完之后，把这话写进提示词即可：</p>
+<ul>
+<li>With a new figure: <code>/anatomy explain how a push button closes a circuit, with a cell and a bulb. Also make a printable A4 PDF of it.</code><br>和新图一起：<code>/anatomy explain how a push button closes a circuit, with a cell and a bulb. Also make a printable A4 PDF of it.</code></li>
+<li>From a figure: <code>/anatomy make a printable A4 version of the raptor-engine figure</code><br>从已有的图：<code>/anatomy make a printable A4 version of the raptor-engine figure</code></li>
+<li>One format: <code>/anatomy make a detailed A4 handout of the raptor engine, for a classroom</code><br>指定一种格式：<code>/anatomy make a detailed A4 handout of the raptor engine, for a classroom</code></li>
+</ul>
+<ul>
+<li>Poster, 1 page. The name set large, the question, the numbers, the figure with every part pinned and explained.<br>海报，1 页。名称放大，加上问题、数字，以及每个零件都被钉住并解释的图。</li>
+<li>Drawing, 1 page. A technical drawing: parts list, specification, an inset and a strip of steps with the working parts lit.<br>图纸，1 页。技术图：零件表、规格、局部放大，以及一条点亮工作零件的步骤带。</li>
+<li>Handout, 2–4 pages. Close-ups, every step as a large lit still with a few sentences, and for big machines a page of assemblies.<br>讲义，2–4 页。特写，每一步都是大幅点亮的静帧加几句话；大机器还会有一页组件图。</li>
+</ul>
+<div class="pair"><figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/print/raptor-drawing.webp" alt="Raptor 2 图纸，A4" /><figcaption class="caption">Raptor 2, drawing format, A4<br>Raptor 2，图纸格式，A4</figcaption></figure><figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/print/raptor-detailed.webp" alt="Raptor 2 讲义，A4" /><figcaption class="caption">Raptor 2, handout format, A4<br>Raptor 2，讲义格式，A4</figcaption></figure></div>
+<p>Three formats, from one line in the prompt. The poster and the drawing fit on one page; the handout grows from two to four pages with the machine, so a push button stays at two and the Raptor gets a third page of assemblies. Every sheet prints cleanly in black and white, on A4 or US Letter, and the figure’s own page gains a small PDF link to it.</p>
+<p>三种格式，提示词里一行即可。海报和图纸各占一页；讲义随机器从两页增到四页，所以按钮停在两页，Raptor 会多一页组件图。每张都可以在 A4 或 US Letter 上干净地黑白打印，图自己的页面上也会多出一个指向它的小 PDF 链接。</p>
+<h2>三层</h2>
+<p>Most figures are pure SVG. When an idea needs fire, water, plasma or light, Claude adds WebGL shaders drawn in the same isometric camera, so the flame sits inside the drawing instead of on top of it. A few figures go further and turn in true 3D.</p>
+<p>大多数图是纯 SVG。当概念需要火、水、等离子体或光时，Claude 会加上在同一台等轴测相机里绘制的 WebGL 着色器，于是火焰坐在图画里面，而不是浮在上面。少数图还会更进一步，在真正的三维中旋转。</p>
+<div class="pair"><figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/thumbs/watch.webp" alt="SVG：机械表机芯" /><figcaption class="caption">SVG: Watch movement<br>SVG：机械表机芯</figcaption></figure><figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/thumbs/turbofan.webp" alt="WebGL：涡扇地面试车" /><figcaption class="caption">WebGL: Turbofan ground run<br>WebGL：涡扇地面试车</figcaption></figure><figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/thumbs/seasons.webp" alt="3D：四季" /><figcaption class="caption">3D: Seasons<br>3D：四季</figcaption></figure></div>
+<p>SVG. The watch is SVG only: four tones by facing, and a painter’s order that is solved again on every frame while its bridges are apart. It redraws only the parts that move.</p>
+<p>SVG。这只表是纯 SVG：按朝向分成四种色调；夹板被抬开时，每一帧都会重新求解绘制顺序。它只重绘在动的那些零件。</p>
+<p>WebGL. The turbofan adds one canvas for the intake streaks, the bypass wind, the combustor flame, the turbine glow and the exhaust. Every value rides an envelope, so nothing pops, and the readout never disagrees with the picture.</p>
+<p>WebGL。涡扇多了一块画布，用来画进气道条纹、涵道风、燃烧室火焰、涡轮辉光和排气。每个值都走包络线，所以不会突然跳变，读数也从不和图画打架。</p>
+<p>3D. Seasons turns 26 parts in true 3D, re-projected every frame, with two canvases for the lamp’s light. Its readout comes from the Almanac’s solar formulas: at 50°N the day lasts 16 h 22 m in June and 8 h 04 m in December. 3D is still a beta. A small turning figure runs at 60 fps; a dense 380-part test hand ran at about 20.</p>
+<p>3D。《四季》让 26 个零件在真正的三维中旋转，每帧重新投影，并用两块画布表现灯的光。读数来自年鉴里的太阳公式：在北纬 50°，六月白昼长 16 小时 22 分，十二月长 8 小时 04 分。3D 仍是测试版。小的旋转图能跑到 60 fps；一个有 380 个零件的密对手测试大约是 20 fps。</p>
+<h2>要花多久</h2>
+<p>Detail costs time, and I would rather show the real numbers than guess. These are Claude’s active time from the first prompt to the shipped figure, review rounds included and idle gaps left out.</p>
+<p>细节要花时间，我宁愿摆出真实数字，也不愿猜。以下是 Claude 从第一条提示词到交稿的有效时间，包含评审轮次，去掉空闲间隔。</p>
+<table>
+<tr><th>图</th><th>时间</th><th>说明</th></tr>
+<tr><td>Watch movement<br>机械表机芯</td><td>1 h 54 min</td><td>One pass, checked and fixed by the same agent.<br>一遍完成，由同一个 agent 检查并修好。</td></tr>
+<tr><td>Seasons<br>四季</td><td>1 h 57 min</td><td>Built alongside the watch, 3D audit included.<br>和表一起做的，包含 3D 审计。</td></tr>
+<tr><td>Raptor engine<br>Raptor 发动机</td><td>10 h 33 min</td><td>First working version in 38 minutes.<br>第一个能跑的版本用了 38 分钟。</td></tr>
+<tr><td>Turbofan<br>涡扇</td><td>14 h</td><td>First build in 4 h 41 min, then five review and fix rounds.<br>首次构建 4 小时 41 分，随后五轮评审和修复。</td></tr>
+</table>
+<p>The pattern holds across the collection. A first version that runs comes quickly. Most of the time goes into the second look, at four times the size, where the faults are: a cable through a duct, a nozzle shaded in steps, a blade folding into a sliver at the cut.</p>
+<p>整个合集都是这个规律。第一个能跑的版本来得很快。大部分时间花在第二眼，放大到四倍时才看得见毛病：电缆穿过管道、喷管的阴影成了阶梯、叶片在剖面上折成一条细片。</p>
+<h2>放进你的代码</h2>
+<p>Every figure in the collection is also a React component, live and themeable down to the colour of its last line.</p>
+<p>合集里的每一幅图也是一个 React 组件，是活的，主题可以细调到最后一根线的颜色。</p>
+<pre><code>npm install anatomy-figures</code></pre>
+<pre><code>import { Watch } from "anatomy-figures";
+
+export default function Page() {
+  return &lt;Watch theme="light" /&gt;;
+}</code></pre>
+<p>Each figure is its own entry, so importing one never pulls in the others:</p>
+<p>每幅图都是单独的入口，引入一幅不会把其余的一起拉进来：</p>
+<pre><code>import Turbofan from "anatomy-figures/turbofan";</code></pre>
+<p>Five themes come with it: dark, light, paper, blueprint and sepia. Pass one as `theme`, set one for a whole tree with `AnatomyTheme`, or pass your own `--anatomy-*` tokens. The figures on this site are the light theme with the card set to the colour of the page.</p>
+<p>自带五个主题：dark、light、paper、blueprint 和 sepia。可以把其中一个传给 `theme`，用 `AnatomyTheme` 给整棵树设定，或传入你自己的 `--anatomy-*` 变量。这个站点上的图用的是 light 主题，卡片颜色设成了页面的颜色。</p>
+<pre><code>import { AnatomyTheme, Turbofan } from "anatomy-figures";
+
+&lt;AnatomyTheme theme="paper"&gt;
+  &lt;Turbofan /&gt;
+&lt;/AnatomyTheme&gt;
+
+&lt;Turbofan theme={{ base: "light", "--anatomy-card": "#fafafa" }} /&gt;</code></pre>
+<p>Every token. Every fill, line and label in a figure reads one of these 26 variables. Pass any of them in `tokens`, or inside a theme object. They are set on the figure itself, so they win over CSS from outside.</p>
+<p>全部变量如下。图中的每一种填充、线条和标签都读取这 26 个变量之一。可以在 `tokens` 里传入其中任意一个，或放在主题对象里。它们设置在图自身上，因此会压过外来的 CSS。</p>
+<pre><code>&lt;Watch
+  theme="light"
+  tokens={{
+    "--anatomy-card": "#ffffff",
+    "--anatomy-lit": "#e5484d",
+    "--anatomy-weight": "0.8px",
+  }}
+/&gt;</code></pre>
+<table>
+<tr><th>类别</th><th>变量</th><th>含义</th></tr>
+<tr><td>Surfaces<br>表面</td><td><code>--anatomy-card</code></td><td>The card behind the figure.<br>图背后的卡片。</td></tr>
+<tr><td></td><td><code>--anatomy-paper</code></td><td>The fill under every solid. Keep it equal to the card.<br>每个实体底下的填充。保持与卡片相同。</td></tr>
+<tr><td></td><td><code>--anatomy-top</code></td><td>The top face of every solid.<br>每个实体的顶面。</td></tr>
+<tr><td></td><td><code>--anatomy-shade-0</code> … <code>--anatomy-shade-3</code></td><td>Side faces, from furthest from the light to facing it squarely.<br>侧面，从最背光到正对光。</td></tr>
+<tr><td></td><td><code>--anatomy-face</code> / <code>--anatomy-lit-top</code> / <code>--anatomy-lit-shade</code></td><td>The body, top and sides of the one lit part.<br>被点亮那个零件的本体、顶面和侧面。</td></tr>
+<tr><td>Lines<br>线条</td><td><code>--anatomy-hi</code></td><td>The strongest lines: the subject’s outline.<br>最重的线：主体轮廓。</td></tr>
+<tr><td></td><td><code>--anatomy-mid</code></td><td>Structure, major ticks and engraved labels.<br>结构、主刻度和铭刻标签。</td></tr>
+<tr><td></td><td><code>--anatomy-lo</code></td><td>The base, the feet and minor lines. The default line.<br>底座、底脚和次要线条。默认线。</td></tr>
+<tr><td></td><td><code>--anatomy-faint</code></td><td>Grooves and the faintest guides.<br>凹槽和最淡的辅助线。</td></tr>
+<tr><td></td><td><code>--anatomy-dot</code></td><td>Dot grids and screw heads.<br>点阵和螺丝头。</td></tr>
+<tr><td></td><td><code>--anatomy-halo</code></td><td>The soft shadow under the base and under lifted parts.<br>底座和被抬起零件下方的柔影。</td></tr>
+<tr><td>Accent<br>强调色</td><td><code>--anatomy-lit</code></td><td>The one accent: the part the reader should watch.<br>那一个强调色：读者该看的零件。</td></tr>
+<tr><td></td><td><code>--anatomy-red</code> / <code>--anatomy-green</code> / <code>--anatomy-blue</code></td><td>Used only where colour is the subject.<br>只在颜色本身就是主题时使用。</td></tr>
+<tr><td>Text<br>文字</td><td><code>--anatomy-text</code></td><td>The figure number and the live readout in the card’s corners.<br>卡片四角的图号和实时读数。</td></tr>
+<tr><td></td><td><code>--anatomy-muted</code></td><td>The title and the hint in the corners.<br>四角的标题和提示。</td></tr>
+<tr><td></td><td><code>--anatomy-strong</code></td><td>The brightest text a figure draws.<br>一幅图里最亮的文字。</td></tr>
+<tr><td>Shape<br>形状</td><td><code>--anatomy-weight</code></td><td>The width of every line. Light and dark default 0.6px.<br>每根线的宽度。浅色和深色默认都是 0.6px。</td></tr>
+<tr><td></td><td><code>--anatomy-halo-opacity</code></td><td>How dark the soft shadow is. Light 0.32, dark 0.9.<br>柔影有多深。浅色 0.32，深色 0.9。</td></tr>
+<tr><td></td><td><code>--anatomy-mono</code></td><td>The font of the corners and engraved labels. Default ui-monospace.<br>四角和铭刻标签的字体。默认 ui-monospace。</td></tr>
+</table>
+<p>Without React, every figure is also a custom element:</p>
+<p>不用 React 时，每幅图也是自定义元素：</p>
+<pre><code>import { define } from "anatomy-figures/element/turbofan";
+
+define();
+
+&lt;anatomy-turbofan theme="dark"&gt;&lt;/anatomy-turbofan&gt;</code></pre>
+<h2>安装</h2>
+<p>Add the skill to Claude Code with one command:</p>
+<p>用一条命令把这个 Skill 加到 Claude Code：</p>
+<pre><code>npx skills add wheresryan22/anatomy</code></pre>
+<p>Or download the skill and unzip it into your skills folder:</p>
+<p>或者下载后解压到你的 skills 目录：</p>
+<pre><code>unzip anatomy.zip -d ~/.claude/skills</code></pre>
+<p>Then open Claude Code in your project and ask for anything that works. Name the idea, not the drawing. Six complete examples ship with the skill, from a dial gauge of about 300 lines to the Raptor engine, and Claude opens the closest one before it starts.</p>
+<p>然后在你的项目里打开 Claude Code，提出任何能运作的请求。点出概念，而不是图画。Skill 自带六个完整示例，从大约 300 行的刻度表到 Raptor 发动机，Claude 开始前会先打开最接近的一个。</p>
+<ul>
+<li><code>/anatomy explain how a pin tumbler lock opens, interactive</code></li>
+<li><code>/anatomy explain how a CPU cache line is filled, interactive</code></li>
+<li><code>/anatomy explain how a gas burner mixes air and fuel, interactive, WebGL</code></li>
+<li><code>/anatomy explain how React reconciles a list, interactive</code></li>
+</ul>
+<h2>限度</h2>
+<p>Claude is very good at building these and not always good at seeing them. It optimises for a figure that works, and a part can be right in every number and still look wrong. The fixes that mattered most came from watching a figure play and describing what felt off.</p>
+<p>Claude 非常擅长把这些做出来，却并不总是擅长把它们看清楚。它优化的是「能运作的图」，一个零件可以在每个数字上都对，看起来却仍然不对。最要紧的修改，来自看着图动起来，并说出哪里感觉不对。</p>
+<p>It is slow when it is good. The skill asks for at least forty parts in every figure and will not trade detail for speed on its own. If you need something quick, say so, and expect a Figure rather than a Hero.</p>
+<p>它好的时候就会慢。这个 Skill 要求每幅图至少四十个零件，不会自己拿细节去换速度。如果你需要快的东西，请直接说，并预期得到的是 Figure 而不是 Hero。</p>
+<p>3D is a beta. It turns one subject at a time, and a full audit of a turning figure takes fifteen to twenty minutes, so it is worth asking for only when a part really has to move in depth.</p>
+<p>3D 是测试版。它一次只转一个主体，对一幅会转的图做完整审计要 15 到 20 分钟，所以只有当某个零件确实必须在深度上运动时，才值得提出。</p>
+<p>References are for mood. Give it a photograph and it will take the finish, not the object. A faithful copy of someone else’s drawing is not what it is for.</p>
+<p>参考图只用于气氛。给它一张照片，它会取表面处理，而不是物件本身。忠实地临摹别人的图，不是它的用途。</p>
+<p>So treat the first figure as a draft. Play with it, notice what is wrong, say so, and ask again. How I built it shows what that loop looked like for the skill itself.</p>
+<p>所以把第一幅图当成草稿。玩一玩，注意哪里不对，说出来，再问一次。《我如何做成它》展示了这个循环在 Skill 自身上是什么样子。</p>
+<h2>常见问题</h2>
+<h3>一定要用 React 吗？</h3>
+<p>Does it need React? No. The skill writes framework-free TypeScript that outputs SVG and HTML for any page, or React components for a React or Next.js site. Every figure in the collection is also a custom element you can drop into plain HTML.</p>
+<p>不必。这个 Skill 写出不依赖框架的 TypeScript，为任意页面输出 SVG 和 HTML，或为 React / Next.js 站点输出组件。合集里的每一幅图也是自定义元素，可以直接放进普通 HTML。</p>
+<h3>做成之后还能改吗？</h3>
+<p>Can I change a figure after it is made? Yes. A figure is ordinary code in your project. Ask Claude for the change, or edit the model yourself: the parts, the readout and the motion all read from the same model, so one changed number moves everything with it.</p>
+<p>可以。一幅图就是你项目里的普通代码。可以向 Claude 提出修改，或自己改模型：零件、读数和运动都从同一个模型读取，改一个数字，其他一切会跟着动。</p>
+<h3>会拖慢页面吗？</h3>
+<p>Will it slow my page down? Figures stop when they scroll off screen and redraw only the parts that move. Shaders render only while their effect is active and visible, with the device pixel ratio capped at 1.5, and under reduced motion they draw a single still frame.</p>
+<p>图滚出屏幕就会停止，并且只重绘在动的零件。着色器只在效果处于活动且可见时渲染，设备像素比上限是 1.5；在减少动态效果时，它们只画一帧静图。</p>
+<h3>无障碍做得如何？</h3>
+<p>Is it accessible? Every figure takes keyboard focus and answers keys as well as the pointer. Its readout is announced to screen readers as it changes, and it goes still under reduced motion while still answering input.</p>
+<p>每幅图都可以获得键盘焦点，既响应按键也响应指针。读数变化时会向屏幕阅读器播报；在减少动态效果时它会静止，但仍响应输入。</p>
+<h3>浅色还是深色？</h3>
+<p>Light or dark? Both. Framework-free figures build in either theme, and the React components come with five themes or take your own colour tokens.</p>
+<p>都可以。不依赖框架的图能在两种主题下生成，React 组件则自带五个主题，或接受你自己的颜色变量。</p>
+<h3>怎样得到最好的结果？</h3>
+<p>How do I get the best result? Name the idea, add the true numbers you care about, and use the three words when you want them. Then play with the first figure, say what feels off, and ask again. Most of the quality comes from the second look.</p>
+<p>点出概念，加上你在意的真实数字，需要时再写上那三个词。然后玩第一幅图，说出哪里感觉不对，再问一次。大部分品质来自第二眼。</p>
+<h3>许可证是什么？</h3>
+<p>What is the licence? MIT, for the skill and for the figures.</p>
+<p>MIT，适用于这个 Skill 和这些图。</p>
+<p>Made by Ryan, @wheresryan22. Every figure drawn by Claude with Claude Code. Set in Inter and EB Garamond. The hands are Michelangelo’s, from a public-domain photograph of The Creation of Adam on the Sistine Chapel ceiling.</p>
+<p>由 Ryan（@wheresryan22）制作。每幅图都由 Claude 用 Claude Code 绘制。字体为 Inter 与 EB Garamond。手的形象来自米开朗琪罗，取自西斯廷礼拜堂天顶画《创造亚当》的公有领域照片。</p>
+<div class="pair"><figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/hands/adam.webp" alt="亚当的手" /><figcaption class="caption">The Creation of Adam, Michelangelo, c. 1512<br>《创造亚当》，米开朗琪罗，约 1512 年</figcaption></figure><figure class="fig"><img src="https://skills.wheresryan.sh/anatomy/hands/god.webp" alt="上帝的手" /><figcaption class="caption">The Creation of Adam, Michelangelo, c. 1512<br>《创造亚当》，米开朗琪罗，约 1512 年</figcaption></figure></div>
+</div>
+</body>
+</html>
