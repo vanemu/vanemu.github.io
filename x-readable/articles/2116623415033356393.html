@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>苹果批准了修复，随后却称开发者在撒谎</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+h3{font-size:1.05rem;margin:1.15em 0 .45em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+a{color:#0b57d0;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.fig img,.fig video{display:block;width:100%;max-width:680px;height:auto;border:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+.pair{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 1.1em;}
+.pair .fig{flex:1 1 220px;margin:0;}
+.gallery{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 1.2em;}
+.gallery figure{flex:1 1 140px;margin:0;max-width:220px;}
+.gallery img{display:block;width:100%;height:auto;border:0;border-radius:4px;}
+.gallery .caption{font-size:.8rem;margin:.3em 0 0;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .45em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+.note{color:#555;font-size:.92rem;margin:0 0 1em;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>苹果批准了修复，随后却称开发者在撒谎</h1>
+<p class="meta">作者：Phillip Shoemaker<br>原文：<a href="https://phillipshoemaker.substack.com/p/apple-approved-the-fix-then-it-called">https://phillipshoemaker.substack.com/p/apple-approved-the-fix-then-it-called</a><br>书签帖：<a href="https://x.com/83dwn/status/2116623415033356393">https://x.com/83dwn/status/2116623415033356393</a><br>2026-10-30</p>
+<figure class="fig"><img src="https://substack-post-media.s3.amazonaws.com/public/images/83c503b5-bea6-42a2-8915-6806905baefb_1414x2000.png" alt="文章封面插画" /></figure>
+<p>Who’s misleading whom?</p>
+<p>究竟是谁在误导谁？</p>
+<h2>现在，批准也会变成对你不利的证据</h2>
+<p>Here’s a case I’m seeing over and over, with the details changed.</p>
+<p>下面这类案子我一再见到，细节做了改写。</p>
+<p>A developer has an app called AI Photo in the App Store. One feature lets users create an AI girlfriend. An update gets rejected for objectionable content because users could dress her in lingerie.</p>
+<p>一位开发者在 App Store 上架了一款叫 AI Photo 的应用。其中有个功能让用户创建 AI 女友。一次更新因为不良内容被拒，理由是用户可以给她穿上内衣。</p>
+<p>The developer reads the rejection and makes a call. The girlfriend stays, the lingerie goes. They resubmit. App Review approves the build, and the app goes live.</p>
+<p>开发者看了拒审意见，做了一个判断：女友功能保留，内衣去掉。重新提交后，App Review 批准了这个构建，应用上线。</p>
+<p>Months pass. The app does well. Nothing is in review. Then an email arrives: the developer’s membership in the Apple Developer Program is terminated under Section 3.2(f) of the Developer Program License Agreement. Every app on the account comes down. Apple’s stated reason:</p>
+<p>几个月过去了，应用表现不错，也没有版本在审。然后一封邮件来了：根据《Apple 开发者计划许可协议》第 3.2(f) 条，该开发者的 Apple Developer Program 会员资格被终止。账号下所有应用全部下架。Apple 给出的理由是：</p>
+<blockquote>We have found a pattern of manipulative or misleading behavior that has led to the termination of your Apple Developer Program membership.
+我们发现存在操纵或误导行为的模式，因此终止了你的 Apple Developer Program 会员资格。</blockquote>
+<p>The developer fixed what they were told was wrong, as best they could read it, and Apple signed off on the fix. Apple now calls that manipulation.</p>
+<p>开发者按自己对拒审意见的理解，尽力改掉了被告知有问题的地方，而且 Apple 还签字批准了这次修复。现在 Apple 却把这称为操纵。</p>
+<p>Developers in this exact spot are filling my inbox, and a lot of them build AI photo apps.</p>
+<p>处在完全同样处境的开发者把我的收件箱塞满了，其中很多人都在做 AI 照片类应用。</p>
+<h2>Apple 告诉你哪里不对，却让你自己猜该怎么改</h2>
+<p>A typical objectionable-content rejection cites Guideline 1.1, pastes in the guideline text, and maybe attaches a screenshot. It rarely says which part has to go. Is the problem the lingerie? The girlfriend? Any feature that renders a human body? The rejection doesn’t say.</p>
+<p>典型的不良内容拒审会引用指南 1.1，贴上条文，也许再附一张截图。但它很少说明必须去掉哪一部分。问题是内衣？是女友功能？还是任何能生成人体的功能？拒审意见并不说。</p>
+<p>So the developer guesses. They pull the most obvious offender and resubmit. Ask a follow-up question in App Store Connect and you’ll often get the same guideline paragraph back.</p>
+<p>于是开发者只能猜。他们去掉最明显的那一项，再提交。若在 App Store Connect 里追问，你常常只会收到同一段指南原文。</p>
+<p>I know why the guidelines read this way. I wrote them, and I kept them gray on purpose. Reviewers needed room to judge new kinds of apps in the interest of users and Apple, without a rulebook bad actors could lawyer around. The porn rule ran on a “we know it when we see it” standard.</p>
+<p>我知道指南为什么写成这样。是我写的，而且我有意把它们留在灰色地带。审核员需要空间，好为用户和 Apple 的利益去判断新型应用，同时又不能写成一本坏人可以钻空子的规则手册。色情相关规则走的是「一看就知道」的标准。</p>
+<p>That flexibility only works if the reviewer then tells the developer what they saw. When the guidance is vague and the penalty for misreading it is losing every app you own, the gray area becomes a trap.</p>
+<p>这种灵活性只有在审核员随后告诉开发者自己看到了什么时，才站得住。如果指引含糊，而误读的代价是失去你名下的全部应用，灰色地带就变成了陷阱。</p>
+<h2>批准，就是 App Review 给出的答复</h2>
+<p>When an app with an objectionable-content rejection comes back, the reviewer doesn’t start from scratch. Reviewers see the prior rejection reasons, the earlier reviewer’s notes, and the screenshots attached as proof. When I ran the team, a serious rejection like objectionable content meant heavy scrutiny on every submission after it.</p>
+<p>一款曾因不良内容被拒的应用再次送来时，审核员并不是从零开始。他们能看到此前的拒审原因、前一位审核员的备注，以及作为证据附上的截图。我带这个团队的时候，像不良内容这类严重拒审，意味着之后每一次提交都会被严格审查。</p>
+<p>So the reviewer who approved AI Photo’s resubmission had the history in front of them. Their job on that build was to check whether the problem was fixed. They approved it.</p>
+<p>因此，批准 AI Photo 重新提交的那位审核员，面前就摆着这段历史。他们对这个构建的任务，就是检查问题是否已经修好。他们批准了。</p>
+<p>If the fix fell short, that was the moment to say so. Experienced reviewers do this constantly. They approve a build with a note telling the developer to fix something before the next submission, or they reject again with a sharper explanation.</p>
+<p>如果修复不到位，那就是该说清楚的时候。有经验的审核员经常这样做：要么批准并附注，提醒开发者在下次提交前改掉某件事；要么再次拒绝，并给出更明确的说明。</p>
+<p>A developer gets no other signal from Apple. Approval is the only feedback that says the app is acceptable now. Apple’s own October 16 change to Guideline 1.2 warns that developers who fail to remedy violations after notice risk breaching the Developer Code of Conduct. The AI Photo developer got notice, made a remedy, and Apple accepted it.</p>
+<p>开发者从 Apple 那里得不到别的信号。批准是唯一表示「现在这个应用可以接受」的反馈。Apple 自己在 10 月 16 日对指南 1.2 的修改中还警告：在接到通知后未能纠正违规的开发者，可能违反《开发者行为准则》。AI Photo 的开发者接到了通知，做了补救，而且 Apple 接受了。</p>
+<h2>终止信指责的，是从未被具体指控过的事</h2>
+<p>Read the rest of the 3.2(f) notice. After the line about a pattern of manipulative or misleading behavior, Apple lists what those behaviors can include: inaccurate metadata, misleading app content, inauthentic ratings and reviews, misleading customer support responses, misleading responses in App Store Connect, bait-and-switch purchasing schemes, or other dishonest or fraudulent activity inside or outside the app.</p>
+<p>把 3.2(f) 通知的后半段读完。在「操纵或误导行为模式」那句话之后，Apple 列举了这些行为可能包括：不准确的元数据、误导性的应用内容、不真实的评分和评论、误导性的客服回复、在 App Store Connect 中的误导性答复、诱饵替换式的购买套路，或其他在应用内外的不诚实或欺诈活动。</p>
+<p>The AI Photo developer did none of those. The letter doesn’t say which one Apple thinks applies. It names no app, no build, no date, and no screenshot.</p>
+<p>AI Photo 的开发者并没有做其中任何一项。信里没有说明 Apple 认为适用哪一条。它没有点名哪款应用、哪个构建、哪个日期，也没有截图。</p>
+<p>Now look at what an appeal requires. I learned this working with Steve Jobs, Tim Cook, and Phil Schiller: Apple wants an apology, an explanation of how it happened, and a plan to keep it from happening again, in that order.</p>
+<p>再看申诉需要什么。我当年和 Steve Jobs、Tim Cook、Phil Schiller 共事时学到的是：Apple 要一份道歉、一份事情如何发生的解释，以及一份防止再犯的计划，而且是这个顺序。</p>
+<p>How do you apologize for an act Apple won’t name? The developer either picks an offense off Apple’s menu and confesses to it, or appeals blind and loses.</p>
+<p>Apple 不肯说出那件事是什么，你要怎么道歉？开发者要么从 Apple 的菜单里挑一项罪名承认，要么盲目申诉然后输掉。</p>
+<h2>3.2(f) 曾经只用于欺诈</h2>
+<p>When I ran App Review, 3.2(f) terminations came from the Fraud team, and only for real fraud: payment fraud, ratings and review manipulation, and schemes like them. One case I still remember: 10,000 accounts created in a single day in Nome, Alaska, a town of fewer than 10,000 people, all downloading, rating, and reviewing the same app. Fraud was so accurate that executives, me included, never second-guessed them.</p>
+<p>我负责 App Review 的时候，3.2(f) 终止来自欺诈团队，而且只针对真正的欺诈：支付欺诈、评分和评论操纵，以及类似手法。有个案子我至今记得：在阿拉斯加诺姆这个人口不到 1 万的小镇，同一天出现了 1 万个账号，全部下载、评分并评论同一款应用。欺诈团队的判断非常准，包括我在内的管理层从不会事后怀疑他们。</p>
+<p>Since around the middle of this year, I’ve watched App Review itself issue 3.2(f) terminations with no apparent oversight. The triggers I’m seeing are rejection history: too many submissions, too many app name changes, too many 1.1 rejections. 3.2(f) inquiries to my practice are up about 1,000 percent in four months.</p>
+<p>大约从今年年中开始，我看到 App Review 自己在发出 3.2(f) 终止，而且看不出有明显的监督。我见到的触发条件是拒审历史：提交太多次、应用改名太多次、1.1 被拒太多次。四个月里，找我咨询 3.2(f) 的案子大约增加了 1000%。</p>
+<p>Apple’s October 16 post on the guideline changes says the violations it’s going after come from malicious actors, sometimes coordinated fraud operations, who hide harmful content that switches on only after approval. That’s bait-and-switch, and Apple added Guideline 2.5.19 to ban it by name. The AI Photo developer hid nothing. The app Apple approved is the app users downloaded.</p>
+<p>Apple 10 月 16 日关于指南变更的文章说，它要打击的违规来自恶意行为者，有时是协同欺诈团伙，他们把有害内容藏起来，只在批准之后再打开。那是诱饵替换，Apple 还新增了指南 2.5.19，专门点名禁止。AI Photo 的开发者什么也没藏。Apple 批准的应用，就是用户下载到的应用。</p>
+<p>Rejection history is a record of a developer and a reviewer disagreeing about a gray rule. Treat it as proof of fraud, and every honest argument with App Review becomes evidence of bad character.</p>
+<p>拒审历史记录的是开发者与审核员在一条灰色规则上的分歧。如果把它当作欺诈的证据，那么每一次与 App Review 的诚实争论，都会变成品格不良的证据。</p>
+<h2>替 Apple 说一句公道话</h2>
+<p>Apple has a real problem in this category. Its October 16 post says it kept more than 150,000 apps with safety issues off the store last year and terminated more than 193,000 developer accounts for fraud and abuse. AI image apps are where nudification tools live, and Apple’s post names them.</p>
+<p>在这个类别里，Apple 确实有真正的问题。它 10 月 16 日的文章说，去年把超过 15 万款存在安全问题的应用挡在商店外，并因欺诈和滥用终止了超过 19.3 万个开发者账号。AI 图像应用正是「裸化」工具栖身之处，Apple 的文章也点了名。</p>
+<p>Generative apps are also hard to review. A reviewer gets a few minutes per update (about six when I ran the team) and can’t try every prompt. If a developer pulls lingerie from a template menu but the model still produces it from a typed prompt, the fix is cosmetic, and Apple may only learn that from later reports. Apple also distrusts fixes made on a server, because anything switched off server-side can be switched back on. And Apple links related developer accounts whenever it can, so it may see history across accounts that the developer never mentions.</p>
+<p>生成式应用也很难审。审核员每次更新只有几分钟（我带团队时大约六分钟），不可能试遍所有提示词。如果开发者从模板菜单里拿掉了内衣，但模型仍能根据输入的文字生成，那么这次修复只是表面功夫，Apple 可能要等到后续举报才知道。Apple 也不信任在服务器上做的修复，因为服务端关掉的东西还可以再打开。而且只要能关联，Apple 就会把相关开发者账号连在一起，因而可能看到开发者从未提及的跨账号历史。</p>
+<p>Every one of those concerns is answered by telling the developer what Apple found. Reviewers already attach screenshots as proof. Sending them costs Apple nothing.</p>
+<p>这些顾虑每一样，都可以用「告诉开发者 Apple 发现了什么」来回应。审核员本来就会把截图当作证据附上。把它们发给开发者，对 Apple 没有成本。</p>
+<h2>六项改动就能结束这一切</h2>
+<ol>
+<li>Make objectionable-content rejections specific. Name the feature, screen, or output, and say whether the whole feature has to go or only certain content.<br>让不良内容拒审足够具体。点明是哪个功能、哪个屏幕或哪类输出，并说明是整个功能必须去掉，还是只去掉某些内容。</li>
+<li>Treat an approval after a rejection as closing that issue. If the reviewer still has doubts, reject again or approve with a written note, the way experienced reviewers already do.<br>把拒审之后的批准视为该问题已经了结。如果审核员仍有疑虑，就再次拒绝，或在批准时附上书面说明——有经验的审核员已经这样做。</li>
+<li>Put the evidence in every 3.2(f) notice: the app, the build, the dates, the conduct, and the screenshots reviewers already collected.<br>在每一封 3.2(f) 通知里附上证据：应用、构建、日期、具体行为，以及审核员已经收集的截图。</li>
+<li>Give notice and a window to fix before any termination where nothing was concealed. Apple’s new Guideline 1.2 language is already built around notice and remedy.<br>在没有隐瞒的情况下，终止前先给通知和整改窗口。Apple 新的指南 1.2 表述，本来就是围绕通知与补救来写的。</li>
+<li>Route 3.2(f) back through the Fraud team, or require Fraud sign-off on any 3.2(f) that starts in App Review.<br>把 3.2(f) 重新交回欺诈团队处理，或要求凡是由 App Review 发起的 3.2(f) 都必须经过欺诈团队签字。</li>
+<li>Publish how many terminations start in App Review versus Fraud, and how many are reversed on appeal.<br>公布有多少终止是由 App Review 发起、有多少由欺诈团队发起，以及有多少在申诉中被撤销。</li>
+</ol>
+<h2>在这件事里，误导的一方是 Apple</h2>
+<p>Apple’s October 16 post says App Store trust rests on “clear standards that are consistently enforced.” The AI Photo developer got neither. They got a vague rejection, an approval that turned out to mean nothing, and a termination letter that names no offense.</p>
+<p>Apple 10 月 16 日的文章说，App Store 的信任建立在「清晰且一贯执行的标准」之上。AI Photo 的开发者两样都没得到。他们得到的是一份含糊的拒审、一次后来被证明毫无意义的批准，以及一封没有点明罪名的终止信。</p>
+<p>The developer acted in good faith on what Apple told them. Apple sent the signal that misled: an approval that reads as a yes, later used as evidence of guilt. Terminating someone for trusting that signal is dishonest.</p>
+<p>开发者按照 Apple 告诉他们的话善意行事。发出误导信号的是 Apple：一次读起来像「可以」的批准，事后却被当成有罪的证据。因为有人信任了这个信号而对他终止资格，这是不诚实的。</p>
+<p>Apple can fix this fast. Its reviewers already write the notes and capture the screenshots. Apple only has to send them to the developers it’s about to put out of business.</p>
+<p>Apple 可以很快改过来。审核员已经在写备注、抓截图。Apple 只需要把这些发给它即将赶出市场的那些开发者。</p>
+<p>Sources: Apple Developer News, “Strengthening App Review Guidelines against nonconsensual intimate imagery and bait-and-switch apps” and “Updated App Review Guidelines are now available,” October 16, 2026</p>
+<p>来源：Apple Developer News，《加强 App Review 指南，打击非自愿私密图像与诱饵替换应用》以及《更新后的 App Review 指南现已发布》，2026 年 10 月 16 日。</p>
+<h2>作者后续说明</h2>
+<p>Phillip Shoemaker, Oct 31: If you are going through this 3.2f purge right now, and did nothing wrong, then I urge you to email John Ternus and plead your case.</p>
+<p>Phillip Shoemaker，10 月 31 日：如果你此刻正在经历这场 3.2(f) 清理，而且并没有做错事，我建议你给 John Ternus 发邮件，陈述自己的情况。</p>
+<p>Phillip Shoemaker, Oct 30: I published this one out of sequence because this is about as bad as it gets. This is a free post, and anyone can read it. Please send it to everyone you know.</p>
+<p>Phillip Shoemaker，10 月 30 日：这篇我没有按原定顺序发表，因为事情已经糟糕到接近极限。这是一篇免费文章，任何人都可以读。请把它转给所有你认识的人。</p>
+</div>
+</body>
+</html>

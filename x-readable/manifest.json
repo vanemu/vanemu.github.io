@@ -1,5 +1,5 @@
 {
-  "count": 49,
+  "count": 54,
   "items": [
     {
       "id": "2103142706134294775",
@@ -392,6 +392,46 @@
       "public_path": "articles/2117694233301725635.html",
       "url": "https://x.com/i/article/2117675610319249408",
       "tweet_url": "https://x.com/tyd3n_/status/2117694233301725635"
+    },
+    {
+      "id": "2122773317970997493",
+      "title_zh": "用 3D 打印改善 iPhone Duo",
+      "local_html": "/workspace/x-bookmarks/longform_batch9/01-selig-3d-print-iphone-duo.html",
+      "public_path": "articles/2122773317970997493.html",
+      "url": "https://christianselig.com/2026/11/3d-print-iphone-duo-accessories/",
+      "tweet_url": "https://x.com/ChristianSelig/status/2122773317970997493"
+    },
+    {
+      "id": "2116623415033356393",
+      "title_zh": "苹果批准了修复，随后却称开发者在撒谎",
+      "local_html": "/workspace/x-bookmarks/longform_batch10/01-shoemaker-apple-approved-the-fix.html",
+      "public_path": "articles/2116623415033356393.html",
+      "url": "https://phillipshoemaker.substack.com/p/apple-approved-the-fix-then-it-called",
+      "tweet_url": "https://x.com/83dwn/status/2116623415033356393"
+    },
+    {
+      "id": "2110023283169247623",
+      "title_zh": "如何更有野心：写给使用模型的人",
+      "local_html": "/workspace/x-bookmarks/longform_batch10/02-felix-more-ambitious.html",
+      "public_path": "articles/2110023283169247623.html",
+      "url": "https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/",
+      "tweet_url": "https://x.com/felixrieseberg/status/2110023283169247623"
+    },
+    {
+      "id": "2109163115627913394",
+      "title_zh": "Anatomy：把概念画成会动的机器",
+      "local_html": "/workspace/x-bookmarks/longform_batch10/03-anatomy.html",
+      "public_path": "articles/2109163115627913394.html",
+      "url": "https://skills.wheresryan.sh/anatomy",
+      "tweet_url": "https://x.com/dingyi/status/2109163115627913394"
+    },
+    {
+      "id": "2114790481066615068",
+      "title_zh": "用产品照片做出可交互的服装陈列",
+      "local_html": "/workspace/x-bookmarks/longform_batch10/04-clothing-hero.html",
+      "public_path": "articles/2114790481066615068.html",
+      "url": "https://amirmushich.com/publications/interactive-clothing-hero/",
+      "tweet_url": "https://x.com/AmirMushich/status/2114790481066615068"
     }
   ]
 }

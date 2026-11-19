@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用产品照片做出可交互的服装陈列</title>
+<style>
+body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.7;color:#1a1a1a;background:#fff;}
+.wrap{max-width:680px;margin:0 auto;}
+h1{font-size:1.45rem;line-height:1.35;margin:0 0 12px;}
+h2{font-size:1.2rem;margin:1.4em 0 .6em;}
+h3{font-size:1.05rem;margin:1.15em 0 .45em;}
+.meta{color:#555;font-size:.92rem;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #eee;}
+.meta a{color:#0b57d0;}
+p{margin:0 0 1em;}
+a{color:#0b57d0;}
+blockquote{margin:0 0 1em;padding:.6em .9em;border-left:3px solid #c45c26;background:#faf7f4;color:#333;white-space:pre-wrap;}
+.fig{margin:1.1em 0 1.4em;padding:0;}
+.fig img,.fig video{display:block;width:100%;max-width:680px;height:auto;border:0;}
+.caption{margin:.5em 0 0;font-size:.88rem;color:#555;line-height:1.5;}
+.pair{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 1.1em;}
+.pair .fig{flex:1 1 220px;margin:0;}
+.gallery{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 1.2em;}
+.gallery figure{flex:1 1 140px;margin:0;max-width:220px;}
+.gallery img{display:block;width:100%;height:auto;border:0;border-radius:4px;}
+.gallery .caption{font-size:.8rem;margin:.3em 0 0;}
+ul,ol{margin:0 0 1em;padding-left:1.4em;}
+li{margin:0 0 .45em;}
+pre{background:#f6f6f6;padding:.8em;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;border-radius:6px;}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;}
+table{border-collapse:collapse;width:100%;margin:0 0 1em;font-size:.92rem;}
+th,td{border:1px solid #ddd;padding:.4em .55em;vertical-align:top;}
+.note{color:#555;font-size:.92rem;margin:0 0 1em;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>用产品照片做出可交互的服装陈列</h1>
+<p class="meta">作者：Amir Mušić<br>原文：<a href="https://amirmushich.com/publications/interactive-clothing-hero/">https://amirmushich.com/publications/interactive-clothing-hero/</a><br>书签帖：<a href="https://x.com/AmirMushich/status/2114790481066615068">https://x.com/AmirMushich/status/2114790481066615068</a><br>2026-10-19</p>
+<figure class="fig"><img src="https://amirmushich.com/publications/interactive-clothing-hero/assets/social-cover.jpg" alt="文章封面：衣杆上的服装陈列" /></figure>
+<p>How to build an interactive website experience from product photos with GPT-6 Astra & AI videos as UI animations.</p>
+<p>如何用产品照片，结合 GPT-6 Astra 以及作为界面动画的 AI 视频，搭建可交互的网站体验。</p>
+<p>This idea brought me 1,000,000+ views across social media, so here I'm sharing how I used AI to turn merch catalog photos into a responsive clothing display.</p>
+<p>这个想法在社交媒体上给我带来了超过 100 万次浏览，所以我在这里分享：我如何用 AI，把周边目录照片做成可响应的服装陈列。</p>
+<p>By Amir Mušić. Published Oct 19, 2026. 13 min read.</p>
+<p>作者 Amir Mušić，发表于 2026 年 10 月 19 日，约 13 分钟阅读。</p>
+<figure class="fig"><video controls playsinline preload="none" poster="https://amirmushich.com/publications/interactive-clothing-hero/assets/rail.webp" aria-label="Desktop interaction with the Molimao showcase"><source src="https://amirmushich.com/publications/interactive-clothing-hero/assets/desktop-demo.mp4" type="video/mp4"></video><figcaption class="caption">01 Neighbors slide aside; the selected garment turns. A click opens the product view. Play the recording or try the live demo on the original page.<br>01 相邻衣物会让开，被选中的那件转过来。点击打开产品页。可播放这段录像，或到原页试用现场演示。</figcaption></figure>
+<p class="note"><a href="https://amirmushich.com/publications/interactive-clothing-hero/assets/desktop-demo.mp4">https://amirmushich.com/publications/interactive-clothing-hero/assets/desktop-demo.mp4</a></p>
+<p>The starter includes a working two-shirt example, prompts and instructions for your AI agent. You can run it first, then ask the agent to adapt it to your own products. The shirts use my original artwork; Molimao’s catalog photography stays in this case study.</p>
+<p>入门包里有一个能跑的两件衬衫示例，以及给你的 AI agent 用的提示词和说明。你可以先运行它，再让 agent 改成你自己的产品。这些衬衫用的是我的原创图案；Molimao 的目录摄影只留在这篇案例里。</p>
+<p>Give the repository to Codex or Claude Code. Your agent starts the included example and guides the rest: <a href="https://github.com/amirmushichge/interactive-garment-starter">https://github.com/amirmushichge/interactive-garment-starter</a></p>
+<p>把仓库交给 Codex 或 Claude Code。你的 agent 会先启动附带示例，再引导后面的步骤：<a href="https://github.com/amirmushichge/interactive-garment-starter">https://github.com/amirmushichge/interactive-garment-starter</a></p>
+<h2>把一个视觉概念用到真实目录上</h2>
+<p>I saw a clothing-store concept by @cambreedesigns on X. Garments hang sideways on a rail. Hovering makes room between their neighbors and turns the selected item toward you. The interaction borrows a familiar action from a physical shop: move things aside to inspect one.</p>
+<p>我在 X 上看到 @cambreedesigns 的一个服装店概念：衣服侧挂在一根杆上。悬停时，相邻衣物会让出空隙，被选中的那件转向你。这种交互借用了实体店里很熟悉的动作：把旁边的东西拨开，细看其中一件。</p>
+<p>I often look for ways to apply a strong visual idea to a real business. For this experiment I chose Molimao Sarajevo, a local clothing brand. I live in Bosnia and like building my experiments with its brands and places. Their existing product photos gave the concept a concrete test: preserve a recognizable garment while making it interactive.</p>
+<p>我常常想办法把一个强烈的视觉想法用到真实生意上。这次实验我选了当地服装品牌 Molimao Sarajevo。我住在波斯尼亚，喜欢用这里的品牌和地点来做实验。他们已有的产品照片给了这个概念一次具体检验：既要保住能认出来的衣服，又要让它可交互。</p>
+<h3>为什么用视频而不是 3D</h3>
+<p>The display needed photographic product detail: fabric, cut and print. I considered 3D, but building garment models and materials for the entire catalog would have added a separate production process. I also wanted to avoid a simplified render changing how the product looked. For this experiment, working from photographs kept the production focused on the existing products.</p>
+<p>这个陈列需要照片级的产品细节：面料、剪裁和印花。我考虑过 3D，但为整个目录建模和做材质会再多出一条制作流程。我也不希望简化后的渲染改变产品看起来的样子。对这次实验来说，从照片出发，能让制作始终围绕现有产品。</p>
+<p>I had already tested a frame-based approach in another clothing showcase. Generate a fixed movement, split it into images, then let code decide which image to show. A locked camera and one quarter-turn fit this approach: the two orientations covered the interaction I wanted.</p>
+<p>我在另一个服装展示里已经试过基于帧的做法：生成一段固定运动，拆成图片，再由代码决定显示哪一张。锁定相机、只做四分之一圈旋转，正好适合这个方法：两个朝向就覆盖了我要的交互。</p>
+<p>We started with Molimao’s white “Before” T-shirt. I set the visual and interaction criteria, selected outputs and reviewed each iteration. In Codex, the agent prepared assets, ran generation through an API, processed the footage and built the interface. We proved the sequence on one product before expanding it.</p>
+<p>我们从 Molimao 的白色 “Before” T 恤开始。我设定视觉和交互标准，挑选输出，并审看每一轮结果。在 Codex 里，agent 准备素材、通过 API 生成、处理影像并搭建界面。我们先在一件产品上验证完整流程，再扩展。</p>
+<figure class="fig"><img src="https://amirmushich.com/publications/interactive-clothing-hero/assets/first-prototype.jpg" alt="早期构图：一件 T 恤和过大的 Before 标题" /><figcaption class="caption">02 The first draft turned the garment into an illustration beside a headline. I returned to the reference: choosing an item on a shared rail had to be the main interaction.<br>02 初稿把衣服做成了标题旁边的插图。我回到参考：在共用衣杆上选一件，必须是主要交互。</figcaption></figure>
+<p>The initial layout missed that shared-rail behavior. I made the motion requirements explicit so that the generated footage and the interface would obey the same rules.</p>
+<p>最初的布局没有做出那根共用衣杆的行为。我把运动要求写明确，好让生成的影像和界面遵守同一套规则。</p>
+<h3>运动约定：一件衣服，一根悬挂轴</h3>
+<ul>
+<li>01 / Rest — Strict profile: Exactly side-on, with no three-quarter turn toward the camera.<br>01 / 静止——严格侧面：完全侧对镜头，不要有转向镜头的四分之三侧面。</li>
+<li>02 / Hover — One 90° turn: Garment and wooden shoulders rotate together. Neighbors slide aside without dimming.<br>02 / 悬停——一次 90° 旋转：衣服和木衣肩一起转。相邻衣物让开，但不变暗。</li>
+<li>03 / Selection — Front view: Leaving reverses the turn. Clicking opens the product view.<br>03 / 选中——正面：离开时反向转回。点击打开产品页。</li>
+</ul>
+<div class="pair"><figure class="fig"><img src="https://amirmushich.com/publications/interactive-clothing-hero/assets/side.webp" alt="严格侧面的静止状态" /><figcaption class="caption">Rest state in strict side profile<br>严格侧面的静止状态</figcaption></figure><figure class="fig"><img src="https://amirmushich.com/publications/interactive-clothing-hero/assets/front.webp" alt="转向镜头的最终状态" /><figcaption class="caption">Final state facing the camera<br>转向镜头的最终状态</figcaption></figure></div>
+<p>03 The vertical wire stays fixed. Only the wooden shoulders and garment belong to the animated frames.</p>
+<p>03 竖直的挂线保持不动。只有木衣肩和衣服属于动画帧。</p>
+<h2>准备图像锚点，并把 LTX 接到 Codex</h2>
+<p>Catalog photos establish identity: shape, fabric color and the position of the print. The animation needs that product in two matched poses. I used the built-in image-generation tool in Codex, which I referred to as GPT Images 2 (Google’s Nano Banana Pro or Nano Banana 2.1 can also be used for this step): first a front view on wooden shoulders, then a strict profile derived from that accepted image.</p>
+<p>目录照片确立身份：外形、面料颜色和印花位置。动画需要同一件产品的两个匹配姿态。我用了 Codex 内置的图像生成工具，我称之为 GPT Images 2（这一步也可以用 Google 的 Nano Banana Pro 或 Nano Banana 2.1）：先做木衣肩上的正面，再从这张被认可的图派生出严格侧面。</p>
+<div class="pair"><figure class="fig"><img src="https://amirmushich.com/publications/interactive-clothing-hero/assets/catalog-front.jpg" alt="Molimao 原版正面照片" /><figcaption class="caption">Catalog photo · front<br>目录照片 · 正面</figcaption></figure><figure class="fig"><img src="https://amirmushich.com/publications/interactive-clothing-hero/assets/catalog-back.jpg" alt="带橙色太阳和萨拉热窝印花的原版背面照片" /><figcaption class="caption">Catalog photo · back<br>目录照片 · 背面</figcaption></figure></div>
+<p>04 The “Before” T-shirt from Molimao’s catalog. These photographs establish what the product actually looks like.</p>
+<p>04 来自 Molimao 目录的 “Before” T 恤。这些照片确定产品实际上长什么样。</p>
+<p>Generating the profile from the accepted front image helped retain scale, light and hanger position. We used a flat green background to make separation easier. For a garment containing green, the backing or masking strategy must change.</p>
+<p>从被认可的正面图生成侧面，有助于保住比例、光线和衣架位置。我们用了平整的绿色背景，好分离。如果衣服本身含绿色，背景或蒙版策略就必须改。</p>
+<p>Image prompt · front view. Attach the original front photograph. Approve the product's identity before generating the second pose.</p>
+<p>图像提示词 · 正面。附上原版正面照片。在生成第二个姿态前，先确认产品身份无误。</p>
+<pre><code>Create a photographic product image of this exact T-shirt on thin wooden shoulders, viewed directly from the front. Preserve its cut, color, small orange chest symbol and labels from the reference.
+
+Locked camera, soft neutral lighting, full garment visible with generous clearance. Landscape 16:9 canvas. Center the top wooden suspension apex.
+
+Use one flat bright green background: no gradient, shadow or green reflections on the fabric. Exclude metal hooks, wires, rails, mannequins, captions and extra objects. Produce one image</code></pre>
+<p>Image prompt · strict profile. Attach the accepted front anchor as the main reference.</p>
+<p>图像提示词 · 严格侧面。把被认可的正面锚点作为主要参考附上。</p>
+<pre><code>Change only the orientation of this T-shirt and its wooden shoulders. Rotate them together exactly 90 degrees around the vertical suspension axis. Show a strict side profile, with the front surface facing right and the broad chest plane hidden. No three-quarter view.
+
+Preserve canvas, scale, top suspension apex, hem height, fabric, light and the identical flat green background. The wooden shoulders overlap in profile. Do not add a hook, rail, new details or text</code></pre>
+<div class="pair"><figure class="fig"><img src="https://amirmushich.com/publications/interactive-clothing-hero/assets/anchor-side.webp" alt="平整绿底上的严格侧面锚点" /><figcaption class="caption">First frame · profile<br>首帧 · 侧面</figcaption></figure><figure class="fig"><img src="https://amirmushich.com/publications/interactive-clothing-hero/assets/anchor-front.webp" alt="同一绿底上匹配的正面锚点" /><figcaption class="caption">Last frame · front<br>末帧 · 正面</figcaption></figure></div>
+<p>05 AI-generated views based on the catalog photos. Check print accuracy, silhouette and color against the originals.</p>
+<p>05 基于目录照片生成的视图。请对照原图检查印花准确性、轮廓和颜色。</p>
+<p>For video, the profile becomes the first frame and the front view the last frame: the two endpoints the model should connect. We checked the pair for matching apex, size, color and frame clearance. The wire stayed outside the generation; rendering it separately avoided a fragile thin edge in every frame.</p>
+<p>做视频时，侧面成为首帧，正面成为末帧：也就是模型应该连接的两个端点。我们检查这一对是否在顶点、尺寸、颜色和画面留白上匹配。挂线留在生成之外；单独画它可以避免每一帧都出现脆弱的细边。</p>
+<h3>API 成了开发流程的一部分</h3>
+<p>We connected LTX API to the workflow in Codex. A local script sent the two images and motion prompt to LTX-2.5 Pro, saved the job ID, checked completion and downloaded the video into the project. I approved the spending limit and selected the takes. The website itself never calls the model.</p>
+<p>我们把 LTX API 接到了 Codex 里的工作流。一段本地脚本把两张图和运动提示词发给 LTX-2.5 Pro，保存任务 ID，检查是否完成，再把视频下载进项目。我批准了支出上限，并挑选镜头。网站本身从不调用模型。</p>
+<p>Codex images + prompt → LTX API video generation → Project folder MP4 + job receipt.</p>
+<p>Codex 图像 + 提示词 → LTX API 生成视频 → 项目文件夹中的 MP4 和任务回执。</p>
+<p>The source requests used six seconds, 1080p and 50 frames per second, without audio. The constraint was one smooth quarter-turn with a locked camera and consistent light. Generation length and interaction duration are different settings; the UI would not make someone wait six seconds.</p>
+<p>源请求用的是 6 秒、1080p、每秒 50 帧，没有音频。约束是一次平滑的四分之一圈旋转，相机锁定、光线稳定。生成时长和交互时长是不同的设置；界面不会让人等六秒。</p>
+<p>How your agent connects the video model: The repository includes an LTX connector and an example request. Your agent prepares the settings, helps you connect your account privately, and shows the estimated cost before generating. The connector saves a job receipt so an interrupted request can be resumed. The LTX API documentation is linked in the repository for the agent to check.</p>
+<p>你的 agent 如何连接视频模型：仓库里有一个 LTX 连接器和一个示例请求。你的 agent 会准备设置，帮你私密地连接账号，并在生成前显示预估费用。连接器会保存任务回执，中断的请求可以恢复。仓库里链接着 LTX API 文档，供 agent 查阅。</p>
+<p>You review the two images and approve a spending limit. The agent handles the request, downloads the video and prepares the animation files. The generated file is intermediate material. We still have to choose a useful interval, remove the backing and test the turn in its actual controller.</p>
+<p>你审看这两张图，并批准支出上限。agent 处理请求、下载视频并准备动画文件。生成的文件只是中间素材。我们还要选出有用的区间，去掉背景，并在实际控制器里测试这次旋转。</p>
+<h2>把衣服从背景里分离出来</h2>
+<p>To place the rotating garment on the site’s rail, we removed the green background from each frame. The transparent result could sit over the page while staying attached to one suspension point.</p>
+<p>为了把旋转的衣服放到网站的衣杆上，我们从每一帧去掉绿色背景。透明结果可以叠在页面上，同时始终挂在同一个悬挂点上。</p>
+<ol>
+<li>Select and sample the turn. Extract the useful interval and retain a compact sequence of frames, including its exact endpoints.<br>选择并取样这次旋转。抽出有用的区间，保留一段紧凑的帧序列，包括精确的两端。</li>
+<li>Build the alpha mask. Identify the flat backing and soften the boundary. Alpha describes each pixel's transparency.<br>建立 Alpha 蒙版。识别平整背景，柔化边界。Alpha 描述每个像素的透明度。</li>
+<li>Remove color spill. Clean green contamination from partly transparent edges, then inspect sleeves, hem and wood against contrasting backgrounds.<br>去除溢色。清理半透明边缘上的绿色污染，再在对比背景下检查袖口、下摆和木头。</li>
+<li>Register the suspension point. Keep the wooden apex at one screen position. Apply one shared crop and scale across the sequence; independent crops would make the garment jump.<br>对齐悬挂点。让木头顶点停在屏幕上的同一个位置。对整段序列使用同一套裁切和缩放；各自裁切会让衣服跳动。</li>
+<li>Pack the frames. Store them in a WebP atlas (a single image containing a grid of animation frames), with a small file describing the grid.<br>打包帧。把它们存进 WebP 图集（一张包含动画帧网格的图），再配一个描述网格的小文件。</li>
+</ol>
+<p>Most rail items used 30 frames; some retained more. A fixed wire in the interface connects the rail to the apex. Its position does not change while the shoulders turn underneath.</p>
+<p>衣杆上的大多数单品用了 30 帧，有些保留了更多。界面里有一根固定的线把衣杆连到顶点。衣肩在下面转动时，它的位置不变。</p>
+<figure class="fig"><img src="https://amirmushich.com/publications/interactive-clothing-hero/assets/side.webp" alt="侧面的 Before T 恤" /><figcaption class="caption">06 Background, rail and wire are separate layers. The button uses the project's controller; the slider exposes every animation frame. (The original page has an interactive frame inspector.)<br>06 背景、衣杆和挂线是分开的层。按钮用的是项目里的控制器；滑块可以露出每一帧动画。（原页有可交互的逐帧检查器。）</figcaption></figure>
+<p>Try the dark background: it reveals pale halos. Orange helps expose green residue. The green Tag Green hoodie needed its own treatment so the key would not remove fabric with the backing. We adjusted the background removal for individual garments.</p>
+<p>试试深色背景：它会露出浅色光晕。橙色有助于暴露残留的绿色。绿色的 Tag Green 连帽衫需要单独处理，以免抠像把面料和背景一起去掉。我们为单件衣服调整了去背。</p>
+<h2>把六秒影像做成可响应的悬停</h2>
+<p>We now had six-second video files. Waiting for each one to play would make browsing slow. The next problem was to complete the same turn in a fraction of a second and allow interruption at any point.</p>
+<p>这时我们有了六秒的视频文件。若等每一段播完，浏览就会很慢。下一个问题是：在几分之一秒内完成同一次旋转，并允许在任意时刻被打断。</p>
+<p>The site chooses a cell from the atlas according to a small timeline. Hover moves its playhead toward the front; leaving reverses it from the current position. Hovering again during the return changes direction without restarting at frame zero.</p>
+<p>网站按一条短时间线从图集里选取单元格。悬停时播放头移向正面；离开则从当前位置反向转回。在转回过程中再次悬停，会改变方向，而不是从第 0 帧重来。</p>
+<table>
+<tr><th>时间</th><th>作用</th></tr>
+<tr><td>80 ms</td><td>Intent delay before starting<br>开始前的意图延迟</td></tr>
+<tr><td>360 ms</td><td>Complete turn to the front<br>转完到正面</td></tr>
+<tr><td>280 ms</td><td>Complete return to profile<br>转完回到侧面</td></tr>
+</table>
+<p>Speed removed the wait, but the first accelerated version felt abrupt. I refined the intent delay, acceleration, braking and direction changes. The final adjustment softened the outer 30% of the motion curve while retaining its middle and overall duration.</p>
+<p>速度去掉了等待，但第一版加速后的运动感觉很突兀。我调整了意图延迟、加速、刹车和转向。最终的调整柔化了运动曲线外侧 30%，同时保留了中段和总时长。</p>
+<p>07 Interactive reconstruction of the two controller settings on identical frames of the “Before” T-shirt. Duration is unchanged. Slow playback makes the subtle difference easier to inspect. This comparison widget is on the original page.</p>
+<p>07 用 “Before” T 恤的相同帧，交互式重建两种控制器设置。时长不变。慢放更容易看清细微差别。这个对比控件在原页上。</p>
+<p>The neighboring garments also move with smooth acceleration, at full opacity. Dimming them had made the scene feel less physical, so I removed it. At rest, the selected item holds the timeline's endpoint. Swapping in an unrelated PNG after the turn could introduce a visible jump in fabric or hanger thickness.</p>
+<p>相邻衣物也会平滑加速移动，并且保持完全不透明。把它们变暗会让场景少了实物感，所以我去掉了变暗。静止时，被选中的那件停在时间线的终点。如果在转完后换上一张无关的 PNG，面料或衣架厚度可能会出现可见的跳动。</p>
+<h2>一段好视频，仍可能做不成界面动画</h2>
+<p>A take can look convincing in a player and become unstable after trimming, acceleration and easing (the curve that controls how motion starts and stops). Sideways drift, rocking or changing folds become much more visible at hover speed.</p>
+<p>一个镜头在播放器里看起来很可信，但在裁剪、加速和缓动（控制运动如何起止的曲线）之后，却可能变得不稳。横向漂移、晃动或褶皱变化，在悬停速度下会明显得多。</p>
+<p>We therefore tested each take at source speed and in the interface, including partial turns, reversal and repeated pointer changes. After acceleration, the Cupid tee and purple M Bird tee visibly rocked. Grow and Forora showed similar problems later. Once the interaction timing felt right, I kept it and replaced the unstable footage.</p>
+<p>因此，我们在源速度和界面里都测试了每个镜头，包括部分旋转、反向，以及反复改变指针。加速之后，Cupid T 恤和紫色 M Bird T 恤明显在晃。Grow 和 Forora 后来也出现了类似问题。一旦交互节奏感觉对了，我就把它固定下来，并替换不稳的影像。</p>
+<figure class="fig"><video controls playsinline preload="none" poster="https://amirmushich.com/publications/interactive-clothing-hero/assets/mbird-first-poster.webp" aria-label="First M Bird source take"><source src="https://amirmushich.com/publications/interactive-clothing-hero/assets/mbird-first.mp4" type="video/mp4"></video><figcaption class="caption">08 The full first take at source speed. Lateral rocking became more obvious during fast UI playback. Switch takes and play the recording to compare on the original page.<br>08 完整的第一遍源速度镜头。横向晃动在快速界面播放时更明显。可在原页切换镜头并播放录像来比较。</figcaption></figure>
+<p class="note"><a href="https://amirmushich.com/publications/interactive-clothing-hero/assets/mbird-first.mp4">https://amirmushich.com/publications/interactive-clothing-hero/assets/mbird-first.mp4</a></p>
+<p>We regenerated clips with unstable movement and trimmed takes that contained a clean turn. For Cupid, we kept the clean forward turn from 2.8 to 4.5 seconds of a new take. For Forora, we used the early interval before extra rotation. Background residue and bright wooden-edge flashes were processing problems, handled separately.</p>
+<p>我们对运动不稳的片段重新生成，并裁出包含干净旋转的镜头。对 Cupid，我们保留了新镜头里 2.8 到 4.5 秒那段干净的正向旋转。对 Forora，我们用了额外旋转出现之前的前段。背景残留和木头边缘的亮闪是后期处理问题，另行处理。</p>
+<p>The acceptance criterion was a stable, recognizable product throughout the interaction. Easing changes when frames appear. It cannot restore a distorted print or remove oscillation already recorded in them.</p>
+<p>验收标准是：在整个交互过程中，产品稳定且可辨认。缓动只改变帧出现的时机。它不能修复已经变形的印花，也去不掉已经录进这些帧里的振荡。</p>
+<h2>在手机上把浏览和选中分开</h2>
+<p>Desktop hover depends on a pointer. On touch screens, we needed a clear distinction between browsing and opening a product. I kept one garment centered, with neighboring profiles visible. Swiping changes the selection; after settling, the central garment turns.</p>
+<p>桌面上的悬停依赖指针。在触屏上，我们需要把浏览和打开产品清楚分开。我让一件衣服居中，旁边能看见相邻的侧面。滑动改变选择；停稳后，中间那件转过来。</p>
+<ul>
+<li>Swipe to browse: The rail follows the gesture, then settles the nearest garment in the center.<br>滑动浏览：衣杆跟随手势，然后把最近的一件停在中间。</li>
+<li>Tap to inspect: A separate product view shows the available sides. Closing it returns to the same selection.<br>点按查看：单独的产品页展示可用的各面。关闭后回到同一选择。</li>
+<li>Change your mind: Reversal should remain continuous; a completed swipe should not also open a product.<br>改变主意：反向应保持连续；一次完成的滑动不应同时打开产品。</li>
+</ul>
+<figure class="fig"><video controls playsinline preload="none" poster="https://amirmushich.com/publications/interactive-clothing-hero/assets/mobile-rail.png" aria-label="Mobile showcase recording"><source src="https://amirmushich.com/publications/interactive-clothing-hero/assets/mobile-demo.mp4" type="video/mp4"></video><figcaption class="caption">09 Browser recording with a mobile viewport. Tests on physical iPhone and Android devices are a separate, unconfirmed step.<br>09 移动视口下的浏览器录像。在实体 iPhone 和 Android 设备上的测试是另一步，尚未确认。</figcaption></figure>
+<p class="note"><a href="https://amirmushich.com/publications/interactive-clothing-hero/assets/mobile-demo.mp4">https://amirmushich.com/publications/interactive-clothing-hero/assets/mobile-demo.mp4</a></p>
+<p>The full case-study collection contains ten garments. Eight have an animated front/back transition in their product view, using LTX or Kling through Pika. Cupid and the 2067 crewneck lacked verified back photos, so I removed that option. The starter focuses on the rail interaction and uses static detail images.</p>
+<p>完整案例合集有十件衣服。其中八件的产品页有正面/背面的动画过渡，用的是 LTX，或经 Pika 使用的 Kling。Cupid 和 2067 圆领衫缺少经过核对的背面照片，所以我去掉了这个选项。入门包聚焦衣杆交互，细节图用的是静态图。</p>
+<h2>解决加载问题</h2>
+<p>After expanding to ten products and sharing a public demo, we hit a cold-load problem. On a connection around 10 Mbps, profile stills appeared before the animations were ready. The interface looked usable, but hover did nothing for ~5 seconds in my initial test.</p>
+<p>扩展到十件产品并公开演示之后，我们碰到了冷启动加载问题。在大约 10 Mbps 的连接上，侧面静图会先出来，动画还没准备好。界面看起来能用，但我最初测试时，悬停大约 5 秒都没有反应。</p>
+<p>A loading screen with real progress showed when the collection was ready. We then reduced the size of the image sheets containing the animation frames and bundled them into one download. The number and dimensions of the frames stayed the same, and we checked the transparent edges after compression.</p>
+<p>带真实进度的加载屏会显示合集何时就绪。随后我们缩小了包含动画帧的图片表，并把它们打成一次下载。帧的数量和尺寸保持不变，压缩后我们检查了透明边缘。</p>
+<table>
+<tr><th></th><th>之前</th><th>之后</th></tr>
+<tr><td>Time until the collection accepts input (seconds)<br>合集开始接受输入的时间（秒）</td><td>7.56</td><td>4.67（−38%）</td></tr>
+<tr><td>Animation download size<br>动画下载体积</td><td>7.80 MB</td><td>4.49 MB（−42%）</td></tr>
+</table>
+<p>10 Controlled local test: 10 Mbps connection, 100 ms latency. In that local test, the collection became interactive about 2.9 seconds sooner. Measurements through the public address varied between runs, so connection and device conditions still matter.</p>
+<p>10 受控本地测试：10 Mbps 连接，100 ms 延迟。在那次本地测试里，合集大约早 2.9 秒可以交互。经公开地址测得的结果各次不同，因此连接和设备条件仍然重要。</p>
+<p>The browser also needs memory to display those frames. The two-shirt starter downloads about 0.84 MB of animation images, which occupy roughly 41 MB when unpacked into pixels. Your agent checks both download size and memory use before adding more products.</p>
+<p>浏览器显示这些帧也需要内存。两件衬衫的入门包大约下载 0.84 MB 动画图像，解成像素后约占 41 MB。你的 agent 在加入更多产品前，会同时检查下载体积和内存占用。</p>
+<h2>把入门包交给你的 AI agent</h2>
+<figure class="fig"><img src="https://amirmushich.com/publications/interactive-clothing-hero/assets/starter-shirts.webp" alt="两件开源示例概念：白色山地印花 T 恤和粉彩卡片 T 恤" /><figcaption class="caption">11 The downloadable starter: two original concepts, with the same reversible rail mechanism. Both prints are my own generated artwork, prepared as garment concepts for this example.<br>11 可下载的入门包：两个原创概念，使用同一套可来回的衣杆机制。两件印花都是我自己生成的图案，作为本示例的服装概念准备。</figcaption></figure>
+<p>To make this workflow available without distributing a clothing brand's catalog, I repeated it with two original prints: an alpine landscape on a white T-shirt and black card artwork on a pastel-pink T-shirt. These generated garment concepts are the running example in the starter. The Molimao visuals in this article remain the record of the original experiment.</p>
+<p>为了在不散发某个服装品牌目录的情况下提供这套流程，我用两件原创印花重做了一遍：白色 T 恤上的高山风景，以及粉彩 T 恤上的黑色卡片图案。这些生成的服装概念是入门包里正在运行的示例。文章中的 Molimao 视觉仍是原实验的记录。</p>
+<p>The image tool produced the cotton bases and matched views. I kept the original graphics as the print source. The white turn uses LTX-2.5 Pro; after an LTX balance failure, the pink replacement used Kling 3.0 through Pika. The four completed video takes cost $3.51 in total at the prices recorded for this experiment; that includes rejected takes. Your agent checks current pricing before proposing a budget.</p>
+<p>图像工具生成了棉质底衫和匹配的视图。我把原始图形留作印花来源。白色那件的旋转用的是 LTX-2.5 Pro；在一次 LTX 余额失败后，粉色替换件经 Pika 使用了 Kling 3.0。四段完成的视频镜头按这次实验记录的价格总计 3.51 美元，其中包括被否决的镜头。你的 agent 会在提出预算前核对当前定价。</p>
+<p>The starter includes prepared motion, so readers can try the interaction before opening an API account. Its detail view uses static front/back images; the animated product-card transitions shown in the larger Molimao demo are outside this package.</p>
+<p>入门包里有已准备好的运动，读者可以在开通 API 账号之前先试用交互。它的详情页用的是静态正/背面图；更大的 Molimao 演示里那些产品卡动画过渡，不在这个包里。</p>
+<h3>把仓库链接贴进 Codex 或 Claude Code</h3>
+<p>Open a development chat in your agent, give it the GitHub link and paste the request below. The repository tells the agent how to set up the project, run the example and build your version. You supply the product and make the visual decisions.</p>
+<p>在你的 agent 里打开一个开发对话，把 GitHub 链接给它，并粘贴下面的请求。仓库会告诉 agent 如何搭建项目、运行示例并做出你的版本。你提供产品，并做出视觉决定。</p>
+<pre><code>Use this repository to build my interactive clothing website: https://github.com/amirmushichge/interactive-garment-starter
+
+Read AGENTS.md and START-HERE.md, then follow docs/agent-workflow.md. Set up everything you can and open the included example for me first.
+
+Then help me replace one garment with my own photos or artwork. Ask only for missing files, account access and visual decisions. Handle setup, image preparation, video generation, background removal, animation and testing. Show me the image anchors before generating video and ask for a total budget before any paid requests.
+
+Keep the result local until I approve publication.</code></pre>
+<ol>
+<li>The agent opens the example. It checks your computer, prepares the required tools and gives you a working local link.<br>agent 打开示例。它检查你的电脑，准备所需工具，并给你一个能用的本地链接。</li>
+<li>You choose one product. Share photographs or a print, and a reference for how the website should look. The agent asks for anything missing.<br>你选一件产品。提供照片或印花，以及网站该是什么样子的参考。agent 会询问缺少的东西。</li>
+<li>You approve the images and budget. The agent prepares the front and profile views, connects an available video tool and proposes a bounded generation cost.<br>你批准图像和预算。agent 准备正面和侧面，连接可用的视频工具，并提出有上限的生成费用。</li>
+<li>The agent builds the interaction. It removes the background, prepares the frames, adds your product and checks motion, touch controls and loading.<br>agent 搭建交互。它去掉背景，准备帧，加入你的产品，并检查运动、触控和加载。</li>
+<li>You review the website. Ask for visual changes in the same chat. The agent prepares a public link once you approve deployment.<br>你审看网站。在同一对话里提出视觉修改。你批准发布后，agent 再准备公开链接。</li>
+</ol>
+<p>If your agent lacks an image or video tool, it identifies the missing connection and helps you enable it. You can also provide prepared images or footage. The included two-shirt example runs immediately once the local server is ready, with no generation charges.</p>
+<p>如果你的 agent 缺少图像或视频工具，它会指出缺了哪条连接，并帮你启用。你也可以提供已经准备好的图像或影像。附带的两件衬衫示例在本地服务器就绪后即可运行，没有生成费用。</p>
+<p>The method plays a prepared turn between two views. Compare the generated garment with your originals: AI can change folds, shades and print details. Before a shop launch, review the product on a real phone and your audience’s connection. Sales and conversion effects remain unmeasured in this experiment.</p>
+<p>这种方法播放的是两个视图之间预先准备好的旋转。请把生成的衣服和原图对照：AI 可能改变褶皱、明暗和印花细节。店铺上线前，请在真实手机和受众的网络上查看产品。销售和转化效果在这次实验中尚未测量。</p>
+<h2>来源与致谢</h2>
+<p>Interaction concept: @cambreedesigns, also @bernie_studios on Instagram. The original implementation is unknown; this article documents my independent experiment.</p>
+<p>交互概念：@cambreedesigns，以及 Instagram 上的 @bernie_studios。原始实现未知；本文记录的是我的独立实验。</p>
+<p>Case-study products and original photography: Molimao Sarajevo. Rail turns: LTX-2.5 Pro. Product-detail transitions: LTX-2.5 Pro and Kling 3.0 through Pika. Image preparation: Codex's built-in image generator. Art direction and selection: Amir Mušić. Code, processing and builds: developed in Codex.</p>
+<p>案例产品和原版摄影：Molimao Sarajevo。衣杆旋转：LTX-2.5 Pro。产品详情过渡：LTX-2.5 Pro，以及经 Pika 使用的 Kling 3.0。图像准备：Codex 内置图像生成器。艺术指导和挑选：Amir Mušić。代码、处理和构建：在 Codex 中完成。</p>
+<p>Evidence and scope: This breakdown uses saved product photographs, image anchors, source videos and iteration reports from September 30–October 6, 2026, with my later editorial clarifications. I named the image tool GPT Images 2; archived tool records identify built-in Imagegen without a separate model ID. Screenshots show actual project stages. Interactive figures use the saved frames and controller, including a reconstruction of the settings before and after endpoint softening.</p>
+<p>证据与范围：这篇拆解使用了 2026 年 9 月 30 日至 10 月 6 日保存的产品照片、图像锚点、源视频和迭代记录，并加上我后来的编辑说明。我把图像工具称为 GPT Images 2；归档的工具记录标明的是内置 Imagegen，没有单独的模型 ID。截图显示的是实际项目阶段。交互图使用保存的帧和控制器，包括端点柔化前后设置的重建。</p>
+<p>The two-shirt starter was prepared separately using my own generated artwork. Its white turn uses LTX-2.5 Pro; its pink turn uses Kling 3.0 through Pika. Code, generated example media and historical case-study media have separate attribution and release scopes. Reuse of Molimao’s photographs and branding requires the rights holder’s permission.</p>
+<p>两件衬衫的入门包是用我自己生成的图案另行准备的。白色旋转用 LTX-2.5 Pro，粉色旋转经 Pika 使用 Kling 3.0。代码、生成的示例媒介和历史案例媒介有各自的归属和发布范围。使用 Molimao 的照片和品牌，需要权利人许可。</p>
+</div>
+</body>
+</html>
