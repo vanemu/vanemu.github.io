@@ -1,5 +1,5 @@
 {
-  "count": 54,
+  "count": 56,
   "items": [
     {
       "id": "2103142706134294775",
@@ -432,6 +432,22 @@
       "public_path": "articles/2114790481066615068.html",
       "url": "https://amirmushich.com/publications/interactive-clothing-hero/",
       "tweet_url": "https://x.com/AmirMushich/status/2114790481066615068"
+    },
+    {
+      "id": "2123159537016533493",
+      "title_zh": "用 Grok Bot 自动化任何事",
+      "local_html": "/workspace/x-bookmarks/longform_batch11/01-poteto-automate-anything.html",
+      "public_path": "articles/2123159537016533493.html",
+      "url": "https://x.com/i/article/2122921713864171520",
+      "tweet_url": "https://x.com/poteto/status/2123159537016533493"
+    },
+    {
+      "id": "2123789428862660980",
+      "title_zh": "45 天蒸发 6 万亿美元：这是“泡沫”，还是机会？",
+      "local_html": "/workspace/x-bookmarks/longform_batch12/01-kobeissi-ai-bubble.html",
+      "public_path": "articles/2123789428862660980.html",
+      "url": "https://x.com/i/article/2123757028350791680",
+      "tweet_url": "https://x.com/KobeissiLetter/status/2123789428862660980"
     }
   ]
 }
